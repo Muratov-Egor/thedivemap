@@ -112,3 +112,17 @@ export interface SiteWithDetails extends Site {
   visits?: SiteVisit[];
   logbook_entries?: LogbookEntry[];
 }
+
+// Интерфейс для параметров фильтрации дайв-сайтов
+export interface DiveSitesFilters {
+  id?: string; // Точное совпадение по UUID
+  country_id?: number; // Точное совпадение
+  region_id?: number; // Через связь countries
+  location_id?: number; // Через site_locations
+  site_type_id?: number; // Точное совпадение
+  difficulty_id?: number; // Точное совпадение
+  depth_min?: number; // >= значение
+  visibility_min?: number; // >= значение
+  rating_min?: number; // >= значение
+  status?: 'draft' | 'published' | 'rejected';
+}
