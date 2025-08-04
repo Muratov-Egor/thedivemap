@@ -1,0 +1,32 @@
+# Системные и окруженческие файлы
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.development
+.env.test
+.env.production
+
+# Сборочные и node-модули
+.next
+node_modules
+
+# Результаты тестов и отчёты
+allure-report
+allure-results
+test-results
+
+# Служебные файлы
+.vscode/
+.DS_Store
+*.log
+
+# Бинарные и статические файлы
+# *.png
+# *.jpg
+# *.jpeg
+*.svg
+*.pdf
+*.zip
+*.tar.gz
