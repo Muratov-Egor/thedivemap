@@ -37,20 +37,19 @@ export interface Difficulty {
 export interface Site {
   id: string;
   name: string;
-  description: string;
+  description: string | null;
   latitude: number;
   longitude: number;
   country_id: number;
-  visited: boolean;
   depth_max: number;
   visibility: number;
-  info_links: string[];
-  dive_center_links: string[];
-  created_at: string;
+  info_links: string[] | null;
+  dive_center_links: string[] | null;
   rating: number;
   site_type_id: number;
   difficulty_id: number;
-  status: 'active' | 'inactive' | 'pending';
+  status: 'draft' | 'published' | 'rejected';
+  created_at: string;
 }
 
 export interface SiteLocation {
