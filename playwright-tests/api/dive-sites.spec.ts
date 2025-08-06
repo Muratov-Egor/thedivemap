@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test';
-import { BaseApiSteps } from './baseApiSteps';
 import { DiveSitesApi } from './api-objects/diveSitesApi';
 import { TEST_DATA } from './test-data';
 
@@ -32,16 +31,33 @@ test('GET /dive-sites - невалидный ID дайв-сайта', async ({ r
 
 // Параметризованный тест фильтрации по основным параметрам
 const filterTests = [
-  { name: 'страна', method: 'getSitesByCountry', param: TEST_DATA.COUNTRIES.THAILAND },
-  { name: 'регион', method: 'getSitesByRegion', param: TEST_DATA.REGIONS.ASIA },
-  { name: 'тип сайта', method: 'getSitesByType', param: TEST_DATA.SITE_TYPES.REEF },
-  { name: 'сложность', method: 'getSitesByDifficulty', param: TEST_DATA.DIFFICULTY.BEGINNER },
+  {
+    name: 'страна',
+    method: 'getSitesByCountry' as keyof DiveSitesApi,
+    param: TEST_DATA.COUNTRIES.THAILAND,
+  },
+  {
+    name: 'регион',
+    method: 'getSitesByRegion' as keyof DiveSitesApi,
+    param: TEST_DATA.REGIONS.ASIA,
+  },
+  {
+    name: 'тип сайта',
+    method: 'getSitesByType' as keyof DiveSitesApi,
+    param: TEST_DATA.SITE_TYPES.REEF,
+  },
+  {
+    name: 'сложность',
+    method: 'getSitesByDifficulty' as keyof DiveSitesApi,
+    param: TEST_DATA.DIFFICULTY.BEGINNER,
+  },
 ];
 
 for (const filterTest of filterTests) {
   test(`GET /dive-sites - фильтрация по ${filterTest.name}`, async ({ request }) => {
     const diveSitesApi = new DiveSitesApi(request);
-    const response = await diveSitesApi[filterTest.method](filterTest.param);
+    const method = diveSitesApi[filterTest.method] as Function;
+    const response = await method.call(diveSitesApi, filterTest.param);
 
     await diveSitesApi.expectStatusCode(response, 200);
     await diveSitesApi.expectValidSitesResponse(response);
@@ -71,17 +87,17 @@ test('GET /dive-sites - невалидный статус', async ({ request }) 
 const numericFilters = [
   {
     name: 'минимальная глубина',
-    method: 'getSitesWithMinDepth',
+    method: 'getSitesWithMinDepth' as keyof DiveSitesApi,
     param: TEST_DATA.FILTER_VALUES.DEPTH_MIN,
   },
   {
     name: 'минимальная видимость',
-    method: 'getSitesWithMinVisibility',
+    method: 'getSitesWithMinVisibility' as keyof DiveSitesApi,
     param: TEST_DATA.FILTER_VALUES.VISIBILITY_MIN,
   },
   {
     name: 'минимальный рейтинг',
-    method: 'getSitesWithMinRating',
+    method: 'getSitesWithMinRating' as keyof DiveSitesApi,
     param: TEST_DATA.FILTER_VALUES.RATING_MIN,
   },
 ];
@@ -89,7 +105,8 @@ const numericFilters = [
 for (const numericFilter of numericFilters) {
   test(`GET /dive-sites - фильтрация по ${numericFilter.name}`, async ({ request }) => {
     const diveSitesApi = new DiveSitesApi(request);
-    const response = await diveSitesApi[numericFilter.method](numericFilter.param);
+    const method = diveSitesApi[numericFilter.method] as Function;
+    const response = await method.call(diveSitesApi, numericFilter.param);
 
     await diveSitesApi.expectStatusCode(response, 200);
     await diveSitesApi.expectValidSitesResponse(response);
@@ -119,7 +136,9 @@ test('GET /dive-sites - валидация нечисловых параметр
   const invalidParams = [{ country_id: 'abc' }, { site_type_id: 'xyz' }, { depth_min: 'deep' }];
 
   for (const params of invalidParams) {
-    const response = await diveSitesApi.getSitesWithFilters(params);
+    const response = await diveSitesApi.getSitesWithFilters(
+      params as unknown as Record<string, string | number>,
+    );
     const paramName = Object.keys(params)[0];
     await diveSitesApi.expectErrorResponse(response, 400, `Invalid ${paramName}`);
   }

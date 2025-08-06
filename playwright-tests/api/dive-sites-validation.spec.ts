@@ -30,7 +30,9 @@ test('GET /dive-sites - валидация специальных символо
   ];
 
   for (const params of specialCharParams) {
-    const response = await diveSitesApi.getSitesWithFilters(params);
+    const response = await diveSitesApi.getSitesWithFilters(
+      params as unknown as Record<string, string | number>,
+    );
     expect(response.status()).toBeGreaterThanOrEqual(400);
   }
 });
