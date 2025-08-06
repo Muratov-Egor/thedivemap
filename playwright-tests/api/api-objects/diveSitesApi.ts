@@ -7,13 +7,13 @@ export class DiveSitesApi extends BaseApiSteps {
   }
 
   async getAllSites(): Promise<APIResponse> {
-    return await test.step('Получить все дайв-сайты', async () => {
+    return await test.step('Get all dive sites', async () => {
       return await this.sentGetResponse('/api/dive-sites');
     });
   }
 
   async getSitesWithFilters(filters: Record<string, string | number>): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты с фильтрами: ${JSON.stringify(filters)}`, async () => {
+    return await test.step(`Get dive sites with filters: ${JSON.stringify(filters)}`, async () => {
       const params = new URLSearchParams();
       Object.entries(filters).forEach(([key, value]) => {
         params.append(key, String(value));
@@ -24,67 +24,67 @@ export class DiveSitesApi extends BaseApiSteps {
   }
 
   async getSiteById(siteId: string): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайт по ID: ${siteId}`, async () => {
+    return await test.step(`Get dive site by ID: ${siteId}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?id=${siteId}`);
     });
   }
 
   async getSitesByCountry(countryId: number): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты по стране ID: ${countryId}`, async () => {
+    return await test.step(`Get dive sites by country ID: ${countryId}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?country_id=${countryId}`);
     });
   }
 
   async getSitesByRegion(regionId: number): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты по региону ID: ${regionId}`, async () => {
+    return await test.step(`Get dive sites by region ID: ${regionId}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?region_id=${regionId}`);
     });
   }
 
   async getSitesByLocation(locationId: number): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты по локации ID: ${locationId}`, async () => {
+    return await test.step(`Get dive sites by location ID: ${locationId}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?location_id=${locationId}`);
     });
   }
 
   async getSitesByType(siteTypeId: number): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты по типу ID: ${siteTypeId}`, async () => {
+    return await test.step(`Get dive sites by type ID: ${siteTypeId}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?site_type_id=${siteTypeId}`);
     });
   }
 
   async getSitesByDifficulty(difficultyId: number): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты по сложности ID: ${difficultyId}`, async () => {
+    return await test.step(`Get dive sites by difficulty ID: ${difficultyId}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?difficulty_id=${difficultyId}`);
     });
   }
 
   async getSitesByStatus(status: 'draft' | 'published' | 'rejected'): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты по статусу: ${status}`, async () => {
+    return await test.step(`Get dive sites by status: ${status}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?status=${status}`);
     });
   }
 
   async getSitesWithMinDepth(depthMin: number): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты с минимальной глубиной: ${depthMin}`, async () => {
+    return await test.step(`Get dive sites with minimum depth: ${depthMin}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?depth_min=${depthMin}`);
     });
   }
 
   async getSitesWithMinVisibility(visibilityMin: number): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты с минимальной видимостью: ${visibilityMin}`, async () => {
+    return await test.step(`Get dive sites with minimum visibility: ${visibilityMin}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?visibility_min=${visibilityMin}`);
     });
   }
 
   async getSitesWithMinRating(ratingMin: number): Promise<APIResponse> {
-    return await test.step(`Получить дайв-сайты с минимальным рейтингом: ${ratingMin}`, async () => {
+    return await test.step(`Get dive sites with minimum rating: ${ratingMin}`, async () => {
       return await this.sentGetResponse(`/api/dive-sites?rating_min=${ratingMin}`);
     });
   }
 
   async expectValidSitesResponse(response: APIResponse): Promise<void> {
-    await test.step('Проверить валидность ответа с дайв-сайтами', async () => {
+    await test.step('Check valid sites response data structure', async () => {
       const data = await response.json();
       expect(Array.isArray(data)).toBeTruthy();
 
@@ -106,14 +106,14 @@ export class DiveSitesApi extends BaseApiSteps {
   }
 
   async expectSitesCount(response: APIResponse, expectedCount: number): Promise<void> {
-    await test.step(`Проверить количество дайв-сайтов: ${expectedCount}`, async () => {
+    await test.step(`Dive sites count should be ${expectedCount}`, async () => {
       const data = await response.json();
       expect(data).toHaveLength(expectedCount);
     });
   }
 
   async expectSiteProperties(response: APIResponse, siteId: string): Promise<void> {
-    await test.step(`Проверить свойства дайв-сайта с ID: ${siteId}`, async () => {
+    await test.step(`Check dive site properties with ID: ${siteId}`, async () => {
       const data = await response.json();
       expect(Array.isArray(data)).toBeTruthy();
 
@@ -135,7 +135,7 @@ export class DiveSitesApi extends BaseApiSteps {
     filterType: string,
     filterValue: any,
   ): Promise<void> {
-    await test.step(`Проверить результаты фильтрации по ${filterType}: ${filterValue}`, async () => {
+    await test.step(`Check filtered results by ${filterType}: ${filterValue}`, async () => {
       const data = await response.json();
       expect(Array.isArray(data)).toBeTruthy();
 
@@ -166,30 +166,6 @@ export class DiveSitesApi extends BaseApiSteps {
               break;
           }
         });
-      }
-    });
-  }
-
-  async expectErrorResponse(
-    response: APIResponse,
-    expectedStatus: number,
-    errorMessage?: string,
-  ): Promise<void> {
-    await test.step(`Проверить ответ с ошибкой: ${expectedStatus}`, async () => {
-      expect(response.status()).toBe(expectedStatus);
-
-      if (errorMessage) {
-        const data = await response.json();
-        expect(data).toHaveProperty('error');
-
-        // Проверяем, что ошибка содержится либо в основном сообщении, либо в деталях
-        const hasErrorInMain = data.error.includes(errorMessage);
-        const hasErrorInDetails =
-          data.details &&
-          Array.isArray(data.details) &&
-          data.details.some((detail: string) => detail.includes(errorMessage));
-
-        expect(hasErrorInMain || hasErrorInDetails).toBeTruthy();
       }
     });
   }

@@ -3,79 +3,73 @@ import { DiveSitesApi } from './api-objects/diveSitesApi';
 import { TEST_DATA } from './test-data';
 
 // Базовый тест производительности
-test('GET /dive-sites - производительность базового запроса', async ({ request }) => {
+test('Response time for GET /dive-sites is less than 3 seconds', async ({ request }) => {
   const diveSitesApi = new DiveSitesApi(request);
-  const startTime = Date.now();
-
-  const response = await diveSitesApi.getAllSites();
-  const endTime = Date.now();
-
+  
+  const { response, time } = await diveSitesApi.measureResponseTime(() => 
+    diveSitesApi.getAllSites()
+  );
+  
   await diveSitesApi.expectStatusCode(response, 200);
-  const responseTime = endTime - startTime;
-
-  console.log(`Response time: ${responseTime}ms`);
+  await diveSitesApi.expectResponseTime(time, 3000); // Максимум 3 секунды
 });
 
 // Тест производительности с фильтрацией
-test('GET /dive-sites - производительность с фильтрацией', async ({ request }) => {
+test('Response time for GET /dive-sites with filters is less than 2 seconds', async ({ request }) => {
   const diveSitesApi = new DiveSitesApi(request);
-  const startTime = Date.now();
-
-  const response = await diveSitesApi.getSitesWithFilters({
-    country_id: TEST_DATA.COUNTRIES.THAILAND,
-    site_type_id: TEST_DATA.SITE_TYPES.REEF,
-    rating_min: TEST_DATA.FILTER_VALUES.RATING_MIN,
-  });
-  const endTime = Date.now();
-
+  
+  const { response, time } = await diveSitesApi.measureResponseTime(() => 
+    diveSitesApi.getSitesWithFilters({
+      country_id: TEST_DATA.COUNTRIES.THAILAND,
+      site_type_id: TEST_DATA.SITE_TYPES.REEF,
+      rating_min: TEST_DATA.FILTER_VALUES.RATING_MIN
+    })
+  );
+  
   await diveSitesApi.expectStatusCode(response, 200);
-  const responseTime = endTime - startTime;
-
-  console.log(`Filtered response time: ${responseTime}ms`);
+  await diveSitesApi.expectResponseTime(time, 2000); // Максимум 2 секунды
 });
 
 // Тест параллельных запросов
-test('GET /dive-sites - производительность параллельных запросов', async ({ request }) => {
+test('Parallel requests for GET /dive-sites are less than 4 seconds', async ({ request }) => {
   const diveSitesApi = new DiveSitesApi(request);
-  const startTime = Date.now();
-
-  const promises = [
-    diveSitesApi.getAllSites(),
-    diveSitesApi.getSitesByCountry(TEST_DATA.COUNTRIES.THAILAND),
-    diveSitesApi.getSitesByType(TEST_DATA.SITE_TYPES.REEF),
-    diveSitesApi.getSitesByDifficulty(TEST_DATA.DIFFICULTY.BEGINNER),
-    diveSitesApi.getSitesByStatus('published'),
-  ];
-
-  const responses = await Promise.all(promises);
-  const endTime = Date.now();
-
-  for (const response of responses) {
-    await diveSitesApi.expectStatusCode(response, 200);
-  }
-
-  const responseTime = endTime - startTime;
-  console.log(`Parallel requests time: ${responseTime}ms`);
+  
+  const { time } = await diveSitesApi.measureResponseTime(async () => {
+    const promises = [
+      diveSitesApi.getAllSites(),
+      diveSitesApi.getSitesByCountry(TEST_DATA.COUNTRIES.THAILAND),
+      diveSitesApi.getSitesByType(TEST_DATA.SITE_TYPES.REEF),
+      diveSitesApi.getSitesByDifficulty(TEST_DATA.DIFFICULTY.BEGINNER),
+      diveSitesApi.getSitesByStatus('published')
+    ];
+    
+    const responses = await Promise.all(promises);
+    
+    for (const response of responses) {
+      await diveSitesApi.expectStatusCode(response, 200);
+    }
+    
+    return responses[0]; // Возвращаем первый ответ для совместимости
+  });
+  
+  await diveSitesApi.expectResponseTime(time, 4000); // Максимум 4 секунды для всех запросов
 });
 
 // Нагрузочное тестирование
-test('GET /dive-sites - нагрузочное тестирование', async ({ request }) => {
+test('Response time for GET /dive-sites is less than 2 seconds on average and less than 5 seconds maximum', async ({ request }) => {
   const diveSitesApi = new DiveSitesApi(request);
   const iterations = 10;
   const responseTimes: number[] = [];
-
+  
   for (let i = 0; i < iterations; i++) {
-    const startTime = Date.now();
-    const response = await diveSitesApi.getAllSites();
-    const endTime = Date.now();
-
+    const { response, time } = await diveSitesApi.measureResponseTime(() => 
+      diveSitesApi.getAllSites()
+    );
+    
     await diveSitesApi.expectStatusCode(response, 200);
-    responseTimes.push(endTime - startTime);
+    responseTimes.push(time);
   }
-
-  const avgResponseTime = responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length;
-  const maxResponseTime = Math.max(...responseTimes);
-
-  console.log(`Average response time: ${avgResponseTime.toFixed(2)}ms`);
-  console.log(`Max response time: ${maxResponseTime}ms`);
+  
+  await diveSitesApi.expectAverageResponseTime(responseTimes, 2000); // Среднее время менее 2 секунд
+  await diveSitesApi.expectMaxResponseTime(responseTimes, 5000); // Максимальное время менее 5 секунд
 });

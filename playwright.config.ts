@@ -5,7 +5,12 @@ export default defineConfig({
   timeout: 30_000,
   retries: 0,
   workers: 5,
-  reporter: [['list'], ['allure-playwright']],
+  reporter: [['list'], ['allure-playwright', {
+    detail: false,
+    suiteTitle: true,
+    outputDir: 'allure-report',
+    suiteNumber: true,
+  }]],
   use: {
     trace: 'on-first-retry',
     video: 'retain-on-failure',
