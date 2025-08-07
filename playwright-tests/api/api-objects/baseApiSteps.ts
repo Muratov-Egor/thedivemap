@@ -16,7 +16,6 @@ export class BaseApiSteps {
     });
   }
 
-
   async expectErrorResponse(
     response: APIResponse,
     expectedStatus: number,
@@ -41,18 +40,20 @@ export class BaseApiSteps {
     });
   }
 
-  async measureResponseTime(operation: () => Promise<APIResponse>): Promise<{ response: APIResponse; time: number }> {
+  async measureResponseTime(
+    operation: () => Promise<APIResponse>,
+  ): Promise<{ response: APIResponse; time: number }> {
     return await test.step('Measure response time', async () => {
       const startTime = Date.now();
       const response = await operation();
       const endTime = Date.now();
       const responseTime = endTime - startTime;
-      
+
       // Логируем в Allure отчет
       await test.step(`Response time: ${responseTime}ms`, async () => {
         // Allure автоматически добавит это в отчет
       });
-      
+
       return { response, time: responseTime };
     });
   }
@@ -67,7 +68,7 @@ export class BaseApiSteps {
     await test.step(`Check average response time`, async () => {
       const avgTime = responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length;
       expect(avgTime).toBeLessThanOrEqual(maxAvgTime);
-      
+
       await test.step(`Average response time: ${avgTime.toFixed(2)}ms`, async () => {
         // Allure автоматически добавит это в отчет
       });
@@ -78,7 +79,7 @@ export class BaseApiSteps {
     await test.step(`Check maximum response time`, async () => {
       const maxTimeActual = Math.max(...responseTimes);
       expect(maxTimeActual).toBeLessThanOrEqual(maxTime);
-      
+
       await test.step(`Maximum response time: ${maxTimeActual}ms`, async () => {
         // Allure автоматически добавит это в отчет
       });
