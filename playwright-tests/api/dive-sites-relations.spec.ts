@@ -3,7 +3,7 @@ import { DiveSitesApi } from './api-objects/diveSitesApi';
 import { TEST_DATA } from './test-data';
 
 // Общий тест проверки связанных данных
-test('GET /dive-sites - проверка связанных данных', async ({ request }) => {
+test('GET /dive-sites - response includes all related data (country, site_type, difficulty)', async ({ request }) => {
   const diveSitesApi = new DiveSitesApi(request);
 
   const response = await diveSitesApi.getAllSites();
@@ -60,7 +60,7 @@ test('GET /dive-sites - проверка связанных данных', async
 });
 
 // Тест консистентности связанных данных
-test('GET /dive-sites - проверка консистентности связанных данных', async ({ request }) => {
+test('GET /dive-sites - consistency of related data', async ({ request }) => {
   const diveSitesApi = new DiveSitesApi(request);
 
   const response = await diveSitesApi.getAllSites();
@@ -88,7 +88,7 @@ test('GET /dive-sites - проверка консистентности связ
 });
 
 // Тест фильтрации с сохранением связанных данных
-test('GET /dive-sites - проверка фильтрации с сохранением связанных данных', async ({
+test('GET /dive-sites - filtering with related data preservation', async ({
   request,
 }) => {
   const diveSitesApi = new DiveSitesApi(request);
@@ -116,7 +116,7 @@ test('GET /dive-sites - проверка фильтрации с сохране�
 });
 
 // Тест комбинированной фильтрации с связанными данными
-test('GET /dive-sites - проверка комбинированной фильтрации с связанными данными', async ({
+test('GET /dive-sites - combined filtering with related data', async ({
   request,
 }) => {
   const diveSitesApi = new DiveSitesApi(request);

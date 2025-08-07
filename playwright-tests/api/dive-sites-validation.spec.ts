@@ -3,7 +3,7 @@ import { DiveSitesApi } from './api-objects/diveSitesApi';
 import { TEST_DATA } from './test-data';
 
 // Критические граничные значения
-test('GET /dive-sites - валидация критических граничных значений', async ({ request }) => {
+test('GET /dive-sites - validation of critical boundary values', async ({ request }) => {
   const diveSitesApi = new DiveSitesApi(request);
 
   const criticalBoundaries = [
@@ -19,7 +19,7 @@ test('GET /dive-sites - валидация критических граничн
 });
 
 // Тесты валидации специальных символов
-test('GET /dive-sites - валидация специальных символов в параметрах', async ({ request }) => {
+test('GET /dive-sites - validation of special characters in parameters', async ({ request }) => {
   const diveSitesApi = new DiveSitesApi(request);
 
   const specialCharParams = [
@@ -38,7 +38,7 @@ test('GET /dive-sites - валидация специальных символо
 });
 
 // Тесты валидации множественных параметров
-test('GET /dive-sites - валидация множественных невалидных параметров', async ({ request }) => {
+test('GET /dive-sites - validation of multiple invalid parameters', async ({ request }) => {
   const diveSitesApi = new DiveSitesApi(request);
 
   const invalidMultiParams = [{ id: TEST_DATA.SITE_IDS.INVALID, status: 'invalid-status' }];
