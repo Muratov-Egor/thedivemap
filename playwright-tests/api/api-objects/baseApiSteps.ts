@@ -85,4 +85,16 @@ export class BaseApiSteps {
       });
     });
   }
+
+  async expectDataToHaveProperty(data: any, property: string) {
+    await test.step(`Check ${data} to have property: ${property}`, async () => {
+      expect(data).toHaveProperty(property);
+    });
+  }
+
+  async expectPropertiesIsEqual(property: string, expectedValue: string | number) {
+    await test.step(`Check ${property} is equal to ${expectedValue}`, async () => {
+      expect(property).toEqual(expectedValue);
+    });
+  }
 }
