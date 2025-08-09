@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import maplibregl, { Map } from "maplibre-gl";
+import { useEffect, useRef } from 'react';
+import maplibregl, { Map } from 'maplibre-gl';
 
 export default function MapContainer() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -12,12 +12,11 @@ export default function MapContainer() {
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: "/map-styles/arcgis_hybrid.json",
+      style: '/map-styles/arcgis_hybrid.json',
       center: [98.379111, 7.609361],
       zoom: 14,
       maxZoom: 15,
       hash: false, // disable hash routing
-    
       touchZoomRotate: true, // disable touch zoom and rotation
       doubleClickZoom: true, // disable double click zoom
       scrollZoom: true, // disable scroll zoom
@@ -29,9 +28,9 @@ export default function MapContainer() {
     mapRef.current = map;
 
     const nav = new maplibregl.NavigationControl({ visualizePitch: true });
-    map.addControl(nav, "top-right");
+    map.addControl(nav, 'top-right');
 
-    const scale = new maplibregl.ScaleControl({ maxWidth: 120, unit: "metric" });
+    const scale = new maplibregl.ScaleControl({ maxWidth: 120, unit: 'metric' });
     map.addControl(scale);
 
     return () => {
