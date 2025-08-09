@@ -38,6 +38,7 @@ Awaiting task definition for complexity level determination and appropriate mode
 - Project Structure: Next.js ✅
 
 ## VAN Compliance
+
 - [x] Rules synced (.cursor/rules)
 - [x] Memory Bank verified
 - [x] Style guide baseline created

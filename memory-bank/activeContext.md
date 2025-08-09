@@ -41,6 +41,7 @@ Initial project setup and Memory Bank initialization for The Dive Map applicatio
 - Project structure: Basic Next.js setup
 
 ## VAN Session
+
 - Mode: VAN
 - Rule loaded: isolation_rules/visual-maps/van-mode-map.mdc
 - Result: All checks passed

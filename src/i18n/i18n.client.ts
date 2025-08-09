@@ -1,0 +1,42 @@
+'use client';
+
+import i18next, { type i18n as I18nInstance } from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+import enCommon from '@/i18n/locales/en/common.json';
+import ruCommon from '@/i18n/locales/ru/common.json';
+
+let i18nSingleton: I18nInstance | null = null;
+
+export function getI18n(): I18nInstance {
+  if (i18nSingleton) return i18nSingleton;
+
+  const instance = i18next.createInstance();
+
+  instance
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .init({
+      resources: {
+        en: { common: enCommon },
+        ru: { common: ruCommon },
+      },
+      fallbackLng: 'ru',
+      supportedLngs: ['en', 'ru'],
+      defaultNS: 'common',
+      ns: ['common'],
+      interpolation: { escapeValue: false },
+      detection: {
+        // localStorage to persist user choice; also checks navigator.language
+        order: ['localStorage', 'navigator'],
+        caches: ['localStorage'],
+      },
+      react: {
+        useSuspense: false,
+      },
+    });
+
+  i18nSingleton = instance;
+  return instance;
+}
