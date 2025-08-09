@@ -3,11 +3,9 @@
 import Header from '@/components/Header';
 import MapContainer from '@/components/MapContainer';
 import Stub from '@/components/stub';
-import { useTranslation } from 'react-i18next';
 import MapMarkers from '@/components/MapMarkers';
 
 export default function HomePage() {
-  const { t } = useTranslation('common');
   return (
     <main className="h-full w-full flex flex-col">
       <Header />

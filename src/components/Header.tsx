@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitch from '@/components/LanguageSwitch';
-import Button from './ui/Button';
 
 export default function Header() {
   const { t } = useTranslation('common');
