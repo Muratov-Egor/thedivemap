@@ -78,17 +78,15 @@ export const TEST_DATA = {
 
   // Реальные значения для тестирования дайв-сайтов в автокомплите
   DIVE_SITES_VALUES: {
-      ID: '02b914c4-c3d7-4181-badb-391ad8bf1e09',
-      NAME: 'Ada Lake',
-      COUNTRY_NAME_RU: 'Сербия',
-      COUNTRY_NAME_EN: 'Serbia',
-      REGION_NAME_RU: 'Европа',
-      REGION_NAME_EN: 'Europe',
-      SITE_TYPE_LABEL_RU: 'Озеро',
-      SITE_TYPE_LABEL_EN: 'Lake',
-      LOCATION_NAME_RU: 'Белград',
-      LOCATION_NAME_EN: 'Belgrade',
+    ID: '02b914c4-c3d7-4181-badb-391ad8bf1e09',
+    NAME: 'Ada Lake',
+    COUNTRY_NAME_RU: 'Сербия',
+    COUNTRY_NAME_EN: 'Serbia',
+    REGION_NAME_RU: 'Европа',
+    REGION_NAME_EN: 'Europe',
+    SITE_TYPE_LABEL_RU: 'Озеро',
+    SITE_TYPE_LABEL_EN: 'Lake',
+    LOCATION_NAME_RU: 'Белград',
+    LOCATION_NAME_EN: 'Belgrade',
   },
-
-    
 };

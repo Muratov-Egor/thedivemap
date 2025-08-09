@@ -22,7 +22,11 @@ export class PlacesApi extends BaseApiSteps {
     });
   }
 
-  async expectValidDiveSitesInResponse(response: APIResponse, diveSite: any, lang?: string): Promise<void> {
+  async expectValidDiveSitesInResponse(
+    response: APIResponse,
+    diveSite: any,
+    lang?: string,
+  ): Promise<void> {
     await test.step('Check valid dive sites in response', async () => {
       const data = await response.json();
       const currentLang = lang || 'ru';
@@ -36,14 +40,26 @@ export class PlacesApi extends BaseApiSteps {
 
       await this.expectPropertiesIsEqual(diveSiteData.id, diveSite.ID);
       await this.expectPropertiesIsEqual(diveSiteData.name, diveSite.NAME);
-      await this.expectPropertiesIsEqual(diveSiteData.country.region[`name_${currentLang}`], diveSite.REGION_NAME_RU);
-      await this.expectPropertiesIsEqual(diveSiteData.country[`name_${currentLang}`], diveSite.COUNTRY_NAME_RU);
-      await this.expectPropertiesIsEqual(diveSiteData.site_type[`label_${currentLang}`], diveSite.SITE_TYPE_LABEL_RU);
-      await this.expectPropertiesIsEqual(diveSiteData.site_locations[0].location[`name_${currentLang}`], diveSite.LOCATION_NAME_RU);
+      await this.expectPropertiesIsEqual(
+        diveSiteData.country.region[`name_${currentLang}`],
+        diveSite.REGION_NAME_RU,
+      );
+      await this.expectPropertiesIsEqual(
+        diveSiteData.country[`name_${currentLang}`],
+        diveSite.COUNTRY_NAME_RU,
+      );
+      await this.expectPropertiesIsEqual(
+        diveSiteData.site_type[`label_${currentLang}`],
+        diveSite.SITE_TYPE_LABEL_RU,
+      );
+      await this.expectPropertiesIsEqual(
+        diveSiteData.site_locations[0].location[`name_${currentLang}`],
+        diveSite.LOCATION_NAME_RU,
+      );
     });
   }
 
-  async expectValidCountriesInResponse(response: APIResponse, country: any ): Promise<void> {
+  async expectValidCountriesInResponse(response: APIResponse, country: any): Promise<void> {
     await test.step('Check valid countries in response', async () => {
       const data = await response.json();
       const countryData = data.countries[0];
@@ -61,7 +77,7 @@ export class PlacesApi extends BaseApiSteps {
     });
   }
 
-  async expectValidRegionsInResponse(response: APIResponse, region: any ): Promise<void> {
+  async expectValidRegionsInResponse(response: APIResponse, region: any): Promise<void> {
     await test.step('Check valid regions in response', async () => {
       const data = await response.json();
       const regionData = data.regions[0];
@@ -77,7 +93,7 @@ export class PlacesApi extends BaseApiSteps {
     });
   }
 
-  async expectValidLocationsInResponse(response: APIResponse, location: any ): Promise<void> {
+  async expectValidLocationsInResponse(response: APIResponse, location: any): Promise<void> {
     await test.step('Check valid locations in response', async () => {
       const data = await response.json();
       const locationData = data.locations[0];

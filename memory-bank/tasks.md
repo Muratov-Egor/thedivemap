@@ -1,42 +1,38 @@
-# Active Tasks
+# Active Task: VAN initialization
 
-## Current Task: VAN Mode Initialization
+Checklist:
 
-**Status**: ✅ COMPLETED
-**Complexity Level**: Level 1 (Quick Setup)
-**Mode**: VAN
+- [x] Ensure .cursor/rules exist
+- [x] Recreate memory-bank core files
+- [x] Determine task complexity level (Level 1 - Quick Bug Fix)
+- [x] Transition to IMPLEMENT mode per van-mode-map
 
-### Completed Steps
+Notes:
 
-- [x] Platform detection (macOS)
-- [x] Memory Bank structure creation
-- [x] Project brief documentation
-- [x] Technical context analysis
-- [x] Product context definition
-- [x] System patterns identification
-- [x] Active context setup
-- [x] Progress tracking initialization
+- tasks.md is the single source of truth for task tracking.
 
-### Task Summary
+## Completed Bug Fixes
 
-Successfully initialized VAN mode for The Dive Map project. Created comprehensive Memory Bank structure with project documentation, technical context, and system patterns. Project is ready for development tasks.
+- [x] [Level 1] Fixed: Remove unused variables/imports to resolve ESLint warnings (Completed: 2025-08-09)
+  - Issue: ESLint warnings for unused vars/imports in HomePage and Header
+  - Solution: Removed unused useTranslation import/variable in src/app/page.tsx; removed unused Button import in src/components/Header.tsx
+  - Files changed: src/app/page.tsx, src/components/Header.tsx
 
-### Next Actions
+## Reflection
 
-- Await specific task definition
-- Determine complexity level for new tasks
-- Transition to appropriate mode (PLAN for Level 2-4, IMPLEMENT for Level 1)
+- Implementation reviewed: YES
+- Successes: Warnings eliminated; build/tests green
+- Challenges: None
+- Lessons Learned: Keep imports minimal; run lint early
+- Improvements: Add pre-commit lint
+- reflection.md created: memory-bank/reflection/reflection-2025-08-09.md
 
-### Environment Status
+## Archive
 
-- Platform: macOS ✅
-- Package Manager: pnpm ✅
-- Node.js: Available ✅
-- Project Structure: Next.js ✅
-- Memory Bank: Complete ✅
+- Date: 2025-08-09
+- Archive Document: docs/archive/tasks/bug-eslint-unused-20250809.md
+- Status: COMPLETED
 
----
+## Documentation
 
-**Task Completed**: VAN Mode Initialization
-**Completion Time**: Current session
-**Mode**: VAN → Ready for next task
+- [x] README.md updated with setup, scripts, testing, and structure
