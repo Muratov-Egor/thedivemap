@@ -1,11 +1,13 @@
 # Memory Bank: Project Brief
 
 ## Project Overview
+
 **Name**: The Dive Map
 **Version**: 0.0.1
 **Description**: The Dive Map is a map of the world that shows the locations of dive sites.
 
 ## Core Technology Stack
+
 - **Framework**: Next.js 15.4.2
 - **Language**: TypeScript
 - **UI Library**: React 19.1.0
@@ -17,6 +19,7 @@
 - **Package Manager**: pnpm
 
 ## Project Structure
+
 - **Frontend**: Next.js app with React components
 - **API**: Next.js API routes
 - **Database**: Supabase integration
@@ -24,6 +27,7 @@
 - **Documentation**: Markdown files in docs/
 
 ## Current Status
+
 - Project initialized with Next.js
 - Basic map functionality with MapLibre GL
 - Supabase integration for data storage
@@ -31,6 +35,7 @@
 - Testing framework configured with Playwright
 
 ## Development Commands
+
 - `pnpm dev` - Start development server
 - `pnpm build` - Build for production
 - `pnpm lint` - Run ESLint

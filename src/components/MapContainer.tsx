@@ -3,11 +3,21 @@
 import { useEffect, useRef } from 'react';
 import maplibregl, { Map } from 'maplibre-gl';
 import { MapProvider, useMap } from '@/contexts/MapContext';
+import DiveSitesLayer from './map/DiveSitesLayer';
 
 function InnerMapContainer({ children }: { children?: React.ReactNode }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
-  const { setMap, setLoaded } = useMap();
+  const {
+    setMap,
+    setLoaded,
+    diveSites,
+    loading,
+    error,
+    fetchDiveSites,
+    onSiteClick,
+    onClusterClick,
+  } = useMap();
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -16,8 +26,9 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
       container: containerRef.current,
       style: '/map-styles/arcgis_hybrid.json',
       center: [98.379111, 7.609361],
-      zoom: 14,
-      maxZoom: 15,
+      zoom: 10,
+      maxZoom: 18,
+      minZoom: 3,
       hash: false,
       touchZoomRotate: true,
       doubleClickZoom: true,
@@ -36,7 +47,11 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
     const scale = new maplibregl.ScaleControl({ maxWidth: 120, unit: 'metric' });
     map.addControl(scale);
 
-    const onLoad = () => setLoaded(true);
+    const onLoad = () => {
+      setLoaded(true);
+      // Загружаем дайв-сайты после загрузки карты
+      fetchDiveSites();
+    };
     map.on('load', onLoad);
 
     return () => {
@@ -46,11 +61,37 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
       mapRef.current?.remove();
       mapRef.current = null;
     };
-  }, [setLoaded, setMap]);
+  }, [setLoaded, setMap, fetchDiveSites]);
 
   return (
     <div className="flex-1 relative">
       <div ref={containerRef} className="absolute inset-0 h-full w-full" />
+
+      {/* Слой дайв-сайтов */}
+      <DiveSitesLayer
+        map={mapRef.current}
+        sites={diveSites}
+        onSiteClick={onSiteClick}
+        onClusterClick={onClusterClick}
+      />
+
+      {/* Индикатор загрузки */}
+      {loading && (
+        <div className="absolute top-4 left-4 bg-white rounded-lg shadow-md px-4 py-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+            Loading dive sites...
+          </div>
+        </div>
+      )}
+
+      {/* Индикатор ошибки */}
+      {error && (
+        <div className="absolute top-4 left-4 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-lg text-sm">
+          Error: {error}
+        </div>
+      )}
+
       {children}
     </div>
   );
