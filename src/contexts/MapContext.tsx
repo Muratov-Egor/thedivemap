@@ -4,6 +4,7 @@ import React, { createContext, useContext, useMemo, useState, useCallback } from
 import { useTranslation } from 'react-i18next';
 import type { Map } from 'maplibre-gl';
 import { Site } from '@/types/database';
+import { Cluster } from '@/types/clustering';
 
 interface MapContextValue {
   map: Map | null;
@@ -17,6 +18,7 @@ interface MapContextValue {
   fetchDiveSites: () => Promise<void>;
   selectSite: (site: Site | null) => void;
   onSiteClick: (site: Site) => void;
+  onClusterClick: (cluster: Cluster) => void;
 }
 
 const MapContext = createContext<MapContextValue | undefined>(undefined);
@@ -56,6 +58,12 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     setSelectedSite(site);
   }, []);
 
+  // Обработка клика по кластеру
+  const onClusterClick = useCallback((cluster: Cluster) => {
+    // Логика обработки клика по кластеру
+    console.log('Cluster clicked:', cluster);
+  }, []);
+
   // Выбор сайта
   const selectSite = useCallback((site: Site | null) => {
     setSelectedSite(site);
@@ -74,6 +82,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       fetchDiveSites,
       selectSite,
       onSiteClick,
+      onClusterClick,
     }),
     [
       map,
@@ -85,6 +94,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       fetchDiveSites,
       selectSite,
       onSiteClick,
+      onClusterClick,
     ],
   );
 

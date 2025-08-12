@@ -79,7 +79,10 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
 
       {/* Индикатор загрузки */}
       {loading && (
-        <div className="absolute top-4 left-4 bg-white rounded-lg shadow-md px-4 py-2 text-sm text-gray-600">
+        <div
+          data-testid="loading-indicator"
+          className="absolute top-4 left-4 bg-white rounded-lg shadow-md px-4 py-2 text-sm text-gray-600"
+        >
           <div className="flex items-center gap-2">
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
             {t('map.loading')}

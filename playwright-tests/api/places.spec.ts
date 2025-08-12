@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { BaseApiSteps } from './api-objects/baseApiSteps';
 import { TEST_DATA } from './test-data';
 import { PlacesApi } from './api-objects/placesApi';

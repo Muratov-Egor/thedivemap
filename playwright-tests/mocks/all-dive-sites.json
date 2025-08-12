@@ -1,0 +1,1870 @@
+[
+  {
+    "id": "71e9c9ae-4295-4a37-b1ca-223a85edf0ab",
+    "name": "Mogren Cove",
+    "description": null,
+    "latitude": 42.2741953,
+    "longitude": 18.8301825,
+    "country_id": 113,
+    "depth_max": 30,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/montenegro-expectations-vs-reality"],
+    "dive_center_links": null,
+    "created_at": "2025-07-19T16:23:58.978707+00:00",
+    "rating": 4,
+    "site_type_id": 3,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 113,
+      "name_en": "Montenegro",
+      "name_ru": "Черногория",
+      "iso_code": "ME",
+      "region_id": 3
+    },
+    "site_type": {
+      "id": 3,
+      "label_en": "Cave",
+      "label_ru": "Пещера"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "b1ac03ab-d766-4606-83a8-37f86eda9d3f",
+    "name": "Homerun Reef",
+    "description": "",
+    "latitude": 7.614699,
+    "longitude": 98.379049,
+    "country_id": 170,
+    "depth_max": 24,
+    "visibility": 10,
+    "info_links": ["https://www.idcphuket.com/scuba-diving/homerun-reef-racha-yai/"],
+    "dive_center_links": ["https://seastar.pro/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 4,
+    "site_type_id": 1,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 1,
+      "label_en": "Reef",
+      "label_ru": "Риф"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "e78ebfa4-52c9-4189-8345-f8a3862a8697",
+    "name": "Bay 3 (Lucy's Reef)",
+    "description": "",
+    "latitude": 7.60549,
+    "longitude": 98.377418,
+    "country_id": 170,
+    "depth_max": 25,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/racha-yai"],
+    "dive_center_links": ["https://seastar.pro/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 1,
+    "difficulty_id": 1,
+    "status": "draft",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 1,
+      "label_en": "Reef",
+      "label_ru": "Риф"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "eb74253e-b6b3-4d5b-a297-97aa4c044d3d",
+    "name": "Bay 1 (Staghorn Reef)",
+    "description": "",
+    "latitude": 7.609361,
+    "longitude": 98.379114,
+    "country_id": 170,
+    "depth_max": 30,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/racha-yai"],
+    "dive_center_links": ["https://seastar.pro/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 10,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 10,
+      "label_en": "Coral Garden",
+      "label_ru": "Коралловый сад"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "f94ad19a-cec4-4a2d-b230-4d517f9fc184",
+    "name": "Bungalow Bay North Wall",
+    "description": "",
+    "latitude": 7.6111273,
+    "longitude": 98.3638067,
+    "country_id": 170,
+    "depth_max": 25,
+    "visibility": 15,
+    "info_links": [],
+    "dive_center_links": ["https://seastar.pro/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "157044ba-6c74-4af3-baf6-b106652a6633",
+    "name": "Bay 2 (Staghorn Reef)",
+    "description": "",
+    "latitude": 7.60785,
+    "longitude": 98.378363,
+    "country_id": 170,
+    "depth_max": 40,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/racha-yai"],
+    "dive_center_links": ["https://seastar.pro/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 4,
+    "site_type_id": 4,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "404580c7-5ca8-4edf-8b40-413c50e532e4",
+    "name": "HTMS Suphairin 313",
+    "description": "После более 40 лет службы Suphairin был затоплен всего в 15–20 метрах от рифа No Name Pinnacle, на восточной стороне Ко Тао. Место выбрали не случайно: риф известен своей живописной подводной средой и удобной глубиной для погружений, а добавление искусственного рифа позволило привлечь ещё больше морских обитателей.\n\nВерхняя точка затонувшего корабля расположена на глубине около 16 метров, а его нижняя часть достигает 28 метров. Это делает объект доступным для рекреационных дайверов, но при этом достаточно глубоким, чтобы привлечь более опытных исследователей.",
+    "latitude": 10.1151954,
+    "longitude": 99.8107657,
+    "country_id": 170,
+    "depth_max": 30,
+    "visibility": 10,
+    "info_links": ["https://www.diversnotes.com/ru/blog/koh-tao-diving-second-trip"],
+    "dive_center_links": [
+      "https://www.master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 2,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 2,
+      "label_en": "Wreck",
+      "label_ru": "Затонувший корабль"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "6c2daaf5-ecf5-4449-822b-60fe80f78806",
+    "name": "Marlas Mystery",
+    "description": "Тайна Марласа (Marlas Mystery) это самое глубокое и редко посещаемое затонувшее судно у острова Рача Яй.",
+    "latitude": 7.6079076,
+    "longitude": 98.3800767,
+    "country_id": 170,
+    "depth_max": 32,
+    "visibility": 10,
+    "info_links": ["https://www.localdivethailand.com/dives/marlas-mystery/"],
+    "dive_center_links": ["https://seastar.pro/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 2,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 2,
+      "label_en": "Wreck",
+      "label_ru": "Затонувший корабль"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "b7682d97-5a97-4bd3-9206-6f52550926b4",
+    "name": "Eel Garden",
+    "description": "",
+    "latitude": 8.5688,
+    "longitude": 97.645648,
+    "country_id": 170,
+    "depth_max": 22,
+    "visibility": 15,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/diving-safari-similans",
+      "https://www.divessi.com/en/mydiveguide/divesite/269221"
+    ],
+    "dive_center_links": ["https://southsiamdivers.com/", "https://phuketdivecenter.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 10,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 10,
+      "label_en": "Coral Garden",
+      "label_ru": "Коралловый сад"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "15d0cf22-0a42-47a8-9be9-a50f816fefaa",
+    "name": "Nang Yuan Pinnacle",
+    "description": "",
+    "latitude": 10.1188048,
+    "longitude": 99.8159384,
+    "country_id": 170,
+    "depth_max": 20,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/koh-tao"],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "448b9da4-7504-4205-baa3-eac4a30aeab4",
+    "name": "Siam Bay",
+    "description": "После цунами 2004 г. здесь установили мемориал в виде композиции, которая представляла из себя морскую раковину с жемчужиной, охраняемую двумя слонами и двумя стражами. К сожалению, силы природы не сохранили эту красоту и на сегодняшний день вся композиция разбросана по песчаному дну.",
+    "latitude": 7.6129776,
+    "longitude": 98.3718318,
+    "country_id": 170,
+    "depth_max": 25,
+    "visibility": 15,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/racha-yai",
+      "https://www.idcphuket.com/scuba-diving/siam-bay-racha-yai/"
+    ],
+    "dive_center_links": ["https://seastar.pro/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 10,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 10,
+      "label_en": "Coral Garden",
+      "label_ru": "Коралловый сад"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "69905925-fcf2-4a54-8f7a-2aa370f17839",
+    "name": "Koh Doc Mai",
+    "description": "Одно из самых доступных мест рябот с Пхукетом чтобы попробовать пещерный дайвинг",
+    "latitude": 7.797696,
+    "longitude": 98.531399,
+    "country_id": 170,
+    "depth_max": 30,
+    "visibility": 10,
+    "info_links": ["https://www.padi.com/dive-site/thailand/koh-doc-mai-2/"],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 5,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 5,
+      "label_en": "Wall",
+      "label_ru": "Стенка"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "67de0610-de1b-47c8-934d-856643ba0b5b",
+    "name": "Turtle Rock",
+    "description": "",
+    "latitude": 7.6855072,
+    "longitude": 98.7625493,
+    "country_id": 170,
+    "depth_max": 20,
+    "visibility": 10,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/turtle-rock",
+      "https://www.localdivethailand.com/phuket-diving-sites/phi-phi-islands-diving/turtle-rock-phi-phi-ley/"
+    ],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 4.9,
+    "site_type_id": 3,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 3,
+      "label_en": "Cave",
+      "label_ru": "Пещера"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "bff8f7bc-0561-490c-acce-8ba8082a430e",
+    "name": "Freedom Bay",
+    "description": "",
+    "latitude": 7.5010697,
+    "longitude": 98.3272779,
+    "country_id": 170,
+    "depth_max": 25,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/racha-noi"],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "ab676b1c-582e-4e78-8385-c82cf699ed76",
+    "name": "Tachai Reef",
+    "description": "",
+    "latitude": 9.063766,
+    "longitude": 97.816365,
+    "country_id": 170,
+    "depth_max": 20,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/diving-safari-similans"],
+    "dive_center_links": ["https://southsiamdivers.com/", "https://phuketdivecenter.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 1,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 1,
+      "label_en": "Reef",
+      "label_ru": "Риф"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "f08a2e88-43a1-41c8-9998-facf4f5c5f6b",
+    "name": "Viking Bay",
+    "description": "",
+    "latitude": 7.6912265,
+    "longitude": 98.7672043,
+    "country_id": 170,
+    "depth_max": 20,
+    "visibility": 10,
+    "info_links": [],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 6,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 6,
+      "label_en": "Artificial reef",
+      "label_ru": "Искусственный риф"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "abb2e7d6-e680-456f-801a-4b65166b0d70",
+    "name": "Koh Bida Nok",
+    "description": "",
+    "latitude": 7.654001,
+    "longitude": 98.766189,
+    "country_id": 170,
+    "depth_max": 32,
+    "visibility": 15,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-bida-nok",
+      "https://www.padi.com/dive-site/thailand/koh-bida-nai-nok-phiphi/"
+    ],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 5,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 5,
+      "label_en": "Wall",
+      "label_ru": "Стенка"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "d005b36a-d524-428f-a382-16425cd599ed",
+    "name": "Phi Ley Wall",
+    "description": "",
+    "latitude": 7.6853255,
+    "longitude": 98.7697578,
+    "country_id": 170,
+    "depth_max": 20,
+    "visibility": 10,
+    "info_links": [],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 5,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 5,
+      "label_en": "Wall",
+      "label_ru": "Стенка"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "de3161e0-e4b8-45c3-aa41-dfb3fc56dd8f",
+    "name": "Koh Bon Ridge",
+    "description": "",
+    "latitude": 8.827922,
+    "longitude": 97.795658,
+    "country_id": 170,
+    "depth_max": 40,
+    "visibility": 20,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/diving-safari-similans",
+      "https://www.similandivingtours.com/dive-sites/koh-bon-and-koh-tachai/koh-bon"
+    ],
+    "dive_center_links": ["https://southsiamdivers.com/", "https://phuketdivecenter.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 1,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 1,
+      "label_en": "Reef",
+      "label_ru": "Риф"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "e8888ccc-b595-455a-ab98-19d0e0d27c0e",
+    "name": "Shark Point",
+    "description": "",
+    "latitude": 7.805604,
+    "longitude": 98.632593,
+    "country_id": 170,
+    "depth_max": 25,
+    "visibility": 10,
+    "info_links": ["https://www.diversnotes.com/ru/blog/sharkPoint"],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "ed8b81fe-53b0-4c3c-a7fd-1723ce447d4d",
+    "name": "Koh Bida Nai",
+    "description": "",
+    "latitude": 7.657468,
+    "longitude": 98.766961,
+    "country_id": 170,
+    "depth_max": 30,
+    "visibility": 10,
+    "info_links": [],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 3,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 3,
+      "label_en": "Cave",
+      "label_ru": "Пещера"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "fbd5d5d6-f6ec-4294-89f2-a58986c324d7",
+    "name": "King Cruiser Wreck",
+    "description": "",
+    "latitude": 7.811684,
+    "longitude": 98.644867,
+    "country_id": 170,
+    "depth_max": 33,
+    "visibility": 7,
+    "info_links": ["https://www.diversnotes.com/ru/blog/king-cruiser"],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 4.8,
+    "site_type_id": 2,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 2,
+      "label_en": "Wreck",
+      "label_ru": "Затонувший корабль"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "2cae5812-47ef-4ab9-aa11-8aae4188ff5f",
+    "name": "Shark Fin Reef",
+    "description": "",
+    "latitude": 8.50878,
+    "longitude": 97.667491,
+    "country_id": 170,
+    "depth_max": 40,
+    "visibility": 20,
+    "info_links": ["https://www.diversnotes.com/ru/blog/diving-safari-similans"],
+    "dive_center_links": ["https://southsiamdivers.com/", "https://phuketdivecenter.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 1,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 1,
+      "label_en": "Reef",
+      "label_ru": "Риф"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "b1f4b3c2-1c36-41ed-b0c9-f724acc98887",
+    "name": "Barge",
+    "description": null,
+    "latitude": 44.797727,
+    "longitude": 20.4256299,
+    "country_id": 150,
+    "depth_max": 10,
+    "visibility": 1,
+    "info_links": null,
+    "dive_center_links": null,
+    "created_at": "2025-07-19T16:24:46.789825+00:00",
+    "rating": 1,
+    "site_type_id": 2,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 150,
+      "name_en": "Serbia",
+      "name_ru": "Сербия",
+      "iso_code": "RS",
+      "region_id": 3
+    },
+    "site_type": {
+      "id": 2,
+      "label_en": "Wreck",
+      "label_ru": "Затонувший корабль"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "712ef9c6-f121-49d1-8d01-0864dd9e813c",
+    "name": "Bungalow Bay South Wall",
+    "description": "",
+    "latitude": 7.607469,
+    "longitude": 98.3630985,
+    "country_id": 170,
+    "depth_max": 25,
+    "visibility": 15,
+    "info_links": [],
+    "dive_center_links": ["https://seastar.pro/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "02b914c4-c3d7-4181-badb-391ad8bf1e09",
+    "name": "Ada Lake",
+    "description": "",
+    "latitude": 44.7765494,
+    "longitude": 20.3747271,
+    "country_id": 150,
+    "depth_max": 15,
+    "visibility": 5,
+    "info_links": [],
+    "dive_center_links": [],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 3,
+    "site_type_id": 11,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 150,
+      "name_en": "Serbia",
+      "name_ru": "Сербия",
+      "iso_code": "RS",
+      "region_id": 3
+    },
+    "site_type": {
+      "id": 11,
+      "label_en": "Lake",
+      "label_ru": "Озеро"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "7a1a19ec-87d4-439f-99e1-c9bac8cdeaff",
+    "name": "Tanote Bay",
+    "description": "",
+    "latitude": 10.0840703,
+    "longitude": 99.8489005,
+    "country_id": 170,
+    "depth_max": 18,
+    "visibility": 10,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.padi.com/dive-site/thailand/aow-leuk/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "e7776311-7046-4918-8895-3c10f06639ee",
+    "name": "Camera Bay",
+    "description": "",
+    "latitude": 7.5129151,
+    "longitude": 98.3257485,
+    "country_id": 170,
+    "depth_max": 25,
+    "visibility": 20,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/racha-noi",
+      "https://www.padi.com/dive-site/thailand/camera-bay-racha-noi/"
+    ],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "10e25bce-4076-41ca-8f6d-731b4ef7cb70",
+    "name": "Aow Leuk",
+    "description": "",
+    "latitude": 10.0711285,
+    "longitude": 99.8407474,
+    "country_id": 170,
+    "depth_max": 15,
+    "visibility": 10,
+    "info_links": ["https://www.diversnotes.com/ru/blog/koh-tao"],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "40da1453-b444-4662-a318-fa04dd0cc7e9",
+    "name": "Honeymoon Bay",
+    "description": "",
+    "latitude": 8.565108,
+    "longitude": 97.639554,
+    "country_id": 170,
+    "depth_max": 20,
+    "visibility": 10,
+    "info_links": ["https://www.diversnotes.com/ru/blog/diving-safari-similans"],
+    "dive_center_links": ["https://southsiamdivers.com/", "https://phuketdivecenter.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "7b6506f6-a598-44a2-9daf-21bfeca43f41",
+    "name": "Richelieu Rock",
+    "description": "",
+    "latitude": 9.3642159,
+    "longitude": 98.0228141,
+    "country_id": 170,
+    "depth_max": 35,
+    "visibility": 15,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/diving-safari-similans",
+      "https://richelieu-rock.com/"
+    ],
+    "dive_center_links": ["https://southsiamdivers.com/", "https://phuketdivecenter.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "41194898-6fb4-41ba-b732-c52331db6689",
+    "name": "Banana Bay",
+    "description": "",
+    "latitude": 7.496983,
+    "longitude": 98.32519,
+    "country_id": 170,
+    "depth_max": 30,
+    "visibility": 20,
+    "info_links": ["https://www.diversnotes.com/ru/blog/racha-noi"],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "f18e787b-0ab1-4795-9923-8df0adb6bb00",
+    "name": "Tachai Pinnacle",
+    "description": "",
+    "latitude": 9.057579,
+    "longitude": 97.813983,
+    "country_id": 170,
+    "depth_max": 40,
+    "visibility": 20,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/diving-safari-similans",
+      "https://www.padi.com/dive-site/thailand/koh-tachai-pinnacle/"
+    ],
+    "dive_center_links": ["https://southsiamdivers.com/", "https://phuketdivecenter.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "652977cc-f073-47dc-a275-142704f7b40e",
+    "name": "Buoyancy World",
+    "description": "",
+    "latitude": 10.1175781,
+    "longitude": 99.8127359,
+    "country_id": 170,
+    "depth_max": 15,
+    "visibility": 5,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.padi.com/dive-site/thailand/buoyancy-world/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 6,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 6,
+      "label_en": "Artificial reef",
+      "label_ru": "Искусственный риф"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "25f32777-f173-4629-865c-3eb5fa242fad",
+    "name": "Hin Pee Wee",
+    "description": "",
+    "latitude": 10.1094938,
+    "longitude": 99.8167313,
+    "country_id": 170,
+    "depth_max": 28,
+    "visibility": 7,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.blackturtledive.com/koh-tao-dive-sites/hin-pee-wee/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 1,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 1,
+      "label_en": "Reef",
+      "label_ru": "Риф"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "b732e356-5700-4459-b431-a4d144670c8f",
+    "name": "White Rock",
+    "description": "",
+    "latitude": 10.1100219,
+    "longitude": 99.8140491,
+    "country_id": 170,
+    "depth_max": 22,
+    "visibility": 15,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.padi.com/dive-site/thailand/white-rock/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "39b4a4b2-19b0-45c5-9f12-58bff268c417",
+    "name": "Chumphon Pinnacle",
+    "description": "",
+    "latitude": 10.172483,
+    "longitude": 99.778683,
+    "country_id": 170,
+    "depth_max": 40,
+    "visibility": 15,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.blackturtledive.com/koh-tao-dive-sites/chumphon-pinnacle/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "8b673c81-0166-4eae-913a-ecf2ce3f0a3c",
+    "name": "Nang Yuan Drop",
+    "description": "",
+    "latitude": 10.1206587,
+    "longitude": 99.8154892,
+    "country_id": 170,
+    "depth_max": 19,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/koh-tao"],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 5,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 5,
+      "label_en": "Wall",
+      "label_ru": "Стенка"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "3ae3aadd-7b7f-4e6c-a30c-55da658cc92e",
+    "name": "Rafaello Beach",
+    "description": null,
+    "latitude": 42.4568573,
+    "longitude": 18.5218411,
+    "country_id": 113,
+    "depth_max": 8,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/montenegro-expectations-vs-reality"],
+    "dive_center_links": ["https://www.divinginmontenegro.com/"],
+    "created_at": "2025-07-19T16:20:44.881247+00:00",
+    "rating": 3,
+    "site_type_id": 12,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 113,
+      "name_en": "Montenegro",
+      "name_ru": "Черногория",
+      "iso_code": "ME",
+      "region_id": 3
+    },
+    "site_type": {
+      "id": 12,
+      "label_en": "Default",
+      "label_ru": "Прочее"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "dae09e9b-fcb9-4014-a8e6-04778bc7cecb",
+    "name": "North Point",
+    "description": "",
+    "latitude": 8.6825427,
+    "longitude": 97.6483178,
+    "country_id": 170,
+    "depth_max": 50,
+    "visibility": 20,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/diving-safari-similans",
+      "https://www.similandivingtours.com/dive-sites/similan-islands/north-point"
+    ],
+    "dive_center_links": ["https://southsiamdivers.com/", "https://phuketdivecenter.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "0ace58d9-3b47-43c4-aa8b-ebf88668ae96",
+    "name": "Green rock",
+    "description": "",
+    "latitude": 10.1245525,
+    "longitude": 99.810766,
+    "country_id": 170,
+    "depth_max": 28,
+    "visibility": 10,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.blackturtledive.com/koh-tao-dive-sites/green-rock/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 4,
+    "site_type_id": 9,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "1c8fa42b-52fe-4496-aaf8-936f7d5aa2ff",
+    "name": "Christmas Point",
+    "description": "",
+    "latitude": 8.6804331,
+    "longitude": 97.6397249,
+    "country_id": 170,
+    "depth_max": 50,
+    "visibility": 30,
+    "info_links": ["https://www.diversnotes.com/ru/blog/diving-safari-similans"],
+    "dive_center_links": ["https://southsiamdivers.com/", "https://phuketdivecenter.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "056b89f4-d276-4a73-b0bc-7fd866fee53d",
+    "name": "Manta Bay",
+    "description": "",
+    "latitude": 7.5156635,
+    "longitude": 98.3336294,
+    "country_id": 170,
+    "depth_max": 30,
+    "visibility": 20,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/racha-noi",
+      "https://www.infinitydiversphuket.com/dive-sites/racha-noi/manta-bay"
+    ],
+    "dive_center_links": ["https://seastar.pro/", "https://diverstars.com/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 4.7,
+    "site_type_id": 4,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "a06cc07f-91a5-47d2-bf3e-f0c349f8cbd8",
+    "name": "South west pinnacle",
+    "description": "",
+    "latitude": 9.9990956,
+    "longitude": 99.7791882,
+    "country_id": 170,
+    "depth_max": 30,
+    "visibility": 10,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.blackturtledive.com/koh-tao-dive-sites/south-west-pinnacle/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "51f9727f-7e0a-4416-b74b-c9d109e30c93",
+    "name": "Twins Pinnacle",
+    "description": "",
+    "latitude": 10.11741,
+    "longitude": 99.8130099,
+    "country_id": 170,
+    "depth_max": 20,
+    "visibility": 10,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.blackturtledive.com/koh-tao-dive-sites/twins-pinnacle/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "e431cf13-803f-416b-b7cb-937668243880",
+    "name": "Junkyard Reef",
+    "description": "",
+    "latitude": 10.0866034,
+    "longitude": 99.8230292,
+    "country_id": 170,
+    "depth_max": 12,
+    "visibility": 20,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.blackturtledive.com/koh-tao-dive-sites/junkyard-reef/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 1,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 1,
+      "label_en": "Reef",
+      "label_ru": "Риф"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "8c7db8bd-2381-4d19-9694-0cdc5653d2f9",
+    "name": "The Tunnels. St. Nicholas Island",
+    "description": null,
+    "latitude": 42.2699151,
+    "longitude": 18.8451467,
+    "country_id": 113,
+    "depth_max": 20,
+    "visibility": 15,
+    "info_links": ["https://www.diversnotes.com/ru/blog/montenegro-expectations-vs-reality"],
+    "dive_center_links": null,
+    "created_at": "2025-07-19T16:23:14.136768+00:00",
+    "rating": 3.5,
+    "site_type_id": 3,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 113,
+      "name_en": "Montenegro",
+      "name_ru": "Черногория",
+      "iso_code": "ME",
+      "region_id": 3
+    },
+    "site_type": {
+      "id": 3,
+      "label_en": "Cave",
+      "label_ru": "Пещера"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "a8839613-aa4f-42b8-98d5-dfb7a2e19605",
+    "name": "Japanese gardens",
+    "description": "",
+    "latitude": 10.1189757,
+    "longitude": 99.8150037,
+    "country_id": 170,
+    "depth_max": 16,
+    "visibility": 10,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.blackturtledive.com/koh-tao-dive-sites/japanese-gardens/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 10,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 10,
+      "label_en": "Coral Garden",
+      "label_ru": "Коралловый сад"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  },
+  {
+    "id": "e6595d6a-07f7-421b-81c0-c82ee1776fd3",
+    "name": "Red rock",
+    "description": "",
+    "latitude": 10.12376,
+    "longitude": 99.811547,
+    "country_id": 170,
+    "depth_max": 22,
+    "visibility": 10,
+    "info_links": ["https://www.diversnotes.com/ru/blog/koh-tao"],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 9,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 9,
+      "label_en": "Pinnacle",
+      "label_ru": "Подводная скала"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "e14f8f88-3616-4a7d-b99e-08432dda1849",
+    "name": "HTMS Sattakut",
+    "description": "",
+    "latitude": 10.1055618,
+    "longitude": 99.8136191,
+    "country_id": 170,
+    "depth_max": 30,
+    "visibility": 5,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.blackturtledive.com/koh-tao-dive-sites/htms-sattakut/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 3,
+    "site_type_id": 2,
+    "difficulty_id": 2,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 2,
+      "label_en": "Wreck",
+      "label_ru": "Затонувший корабль"
+    },
+    "difficulty": {
+      "id": 2,
+      "label_en": "Intermediate",
+      "label_ru": "Средний уровень"
+    }
+  },
+  {
+    "id": "e36655a8-6b88-4577-8550-15fb593f3e6c",
+    "name": "Mango Bay",
+    "description": "",
+    "latitude": 10.1220013,
+    "longitude": 99.8348572,
+    "country_id": 170,
+    "depth_max": 16,
+    "visibility": 10,
+    "info_links": [
+      "https://www.diversnotes.com/ru/blog/koh-tao",
+      "https://www.blackturtledive.com/koh-tao-dive-sites/mango-bay/"
+    ],
+    "dive_center_links": [
+      "https://master-divers.com/",
+      "https://www.phoenixdiverskohtao.com/",
+      "https://www.scubabirds.com"
+    ],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 4,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 4,
+      "label_en": "Bay",
+      "label_ru": "Бухта"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  }
+]
