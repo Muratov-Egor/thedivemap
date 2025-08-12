@@ -130,7 +130,7 @@ export default function DiveSitesLayer({
           }
         } catch (error) {
           console.error('Error during clustering:', error);
-        }   
+        }
       }, 100);
 
       throttledUpdate();
@@ -140,9 +140,12 @@ export default function DiveSitesLayer({
         if (clusteringManagerRef.current) {
           const newClusters = clusteringManagerRef.current.cluster(sites, bounds, zoom);
           setClusters(newClusters);
-          setIndividualSites(sites.filter((site) => !newClusters.some((cluster) => 
-            cluster.points.some((p) => p.id === site.id)
-          )));
+          setIndividualSites(
+            sites.filter(
+              (site) =>
+                !newClusters.some((cluster) => cluster.points.some((p) => p.id === site.id)),
+            ),
+          );
         }
       } catch (error) {
         console.error('Error during clustering:', error);
@@ -276,7 +279,6 @@ export default function DiveSitesLayer({
           isVisible={isInfoWindowVisible}
         />
       )}
-
     </>
   );
 }
