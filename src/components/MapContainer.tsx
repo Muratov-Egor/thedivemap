@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import maplibregl, { Map } from 'maplibre-gl';
 import { MapProvider, useMap } from '@/contexts/MapContext';
 import DiveSitesLayer from './map/DiveSitesLayer';
 
 function InnerMapContainer({ children }: { children?: React.ReactNode }) {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
   const {
@@ -36,6 +38,11 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
       keyboard: true,
       dragPan: true,
       dragRotate: true,
+      // Ограничиваем область перемещения карты
+      maxBounds: [
+        [90, 5], // Юго-западная граница (lng, lat)
+        [110, 15], // Северо-восточная граница (lng, lat)
+      ],
     });
 
     mapRef.current = map;
@@ -80,7 +87,7 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
         <div className="absolute top-4 left-4 bg-white rounded-lg shadow-md px-4 py-2 text-sm text-gray-600">
           <div className="flex items-center gap-2">
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-            Loading dive sites...
+            {t('map.loading')}
           </div>
         </div>
       )}

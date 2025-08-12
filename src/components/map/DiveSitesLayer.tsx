@@ -8,7 +8,6 @@ import { ClusteringManager } from '@/lib/clustering/ClusteringManager';
 import { PerformanceOptimizer } from '@/lib/clustering/PerformanceOptimizer';
 import DiveSiteMarker from './DiveSiteMarker';
 import MarkerCluster from './MarkerCluster';
-import DiveSiteInfoWindow from './DiveSiteInfoWindow';
 
 interface DiveSitesLayerProps {
   map: Map | null;
@@ -26,8 +25,6 @@ export default function DiveSitesLayer({
   const [clusters, setClusters] = useState<Cluster[]>([]);
   const [individualSites, setIndividualSites] = useState<Site[]>([]);
   const [selectedSite, setSelectedSite] = useState<Site | null>(null);
-  const [infoWindowPosition, setInfoWindowPosition] = useState<[number, number]>([0, 0]);
-  const [isInfoWindowVisible, setIsInfoWindowVisible] = useState(false);
 
   // Сбрасываем состояние кластеризации если нет данных
   useEffect(() => {
@@ -73,6 +70,22 @@ export default function DiveSitesLayer({
     return map ? map.getZoom() : 0;
   }, [map]);
 
+  // Проверка видимости точки на карте
+  const isPointVisible = useCallback(
+    (lng: number, lat: number): boolean => {
+      if (!map) return false;
+
+      const bounds = map.getBounds();
+      return (
+        lng >= bounds.getWest() &&
+        lng <= bounds.getEast() &&
+        lat >= bounds.getSouth() &&
+        lat <= bounds.getNorth()
+      );
+    },
+    [map],
+  );
+
   // Обновление кластеризации
   const updateClustering = useCallback(() => {
     if (!map || !clusteringManagerRef.current || sites.length === 0) {
@@ -93,20 +106,6 @@ export default function DiveSitesLayer({
           if (clusteringManagerRef.current) {
             const newClusters = clusteringManagerRef.current.cluster(sites, bounds, zoom);
             setClusters(newClusters);
-
-            // Отладочная информация
-            if (process.env.NODE_ENV === 'development') {
-              console.log('Clustering Debug:', {
-                zoom,
-                totalSites: sites.length,
-                clusters: newClusters.length,
-                clusterDetails: newClusters.map((c) => ({
-                  id: c.id,
-                  count: c.count,
-                  center: c.center,
-                })),
-              });
-            }
 
             // Определяем, какие сайты показывать индивидуально на основе уровня зума
             const shouldShowIndividual = zoom > 12; // Порог для показа всех сайтов как отдельных маркеров
@@ -190,12 +189,7 @@ export default function DiveSitesLayer({
       setSelectedSite(site);
       onSiteClick?.(site);
 
-      // Позиционируем информационное окно
-      if (map) {
-        const point = map.project([site.longitude, site.latitude]);
-        setInfoWindowPosition([point.x, point.y - 50]);
-        setIsInfoWindowVisible(true);
-      }
+      console.log(site);
     },
     [map, onSiteClick],
   );
@@ -239,46 +233,40 @@ export default function DiveSitesLayer({
   return (
     <>
       {/* Индивидуальные маркеры дайв-сайтов */}
-      {individualSites.map((site) => (
-        <div
-          key={site.id}
-          className="absolute"
-          style={{
-            left: map.project([site.longitude, site.latitude]).x - 16,
-            top: map.project([site.longitude, site.latitude]).y - 16,
-          }}
-        >
-          <DiveSiteMarker
-            site={site}
-            onClick={handleSiteClick}
-            isActive={selectedSite?.id === site.id}
-          />
-        </div>
-      ))}
+      {individualSites
+        .filter((site) => isPointVisible(site.longitude, site.latitude))
+        .map((site) => (
+          <div
+            key={site.id}
+            className="absolute"
+            style={{
+              left: map.project([site.longitude, site.latitude]).x - 16,
+              top: map.project([site.longitude, site.latitude]).y - 16,
+            }}
+          >
+            <DiveSiteMarker
+              site={site}
+              onClick={handleSiteClick}
+              isActive={selectedSite?.id === site.id}
+            />
+          </div>
+        ))}
 
       {/* Кластеризованные маркеры */}
-      {clusters.map((cluster) => (
-        <div
-          key={cluster.id}
-          className="absolute"
-          style={{
-            left: map.project(cluster.center).x - 20,
-            top: map.project(cluster.center).y - 20,
-          }}
-        >
-          <MarkerCluster cluster={cluster} onClick={handleClusterClick} />
-        </div>
-      ))}
-
-      {/* Информационное окно */}
-      {selectedSite && (
-        <DiveSiteInfoWindow
-          site={selectedSite}
-          position={infoWindowPosition}
-          onClose={handleCloseInfoWindow}
-          isVisible={isInfoWindowVisible}
-        />
-      )}
+      {clusters
+        .filter((cluster) => isPointVisible(cluster.center[0], cluster.center[1]))
+        .map((cluster) => (
+          <div
+            key={cluster.id}
+            className="absolute"
+            style={{
+              left: map.project(cluster.center).x - 20,
+              top: map.project(cluster.center).y - 20,
+            }}
+          >
+            <MarkerCluster cluster={cluster} onClick={handleClusterClick} />
+          </div>
+        ))}
     </>
   );
 }

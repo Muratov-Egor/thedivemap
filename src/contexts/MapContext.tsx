@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useMemo, useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Map } from 'maplibre-gl';
 import { Site } from '@/types/database';
 import { Cluster } from '@/types/clustering';
@@ -23,6 +24,7 @@ interface MapContextValue {
 const MapContext = createContext<MapContextValue | undefined>(undefined);
 
 export function MapProvider({ children }: { children: React.ReactNode }) {
+  const { t } = useTranslation();
   const [map, setMap] = useState<Map | null>(null);
   const [isLoaded, setLoaded] = useState(false);
   const [diveSites, setDiveSites] = useState<Site[]>([]);
@@ -38,14 +40,14 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await fetch('/api/dive-sites');
       if (!response.ok) {
-        throw new Error('Failed to fetch dive sites');
+        throw new Error(t('map.error.fetchFailed'));
       }
 
       const sites = await response.json();
       setDiveSites(sites);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
-      console.error('Error fetching dive sites:', err);
+      console.error(t('map.error.fetchError'), err);
     } finally {
       setLoading(false);
     }
@@ -57,10 +59,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Обработка клика по кластеру
-  const onClusterClick = useCallback((cluster: Cluster) => {
-    // Логика для обработки клика по кластеру
-    console.log('Cluster clicked:', cluster);
-  }, []);
+  const onClusterClick = useCallback((cluster: Cluster) => {}, []);
 
   // Выбор сайта
   const selectSite = useCallback((site: Site | null) => {

@@ -87,18 +87,6 @@ export class ClusteringManager {
 
     const finalRadius = Math.max(minRadius, Math.min(maxRadius, adaptiveRadius));
 
-    // Отладочная информация
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Cluster Radius Debug:', {
-        zoom,
-        baseRadius,
-        areaSize,
-        adaptiveRadius,
-        finalRadius,
-        bounds,
-      });
-    }
-
     return finalRadius;
   }
 
@@ -114,16 +102,6 @@ export class ClusteringManager {
 
     const clusters: Cluster[] = [];
     const visited = new Set<number>(); // Отслеживаем посещенные точки
-
-    // Отладочная информация
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Clustering Debug:', {
-        totalPoints: points.length,
-        radius,
-        zoom,
-        minPoints: this.options.minPoints,
-      });
-    }
 
     for (let i = 0; i < points.length; i++) {
       if (visited.has(i)) continue; // Пропускаем уже посещенные точки
@@ -154,27 +132,7 @@ export class ClusteringManager {
           level: zoom,
         };
         clusters.push(cluster);
-
-        // Отладочная информация для каждого кластера
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`Cluster ${clusters.length - 1}:`, {
-            id: cluster.id,
-            count: cluster.count,
-            center: cluster.center,
-            points: clusterPoints.map((p) => ({ id: p.id, coords: [p.longitude, p.latitude] })),
-          });
-        }
       }
-    }
-
-    // Финальная отладочная информация
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Clustering Results:', {
-        totalClusters: clusters.length,
-        totalClusteredPoints: clusters.reduce((sum, c) => sum + c.count, 0),
-        individualPoints: points.length - clusters.reduce((sum, c) => sum + c.count, 0),
-        clusterSizes: clusters.map((c) => c.count),
-      });
     }
 
     return clusters;

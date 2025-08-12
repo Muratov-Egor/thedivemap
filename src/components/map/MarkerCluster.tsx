@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ClusterMarkerProps } from '@/types/clustering';
 
 export default function MarkerCluster({
@@ -9,6 +10,7 @@ export default function MarkerCluster({
   onHover,
   isActive = false,
 }: ClusterMarkerProps) {
+  const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
   const clusterRef = useRef<HTMLDivElement>(null);
 
@@ -77,7 +79,7 @@ export default function MarkerCluster({
       onMouseLeave={handleMouseLeave}
       role="button"
       tabIndex={0}
-      aria-label={`Cluster with ${cluster.count} dive sites`}
+      aria-label={`Cluster with ${cluster.count} ${t('map.markers.diveSites')}`}
     >
       {/* Основной кластер */}
       <div
@@ -105,24 +107,14 @@ export default function MarkerCluster({
       {(isHovered || isActive) && (
         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-white rounded-lg shadow-lg border border-gray-200 text-sm whitespace-nowrap z-20">
           <div className="font-semibold text-gray-900">
-            {cluster.count} dive site{cluster.count !== 1 ? 's' : ''}
+            {cluster.count}{' '}
+            {cluster.count === 1
+              ? t('map.markers.diveSiteSingular')
+              : t('map.markers.diveSitePlural')}
           </div>
-          <div className="text-gray-600">Click to zoom in</div>
+          <div className="text-gray-600">{t('map.markers.clickToZoom')}</div>
           <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
         </div>
-      )}
-
-      {/* Индикатор границ кластера (для отладки) */}
-      {process.env.NODE_ENV === 'development' && isHovered && (
-        <div
-          className="absolute inset-0 border-2 border-dashed border-orange-400 rounded-full pointer-events-none"
-          style={{
-            width: '200px',
-            height: '200px',
-            marginLeft: '-100px',
-            marginTop: '-100px',
-          }}
-        />
       )}
     </div>
   );

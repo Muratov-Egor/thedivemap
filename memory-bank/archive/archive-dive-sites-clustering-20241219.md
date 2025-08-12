@@ -99,7 +99,6 @@ The implementation followed a structured Level 3 workflow:
 - `src/types/clustering.ts`: TypeScript interfaces for clustering
 - `src/components/map/DiveSiteMarker.tsx`: Individual marker component
 - `src/components/map/MarkerCluster.tsx`: Cluster visualization component
-- `src/components/map/DiveSiteInfoWindow.tsx`: Information window component
 - `src/components/map/DiveSitesLayer.tsx`: Map layer component
 
 #### Modified Files
