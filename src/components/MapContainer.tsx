@@ -28,9 +28,9 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
       container: containerRef.current,
       style: '/map-styles/arcgis_hybrid.json',
       center: [98.379111, 7.609361],
-      zoom: 13,
-      maxZoom: 18,
-      minZoom: 3,
+      zoom: 0,
+      maxZoom: 15,
+      minZoom: 0,
       hash: false,
       touchZoomRotate: true,
       doubleClickZoom: true,
@@ -38,11 +38,6 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
       keyboard: true,
       dragPan: true,
       dragRotate: true,
-      // Ограничиваем область перемещения карты
-      maxBounds: [
-        [90, 5], // Юго-западная граница (lng, lat)
-        [110, 15], // Северо-восточная граница (lng, lat)
-      ],
     });
 
     mapRef.current = map;

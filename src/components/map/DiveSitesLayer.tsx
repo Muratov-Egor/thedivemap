@@ -191,7 +191,7 @@ export default function DiveSitesLayer({
 
       console.log(site);
     },
-    [map, onSiteClick],
+    [onSiteClick],
   );
 
   // Обработка клика по кластеру
