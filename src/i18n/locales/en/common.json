@@ -5,5 +5,20 @@
   },
   "home": {
     "title": "Here will be a map"
+  },
+  "map": {
+    "loading": "Loading dive sites...",
+    "error": {
+      "fetchFailed": "Failed to fetch dive sites",
+      "fetchError": "Error fetching dive sites"
+    },
+    "markers": {
+      "diveSite": "Dive site",
+      "diveSites": "dive sites",
+      "diveSiteSingular": "dive site",
+      "diveSitePlural": "dive sites",
+      "clickToZoom": "Click to zoom in",
+      "type": "Type"
+    }
   }
 }

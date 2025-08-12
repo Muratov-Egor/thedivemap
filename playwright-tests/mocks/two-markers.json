@@ -1,0 +1,70 @@
+[
+  {
+    "id": "6c2daaf5-ecf5-4449-822b-60fe80f78806",
+    "name": "Marlas Mystery",
+    "description": "Тайна Марласа (Marlas Mystery) это самое глубокое и редко посещаемое затонувшее судно у острова Рача Яй.",
+    "latitude": 7.6079076,
+    "longitude": 98.3800767,
+    "country_id": 170,
+    "depth_max": 32,
+    "visibility": 10,
+    "info_links": ["https://www.localdivethailand.com/dives/marlas-mystery/"],
+    "dive_center_links": ["https://seastar.pro/"],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 0,
+    "site_type_id": 2,
+    "difficulty_id": 3,
+    "status": "published",
+    "country": {
+      "id": 170,
+      "name_en": "Thailand",
+      "name_ru": "Таиланд",
+      "iso_code": "TH",
+      "region_id": 2
+    },
+    "site_type": {
+      "id": 2,
+      "label_en": "Wreck",
+      "label_ru": "Затонувший корабль"
+    },
+    "difficulty": {
+      "id": 3,
+      "label_en": "Advanced",
+      "label_ru": "Продвинутый"
+    }
+  },
+  {
+    "id": "02b914c4-c3d7-4181-badb-391ad8bf1e09",
+    "name": "Ada Lake",
+    "description": "",
+    "latitude": 44.7765494,
+    "longitude": 20.3747271,
+    "country_id": 150,
+    "depth_max": 15,
+    "visibility": 5,
+    "info_links": [],
+    "dive_center_links": [],
+    "created_at": "2025-07-06T10:08:05.809658+00:00",
+    "rating": 3,
+    "site_type_id": 11,
+    "difficulty_id": 1,
+    "status": "published",
+    "country": {
+      "id": 150,
+      "name_en": "Serbia",
+      "name_ru": "Сербия",
+      "iso_code": "RS",
+      "region_id": 3
+    },
+    "site_type": {
+      "id": 11,
+      "label_en": "Lake",
+      "label_ru": "Озеро"
+    },
+    "difficulty": {
+      "id": 1,
+      "label_en": "Beginner",
+      "label_ru": "Новичок"
+    }
+  }
+]

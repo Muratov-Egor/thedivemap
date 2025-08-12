@@ -4,7 +4,7 @@ export default defineConfig({
   testDir: './playwright-tests',
   timeout: 30_000,
   retries: 0,
-  workers: 5,
+  workers: 3,
   reporter: [
     ['list'],
     [
@@ -22,6 +22,7 @@ export default defineConfig({
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
     baseURL: 'http://localhost:3000',
+    testIdAttribute: 'data-testid',
   },
   projects: [
     {
@@ -36,5 +37,12 @@ export default defineConfig({
     //   name: 'webkit',
     //   use: { ...devices['Desktop Safari'] },
     // },
+    {
+      name: 'Mobile Chrome',
+      use: {
+        ...devices['iPhone 13'],
+      },
+    },
+
   ],
 });

@@ -5,5 +5,20 @@
   },
   "home": {
     "title": "Тут будет карта"
+  },
+  "map": {
+    "loading": "Загрузка дайв-сайтов...",
+    "error": {
+      "fetchFailed": "Не удалось загрузить дайв-сайты",
+      "fetchError": "Ошибка загрузки дайв-сайтов"
+    },
+    "markers": {
+      "diveSite": "Дайв-сайт",
+      "diveSites": "дайв-сайтов",
+      "diveSiteSingular": "дайв-сайт",
+      "diveSitePlural": "дайв-сайтов",
+      "clickToZoom": "Нажмите для увеличения",
+      "type": "Тип"
+    }
   }
 }

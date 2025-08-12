@@ -9,7 +9,7 @@ export default function HomePage() {
     <main className="h-full w-full flex flex-col">
       <Header />
       <div className="flex-1 flex">
-        <MapContainer></MapContainer>
+        <MapContainer />
         <Stub />
       </div>
     </main>
