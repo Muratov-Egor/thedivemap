@@ -17,7 +17,8 @@
       "diveSites": "дайв-сайтов",
       "diveSiteSingular": "дайв-сайт",
       "diveSitePlural": "дайв-сайтов",
-      "clickToZoom": "Нажмите для увеличения"
+      "clickToZoom": "Нажмите для увеличения",
+      "type": "Тип"
     }
   }
 }

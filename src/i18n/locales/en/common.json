@@ -17,7 +17,8 @@
       "diveSites": "dive sites",
       "diveSiteSingular": "dive site",
       "diveSitePlural": "dive sites",
-      "clickToZoom": "Click to zoom in"
+      "clickToZoom": "Click to zoom in",
+      "type": "Type"
     }
   }
 }

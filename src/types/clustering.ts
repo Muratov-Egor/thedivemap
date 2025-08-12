@@ -68,7 +68,25 @@ export interface MapEvent {
 
 // Типы для маркеров
 export interface MarkerProps {
-  site: Site;
+  site: Site & {
+    site_type?: {
+      id: number;
+      label_en: string;
+      label_ru: string;
+    };
+    difficulty?: {
+      id: number;
+      label_en: string;
+      label_ru: string;
+    };
+    country?: {
+      id: number;
+      name_en: string;
+      name_ru: string;
+      iso_code: string;
+      region_id: number;
+    };
+  };
   onClick?: (site: Site) => void;
   onHover?: (site: Site) => void;
   isActive?: boolean;
