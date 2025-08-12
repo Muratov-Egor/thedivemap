@@ -2,7 +2,6 @@
 
 import { useTranslation } from 'react-i18next';
 import { useCallback, useMemo } from 'react';
-import { Button } from './ui/Button';
 
 export default function LanguageSwitch() {
   const { i18n } = useTranslation();
@@ -18,15 +17,8 @@ export default function LanguageSwitch() {
   }, [i18n, nextLang]);
 
   return (
-    <Button
-      onClick={onToggle}
-      className="px-2 py-1 text-sm border rounded hover:bg-gray-50"
-      data-testid="lang-switch"
-      aria-label="Toggle language"
-      size="md"
-      variant="secondary"
-    >
+    <button onClick={onToggle} className="px-2 py-1 text-sm border rounded hover:bg-gray-50">
       {current.startsWith('ru') ? 'RU' : 'EN'}
-    </Button>
+    </button>
   );
 }
