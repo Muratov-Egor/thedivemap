@@ -215,12 +215,6 @@ export default function DiveSitesLayer({
     [map, onClusterClick],
   );
 
-  // Закрытие информационного окна
-  const handleCloseInfoWindow = useCallback(() => {
-    setIsInfoWindowVisible(false);
-    setSelectedSite(null);
-  }, []);
-
   // Очистка при размонтировании
   useEffect(() => {
     return () => {

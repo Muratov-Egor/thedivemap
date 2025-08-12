@@ -28,7 +28,7 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
       container: containerRef.current,
       style: '/map-styles/arcgis_hybrid.json',
       center: [98.379111, 7.609361],
-      zoom: 10,
+      zoom: 13,
       maxZoom: 18,
       minZoom: 3,
       hash: false,
