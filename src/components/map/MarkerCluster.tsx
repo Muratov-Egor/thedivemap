@@ -94,6 +94,7 @@ export default function MarkerCluster({
           transition-all duration-300
           ${isHovered || isActive ? 'shadow-xl' : 'shadow-lg'}
         `}
+        data-testid={`marker-cluster`}
       >
         {formatCount(cluster.count)}
       </div>
