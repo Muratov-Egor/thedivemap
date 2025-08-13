@@ -1,0 +1,8 @@
+{
+  "title": "Filters",
+  "stub": "Here will be filters",
+  "accessibility": {
+    "openFilters": "Open filters",
+    "closeFilters": "Close filters"
+  }
+}

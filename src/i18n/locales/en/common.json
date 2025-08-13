@@ -18,7 +18,8 @@
       "diveSiteSingular": "dive site",
       "diveSitePlural": "dive sites",
       "clickToZoom": "Click to zoom in",
-      "type": "Type"
+      "type": "Type",
+      "closeTooltip": "Close"
     }
   },
   "button": {
