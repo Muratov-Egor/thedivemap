@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import maplibregl, { Map } from 'maplibre-gl';
 import { MapProvider, useMap } from '@/contexts/MapContext';
-import DiveSitesLayer from './map/DiveSitesLayer';
+import DiveSitesLayer from './DiveSitesLayer';
 
 function InnerMapContainer({ children }: { children?: React.ReactNode }) {
   const { t } = useTranslation();
