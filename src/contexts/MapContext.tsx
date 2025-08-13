@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useMemo, useState, useCallback } from 'react';
+import React, { createContext, useContext, useMemo, useState, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Map } from 'maplibre-gl';
 import { Site } from '@/types/database';
@@ -31,11 +31,18 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   const [selectedSite, setSelectedSite] = useState<Site | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const hasFetchedRef = useRef(false);
 
   // Загрузка дайв-сайтов
   const fetchDiveSites = useCallback(async () => {
+    // Предотвращаем повторные запросы
+    if (hasFetchedRef.current || loading) {
+      return;
+    }
+
     setLoading(true);
     setError(null);
+    hasFetchedRef.current = true;
 
     try {
       const response = await fetch('/api/dive-sites');
@@ -48,10 +55,12 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
       console.error(t('map.error.fetchError'), err);
+      // Сбрасываем флаг в случае ошибки, чтобы можно было повторить запрос
+      hasFetchedRef.current = false;
     } finally {
       setLoading(false);
     }
-  }, [t]);
+  }, [t, loading]);
 
   // Обработка клика по сайту
   const onSiteClick = useCallback((site: Site) => {

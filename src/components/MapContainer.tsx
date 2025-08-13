@@ -21,6 +21,11 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
     onClusterClick,
   } = useMap();
 
+  // Загружаем дайв-сайты при монтировании компонента
+  useEffect(() => {
+    fetchDiveSites();
+  }, [fetchDiveSites]);
+
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
@@ -51,8 +56,7 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
 
     const onLoad = () => {
       setLoaded(true);
-      // Загружаем дайв-сайты после загрузки карты
-      fetchDiveSites();
+      // Убираем вызов fetchDiveSites отсюда - теперь данные загружаются параллельно
     };
     map.on('load', onLoad);
 
@@ -63,7 +67,7 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
       mapRef.current?.remove();
       mapRef.current = null;
     };
-  }, [setLoaded, setMap, fetchDiveSites]);
+  }, [setLoaded, setMap]);
 
   return (
     <div className="flex-1 relative">

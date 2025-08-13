@@ -67,7 +67,7 @@ playwright-tests/
 #### Browser Configuration
 
 - **API Tests**: Chromium only (no browser-specific behavior needed)
-- **E2E Tests**: 
+- **E2E Tests**:
   - Desktop Chrome (1280x720)
   - Mobile Chrome (iPhone 13 - 375x812)
 
@@ -82,7 +82,7 @@ To add new browsers for E2E testing, uncomment and modify the browser configurat
 //   use: { ...devices['Desktop Firefox'] },
 // },
 // {
-//   name: 'e2e-webkit', 
+//   name: 'e2e-webkit',
 //   testMatch: /.*e2e.*\.spec\.ts/,
 //   use: { ...devices['Desktop Safari'] },
 // },

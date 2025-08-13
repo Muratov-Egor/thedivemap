@@ -91,10 +91,21 @@ export default function DiveSiteMarker({ site, onClick, onHover, isActive = fals
 
       {/* Tooltip с информацией */}
       {(isHovered || isActive) && !isTooltipClosed && (
-        <div data-testid={`dive-site-tooltip`} className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-white rounded-lg shadow-lg border border-gray-200 text-sm whitespace-nowrap z-20">
-          <div data-testid={`dive-site-tooltip-name`} className="font-semibold text-gray-900 mb-1 text-center">{site.name}</div>
+        <div
+          data-testid={`dive-site-tooltip`}
+          className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-white rounded-lg shadow-lg border border-gray-200 text-sm whitespace-nowrap z-20"
+        >
+          <div
+            data-testid={`dive-site-tooltip-name`}
+            className="font-semibold text-gray-900 mb-1 text-center"
+          >
+            {site.name}
+          </div>
 
-          <div data-testid={`dive-site-tooltip-coordinates`} className="text-gray-600 text-xs mb-2 text-center">
+          <div
+            data-testid={`dive-site-tooltip-coordinates`}
+            className="text-gray-600 text-xs mb-2 text-center"
+          >
             📍 {formatCoordinates(site.latitude, site.longitude)}
           </div>
 
@@ -105,7 +116,11 @@ export default function DiveSiteMarker({ site, onClick, onHover, isActive = fals
               </div>
             )}
 
-            {site.rating > 0 && <div data-testid={`dive-site-tooltip-rating`} className="text-gray-600 text-xs">⭐️ {site.rating}/5</div>}
+            {site.rating > 0 && (
+              <div data-testid={`dive-site-tooltip-rating`} className="text-gray-600 text-xs">
+                ⭐️ {site.rating}/5
+              </div>
+            )}
           </div>
 
           <button
