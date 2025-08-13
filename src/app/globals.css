@@ -31,3 +31,102 @@ body {
   color: #004499 !important;
   text-decoration: none !important;
 }
+
+/* Дополнительные эффекты для кнопок */
+@supports (backdrop-filter: blur(10px)) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Анимации для кнопок */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow:
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Эффект солнечных бликов на воде */
+@keyframes water-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  25% {
+    background-position: -150% 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  75% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.water-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.water-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+  pointer-events: none;
+}
+
+.water-shimmer:hover::before {
+  left: 100%;
+  animation: water-shimmer 1.5s ease-in-out;
+}
+
+/* Альтернативный эффект с несколькими бликами */
+@keyframes multiple-shimmers {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.water-shimmer-multiple::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.water-shimmer-multiple:hover::before {
+  animation: multiple-shimmers 1.5s ease-in-out;
+}
