@@ -54,7 +54,7 @@ None currently identified
 
 ## Implementation Commands
 
-*Commands will be logged here as implementation progresses*
+_Commands will be logged here as implementation progresses_
 
 ## Key Findings
 

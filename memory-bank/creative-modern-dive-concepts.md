@@ -86,7 +86,7 @@
 ```css
 /* Primary Button - Тропический градиент */
 .btn-primary-ocean {
-  background: linear-gradient(135deg, #1B68A4, #199BD7);
+  background: linear-gradient(135deg, #1b68a4, #199bd7);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 20px;
@@ -94,7 +94,7 @@
   font-weight: 600;
   font-size: 16px;
   color: white;
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(27, 104, 164, 0.4),
     0 4px 16px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -102,7 +102,7 @@
 
 .btn-primary-ocean:hover {
   transform: translateY(-4px);
-  box-shadow: 
+  box-shadow:
     0 16px 48px rgba(27, 104, 164, 0.5),
     0 8px 24px rgba(0, 0, 0, 0.15);
 }
@@ -115,8 +115,8 @@
   padding: 16px 32px;
   font-weight: 600;
   font-size: 16px;
-  color: #1B68A4;
-  box-shadow: 
+  color: #1b68a4;
+  box-shadow:
     12px 12px 24px rgba(0, 0, 0, 0.4),
     -12px -12px 24px rgba(255, 255, 255, 0.05);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -124,19 +124,19 @@
 
 .btn-secondary-neumorph:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     16px 16px 32px rgba(0, 0, 0, 0.5),
     -16px -16px 32px rgba(255, 255, 255, 0.08);
 }
 
 /* Floating Action Button */
 .btn-floating-coral {
-  background: linear-gradient(135deg, #F47B25, #ea580c);
+  background: linear-gradient(135deg, #f47b25, #ea580c);
   border: none;
   border-radius: 50%;
   width: 72px;
   height: 72px;
-  box-shadow: 
+  box-shadow:
     0 12px 40px rgba(244, 123, 37, 0.5),
     0 6px 20px rgba(0, 0, 0, 0.15);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -144,7 +144,7 @@
 
 .btn-floating-coral:hover {
   transform: scale(1.15) translateY(-6px);
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(244, 123, 37, 0.6),
     0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -160,7 +160,7 @@
   border-radius: 24px;
   padding: 24px;
   margin: 16px 0;
-  box-shadow: 
+  box-shadow:
     0 12px 40px rgba(0, 0, 0, 0.15),
     0 6px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -175,18 +175,13 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   transition: left 0.6s;
 }
 
 .dive-site-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 
+  box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.2),
     0 12px 30px rgba(0, 0, 0, 0.15);
 }
@@ -260,7 +255,7 @@
 }
 
 .action-btn-primary {
-  background: linear-gradient(135deg, #1B68A4, #199BD7);
+  background: linear-gradient(135deg, #1b68a4, #199bd7);
   color: white;
   border: none;
 }
@@ -282,7 +277,7 @@
   border-radius: 24px;
   padding: 24px;
   margin: 20px;
-  box-shadow: 
+  box-shadow:
     0 16px 48px rgba(0, 0, 0, 0.3),
     0 8px 24px rgba(0, 0, 0, 0.2);
 }
@@ -300,7 +295,7 @@
 }
 
 .search-input:focus {
-  border-color: #1B68A4;
+  border-color: #1b68a4;
   box-shadow: 0 0 0 4px rgba(27, 104, 164, 0.1);
   outline: none;
 }
@@ -329,12 +324,12 @@
 
 .filter-chip:hover {
   background: rgba(27, 104, 164, 0.2);
-  border-color: #1B68A4;
+  border-color: #1b68a4;
   transform: translateY(-2px);
 }
 
 .filter-chip.active {
-  background: linear-gradient(135deg, #1B68A4, #199BD7);
+  background: linear-gradient(135deg, #1b68a4, #199bd7);
   border-color: transparent;
   box-shadow: 0 4px 16px rgba(27, 104, 164, 0.3);
 }
@@ -350,7 +345,7 @@
   border-radius: 20px;
   padding: 16px;
   margin: 16px;
-  box-shadow: 
+  box-shadow:
     0 12px 40px rgba(0, 0, 0, 0.25),
     0 6px 20px rgba(0, 0, 0, 0.15);
 }
@@ -374,7 +369,7 @@
 }
 
 .nav-item.active {
-  background: linear-gradient(135deg, #1B68A4, #199BD7);
+  background: linear-gradient(135deg, #1b68a4, #199bd7);
   color: white;
   box-shadow: 0 4px 16px rgba(27, 104, 164, 0.3);
 }
@@ -410,7 +405,7 @@
 .stats-number {
   font-size: 32px;
   font-weight: 800;
-  background: linear-gradient(135deg, #1B68A4, #199BD7);
+  background: linear-gradient(135deg, #1b68a4, #199bd7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 8px;
@@ -438,11 +433,12 @@
 
 ```css
 @keyframes float {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg); 
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
   }
-  50% { 
-    transform: translateY(-10px) rotate(2deg); 
+  50% {
+    transform: translateY(-10px) rotate(2deg);
   }
 }
 
@@ -483,12 +479,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 212, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
   animation: wave 2s ease-in-out infinite;
 }
 ```
@@ -497,11 +488,12 @@
 
 ```css
 @keyframes pulse-glow {
-  0%, 100% { 
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
     transform: scale(1);
   }
-  50% { 
+  50% {
     box-shadow: 0 0 40px rgba(0, 212, 255, 0.8);
     transform: scale(1.1);
   }
@@ -545,12 +537,12 @@
     padding: 24px;
     margin: 16px;
   }
-  
+
   .search-panel {
     margin: 20px;
     padding: 24px;
   }
-  
+
   .nav-panel {
     position: static;
     border-radius: 20px;
@@ -563,7 +555,7 @@
     padding: 32px;
     margin: 24px;
   }
-  
+
   .search-panel {
     margin: 24px;
     padding: 32px;
@@ -579,7 +571,7 @@
 
 ```css
 .depth-indicator {
-  background: linear-gradient(180deg, #1B68A4 0%, #199BD7 50%, #1e40af 100%);
+  background: linear-gradient(180deg, #1b68a4 0%, #199bd7 50%, #1e40af 100%);
   border-radius: 20px;
   padding: 20px;
   position: relative;
@@ -599,7 +591,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: linear-gradient(180deg, #1B68A4, #199BD7);
+  background: linear-gradient(180deg, #1b68a4, #199bd7);
   border-radius: 10px;
   transition: height 0.5s ease;
 }
@@ -628,7 +620,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.3),
     inset 0 2px 4px rgba(255, 255, 255, 0.1);
 }
@@ -636,7 +628,7 @@
 .compass-needle {
   width: 4px;
   height: 60px;
-  background: linear-gradient(180deg, #ef4444 0%, #1B68A4 50%, #10b981 100%);
+  background: linear-gradient(180deg, #ef4444 0%, #1b68a4 50%, #10b981 100%);
   border-radius: 2px;
   position: absolute;
   transform-origin: center;
@@ -644,8 +636,12 @@
 }
 
 @keyframes compass-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 ```
 
@@ -662,7 +658,7 @@
 .temp-display {
   font-size: 24px;
   font-weight: 700;
-  color: #1B68A4;
+  color: #1b68a4;
   text-align: center;
   margin-bottom: 8px;
 }
@@ -678,7 +674,7 @@
 
 .temp-fill {
   height: 100%;
-  background: linear-gradient(90deg, #1B68A4, #199BD7);
+  background: linear-gradient(90deg, #1b68a4, #199bd7);
   border-radius: 4px;
   transition: width 0.5s ease;
 }

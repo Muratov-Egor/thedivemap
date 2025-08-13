@@ -128,6 +128,18 @@ export default function Stub() {
         </div>
       </section>
 
+      {/* Эффект блика */}
+      <section className="w-full mb-8">
+        <h3 className="text-lg font-semibold text-gray-700 mb-3">Эффект блика при ховере</h3>
+        <div className="flex items-center gap-3">
+          <Button variant="primary">Primary с бликом</Button>
+          <Button variant="coral">Coral с бликом</Button>
+          <Button variant="glass">Glass с бликом</Button>
+          <Button variant="success">Success с бликом</Button>
+        </div>
+        <p className="text-sm text-gray-600 mt-2">Наведите курсор на кнопки, чтобы увидеть эффект блика</p>
+      </section>
+
       {/* Комбинации */}
       <section className="w-full mb-8">
         <h3 className="text-lg font-semibold text-gray-700 mb-3">Комбинации</h3>
@@ -252,10 +264,18 @@ export default function Stub() {
       <section className="w-full mb-8">
         <h3 className="text-lg font-semibold text-gray-700 mb-3">Кнопки с эффектами</h3>
         <div className="grid grid-cols-2 gap-3">
-          <Button variant="primary" shimmer>Primary Shimmer</Button>
-          <Button variant="coral" glow>Coral Glow</Button>
-          <Button variant="primary" shimmer glow>Primary Shimmer + Glow</Button>
-          <Button variant="coral" shape="circle" glow>+</Button>
+          <Button variant="primary" shimmer>
+            Primary Shimmer
+          </Button>
+          <Button variant="coral" glow>
+            Coral Glow
+          </Button>
+          <Button variant="primary" shimmer glow>
+            Primary Shimmer + Glow
+          </Button>
+          <Button variant="coral" shape="circle" glow>
+            +
+          </Button>
         </div>
       </section>
     </div>

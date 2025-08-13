@@ -18,11 +18,7 @@ describe('Button Component', () => {
   it('применяет правильные классы по умолчанию', () => {
     render(<Button>Кнопка</Button>);
     const button = screen.getByRole('button');
-    expect(button).toHaveClass(
-      'bg-blue-600',
-      'text-white',
-      'rounded-xl',
-    );
+    expect(button).toHaveClass('bg-gradient-ocean', 'text-white', 'rounded-2xl');
   });
 
   it('поддерживает разные размеры', () => {
@@ -35,20 +31,33 @@ describe('Button Component', () => {
 
   it('поддерживает разные варианты стилей', () => {
     const { rerender } = render(<Button variant="secondary">Secondary</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-gradient-to-r', 'from-yellow-500', 'to-orange-500');
-
-    rerender(<Button variant="ghost">Ghost</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-transparent', 'text-gray-700');
-
-    rerender(<Button variant="white">White</Button>);
     expect(screen.getByRole('button')).toHaveClass(
       'bg-gradient-to-r',
-      'from-gray-50',
-      'to-gray-100',
+      'from-gray-200',
+      'to-gray-300',
     );
 
-    rerender(<Button variant="danger">Danger</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-gradient-to-r', 'from-red-400', 'to-red-600');
+    rerender(<Button variant="ghost">Ghost</Button>);
+    expect(screen.getByRole('button')).toHaveClass('bg-transparent', 'text-slate-600');
+
+    rerender(<Button variant="coral">Coral</Button>);
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-gradient-coral',
+      'text-white',
+    );
+
+    rerender(<Button variant="glass">Glass</Button>);
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-white/80',
+      'text-slate-800',
+    );
+
+    rerender(<Button variant="success">Success</Button>);
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-gradient-to-r',
+      'from-green-500',
+      'to-emerald-600',
+    );
   });
 
   it('поддерживает круглую форму', () => {
@@ -157,5 +166,16 @@ describe('Button Component', () => {
     render(<Button ref={ref}>Кнопка</Button>);
 
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
+
+  it('поддерживает эффекты shimmer и glow', () => {
+    const { rerender } = render(<Button shimmer>Shimmer</Button>);
+    expect(screen.getByRole('button')).toHaveClass('water-shimmer-multiple');
+
+    rerender(<Button glow>Glow</Button>);
+    expect(screen.getByRole('button')).toHaveClass('animate-pulse-glow');
+
+    rerender(<Button shimmer glow>Shimmer + Glow</Button>);
+    expect(screen.getByRole('button')).toHaveClass('water-shimmer-multiple', 'animate-pulse-glow');
   });
 });

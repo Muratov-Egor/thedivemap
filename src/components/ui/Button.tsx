@@ -35,7 +35,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const { t } = useTranslation('common');
-    
+
     const baseStyles =
       'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95';
 
@@ -64,17 +64,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantStyles = {
       primary:
-        'bg-gradient-ocean text-white hover:shadow-glow-hover focus:ring-tropical-blue/50 shadow-glow hover:scale-105 transform transition-all duration-300 border border-white/30 backdrop-blur-sm',
+        'bg-gradient-ocean text-white hover:shadow-glow-hover focus:ring-tropical-blue/50 shadow-glow button-shine transform transition-all duration-300 border border-white/30 backdrop-blur-sm',
       secondary:
-        'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-700 hover:from-slate-200 hover:to-slate-300 focus:ring-slate-400 shadow-md hover:shadow-lg hover:scale-105 transform transition-all duration-300 border border-slate-300',
+        'bg-gradient-to-r from-gray-200 to-gray-300 text-slate-700 hover:from-slate-200 hover:to-slate-300 focus:ring-slate-400 shadow-md hover:shadow-lg button-shine transform transition-all duration-300 border border-slate-300',
       coral:
-        'bg-gradient-coral text-white hover:shadow-glow-coral focus:ring-coral/50 shadow-glow-coral hover:scale-105 transform transition-all duration-300 border border-white/30 backdrop-blur-sm',
+        'bg-gradient-coral text-white hover:shadow-glow-coral focus:ring-coral/50 shadow-glow-coral button-shine transform transition-all duration-300 border border-white/30 backdrop-blur-sm',
       glass:
-        'bg-white/80 text-slate-800 hover:bg-white focus:ring-slate-400 shadow-glass hover:shadow-glass-hover hover:scale-105 transform transition-all duration-300 border border-slate-200 backdrop-blur-xl',
+        'bg-white/80 text-slate-800 hover:bg-white focus:ring-slate-400 shadow-glass hover:shadow-glass-hover button-shine transform transition-all duration-300 border border-slate-200 backdrop-blur-xl',
       ghost:
-        'bg-transparent text-slate-600 hover:bg-slate-100 focus:ring-slate-400 hover:scale-105 transform transition-all duration-300 border border-slate-200',
+        'bg-transparent text-slate-600 hover:bg-slate-100 focus:ring-slate-400 button-shine transform transition-all duration-300 border border-slate-200',
       success:
-        'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 focus:ring-green-400 shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300 border-0',
+        'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 focus:ring-green-400 shadow-lg hover:shadow-xl button-shine transform transition-all duration-300 border-0',
     };
 
     const shapeStyles = {
@@ -84,10 +84,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     // Добавляем эффекты
-    const effectStyles = cn(
-      shimmer && 'water-shimmer-multiple',
-      glow && 'animate-pulse-glow',
-    );
+    const effectStyles = cn(shimmer && 'water-shimmer-multiple', glow && 'animate-pulse-glow');
 
     const classes = cn(
       baseStyles,
@@ -132,27 +129,27 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Добавляем aria-label для кнопок без текста
     const getAriaLabel = () => {
       if (children) return undefined; // Если есть текст, aria-label не нужен
-      
+
       if (loading) return t('button.accessibility.loading');
       if (disabled) return t('button.accessibility.disabled');
-      
+
       // Если есть иконка, описываем её назначение
       if (icon) {
         return t('button.accessibility.withIcon');
       }
-      
+
       return t('button.accessibility.empty');
     };
-    
+
     const ariaLabel = getAriaLabel();
 
     const finalAriaLabel = ariaLabel || props['aria-label'];
-    
+
     return (
-      <button 
-        ref={ref} 
-        className={classes} 
-        disabled={disabled || loading} 
+      <button
+        ref={ref}
+        className={classes}
+        disabled={disabled || loading}
         aria-label={finalAriaLabel}
         {...props}
       >

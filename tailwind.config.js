@@ -7,20 +7,20 @@ module.exports = {
         // Тропическая палитра
         'tropical-blue': '#1B68A4',
         'deep-ocean': '#199BD7',
-        'coral': '#F47B25',
+        coral: '#F47B25',
         'sea-green': '#11B981',
-        
+
         // Фоны - светлая тема
         'dark-ocean': '#f8fafc', // Slate 50
         'deep-water': '#f1f5f9', // Slate 100
         'glass-bg': 'rgba(255, 255, 255, 0.8)',
         'frosted-glass': 'rgba(255, 255, 255, 0.6)',
-        
+
         // Статусные цвета
-        'success': '#10b981',
-        'warning': '#f59e0b',
-        'error': '#ef4444',
-        'info': '#3b82f6',
+        success: '#10b981',
+        warning: '#f59e0b',
+        error: '#ef4444',
+        info: '#3b82f6',
       },
       backgroundImage: {
         'gradient-ocean': 'linear-gradient(135deg, #1B68A4, #199BD7)',
@@ -31,19 +31,20 @@ module.exports = {
         'gradient-neumorph-inset': 'linear-gradient(145deg, #e2e8f0, #f8fafc)',
       },
       backdropBlur: {
-        'xs': '2px',
-        'sm': '4px',
-        'md': '12px',
-        'lg': '16px',
-        'xl': '24px',
+        xs: '2px',
+        sm: '4px',
+        md: '12px',
+        lg: '16px',
+        xl: '24px',
         '2xl': '40px',
         '3xl': '64px',
       },
       boxShadow: {
-        'glass': '0 8px 32px rgba(0, 0, 0, 0.1)',
+        glass: '0 8px 32px rgba(0, 0, 0, 0.1)',
         'glass-hover': '0 16px 48px rgba(0, 0, 0, 0.15)',
-        'neumorph': '8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.8)',
-        'neumorph-hover': '12px 12px 24px rgba(0, 0, 0, 0.15), -12px -12px 24px rgba(255, 255, 255, 0.9)',
+        neumorph: '8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.8)',
+        'neumorph-hover':
+          '12px 12px 24px rgba(0, 0, 0, 0.15), -12px -12px 24px rgba(255, 255, 255, 0.9)',
         'glow-blue': '0 8px 32px rgba(27, 104, 164, 0.2)',
         'glow-coral': '0 8px 32px rgba(244, 123, 37, 0.2)',
         'glow-hover': '0 12px 40px rgba(27, 104, 164, 0.3)',
@@ -54,6 +55,7 @@ module.exports = {
         'water-ripple': 'water-ripple 0.6s ease-out',
         'water-shimmer': 'water-shimmer 1.5s ease-in-out',
         'multiple-shimmers': 'multiple-shimmers 1.5s ease-in-out',
+        'button-shine': 'button-shine 1s ease-out',
       },
       keyframes: {
         float: {
@@ -61,10 +63,10 @@ module.exports = {
           '50%': { transform: 'translateY(-10px)' },
         },
         'pulse-glow': {
-          '0%, 100%': { 
+          '0%, 100%': {
             boxShadow: '0 8px 32px rgba(27, 104, 164, 0.2)',
           },
-          '50%': { 
+          '50%': {
             boxShadow: '0 8px 32px rgba(27, 104, 164, 0.4), 0 0 20px rgba(27, 104, 164, 0.2)',
           },
         },
@@ -91,14 +93,14 @@ module.exports = {
         },
       },
       borderRadius: {
-        'xl': '12px',
+        xl: '12px',
         '2xl': '16px',
         '3xl': '20px',
         '4xl': '24px',
       },
       fontFamily: {
-        'display': ['Poppins', 'Inter', 'sans-serif'],
-        'mono': ['JetBrains Mono', 'Fira Code', 'monospace'],
+        display: ['Poppins', 'Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
     },
   },

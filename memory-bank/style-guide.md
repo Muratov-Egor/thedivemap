@@ -5,6 +5,7 @@
 **"Deep Ocean Meets Modern Tech"** - The Dive Map emphasizes immersive user experience, modern design trends, and ocean-inspired aesthetics while maintaining professional functionality for dive site exploration.
 
 ### Core Principles
+
 - **Иммерсивность** - Погружение в атмосферу дайвинга
 - **Современность** - Glassmorphism, неоморфизм, градиенты 2024
 - **Интуитивность** - Плавные анимации и микровзаимодействия
