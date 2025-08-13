@@ -20,5 +20,13 @@
       "clickToZoom": "Click to zoom in",
       "type": "Type"
     }
+  },
+  "button": {
+    "accessibility": {
+      "loading": "Button is loading, please wait",
+      "disabled": "Button is temporarily unavailable",
+      "empty": "Button without text description",
+      "withIcon": "Button with graphic element"
+    }
   }
 }
