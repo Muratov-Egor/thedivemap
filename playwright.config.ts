@@ -25,24 +25,36 @@ export default defineConfig({
     testIdAttribute: 'data-testid',
   },
   projects: [
+    // API тесты - только в Chromium
     {
-      name: 'chromium',
+      name: 'api-chromium',
+      testMatch: /.*api.*\.spec\.ts/,
       use: { ...devices['Desktop Chrome'] },
     },
+    // E2E тесты - Desktop Chrome
+    {
+      name: 'e2e-chromium',
+      testMatch: /.*e2e.*\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+    // E2E тесты - Mobile Chrome
+    {
+      name: 'e2e-mobile-chrome',
+      testMatch: /.*e2e.*\.spec\.ts/,
+      use: {
+        ...devices['iPhone 13'],
+      },
+    },
+    // Закомментированные браузеры для E2E тестов (раскомментировать при необходимости)
     // {
-    //   name: 'firefox',
+    //   name: 'e2e-firefox',
+    //   testMatch: /.*e2e.*\.spec\.ts/,
     //   use: { ...devices['Desktop Firefox'] },
     // },
     // {
-    //   name: 'webkit',
+    //   name: 'e2e-webkit',
+    //   testMatch: /.*e2e.*\.spec\.ts/,
     //   use: { ...devices['Desktop Safari'] },
     // },
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['iPhone 13'],
-    //   },
-    // },
-
   ],
 });
