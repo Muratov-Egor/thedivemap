@@ -19,3 +19,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Улучшение доступности ссылок в атрибуции карты */
+.maplibregl-ctrl-attrib a {
+  color: #0066cc !important;
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+}
+
+.maplibregl-ctrl-attrib a:hover {
+  color: #004499 !important;
+  text-decoration: none !important;
+}

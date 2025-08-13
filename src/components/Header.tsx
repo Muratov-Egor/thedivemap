@@ -12,7 +12,7 @@ export default function Header() {
       <Link href="/" className="flex sm:gap-2 gap-1 items-center hover:underline pr-4">
         <Image
           src="/img/Logo.ico"
-          alt={t('header.logoAlt')}
+          alt=""
           width={64}
           height={64}
           className="sm:w-24 sm:h-24 w-16 h-16"

@@ -54,7 +54,7 @@ export default function MarkerCluster({
   const getClusterColor = () => {
     if (cluster.count >= 100) return 'bg-red-600';
     if (cluster.count >= 50) return 'bg-orange-600';
-    if (cluster.count >= 20) return 'bg-yellow-600';
+    if (cluster.count >= 20) return 'bg-orange-700'; // Изменено с bg-yellow-600 на bg-orange-700 для лучшего контраста
     if (cluster.count >= 10) return 'bg-blue-600';
     return 'bg-green-600';
   };
