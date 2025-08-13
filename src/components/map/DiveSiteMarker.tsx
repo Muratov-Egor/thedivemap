@@ -78,12 +78,12 @@ export default function DiveSiteMarker({ site, onClick, onHover, isActive = fals
       {/* Основной маркер */}
       <div
         className={`w-8 h-8 rounded-full
-          bg-blue-600
+          bg-gradient-ocean
           text-white
           flex items-center justify-center
-          shadow-md border-2 border-white
+          shadow-glow-blue border-2 border-white
           transition-all duration-200
-          ${isHovered || isActive ? 'shadow-lg' : 'shadow-md'}`}
+          ${isHovered || isActive ? 'shadow-glow-hover' : 'shadow-glow-blue'}`}
         data-testid={`dive-site-marker-${site.id}`}
       >
         <span className="text-sm sm:text-lg">🤿</span>

@@ -41,16 +41,10 @@ describe('Button Component', () => {
     expect(screen.getByRole('button')).toHaveClass('bg-transparent', 'text-slate-600');
 
     rerender(<Button variant="coral">Coral</Button>);
-    expect(screen.getByRole('button')).toHaveClass(
-      'bg-gradient-coral',
-      'text-white',
-    );
+    expect(screen.getByRole('button')).toHaveClass('bg-gradient-coral', 'text-white');
 
     rerender(<Button variant="glass">Glass</Button>);
-    expect(screen.getByRole('button')).toHaveClass(
-      'bg-white/80',
-      'text-slate-800',
-    );
+    expect(screen.getByRole('button')).toHaveClass('bg-white/80', 'text-slate-800');
 
     rerender(<Button variant="success">Success</Button>);
     expect(screen.getByRole('button')).toHaveClass(
@@ -175,7 +169,11 @@ describe('Button Component', () => {
     rerender(<Button glow>Glow</Button>);
     expect(screen.getByRole('button')).toHaveClass('animate-pulse-glow');
 
-    rerender(<Button shimmer glow>Shimmer + Glow</Button>);
+    rerender(
+      <Button shimmer glow>
+        Shimmer + Glow
+      </Button>,
+    );
     expect(screen.getByRole('button')).toHaveClass('water-shimmer-multiple', 'animate-pulse-glow');
   });
 });

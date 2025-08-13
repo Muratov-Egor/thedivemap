@@ -124,7 +124,9 @@ export default function ButtonDemo() {
         <div className="flex items-center gap-3">
           <Button shimmer>Shimmer</Button>
           <Button glow>Glow</Button>
-          <Button shimmer glow>Shimmer + Glow</Button>
+          <Button shimmer glow>
+            Shimmer + Glow
+          </Button>
         </div>
       </section>
 
@@ -137,7 +139,9 @@ export default function ButtonDemo() {
           <Button variant="glass">Glass с бликом</Button>
           <Button variant="success">Success с бликом</Button>
         </div>
-        <p className="text-sm text-gray-600 mt-2">Наведите курсор на кнопки, чтобы увидеть эффект блика</p>
+        <p className="text-sm text-gray-600 mt-2">
+          Наведите курсор на кнопки, чтобы увидеть эффект блика
+        </p>
       </section>
 
       {/* Комбинации */}

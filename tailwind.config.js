@@ -50,7 +50,7 @@ module.exports = {
         'glow-hover': '0 12px 40px rgba(27, 104, 164, 0.3)',
       },
       animation: {
-        'float': 'float 3s ease-in-out infinite',
+        float: 'float 3s ease-in-out infinite',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
         'water-ripple': 'water-ripple 0.6s ease-out',
         'water-shimmer': 'water-shimmer 1.5s ease-in-out',

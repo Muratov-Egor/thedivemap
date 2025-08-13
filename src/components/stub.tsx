@@ -1,4 +1,3 @@
-
 export default function Stub() {
   return (
     <div className="hidden md:flex flex-col justify-start items-center md:w-[500px] border-l border-gray-200 p-6 overflow-y-auto max-h-screen">

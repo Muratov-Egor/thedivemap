@@ -52,11 +52,11 @@ export default function MarkerCluster({
 
   // Определяем цвет кластера на основе количества точек
   const getClusterColor = () => {
-    if (cluster.count >= 100) return 'bg-red-600';
-    if (cluster.count >= 50) return 'bg-orange-600';
-    if (cluster.count >= 20) return 'bg-orange-700'; // Изменено с bg-yellow-600 на bg-orange-700 для лучшего контраста
-    if (cluster.count >= 10) return 'bg-blue-600';
-    return 'bg-green-600';
+    if (cluster.count >= 100) return 'bg-gradient-coral';
+    if (cluster.count >= 50) return 'bg-gradient-ocean';
+    if (cluster.count >= 20) return 'bg-gradient-to-r from-orange-500 to-orange-600';
+    if (cluster.count >= 10) return 'bg-gradient-to-r from-blue-500 to-blue-600';
+    return 'bg-gradient-to-r from-green-500 to-emerald-600';
   };
 
   // Форматируем количество точек для отображения
@@ -72,7 +72,7 @@ export default function MarkerCluster({
       className={`
         relative cursor-pointer
         transition-all duration-300 ease-out
-        ${isActive ? 'ring-4 ring-orange-200' : ''}
+        ${isActive ? 'ring-4 ring-coral/30' : ''}
       `}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
@@ -90,9 +90,9 @@ export default function MarkerCluster({
           rounded-full
           flex items-center justify-center
           font-semibold
-          shadow-lg border-2 border-white
+          shadow-glow-blue border-2 border-white
           transition-all duration-300
-          ${isHovered || isActive ? 'shadow-xl' : 'shadow-lg'}
+          ${isHovered || isActive ? 'shadow-glow-hover' : 'shadow-glow-blue'}
         `}
         data-testid={`marker-cluster`}
       >
@@ -100,9 +100,7 @@ export default function MarkerCluster({
       </div>
 
       {/* Пульсирующая анимация для активного кластера */}
-      {isActive && (
-        <div className="absolute inset-0 rounded-full bg-orange-400 animate-ping opacity-75"></div>
-      )}
+      {isActive && <div className="absolute inset-0 rounded-full bg-coral/75 animate-ping"></div>}
 
       {/* Tooltip с информацией */}
       {(isHovered || isActive) && (
