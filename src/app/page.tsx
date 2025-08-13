@@ -2,7 +2,7 @@
 
 import Header from '@/components/Header';
 import MapContainer from '@/components/map/MapContainer';
-import Stub from '@/components/stub';
+import Filters from '@/components/Filters';
 
 export default function HomePage() {
   return (
@@ -10,7 +10,7 @@ export default function HomePage() {
       <Header />
       <div className="flex-1 flex">
         <MapContainer />
-        <Stub />
+        <Filters />
       </div>
     </main>
   );
