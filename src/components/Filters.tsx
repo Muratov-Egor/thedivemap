@@ -7,10 +7,10 @@ import { FiltersIcon, CloseIcon } from '@/components/icons';
 
 export default function Filters() {
   const { t } = useTranslation('filters');
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
 
-  const toggleMobileFilters = () => {
-    setIsMobileOpen(!isMobileOpen);
+  const toggleIsMobileFiltersPanelOpen = () => {
+    setIsMobilePanelOpen(!isMobilePanelOpen);
   };
 
   return (
@@ -23,22 +23,20 @@ export default function Filters() {
         <h2 className="text-xl font-bold text-gray-800 mb-6">{t('title')}</h2>
       </div>
 
-      {!isMobileOpen && (
-        <div className="md:hidden fixed bottom-6 right-6 z-50">
-          <Button
-            variant="coral"
-            shape="circle"
-            size="medium"
-            icon={<FiltersIcon />}
-            onClick={toggleMobileFilters}
-            data-testid="open-filters-panel-button"
-            aria-label={t('accessibility.openFilters')}
-          />
-        </div>
-      )}
+      <div className="md:hidden fixed bottom-6 right-6 z-50">
+        <Button
+          variant="coral"
+          shape="circle"
+          size="medium"
+          icon={<FiltersIcon />}
+          onClick={toggleIsMobileFiltersPanelOpen}
+          data-testid="open-filters-panel-button"
+          aria-label={t('accessibility.openFilters')}
+        />
+      </div>
 
       {/* Мобильная панель фильтров */}
-      {isMobileOpen && (
+      {isMobilePanelOpen && (
         <div
           className="absolute right-0 top-0 h-full w-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 flex flex-col"
           onClick={(e) => e.stopPropagation()}
@@ -51,8 +49,8 @@ export default function Filters() {
               shape="circle"
               size="small"
               icon={<CloseIcon />}
-              onClick={() => setIsMobileOpen(false)}
-              data-testid="close-button"
+              onClick={() => setIsMobilePanelOpen(false)}
+              data-testid="close-filters-panel-button"
               aria-label={t('accessibility.closeFilters')}
             />
           </div>
