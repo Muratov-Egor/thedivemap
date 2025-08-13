@@ -1,145 +1,115 @@
 # The Dive Map
 
-A Next.js application that displays a world map with dive sites, filters, and localized UI.
+The Dive Map is a map of the world that shows the locations of dive sites.
 
-## Overview
+## Testing Configuration
 
-The app renders a MapLibre GL map and displays dive sites from a Supabase database via Next.js Route Handlers. API endpoints expose filtered data for tests and potential integrations. UI supports English and Russian via i18next.
+### Playwright Test Setup
 
-## Tech Stack
+The project uses Playwright for both API and E2E testing with a custom configuration that separates test execution by browser:
 
-- Next.js 15 (App Router)
-- React 19, TypeScript
-- MapLibre GL
-- Supabase JS + SSR helpers
-- Tailwind CSS
-- Playwright + Allure (API/E2E tests)
-- ESLint 9, Prettier 3
+#### Test Projects
 
-## Prerequisites
+- **API Tests** (`api-chromium`): Run only in Chromium browser
+  - Located in `playwright-tests/api/`
+  - 35 tests in 4 files
+  - Tests API endpoints and data validation
 
-- Node.js 20+
-- pnpm (project uses lockfile; prefer pnpm for all commands)
+- **E2E Tests** (`e2e-chromium`, `e2e-mobile-chrome`): Run in multiple browsers
+  - Located in `playwright-tests/e2e/`
+  - 4 tests in 3 files (8 total when running in both browsers)
+  - Tests user interactions and accessibility
 
-## Getting Started
-
-1. Install deps:
+#### Available Test Commands
 
 ```bash
-pnpm install
-```
+# Run all tests (API + E2E in all browsers)
+pnpm test
 
-2. Configure environment:
-   Create `.env.local` with your Supabase credentials:
-
-```bash
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-```
-
-3. Start dev server (http://localhost:3000):
-
-```bash
-pnpm dev
-```
-
-## Scripts
-
-- `pnpm dev` — start Next.js dev server
-- `pnpm build` — production build
-- `pnpm start` — start production server
-- `pnpm lint` — run ESLint (Next.js config)
-- `pnpm format` — format with Prettier
-- `pnpm format:check` — check formatting
-- `pnpm api` — run Playwright API tests (`playwright-tests/api`)
-- `pnpm e2e` — run Playwright UI tests (`playwright-tests/e2e`)
-- `pnpm e2e:ui` — Playwright UI mode
-- `pnpm e2e:headless` — headed run for e2e
-- `pnpm report` — generate & open Allure report
-- `pnpm report:clean` — clean test reports
-
-## Testing
-
-- Base URL: `http://localhost:3000` (see `playwright.config.ts`)
-- Before running tests, ensure the dev server is running in another terminal: `pnpm dev`
-- API tests:
-
-```bash
+# Run only API tests (Chromium only)
 pnpm api
-```
+pnpm test:api
 
-- E2E tests:
-
-```bash
+# Run only E2E tests (Desktop + Mobile Chrome)
 pnpm e2e
+pnpm test:e2e
+
+# Run E2E tests separately
+pnpm e2e:desktop    # Desktop Chrome only
+pnpm e2e:mobile     # Mobile Chrome only
+
+# Run tests with UI
+pnpm e2e:ui         # E2E tests with Playwright UI
+pnpm e2e:headed     # E2E tests in headed mode
+
+# Generate and open Allure reports
+pnpm report
+pnpm report:clean   # Clean report files
 ```
 
-- Allure report:
+#### Test Structure
+
+```
+playwright-tests/
+├── api/                    # API tests (Chromium only)
+│   ├── api-objects/        # Page Object classes for API
+│   ├── dive-sites.spec.ts  # Dive sites API tests
+│   ├── places.spec.ts      # Places API tests
+│   └── test-data.ts        # Test data constants
+├── e2e/                    # E2E tests (All browsers)
+│   ├── page-objects/       # Page Object classes
+│   ├── accessibility.testing.spec.ts
+│   ├── clusters.spec.ts
+│   └── markers.spec.ts
+└── mocks/                  # Mock data files
+```
+
+#### Browser Configuration
+
+- **API Tests**: Chromium only (no browser-specific behavior needed)
+- **E2E Tests**: 
+  - Desktop Chrome (1280x720)
+  - Mobile Chrome (iPhone 13 - 375x812)
+
+#### Adding New Browsers
+
+To add new browsers for E2E testing, uncomment and modify the browser configurations in `playwright.config.ts`:
+
+```typescript
+// {
+//   name: 'e2e-firefox',
+//   testMatch: /.*e2e.*\.spec\.ts/,
+//   use: { ...devices['Desktop Firefox'] },
+// },
+// {
+//   name: 'e2e-webkit', 
+//   testMatch: /.*e2e.*\.spec\.ts/,
+//   use: { ...devices['Desktop Safari'] },
+// },
+```
+
+## Development
 
 ```bash
-pnpm report
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Run linting
+pnpm lint
+
+# Format code
+pnpm format
 ```
 
-## API Endpoints (App Router)
+## Building
 
-- `GET /api/dive-sites` — list/filter dive sites. Query params include: `id`, `country_id`, `region_id`, `location_id`, `site_type_id`, `difficulty_id`, `depth_min`, `visibility_min`, `rating_min`, `status`.
-- `GET /api/places` — geo names for countries/regions/locations with `lang` support (`ru`, `en`).
+```bash
+# Build for production
+pnpm build
 
-## Internationalization
-
-- i18next + react-i18next
-- Languages: `en`, `ru`
-- Locale files: `src/i18n/locales/{en,ru}/common.json`
-- Client-side init: `src/i18n/i18n.client.ts`
-
-## Mapping
-
-- MapLibre GL renders the base map and markers.
-- Map style example: `public/map-styles/arcgis_hybrid.json`.
-
-## Project Structure
-
+# Start production server
+pnpm start
 ```
-.
-├── src/
-│  ├── app/
-│  │  ├── api/
-│  │  │  ├── dive-sites/route.ts
-│  │  │  └── places/route.ts
-│  │  ├── layout.tsx
-│  │  └── page.tsx
-│  ├── components/
-│  │  ├── Header.tsx
-│  │  ├── MapContainer.tsx
-│  │  ├── MapMarkers.tsx
-│  │  └── ui/Button.tsx
-│  ├── contexts/
-│  │  ├── DiveSitesContext.tsx
-│  │  └── MapContext.tsx
-│  ├── i18n/
-│  └── lib/
-│     └── supabase/
-├── playwright-tests/
-│  ├── api/
-│  └── e2e/
-├── public/
-│  └── map-styles/
-├── memory-bank/
-└── README.md
-```
-
-## Quality & Conventions
-
-- Follow ESLint and Prettier configs.
-- Prefer modular, typed React components (hooks, contexts).
-- For E2E: Page Object pattern with `data-testid` selectors (no CSS class selectors).
-- Use pnpm exclusively; do not modify the lockfile manually.
-
-## Troubleshooting
-
-- Supabase env variables are required by API routes. If missing, `/api/dive-sites` may fail.
-- Ensure port 3000 is available before running tests.
-
-## License
-
-ISC
