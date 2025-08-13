@@ -9,7 +9,7 @@ test.describe('Accessibility Testing', () => {
         await baseSteps.waitForDataLoaded();
       });
 
-    test.only('should not have any accessibility violations', async ({ page }) => {
+    test('should not have any accessibility violations', async ({ page }) => {
         const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
         expect(accessibilityScanResults.violations).toEqual([]);
     });
