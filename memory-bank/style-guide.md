@@ -1,16 +1,37 @@
-# Style Guide: The Dive Map
+# 🐠 Modern Dive App Style Guide 2024
 
-## Design Philosophy
+## 🎨 Design Philosophy
 
-The Dive Map emphasizes clarity, accessibility, and ocean-inspired aesthetics while maintaining professional functionality for dive site exploration.
+**"Deep Ocean Meets Modern Tech"** - The Dive Map emphasizes immersive user experience, modern design trends, and ocean-inspired aesthetics while maintaining professional functionality for dive site exploration.
 
-## Color Palette
+### Core Principles
+- **Иммерсивность** - Погружение в атмосферу дайвинга
+- **Современность** - Glassmorphism, неоморфизм, градиенты 2024
+- **Интуитивность** - Плавные анимации и микровзаимодействия
+- **Атмосферность** - Цвета и эффекты, имитирующие подводный мир
 
-### Primary Colors
+## 🌊 Color Palette 2024
 
-- **Ocean Blue**: `#1e40af` - Primary brand color, used for main elements
-- **Deep Sea Blue**: `#1e3a8a` - Secondary color for emphasis
-- **Coral Accent**: `#f97316` - Accent color for highlights and CTAs
+### Primary Colors (Живые, яркие)
+
+- **Tropical Blue**: `#1B68A4` - Основной цвет, имитирующий тропические воды
+- **Deep Ocean**: `#199BD7` - Глубокий океан для акцентов
+- **Coral Reef**: `#F47B25` - Яркий коралл для CTA
+- **Sea Green**: `#11B981` - Морская зелень для успешных действий
+
+### Secondary Colors (Градиенты)
+
+- **Sunset Gradient**: `linear-gradient(135deg, #ff6b6b, #feca57)`
+- **Ocean Gradient**: `linear-gradient(135deg, #1B68A4, #199BD7)`
+- **Deep Sea Gradient**: `linear-gradient(135deg, #199BD7, #1e40af)`
+- **Coral Gradient**: `linear-gradient(135deg, #F47B25, #ea580c)`
+
+### Background Colors
+
+- **Dark Ocean**: `#0f172a` - Основной фон (темная тема)
+- **Deep Water**: `#1e293b` - Вторичный фон
+- **Glass Background**: `rgba(255, 255, 255, 0.1)` - Стеклянные элементы
+- **Frosted Glass**: `rgba(255, 255, 255, 0.05)` - Размытое стекло
 
 ### Secondary Colors
 

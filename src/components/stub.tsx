@@ -48,7 +48,7 @@ const StarIcon = () => (
 
 export default function Stub() {
   return (
-    <div className="hidden md:flex flex-col justify-start items-center md:w-[400px] border-l border-gray-200 p-6 overflow-y-auto max-h-screen">
+    <div className="hidden md:flex flex-col justify-start items-center md:w-[1000px] border-l border-gray-200 p-6 overflow-y-auto max-h-screen">
       <h2 className="text-xl font-bold text-gray-800 mb-6">Демонстрация кнопок</h2>
 
       {/* Размеры */}
@@ -58,6 +58,7 @@ export default function Stub() {
           <Button size="small">Маленькая</Button>
           <Button size="medium">Средняя</Button>
           <Button size="large">Большая</Button>
+          <Button size="xl">Очень большая</Button>
         </div>
       </section>
 
@@ -67,9 +68,9 @@ export default function Stub() {
         <div className="grid grid-cols-2 gap-3">
           <Button variant="primary">Primary</Button>
           <Button variant="secondary">Secondary</Button>
-          <Button variant="white">White</Button>
+          <Button variant="coral">Coral</Button>
+          <Button variant="glass">Glass</Button>
           <Button variant="ghost">Ghost</Button>
-          <Button variant="danger">Danger</Button>
           <Button variant="success">Success</Button>
         </div>
       </section>
@@ -80,6 +81,7 @@ export default function Stub() {
         <div className="flex items-center gap-3">
           <Button shape="rounded">Прямоугольная</Button>
           <Button shape="circle" icon={<PlusIcon />} />
+          <Button shape="pill">Pill</Button>
         </div>
       </section>
 
@@ -116,6 +118,16 @@ export default function Stub() {
         </div>
       </section>
 
+      {/* Эффекты */}
+      <section className="w-full mb-8">
+        <h3 className="text-lg font-semibold text-gray-700 mb-3">Эффекты</h3>
+        <div className="flex items-center gap-3">
+          <Button shimmer>Shimmer</Button>
+          <Button glow>Glow</Button>
+          <Button shimmer glow>Shimmer + Glow</Button>
+        </div>
+      </section>
+
       {/* Комбинации */}
       <section className="w-full mb-8">
         <h3 className="text-lg font-semibold text-gray-700 mb-3">Комбинации</h3>
@@ -123,10 +135,10 @@ export default function Stub() {
           <Button size="large" variant="primary" icon={<SearchIcon />}>
             Большой поиск
           </Button>
-          <Button size="small" variant="white" icon={<HeartIcon />}>
+          <Button size="small" variant="glass" icon={<HeartIcon />}>
             Маленькое избранное
           </Button>
-          <Button size="medium" variant="danger" shape="circle" icon={<PlusIcon />} />
+          <Button size="medium" variant="coral" shape="circle" icon={<PlusIcon />} />
           <Button size="large" variant="ghost" icon={<ArrowRightIcon />} iconPosition="right">
             Перейти
           </Button>
@@ -155,9 +167,10 @@ export default function Stub() {
         <div className="flex items-center gap-3">
           <Button variant="primary" shape="circle" icon={<StarIcon />} />
           <Button variant="secondary" shape="circle" icon={<StarIcon />} />
+          <Button variant="coral" shape="circle" icon={<StarIcon />} />
+          <Button variant="glass" shape="circle" icon={<StarIcon />} />
           <Button variant="ghost" shape="circle" icon={<StarIcon />} />
-          <Button variant="white" shape="circle" icon={<StarIcon />} />
-          <Button variant="danger" shape="circle" icon={<StarIcon />} />
+          <Button variant="success" shape="circle" icon={<StarIcon />} />
         </div>
       </section>
 
@@ -168,7 +181,7 @@ export default function Stub() {
           <Button icon={<ArrowRightIcon />} iconPosition="right">
             Далее
           </Button>
-          <Button variant="white" icon={<ArrowRightIcon />} iconPosition="right">
+          <Button variant="glass" icon={<ArrowRightIcon />} iconPosition="right">
             Продолжить
           </Button>
           <Button variant="ghost" icon={<ArrowRightIcon />} iconPosition="right">
@@ -185,7 +198,7 @@ export default function Stub() {
           <Button variant="secondary" loading>
             Сохранение
           </Button>
-          <Button variant="white" loading>
+          <Button variant="glass" loading>
             Отправка
           </Button>
           <Button shape="circle" loading />
@@ -200,7 +213,7 @@ export default function Stub() {
           <Button variant="secondary" disabled>
             Заблокировано
           </Button>
-          <Button variant="white" disabled>
+          <Button variant="glass" disabled>
             Неактивно
           </Button>
           <Button shape="circle" disabled icon={<PlusIcon />} />
@@ -217,26 +230,32 @@ export default function Stub() {
           <Button size="large" variant="secondary" icon={<HeartIcon />}>
             💛 Вторичное сердце
           </Button>
-          <Button size="large" variant="white" icon={<StarIcon />}>
-            ⭐ Белая звезда
+          <Button size="large" variant="coral" icon={<StarIcon />}>
+            🧡 Коралловая звезда
+          </Button>
+          <Button size="large" variant="glass" icon={<PlusIcon />}>
+            💎 Стеклянное добавление
+          </Button>
+          <Button size="large" variant="ghost" icon={<ArrowRightIcon />}>
+            👻 Призрачный переход
           </Button>
           <Button size="large" variant="success" icon={<PlusIcon />}>
             ✅ Успешное добавление
           </Button>
-          <Button size="large" variant="danger" icon={<ArrowRightIcon />}>
-            ⚠️ Опасное действие
+          <Button size="large" variant="coral" icon={<ArrowRightIcon />}>
+            ⚠️ Коралловое действие
           </Button>
         </div>
       </section>
 
-      {/* Круглые стили */}
+      {/* Кнопки с эффектами */}
       <section className="w-full mb-8">
-        <h3 className="text-lg font-semibold text-gray-700 mb-3">Круглые стили</h3>
-        <div className="grid grid-cols-4 gap-3">
-          <Button variant="primary" shape="circle" icon={<StarIcon />} />
-          <Button variant="secondary" shape="circle" icon={<StarIcon />} />
-          <Button variant="white" shape="circle" icon={<StarIcon />} />
-          <Button variant="success" shape="circle" icon={<StarIcon />} />
+        <h3 className="text-lg font-semibold text-gray-700 mb-3">Кнопки с эффектами</h3>
+        <div className="grid grid-cols-2 gap-3">
+          <Button variant="primary" shimmer>Primary Shimmer</Button>
+          <Button variant="coral" glow>Coral Glow</Button>
+          <Button variant="primary" shimmer glow>Primary Shimmer + Glow</Button>
+          <Button variant="coral" shape="circle" glow>+</Button>
         </div>
       </section>
     </div>
