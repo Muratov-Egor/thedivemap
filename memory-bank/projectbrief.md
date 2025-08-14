@@ -2,43 +2,94 @@
 
 ## Project Overview
 
-**Name**: The Dive Map
-**Version**: 0.0.1
-**Description**: The Dive Map is a map of the world that shows the locations of dive sites.
+**Project Name**: The Dive Map  
+**Description**: Interactive map application for dive sites worldwide  
+**Technology Stack**: Next.js 15.4.2, React 19.1.0, TypeScript, Tailwind CSS, Supabase  
+**Package Manager**: pnpm  
+**Testing**: Playwright (E2E), Jest (Unit)
 
-## Core Technology Stack
+## Current Development Focus
 
-- **Framework**: Next.js 15.4.2
-- **Language**: TypeScript
-- **UI Library**: React 19.1.0
-- **Styling**: Tailwind CSS
-- **Map Library**: MapLibre GL
-- **Database**: Supabase
-- **Internationalization**: i18next
-- **Testing**: Playwright
-- **Package Manager**: pnpm
+### Primary: Modern UI/UX Implementation (Level 3)
+**Status**: IMPLEMENT Mode - Phase 1: Foundation  
+**Goal**: Transform the application with modern design system and enhanced user experience
 
-## Project Structure
+### Secondary: Autocomplete Component (Level 2)
+**Status**: PLAN Mode - Planning Phase  
+**Goal**: Create a modern autocomplete component for search functionality
 
-- **Frontend**: Next.js app with React components
-- **API**: Next.js API routes
-- **Database**: Supabase integration
-- **Testing**: Playwright for E2E and API testing
-- **Documentation**: Markdown files in docs/
+## Autocomplete Component Requirements
 
-## Current Status
+### Functional Requirements
+- Search across 4 data types: sites, countries, regions, locations
+- Real-time search with debouncing
+- Keyboard navigation support
+- Mobile-responsive design
+- Accessibility compliance (WCAG AA)
 
-- Project initialized with Next.js
-- Basic map functionality with MapLibre GL
-- Supabase integration for data storage
-- Internationalization setup with i18next
-- Testing framework configured with Playwright
+### Technical Requirements
+- Integration with `/api/places/` endpoint
+- TypeScript implementation
+- Tailwind CSS styling
+- i18n support (ru/en)
+- Performance optimization
 
-## Development Commands
+### Design Requirements
+- Match existing design system
+- Use tropical color palette
+- Implement glassmorphism effects
+- Smooth animations and transitions
 
-- `pnpm dev` - Start development server
-- `pnpm build` - Build for production
-- `pnpm lint` - Run ESLint
-- `pnpm api` - Run API tests
-- `pnpm e2e` - Run E2E tests
-- `pnpm report` - Generate Allure test reports
+## API Integration
+
+**Endpoint**: `/api/places/`  
+**Method**: GET  
+**Parameters**: 
+- `q` (required): Search query
+- `lang` (optional): Language ('ru' | 'en', default: 'ru')
+
+**Response Structure**:
+```typescript
+{
+  sites: Array<{
+    id: number,
+    name: string,
+    country: { name: string, region: { name: string } },
+    site_type: { label: string },
+    site_locations: Array<{ location: { name: string } }>
+  }>,
+  countries: Array<{ id: number, name: string, iso_code: string }>,
+  regions: Array<{ id: number, name: string }>,
+  locations: Array<{ id: number, name: string, country_id: number, region_id: number }>,
+  errors: { countries: string | null, regions: string | null, locations: string | null }
+}
+```
+
+## Success Criteria
+
+### Functional
+- [ ] Search works across all 4 data types
+- [ ] Real-time results with debouncing
+- [ ] Keyboard navigation (arrow keys, enter, escape)
+- [ ] Mobile touch support
+- [ ] Accessibility features (screen reader support)
+
+### Technical
+- [ ] TypeScript implementation
+- [ ] Performance optimized (debouncing, memoization)
+- [ ] Error handling for API failures
+- [ ] Loading states
+- [ ] Unit tests coverage
+
+### Design
+- [ ] Matches existing design system
+- [ ] Responsive design
+- [ ] Smooth animations
+- [ ] Consistent with tropical theme
+
+## Constraints
+
+- Must integrate with existing component architecture
+- Must maintain performance with large datasets
+- Must support both Russian and English languages
+- Must be accessible according to WCAG AA standards
