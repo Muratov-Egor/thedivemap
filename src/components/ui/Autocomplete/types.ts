@@ -60,6 +60,7 @@ export interface AutocompleteProps {
   disabled?: boolean;
   loading?: boolean;
   error?: string | null;
+  language?: 'ru' | 'en'; // Добавляем поддержку языка
 }
 
 export interface AutocompleteItem {

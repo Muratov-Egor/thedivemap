@@ -7,8 +7,11 @@ import { FiltersIcon, CloseIcon } from '@/components/icons';
 import Autocomplete from './ui/Autocomplete/Autocomplete';
 
 export default function Filters() {
-  const { t } = useTranslation('filters');
+  const { t, i18n } = useTranslation('filters');
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
+
+  // Получаем текущий язык из i18n
+  const currentLanguage = i18n.language as 'ru' | 'en';
 
   const toggleIsMobileFiltersPanelOpen = () => {
     setIsMobilePanelOpen(!isMobilePanelOpen);
@@ -22,7 +25,7 @@ export default function Filters() {
         data-testid="desktop-filters-panel"
       >
         <h2 className="text-xl font-bold text-gray-800 mb-6">{t('title')}</h2>
-        <Autocomplete />
+        <Autocomplete language={currentLanguage} />
       </div>
 
       <div className="md:hidden fixed bottom-6 right-6 z-50">
@@ -59,7 +62,7 @@ export default function Filters() {
 
           <div className="flex-1 p-4 overflow-y-auto">
             <div className="space-y-4">
-              <Autocomplete />
+              <Autocomplete language={currentLanguage} />
             </div>
           </div>
         </div>

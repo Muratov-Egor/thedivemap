@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { AutocompleteItem as AutocompleteItemType } from './types';
 import AutocompleteItem from './AutocompleteItem';
 import { cn } from '@/lib/utils';
@@ -22,6 +23,8 @@ export default function AutocompleteList({
   error = null,
   className,
 }: AutocompleteListProps) {
+  const { t } = useTranslation('autocomplete');
+
   if (isLoading) {
     return (
       <div
@@ -34,7 +37,7 @@ export default function AutocompleteList({
         <div className="flex items-center justify-center py-8">
           <div className="flex items-center gap-3 text-slate-600">
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-tropical-blue"></div>
-            <span className="text-sm font-medium">Поиск...</span>
+            <span className="text-sm font-medium">{t('loading')}</span>
           </div>
         </div>
       </div>
@@ -56,7 +59,7 @@ export default function AutocompleteList({
               <span className="text-lg">⚠️</span>
             </div>
             <div className="text-sm">
-              <div className="font-medium">Ошибка поиска</div>
+              <div className="font-medium">{t('errors.searchFailed')}</div>
               <div className="text-red-500">{error}</div>
             </div>
           </div>
@@ -73,12 +76,12 @@ export default function AutocompleteList({
     <div
       className={cn(
         'absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-lg z-50',
-        'max-h-80 overflow-y-auto',
+        'max-h-120 overflow-y-auto',
         'scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent',
         className
       )}
       role="listbox"
-      aria-label="Результаты поиска"
+      aria-label={t('resultsLabel')}
     >
       {results.map((item, index) => (
         <AutocompleteItem
@@ -91,7 +94,7 @@ export default function AutocompleteList({
 
       {/* Results count indicator */}
       <div className="px-4 py-2 text-xs text-slate-500 border-t border-slate-100 bg-slate-50/50">
-        Найдено результатов: {results.length}
+        {t('resultsCount')}: {results.length}
       </div>
     </div>
   );

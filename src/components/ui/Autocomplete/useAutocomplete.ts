@@ -11,7 +11,8 @@ export function useAutocomplete(
   onSelect?: (item: AutocompleteItem) => void,
   debounceMs: number = DEBOUNCE_MS,
   minQueryLength: number = MIN_QUERY_LENGTH,
-  maxResults: number = MAX_RESULTS
+  maxResults: number = MAX_RESULTS,
+  language: 'ru' | 'en' = 'ru' // Добавляем параметр языка
 ): UseAutocompleteReturn {
   const [state, setState] = useState<AutocompleteState>({
     query: '',
@@ -55,7 +56,7 @@ export function useAutocomplete(
     try {
       const searchParams = new URLSearchParams({
         q: query,
-        lang: 'ru', // Default to Russian, can be made configurable
+        lang: language, // Default to Russian, can be made configurable
       });
 
       const response = await fetch(`/api/places/?${searchParams}`, {
@@ -153,7 +154,7 @@ export function useAutocomplete(
         isOpen: false,
       }));
     }
-  }, [minQueryLength, maxResults]);
+  }, [minQueryLength, maxResults, language]);
 
   // Debounced search effect
   useEffect(() => {

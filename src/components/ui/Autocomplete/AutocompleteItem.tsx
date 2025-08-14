@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { AutocompleteItem as AutocompleteItemType } from './types';
-import { cn } from '@/lib/utils';
+import { cn, getCountryFlag } from '@/lib/utils';
 
 interface AutocompleteItemProps {
   item: AutocompleteItemType;
@@ -11,12 +12,14 @@ interface AutocompleteItemProps {
   className?: string;
 }
 
-const getTypeIcon = (type: AutocompleteItemType['type']) => {
+const getTypeIcon = (type: AutocompleteItemType['type'], metadata?: Record<string, string | number | boolean | string[]>) => {
   switch (type) {
     case 'site':
-      return '🏊‍♂️';
+      return '🤿';
     case 'country':
-      return '🌍';
+      // Используем флаг страны если есть ISO код
+      const isoCode = metadata?.iso_code as string;
+      return isoCode ? getCountryFlag(isoCode) : '🌍';
     case 'region':
       return '🗺️';
     case 'location':
@@ -26,27 +29,29 @@ const getTypeIcon = (type: AutocompleteItemType['type']) => {
   }
 };
 
-const getTypeLabel = (type: AutocompleteItemType['type']) => {
-  switch (type) {
-    case 'site':
-      return 'Место для дайвинга';
-    case 'country':
-      return 'Страна';
-    case 'region':
-      return 'Регион';
-    case 'location':
-      return 'Локация';
-    default:
-      return 'Результат';
-  }
-};
-
 export default function AutocompleteItem({
   item,
   isSelected,
   onClick,
   className,
 }: AutocompleteItemProps) {
+  const { t } = useTranslation('autocomplete');
+
+  const getTypeLabel = (type: AutocompleteItemType['type']) => {
+    switch (type) {
+      case 'site':
+        return t('types.site');
+      case 'country':
+        return t('types.country');
+      case 'region':
+        return t('types.region');
+      case 'location':
+        return t('types.location');
+      default:
+        return t('types.result');
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -71,7 +76,7 @@ export default function AutocompleteItem({
     >
       {/* Type Icon */}
       <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center text-lg">
-        {getTypeIcon(item.type)}
+        {getTypeIcon(item.type, item.metadata)}
       </div>
 
       {/* Content */}
@@ -91,24 +96,12 @@ export default function AutocompleteItem({
           </span>
         </div>
 
-        {/* Subtitle */}
-        {item.subtitle && (
-          <div className="text-sm text-slate-600 truncate mt-1">
-            {item.subtitle}
-          </div>
-        )}
-
         {/* Additional Metadata */}
         {item.metadata && Object.keys(item.metadata).length > 0 && (
           <div className="text-xs text-slate-500 mt-1">
             {item.type === 'site' && item.metadata.site_type && (
               <span className="inline-block bg-coral/10 text-coral px-2 py-1 rounded mr-2">
                 {item.metadata.site_type}
-              </span>
-            )}
-            {item.type === 'country' && item.metadata.iso_code && (
-              <span className="inline-block bg-deep-ocean/10 text-deep-ocean px-2 py-1 rounded">
-                {item.metadata.iso_code}
               </span>
             )}
           </div>

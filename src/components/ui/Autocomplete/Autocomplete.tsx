@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useRef, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AutocompleteProps } from './types';
 import { useAutocomplete } from './useAutocomplete';
 import AutocompleteList from './AutocompleteList';
 import { cn } from '@/lib/utils';
 
 export default function Autocomplete({
-  placeholder = 'Поиск мест для дайвинга...',
+  placeholder,
   className,
   onSelect,
   onSearch,
@@ -17,15 +18,21 @@ export default function Autocomplete({
   disabled = false,
   loading = false,
   error = null,
+  language = 'ru', // Добавляем параметр языка с дефолтным значением
 }: AutocompleteProps) {
+  const { t } = useTranslation('autocomplete');
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Используем переданный placeholder или дефолтный из i18n
+  const defaultPlaceholder = t('placeholder');
 
   const { state, actions } = useAutocomplete(
     onSelect,
     debounceMs,
     minQueryLength,
-    maxResults
+    maxResults,
+    language
   );
 
   // Handle keyboard navigation
@@ -142,7 +149,7 @@ export default function Autocomplete({
           onKeyDown={handleKeyDown}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
-          placeholder={placeholder}
+          placeholder={placeholder || defaultPlaceholder}
           disabled={disabled}
           className={cn(
             'w-full px-4 py-3 text-base text-slate-800 placeholder-slate-500',
@@ -176,7 +183,7 @@ export default function Autocomplete({
             type="button"
             onClick={handleClear}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 transition-colors"
-            aria-label="Очистить поиск"
+            aria-label={t('clearButton')}
           >
             <svg
               className="w-4 h-4"

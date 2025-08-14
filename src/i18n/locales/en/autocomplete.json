@@ -1,0 +1,18 @@
+{
+  "placeholder": "Search dive sites...",
+  "clearButton": "Clear search",
+  "types": {
+    "site": "Dive site",
+    "country": "Country",
+    "region": "Region",
+    "location": "Location",
+    "result": "Result"
+  },
+  "errors": {
+    "searchFailed": "Search failed",
+    "noResults": "No results found"
+  },
+  "loading": "Searching...",
+  "resultsLabel": "Search results",
+  "resultsCount": "Results found"
+}
