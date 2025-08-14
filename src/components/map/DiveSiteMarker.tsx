@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarkerProps } from '../../types/clustering';
+import Button from '@/components/ui/Button';
+import { CloseIcon } from '@/components/icons';
 
 export default function DiveSiteMarker({ site, onClick, onHover, isActive = false }: MarkerProps) {
   const { t } = useTranslation();
@@ -123,14 +125,16 @@ export default function DiveSiteMarker({ site, onClick, onHover, isActive = fals
             )}
           </div>
 
-          <button
+          <Button
             onClick={handleClose}
-            className="absolute -top-1 -right-1 w-5 h-5 bg-white hover:bg-gray-300 text-gray-500 hover:text-gray-700 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 shadow-sm hover:shadow-md border border-gray-200"
-            aria-label="Close tooltip"
+            variant="glass"
+            shape="circle"
+            size="small"
+            icon={<CloseIcon className="w-2 h-2" />}
+            className="!absolute !-top-2 !-right-2 !w-6 !h-6 !p-0"
+            aria-label={t('map.markers.closeTooltip')}
             data-testid={`dive-site-tooltip-close`}
-          >
-            ×
-          </button>
+          />
           <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white"></div>
         </div>
       )}

@@ -31,16 +31,18 @@ export default defineConfig({
       testMatch: /.*api.*\.spec\.ts/,
       use: { ...devices['Desktop Chrome'] },
     },
-    // E2E тесты - Desktop Chrome
+    // E2E тесты - Desktop Chrome (включая десктопные тесты фильтров)
     {
       name: 'e2e-chromium',
-      testMatch: /.*e2e.*\.spec\.ts/,
+      testMatch: /.*e2e.*\.spec\.ts|.*desktop.*\.spec\.ts/,
+      testIgnore: /.*mobile.*\.spec\.ts/,
       use: { ...devices['Desktop Chrome'] },
     },
-    // E2E тесты - Mobile Chrome
+    // E2E тесты - Mobile Chrome (включая мобильные тесты фильтров)
     {
       name: 'e2e-mobile-chrome',
-      testMatch: /.*e2e.*\.spec\.ts/,
+      testMatch: /.*e2e.*\.spec\.ts|.*mobile.*\.spec\.ts/,
+      testIgnore: /.*desktop.*\.spec\.ts/,
       use: {
         ...devices['iPhone 13'],
       },
