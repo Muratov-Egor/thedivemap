@@ -1,0 +1,129 @@
+{
+  "sites": [
+    {
+      "id": "f94ad19a-cec4-4a2d-b230-4d517f9fc184",
+      "name": "Bungalow Bay North Wall",
+      "country": {
+        "region": {
+          "name_en": "Asia"
+        },
+        "name_en": "Thailand"
+      },
+      "site_type": {
+        "label_en": "Bay"
+      },
+      "site_locations": [
+        {
+          "location": {
+            "name_en": "Phuket"
+          }
+        },
+        {
+          "location": {
+            "name_en": "Racha Yai"
+          }
+        }
+      ]
+    },
+    {
+      "id": "157044ba-6c74-4af3-baf6-b106652a6633",
+      "name": "Bay 2 (Staghorn Reef)",
+      "country": {
+        "region": {
+          "name_en": "Asia"
+        },
+        "name_en": "Thailand"
+      },
+      "site_type": {
+        "label_en": "Bay"
+      },
+      "site_locations": [
+        {
+          "location": {
+            "name_en": "Phuket"
+          }
+        },
+        {
+          "location": {
+            "name_en": "Racha Yai"
+          }
+        }
+      ]
+    },
+    {
+      "id": "6c2daaf5-ecf5-4449-822b-60fe80f78806",
+      "name": "Marlas Mystery",
+      "country": {
+        "region": {
+          "name_en": "Asia"
+        },
+        "name_en": "Thailand"
+      },
+      "site_type": {
+        "label_en": "Wreck"
+      },
+      "site_locations": [
+        {
+          "location": {
+            "name_en": "Phuket"
+          }
+        },
+        {
+          "location": {
+            "name_en": "Racha Yai"
+          }
+        }
+      ]
+    }
+  ],
+  "countries": [
+    {
+      "id": 170,
+      "name_ru": "Таиланд",
+      "name_en": "Thailand",
+      "iso_code": "TH",
+      "name": "Thailand"
+    },
+    {
+      "id": 113,
+      "name_ru": "Черногория",
+      "name_en": "Montenegro",
+      "iso_code": "ME",
+      "name": "Montenegro"
+    },
+    {
+      "id": 150,
+      "name_ru": "Сербия",
+      "name_en": "Serbia",
+      "iso_code": "RS",
+      "name": "Serbia"
+    }
+  ],
+  "regions": [
+    {
+      "id": 3,
+      "name_ru": "Европа",
+      "name_en": "Europe",
+      "name": "Europe"
+    }
+  ],
+  "locations": [
+    {
+      "id": 4,
+      "name": "Racha Yai",
+      "country_id": null,
+      "region_id": null
+    },
+    {
+      "id": 5,
+      "name": "Racha Noi",
+      "country_id": null,
+      "region_id": null
+    }
+  ],
+  "errors": {
+    "countries": null,
+    "regions": null,
+    "locations": null
+  }
+}

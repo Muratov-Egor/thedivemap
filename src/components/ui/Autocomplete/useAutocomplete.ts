@@ -31,6 +31,9 @@ export function useAutocomplete(
     error: null,
   });
 
+  // Флаг для предотвращения поиска при выборе элемента
+  const isSelectingRef = useRef(false);
+
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -68,7 +71,7 @@ export function useAutocomplete(
           lang: language, // Default to Russian, can be made configurable
         });
 
-        const response = await fetch(`/api/places/?${searchParams}`, {
+        const response = await fetch(`/api/places?${searchParams}`, {
           signal: abortControllerRef.current.signal,
         });
 
@@ -166,6 +169,12 @@ export function useAutocomplete(
 
   // Debounced search effect
   useEffect(() => {
+    // Не запускаем поиск, если элемент был выбран
+    if (isSelectingRef.current) {
+      isSelectingRef.current = false;
+      return;
+    }
+
     if (debounceRef.current) {
       clearTimeout(debounceRef.current);
     }
@@ -203,11 +212,17 @@ export function useAutocomplete(
 
     selectItem: useCallback(
       (item: AutocompleteItem) => {
+        // Устанавливаем флаг, чтобы предотвратить поиск
+        isSelectingRef.current = true;
+
         setState((prev) => ({
           ...prev,
           query: item.name,
+          results: [], // Очищаем результаты
           isOpen: false,
           selectedIndex: -1,
+          isLoading: false,
+          error: null,
         }));
         onSelect?.(item);
       },
