@@ -1,0 +1,19 @@
+{
+  "placeholder": "Поиск мест для дайвинга...",
+  "searchLabel": "Поле поиска мест для дайвинга",
+  "clearButton": "Очистить поиск",
+  "types": {
+    "site": "Место для дайвинга",
+    "country": "Страна",
+    "region": "Регион",
+    "location": "Локация",
+    "result": "Результат"
+  },
+  "errors": {
+    "searchFailed": "Ошибка поиска",
+    "noResults": "Ничего не найдено"
+  },
+  "loading": "Поиск...",
+  "resultsLabel": "Результаты поиска",
+  "resultsCount": "Найдено результатов"
+}

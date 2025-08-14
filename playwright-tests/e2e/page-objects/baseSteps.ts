@@ -9,12 +9,6 @@ export class BaseSteps {
     });
   }
 
-  async setMobileViewport() {
-    await test.step('Set mobile viewport size to 375x812', async () => {
-      await this.page.setViewportSize({ width: 375, height: 812 });
-    });
-  }
-
   async waitForDataLoaded() {
     await test.step('Wait for dive sites data to be loaded', async () => {
       // Ждем исчезновения индикатора загрузки
@@ -34,6 +28,41 @@ export class BaseSteps {
     await test.step(`Mock API response for ${path}`, async () => {
       await this.page.route(path, async (route) => {
         await route.fulfill({ json: response });
+      });
+    });
+  }
+
+  async mockApiResponseWithPattern(pattern: string, response: any) {
+    await test.step(`Mock API response for pattern ${pattern}`, async () => {
+      await this.page.route(pattern, async (route) => {
+        await route.fulfill({ json: response });
+      });
+    });
+  }
+
+  async mockApiError(pattern: string, status: number, body: string) {
+    await test.step(`Mock API error for pattern ${pattern} with status ${status}`, async () => {
+      await this.page.route(pattern, async (route) => {
+        await route.fulfill({ status, body });
+      });
+    });
+  }
+
+  async mockApiNetworkError(pattern: string) {
+    await test.step(`Mock API network error for pattern ${pattern}`, async () => {
+      await this.page.route(pattern, async (route) => {
+        await route.abort('failed');
+      });
+    });
+  }
+
+  async mockApiMalformedJson(pattern: string) {
+    await test.step(`Mock API malformed JSON for pattern ${pattern}`, async () => {
+      await this.page.route(pattern, async (route) => {
+        await route.fulfill({
+          status: 200,
+          body: 'invalid json',
+        });
       });
     });
   }
