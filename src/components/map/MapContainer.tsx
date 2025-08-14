@@ -3,10 +3,10 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import maplibregl, { Map } from 'maplibre-gl';
-import { MapProvider, useMap } from '@/contexts/MapContext';
+import { useMap } from '@/contexts/MapContext';
 import DiveSitesLayer from './DiveSitesLayer';
 
-function InnerMapContainer({ children }: { children?: React.ReactNode }) {
+export default function MapContainer({ children }: { children?: React.ReactNode }) {
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
@@ -103,13 +103,5 @@ function InnerMapContainer({ children }: { children?: React.ReactNode }) {
 
       {children}
     </div>
-  );
-}
-
-export default function MapContainer({ children }: { children?: React.ReactNode }) {
-  return (
-    <MapProvider>
-      <InnerMapContainer>{children}</InnerMapContainer>
-    </MapProvider>
   );
 }
