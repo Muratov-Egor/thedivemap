@@ -164,6 +164,9 @@ export default function Autocomplete({
           aria-activedescendant={
             state.selectedIndex >= 0 ? `autocomplete-option-${state.selectedIndex}` : undefined
           }
+          aria-describedby={error || state.error ? 'autocomplete-error-message' : undefined}
+          aria-haspopup="listbox"
+          aria-label={t('searchLabel')}
           data-testid="autocomplete-input"
         />
 
@@ -226,12 +229,15 @@ export default function Autocomplete({
       {/* Error Message */}
       {(error || state.error) && !state.isOpen && (
         <div
+          id="autocomplete-error-message"
           className="mt-2 bg-white/90 backdrop-blur-xl border border-red-200 rounded-2xl shadow-lg p-4"
           data-testid="autocomplete-error-message"
+          role="alert"
+          aria-live="assertive"
         >
           <div className="flex items-center gap-3 text-red-600">
             <div className="w-5 h-5 flex items-center justify-center">
-              <span className="text-lg">⚠️</span>
+              <span className="text-lg" aria-hidden="true">⚠️</span>
             </div>
             <div className="text-sm">
               <div className="font-medium text-red-700">{t('errors.searchFailed')}</div>

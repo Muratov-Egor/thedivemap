@@ -10,6 +10,7 @@ interface AutocompleteItemProps {
   isSelected: boolean;
   onClick: () => void;
   className?: string;
+  index: number; // Добавляем индекс для ID
 }
 
 //todo вынести в отдельный компонент
@@ -38,6 +39,7 @@ export default function AutocompleteItem({
   isSelected,
   onClick,
   className,
+  index,
 }: AutocompleteItemProps) {
   const { t } = useTranslation('autocomplete');
 
@@ -59,6 +61,7 @@ export default function AutocompleteItem({
 
   return (
     <div
+      id={`autocomplete-option-${index}`}
       className={cn(
         'relative flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ease-in-out',
         'hover:bg-gradient-to-r hover:from-tropical-blue/5 hover:to-deep-ocean/5',
@@ -71,6 +74,7 @@ export default function AutocompleteItem({
       onClick={onClick}
       role="option"
       aria-selected={isSelected}
+      aria-label={`${item.name}, ${getTypeLabel(item.type)}`}
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {

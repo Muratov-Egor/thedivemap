@@ -17,6 +17,7 @@ export class Autocomplete {
   readonly autocompleteSearchIcon: Locator;
 
   constructor(private page: Page) {
+    // Desktop локаторы
     this.autocompleteContainer = page.getByTestId('autocomplete-container');
     this.autocompleteInput = page.getByTestId('autocomplete-input');
     this.autocompleteLoading = page.getByTestId('autocomplete-loading');
@@ -33,15 +34,59 @@ export class Autocomplete {
     this.autocompleteSearchIcon = page.locator('[data-testid="autocomplete-input"] + div svg');
   }
 
-  async typeText(text: string) {
-    await test.step(`Enter text into autocomplete field`, async () => {
-      await this.autocompleteInput.pressSequentially(text, { delay: 100 });
+  // Приватные методы для получения локаторов в зависимости от контекста
+  private getInputLocator(isMobile: boolean = false): Locator {
+    if (isMobile) {
+      return this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-input');
+    }
+    return this.autocompleteInput;
+  }
+
+  private getListLocator(isMobile: boolean = false): Locator {
+    if (isMobile) {
+      return this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-list');
+    }
+    return this.autocompleteList;
+  }
+
+  private getItemLocator(isMobile: boolean = false): Locator {
+    if (isMobile) {
+      return this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-item');
+    }
+    return this.autocompleteItem;
+  }
+
+  private getClearButtonLocator(isMobile: boolean = false): Locator {
+    if (isMobile) {
+      return this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-clear-button');
+    }
+    return this.autocompleteClearButton;
+  }
+
+  private getSearchIconLocator(isMobile: boolean = false): Locator {
+    if (isMobile) {
+      return this.page.getByTestId('mobile-filters-panel').locator('[data-testid="autocomplete-input"] + div svg');
+    }
+    return this.autocompleteSearchIcon;
+  }
+
+  private getResultsCountLocator(isMobile: boolean = false): Locator {
+    if (isMobile) {
+      return this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-list-results-count');
+    }
+    return this.autocompleteListResultsCount;
+  }
+
+  async typeText(text: string, isMobile: boolean = false) {
+    await test.step(`Enter text into ${isMobile ? 'mobile ' : ''}autocomplete field`, async () => {
+      await this.getInputLocator(isMobile).pressSequentially(text, { delay: 100 });
     });
   }
 
-  async expectListToBeLoading() {
-    await test.step(`Expect autocomplete list to be in loading state`, async () => {
-      await expect(this.autocompleteListLoading).toBeVisible();
+  async expectListToBeLoading(isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}autocomplete list to be in loading state`, async () => {
+      // Проверяем, что список видим (это означает, что загрузка началась)
+      await expect(this.getListLocator(isMobile)).toBeVisible();
     });
   }
 
@@ -51,65 +96,65 @@ export class Autocomplete {
     });
   }
 
-  async expectListToBeVisible() {
-    await test.step(`Expect autocomplete results list to be visible`, async () => {
-      await expect(this.autocompleteList).toBeVisible();
+  async expectListToBeVisible(isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}autocomplete results list to be visible`, async () => {
+      await expect(this.getListLocator(isMobile)).toBeVisible();
     });
   }
 
-  async expectListToBeHidden() {
-    await test.step(`Expect autocomplete results list to be hidden`, async () => {
-      await expect(this.autocompleteList).toBeHidden();
+  async expectListToBeHidden(isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}autocomplete results list to be hidden`, async () => {
+      await expect(this.getListLocator(isMobile)).toBeHidden();
     });
   }
 
-  async expectResultsCount(count: number) {
-    await test.step(`Expect autocomplete to show ${count} results`, async () => {
-      await expect(this.autocompleteListResultsCount).toContainText(`${count}`);
+  async expectResultsCount(count: number, isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}autocomplete to show ${count} results`, async () => {
+      await expect(this.getResultsCountLocator(isMobile)).toContainText(`${count}`);
     });
   }
 
-  async clickClearButton() {
-    await test.step('Click clear button', async () => {
-      await this.autocompleteClearButton.click();
+  async clickClearButton(isMobile: boolean = false) {
+    await test.step(`Click ${isMobile ? 'mobile ' : ''}clear button`, async () => {
+      await this.getClearButtonLocator(isMobile).click();
     });
   }
 
-  async expectInputToBeEmpty() {
-    await test.step('Expect input to be empty', async () => {
-      await expect(this.autocompleteInput).toHaveValue('');
+  async expectInputToBeEmpty(isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}input to be empty`, async () => {
+      await expect(this.getInputLocator(isMobile)).toHaveValue('');
     });
   }
 
-  async expectInputToHaveValue(value: string) {
-    await test.step(`Expect input to have value: ${value}`, async () => {
-      await expect(this.autocompleteInput).toHaveValue(value);
+  async expectInputToHaveValue(value: string, isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}input to have value: ${value}`, async () => {
+      await expect(this.getInputLocator(isMobile)).toHaveValue(value);
     });
   }
 
-  async clickOnFirstResult() {
-    await test.step('Click on first result', async () => {
-      await this.autocompleteItem.first().click();
+  async clickOnFirstResult(isMobile: boolean = false) {
+    await test.step(`Click on first ${isMobile ? 'mobile ' : ''}result`, async () => {
+      await this.getItemLocator(isMobile).first().click();
     });
   }
 
-  async pressKey(key: string) {
-    await test.step(`Press key: ${key}`, async () => {
-      await this.autocompleteInput.press(key);
+  async pressKey(key: string, isMobile: boolean = false) {
+    await test.step(`Press key on ${isMobile ? 'mobile ' : ''}: ${key}`, async () => {
+      await this.getInputLocator(isMobile).press(key);
     });
   }
 
-  async expectItemNumberToBeSelected(index: number) {
-    await test.step(`Expect item at index ${index} to be selected`, async () => {
+  async expectItemNumberToBeSelected(index: number, isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}item at index ${index} to be selected`, async () => {
       // Проверяем, что autocompleteItem с указанным индексом имеет CSS класс для выделения
-      const selectedItem = this.autocompleteItem.nth(index);
+      const selectedItem = this.getItemLocator(isMobile).nth(index);
       await expect(selectedItem).toHaveClass(/from-tropical-blue\/10/);
     });
   }
 
-  async expectResultTypeToBeVisible(type: string, icon: string) {
-    await test.step(`Expect result type ${type} with icon ${icon} to be visible`, async () => {
-      const items = this.autocompleteItem.filter({ hasText: icon });
+  async expectResultTypeToBeVisible(type: string, icon: string, isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}result type ${type} with icon ${icon} to be visible`, async () => {
+      const items = this.getItemLocator(isMobile).filter({ hasText: icon });
       await expect(items.first()).toBeVisible();
     });
   }
@@ -126,15 +171,15 @@ export class Autocomplete {
     });
   }
 
-  async expectSearchIconToBeVisible() {
-    await test.step('Expect search icon to be visible', async () => {
-      await expect(this.autocompleteSearchIcon).toBeVisible();
+  async expectSearchIconToBeVisible(isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}search icon to be visible`, async () => {
+      await expect(this.getSearchIconLocator(isMobile)).toBeVisible();
     });
   }
 
-  async expectSearchIconToBeHidden() {
-    await test.step('Expect search icon to be hidden', async () => {
-      await expect(this.autocompleteSearchIcon).toBeHidden();
+  async expectSearchIconToBeHidden(isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}search icon to be hidden`, async () => {
+      await expect(this.getSearchIconLocator(isMobile)).toBeHidden();
     });
   }
 

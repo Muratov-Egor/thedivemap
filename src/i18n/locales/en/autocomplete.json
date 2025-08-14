@@ -1,5 +1,6 @@
 {
   "placeholder": "Search dive sites...",
+  "searchLabel": "Dive sites search field",
   "clearButton": "Clear search",
   "types": {
     "site": "Dive site",

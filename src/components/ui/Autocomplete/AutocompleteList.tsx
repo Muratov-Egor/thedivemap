@@ -76,6 +76,7 @@ export default function AutocompleteList({
 
   return (
     <div
+      id="autocomplete-listbox"
       className={cn(
         'absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-lg z-50',
         'max-h-120 overflow-y-auto',
@@ -92,6 +93,7 @@ export default function AutocompleteList({
           item={item}
           isSelected={index === selectedIndex}
           onClick={() => onSelect(item)}
+          index={index}
         />
       ))}
 
@@ -99,6 +101,8 @@ export default function AutocompleteList({
       <div
         className="px-4 py-2 text-xs text-slate-500 border-t border-slate-100 bg-slate-50/50"
         data-testid="autocomplete-list-results-count"
+        aria-live="polite"
+        aria-label={`${t('resultsCount')}: ${results.length}`}
       >
         {t('resultsCount')}: {results.length}
       </div>

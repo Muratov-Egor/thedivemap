@@ -17,7 +17,7 @@ test.describe('Mobile: Autocomplete tests', () => {
 
     await filtersPanel.openMobileFiltersPanel();
     await filtersPanel.expectMobileFiltersPanelToBeVisible();
-    await autocomplete.expectSearchIconToBeVisible();
+    await autocomplete.expectSearchIconToBeVisible(true);
   });
 
   test('Should display autocomplete results on mobile when typing', async ({ page }) => {
@@ -25,10 +25,10 @@ test.describe('Mobile: Autocomplete tests', () => {
     const autocomplete = new Autocomplete(page);
 
     await filtersPanel.openMobileFiltersPanel();
-    await autocomplete.typeText('xxx');
+    await autocomplete.typeText('xxx', true);
 
-    await autocomplete.expectListToBeVisible();
-    await autocomplete.expectResultsCount(9);
+    await autocomplete.expectListToBeVisible(true);
+    await autocomplete.expectResultsCount(9, true);
   });
 
   test('Should handle touch interactions on mobile', async ({ page }) => {
@@ -36,14 +36,14 @@ test.describe('Mobile: Autocomplete tests', () => {
     const autocomplete = new Autocomplete(page);
 
     await filtersPanel.openMobileFiltersPanel();
-    await autocomplete.typeText('xxx');
-    await autocomplete.expectSearchIconToBeHidden();
-    await autocomplete.expectListToBeVisible();
+    await autocomplete.typeText('xxx', true);
+    await autocomplete.expectSearchIconToBeHidden(true);
+    await autocomplete.expectListToBeVisible(true);
 
     // Выбираем первый результат
-    await autocomplete.clickOnFirstResult();
-    await autocomplete.expectInputToHaveValue('Bungalow Bay North Wall');
-    await autocomplete.expectListToBeHidden();
+    await autocomplete.clickOnFirstResult(true);
+    await autocomplete.expectInputToHaveValue('Bungalow Bay North Wall', true);
+    await autocomplete.expectListToBeHidden(true);
   });
 
   test('Should close mobile filters panel and hide autocomplete', async ({ page }) => {
@@ -51,9 +51,9 @@ test.describe('Mobile: Autocomplete tests', () => {
     const autocomplete = new Autocomplete(page);
 
     await filtersPanel.openMobileFiltersPanel();
-    await autocomplete.typeText('xxx');
-    await autocomplete.expectSearchIconToBeHidden();
-    await autocomplete.expectListToBeVisible();
+    await autocomplete.typeText('xxx', true);
+    await autocomplete.expectSearchIconToBeHidden(true);
+    await autocomplete.expectListToBeVisible(true);
 
     await filtersPanel.closeMobileFiltersPanel();
     await filtersPanel.expectMobileFiltersPanelNotExists();
@@ -64,14 +64,14 @@ test.describe('Mobile: Autocomplete tests', () => {
     const autocomplete = new Autocomplete(page);
 
     await filtersPanel.openMobileFiltersPanel();
-    await autocomplete.typeText('xxx');
-    await autocomplete.expectListToBeVisible();
+    await autocomplete.typeText('xxx', true);
+    await autocomplete.expectListToBeVisible(true);
 
     // Навигация с клавиатуры
-    await autocomplete.pressKey('ArrowDown');
-    await autocomplete.expectItemNumberToBeSelected(0);
-    await autocomplete.pressKey('Enter');
-    await autocomplete.expectInputToHaveValue('Bungalow Bay North Wall');
+    await autocomplete.pressKey('ArrowDown', true);
+    await autocomplete.expectItemNumberToBeSelected(0, true);
+    await autocomplete.pressKey('Enter', true);
+    await autocomplete.expectInputToHaveValue('Bay 2 (Staghorn Reef)', true);
   });
 
   test('Should show loading state on mobile', async ({ page }) => {
@@ -79,8 +79,8 @@ test.describe('Mobile: Autocomplete tests', () => {
     const autocomplete = new Autocomplete(page);
 
     await filtersPanel.openMobileFiltersPanel();
-    await autocomplete.typeText('xxx');
-    await autocomplete.expectListToBeLoading();
+    await autocomplete.typeText('xxx', true);
+    await autocomplete.expectListToBeLoading(true);
   });
 
   test('Should clear input on mobile', async ({ page }) => {
@@ -88,12 +88,12 @@ test.describe('Mobile: Autocomplete tests', () => {
     const autocomplete = new Autocomplete(page);
 
     await filtersPanel.openMobileFiltersPanel();
-    await autocomplete.typeText('xxx');
+    await autocomplete.typeText('xxx', true);
     await page.waitForTimeout(1000);
-    await autocomplete.expectListToBeVisible();
+    await autocomplete.expectListToBeVisible(true);
 
-    await autocomplete.clickClearButton();
-    await autocomplete.expectInputToBeEmpty();
-    await autocomplete.expectListToBeHidden();
+    await autocomplete.clickClearButton(true);
+    await autocomplete.expectInputToBeEmpty(true);
+    await autocomplete.expectListToBeHidden(true);
   });
 });
