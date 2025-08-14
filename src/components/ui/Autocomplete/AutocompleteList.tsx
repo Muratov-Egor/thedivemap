@@ -31,8 +31,9 @@ export default function AutocompleteList({
         className={cn(
           'absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-lg z-50',
           'max-h-80 overflow-hidden',
-          className
+          className,
         )}
+        data-testid="autocomplete-list-loading"
       >
         <div className="flex items-center justify-center py-8">
           <div className="flex items-center gap-3 text-slate-600">
@@ -50,8 +51,9 @@ export default function AutocompleteList({
         className={cn(
           'absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-xl border border-red-200 rounded-2xl shadow-lg z-50',
           'max-h-80 overflow-hidden',
-          className
+          className,
         )}
+        data-testid="autocomplete-list-error"
       >
         <div className="flex items-center justify-center py-6 px-4">
           <div className="flex items-center gap-3 text-red-600">
@@ -78,10 +80,11 @@ export default function AutocompleteList({
         'absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-lg z-50',
         'max-h-120 overflow-y-auto',
         'scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent',
-        className
+        className,
       )}
       role="listbox"
       aria-label={t('resultsLabel')}
+      data-testid="autocomplete-list"
     >
       {results.map((item, index) => (
         <AutocompleteItem
@@ -93,7 +96,10 @@ export default function AutocompleteList({
       ))}
 
       {/* Results count indicator */}
-      <div className="px-4 py-2 text-xs text-slate-500 border-t border-slate-100 bg-slate-50/50">
+      <div
+        className="px-4 py-2 text-xs text-slate-500 border-t border-slate-100 bg-slate-50/50"
+        data-testid="autocomplete-list-results-count"
+      >
         {t('resultsCount')}: {results.length}
       </div>
     </div>

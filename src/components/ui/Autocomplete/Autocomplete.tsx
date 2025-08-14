@@ -32,7 +32,7 @@ export default function Autocomplete({
     debounceMs,
     minQueryLength,
     maxResults,
-    language
+    language,
   );
 
   // Handle keyboard navigation
@@ -63,7 +63,7 @@ export default function Autocomplete({
           break;
       }
     },
-    [actions, state.selectedIndex, state.results]
+    [actions, state.selectedIndex, state.results],
   );
 
   // Handle input change
@@ -73,7 +73,7 @@ export default function Autocomplete({
       actions.setQuery(value);
       onSearch?.(value);
     },
-    [actions, onSearch]
+    [actions, onSearch],
   );
 
   // Handle input focus
@@ -101,10 +101,7 @@ export default function Autocomplete({
   // Click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         actions.closeDropdown();
       }
     };
@@ -119,7 +116,7 @@ export default function Autocomplete({
   useEffect(() => {
     if (state.selectedIndex >= 0 && state.isOpen) {
       const selectedElement = containerRef.current?.querySelector(
-        `[data-index="${state.selectedIndex}"]`
+        `[data-index="${state.selectedIndex}"]`,
       );
       if (selectedElement) {
         (selectedElement as HTMLElement).scrollIntoView({
@@ -138,6 +135,7 @@ export default function Autocomplete({
       aria-expanded={state.isOpen}
       aria-haspopup="listbox"
       aria-controls="autocomplete-listbox"
+      data-testid="autocomplete-container"
     >
       {/* Input Field */}
       <div className="relative">
@@ -159,20 +157,22 @@ export default function Autocomplete({
             'disabled:opacity-50 disabled:cursor-not-allowed',
             'pr-12', // Space for clear button
             state.isOpen && 'border-tropical-blue shadow-lg',
-            error && 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+            error && 'border-red-300 focus:border-red-500 focus:ring-red-500/20',
           )}
           aria-autocomplete="list"
           aria-controls="autocomplete-listbox"
           aria-activedescendant={
-            state.selectedIndex >= 0
-              ? `autocomplete-option-${state.selectedIndex}`
-              : undefined
+            state.selectedIndex >= 0 ? `autocomplete-option-${state.selectedIndex}` : undefined
           }
+          data-testid="autocomplete-input"
         />
 
         {/* Loading Indicator */}
         {(state.isLoading || loading) && (
-          <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+          <div
+            className="absolute right-4 top-1/2 transform -translate-y-1/2"
+            data-testid="autocomplete-loading"
+          >
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-tropical-blue"></div>
           </div>
         )}
@@ -184,13 +184,9 @@ export default function Autocomplete({
             onClick={handleClear}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 transition-colors"
             aria-label={t('clearButton')}
+            data-testid="autocomplete-clear-button"
           >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -204,12 +200,7 @@ export default function Autocomplete({
         {/* Search Icon */}
         {!state.query && !state.isLoading && !loading && (
           <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

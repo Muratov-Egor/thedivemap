@@ -12,7 +12,11 @@ interface AutocompleteItemProps {
   className?: string;
 }
 
-const getTypeIcon = (type: AutocompleteItemType['type'], metadata?: Record<string, string | number | boolean | string[]>) => {
+//todo вынести в отдельный компонент
+const getTypeIcon = (
+  type: AutocompleteItemType['type'],
+  metadata?: Record<string, string | number | boolean | string[]>,
+) => {
   switch (type) {
     case 'site':
       return '🤿';
@@ -37,6 +41,7 @@ export default function AutocompleteItem({
 }: AutocompleteItemProps) {
   const { t } = useTranslation('autocomplete');
 
+  //todo вынести в отдельный компонент
   const getTypeLabel = (type: AutocompleteItemType['type']) => {
     switch (type) {
       case 'site':
@@ -61,7 +66,7 @@ export default function AutocompleteItem({
         'focus:outline-none focus:ring-2 focus:ring-tropical-blue/20',
         isSelected && 'bg-gradient-to-r from-tropical-blue/10 to-deep-ocean/10',
         'border-b border-slate-100 last:border-b-0',
-        className
+        className,
       )}
       onClick={onClick}
       role="option"
@@ -73,6 +78,7 @@ export default function AutocompleteItem({
           onClick();
         }
       }}
+      data-testid="autocomplete-item"
     >
       {/* Type Icon */}
       <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center text-lg">
@@ -86,12 +92,16 @@ export default function AutocompleteItem({
           <span
             className={cn(
               'font-medium text-slate-800 truncate',
-              isSelected && 'text-tropical-blue'
+              isSelected && 'text-tropical-blue',
             )}
+            data-testid="autocomplete-item-name"
           >
             {item.name}
           </span>
-          <span className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-full">
+          <span
+            className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-full"
+            data-testid="autocomplete-item-type"
+          >
             {getTypeLabel(item.type)}
           </span>
         </div>
@@ -110,7 +120,10 @@ export default function AutocompleteItem({
 
       {/* Selection Indicator */}
       {isSelected && (
-        <div className="flex-shrink-0 w-2 h-2 bg-tropical-blue rounded-full" />
+        <div
+          className="flex-shrink-0 w-2 h-2 bg-tropical-blue rounded-full"
+          data-testid="autocomplete-item-selected"
+        />
       )}
     </div>
   );
