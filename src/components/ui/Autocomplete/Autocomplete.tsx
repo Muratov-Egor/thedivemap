@@ -237,7 +237,9 @@ export default function Autocomplete({
         >
           <div className="flex items-center gap-3 text-red-600">
             <div className="w-5 h-5 flex items-center justify-center">
-              <span className="text-lg" aria-hidden="true">⚠️</span>
+              <span className="text-lg" aria-hidden="true">
+                ⚠️
+              </span>
             </div>
             <div className="text-sm">
               <div className="font-medium text-red-700">{t('errors.searchFailed')}</div>

@@ -65,14 +65,18 @@ export class Autocomplete {
 
   private getSearchIconLocator(isMobile: boolean = false): Locator {
     if (isMobile) {
-      return this.page.getByTestId('mobile-filters-panel').locator('[data-testid="autocomplete-input"] + div svg');
+      return this.page
+        .getByTestId('mobile-filters-panel')
+        .locator('[data-testid="autocomplete-input"] + div svg');
     }
     return this.autocompleteSearchIcon;
   }
 
   private getResultsCountLocator(isMobile: boolean = false): Locator {
     if (isMobile) {
-      return this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-list-results-count');
+      return this.page
+        .getByTestId('mobile-filters-panel')
+        .getByTestId('autocomplete-list-results-count');
     }
     return this.autocompleteListResultsCount;
   }

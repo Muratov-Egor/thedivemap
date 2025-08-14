@@ -2,7 +2,7 @@
 
 **Task ID:** autocomplete-accessibility-20250109  
 **Date:** 2025-01-09  
-**Status:** Completed  
+**Status:** Completed
 
 ## Overview
 
@@ -11,26 +11,31 @@
 ## Issues Found
 
 ### 1. Missing ARIA IDs
+
 - **Problem:** В коде были ссылки на `aria-controls="autocomplete-listbox"` и `aria-activedescendant="autocomplete-option-${index}"`, но сами элементы с этими ID не создавались
 - **Impact:** Screen readers не могли правильно связать элементы
 - **Fix:** Добавлены ID для всех элементов списка и контейнера
 
 ### 2. Incorrect ARIA Attributes
+
 - **Problem:** Атрибут `aria-expanded` был на элементе `input`, что не разрешено стандартами ARIA
 - **Impact:** Нарушение accessibility стандартов
 - **Fix:** Убран `aria-expanded` с input поля, оставлен только на контейнере с ролью `combobox`
 
 ### 3. Missing Accessibility Tests
+
 - **Problem:** Отсутствовали специфичные тесты accessibility для Autocomplete
 - **Impact:** Не было гарантии, что accessibility работает корректно
 - **Fix:** Добавлены тесты accessibility с использованием axe-core
 
 ### 4. Mobile Test Conflicts
+
 - **Problem:** На странице есть два autocomplete поля (desktop и mobile), что вызывало конфликты в тестах
 - **Impact:** Тесты падали из-за неправильного выбора элементов
 - **Fix:** Исправлены локаторы для мобильных тестов
 
 ### 5. Code Duplication in Page Object
+
 - **Problem:** В page object были дублирующиеся методы для desktop и mobile версий
 - **Impact:** Сложность поддержки и увеличение размера кода
 - **Fix:** Рефакторинг с параметризованными методами
@@ -38,6 +43,7 @@
 ## Solutions Implemented
 
 ### 1. ARIA Improvements
+
 ```typescript
 // Добавлены ID для элементов
 <div id="autocomplete-listbox" role="listbox">
@@ -45,6 +51,7 @@
 ```
 
 ### 2. Accessibility Tests
+
 ```typescript
 test('should have proper ARIA attributes for combobox', async ({ page }) => {
   await expect(page.getByTestId('autocomplete-input')).toHaveAttribute('role', 'textbox');
@@ -53,6 +60,7 @@ test('should have proper ARIA attributes for combobox', async ({ page }) => {
 ```
 
 ### 3. Parameterized Page Object Methods
+
 ```typescript
 // Вместо дублирования методов
 async typeText(text: string, isMobile: boolean = false) {
@@ -64,15 +72,18 @@ async typeText(text: string, isMobile: boolean = false) {
 ## Files Modified
 
 ### Components
+
 - `src/components/ui/Autocomplete/Autocomplete.tsx` - Исправлены ARIA атрибуты
 - `src/components/ui/Autocomplete/AutocompleteList.tsx` - Добавлены ID для элементов
 - `src/components/ui/Autocomplete/AutocompleteItem.tsx` - Добавлены ID для элементов
 
 ### Translations
+
 - `src/i18n/locales/ru/autocomplete.json` - Добавлены переводы для accessibility
 - `src/i18n/locales/en/autocomplete.json` - Добавлены переводы для accessibility
 
 ### Tests
+
 - `playwright-tests/e2e/page-objects/autocomplete.ts` - Рефакторинг с параметризованными методами
 - `playwright-tests/e2e/autocomplete.mobile.spec.ts` - Обновлены для использования новых методов
 - `playwright-tests/e2e/accessibility.testing.spec.ts` - Улучшены тесты accessibility
@@ -80,11 +91,13 @@ async typeText(text: string, isMobile: boolean = false) {
 ## Test Results
 
 ### Before Fixes
+
 - ❌ Accessibility тесты падали из-за неправильных ARIA атрибутов
 - ❌ Мобильные тесты падали из-за конфликтов локаторов
 - ❌ Отсутствовали специфичные тесты accessibility
 
 ### After Fixes
+
 - ✅ Все accessibility тесты проходят
 - ✅ Все мобильные тесты проходят (7/7)
 - ✅ Все desktop тесты проходят (9/9)
