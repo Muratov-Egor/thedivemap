@@ -14,7 +14,7 @@ export default function Filters() {
   const { t, i18n } = useTranslation('filters');
   const { t: tCommon } = useTranslation('common');
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
-  const { centerOnSelection, autocompleteInfoMessage, activeFilters, clearFilters } = useMap();
+  const { centerOnSelection, activeFilters, clearFilters } = useMap();
 
   // Получаем текущий язык из i18n
   const currentLanguage = i18n.language as 'ru' | 'en';
@@ -32,7 +32,8 @@ export default function Filters() {
     clearFilters();
   };
 
-  const hasActiveFilters = activeFilters.siteTypeIds.length > 0 || activeFilters.difficultyIds.length > 0;
+  const hasActiveFilters =
+    activeFilters.siteTypeIds.length > 0 || activeFilters.difficultyIds.length > 0;
 
   return (
     <>
@@ -47,11 +48,10 @@ export default function Filters() {
             language={currentLanguage}
             placeholder={tCommon('search.placeholder')}
             onSelect={handleAutocompleteSelect}
-            infoMessage={autocompleteInfoMessage}
           />
           <SiteTypeFilters />
           <DifficultyFilters />
-          
+
           {/* Общая кнопка очистки */}
           {hasActiveFilters && (
             <div className="pt-4 border-t border-gray-200">
@@ -107,11 +107,10 @@ export default function Filters() {
                 language={currentLanguage}
                 placeholder={tCommon('search.placeholder')}
                 onSelect={handleAutocompleteSelect}
-                infoMessage={autocompleteInfoMessage}
               />
               <SiteTypeFilters />
               <DifficultyFilters />
-              
+
               {/* Общая кнопка очистки для мобильной версии */}
               {hasActiveFilters && (
                 <div className="pt-4 border-t border-gray-200">

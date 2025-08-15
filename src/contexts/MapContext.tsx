@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useMemo, useState, useCallback, useRef } from 'react';
+import React, { createContext, useContext, useMemo, useState, useCallback, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Map } from 'maplibre-gl';
 import { Site } from '@/types/database';
@@ -46,7 +46,10 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [autocompleteInfoMessage, setAutocompleteInfoMessage] = useState<string | null>(null);
-  const [activeFilters, setActiveFilters] = useState<{ siteTypeIds: number[]; difficultyIds: number[] }>({
+  const [activeFilters, setActiveFilters] = useState<{
+    siteTypeIds: number[];
+    difficultyIds: number[];
+  }>({
     siteTypeIds: [],
     difficultyIds: [],
   });
@@ -80,6 +83,13 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     }
   }, [t, loading]);
+
+  // Сброс флага при инициализации карты
+  useEffect(() => {
+    if (map && !hasFetchedRef.current) {
+      hasFetchedRef.current = false;
+    }
+  }, [map]);
 
   // Выбор сайта
   const selectSite = useCallback((site: Site | null) => {
@@ -194,11 +204,11 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
 
   // Методы для фильтрации
   const setSiteTypeFilter = useCallback((siteTypeId: number) => {
-    setActiveFilters(prev => {
+    setActiveFilters((prev) => {
       const isSelected = prev.siteTypeIds.includes(siteTypeId);
       if (isSelected) {
         // Удаляем фильтр если он уже выбран
-        return { ...prev, siteTypeIds: prev.siteTypeIds.filter(id => id !== siteTypeId) };
+        return { ...prev, siteTypeIds: prev.siteTypeIds.filter((id) => id !== siteTypeId) };
       } else {
         // Добавляем фильтр если он не выбран
         return { ...prev, siteTypeIds: [...prev.siteTypeIds, siteTypeId] };
@@ -207,11 +217,11 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setDifficultyFilter = useCallback((difficultyId: number) => {
-    setActiveFilters(prev => {
+    setActiveFilters((prev) => {
       const isSelected = prev.difficultyIds.includes(difficultyId);
       if (isSelected) {
         // Удаляем фильтр если он уже выбран
-        return { ...prev, difficultyIds: prev.difficultyIds.filter(id => id !== difficultyId) };
+        return { ...prev, difficultyIds: prev.difficultyIds.filter((id) => id !== difficultyId) };
       } else {
         // Добавляем фильтр если он не выбран
         return { ...prev, difficultyIds: [...prev.difficultyIds, difficultyId] };
@@ -228,11 +238,13 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     let filtered = diveSites;
 
     if (activeFilters.siteTypeIds.length > 0) {
-      filtered = filtered.filter(site => activeFilters.siteTypeIds.includes(site.site_type_id));
+      filtered = filtered.filter((site) => activeFilters.siteTypeIds.includes(site.site_type_id));
     }
 
     if (activeFilters.difficultyIds.length > 0) {
-      filtered = filtered.filter(site => activeFilters.difficultyIds.includes(site.difficulty_id));
+      filtered = filtered.filter((site) =>
+        activeFilters.difficultyIds.includes(site.difficulty_id),
+      );
     }
 
     return filtered;

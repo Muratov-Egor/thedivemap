@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { renderHook, waitFor } from '@testing-library/react';
 import { useFilters } from '../useFilters';
 
@@ -84,7 +85,7 @@ describe('useFilters', () => {
     });
 
     expect(result.current.filters).toBe(null);
-    expect(result.current.error).toBe('Cannot read properties of undefined (reading \'ok\')');
+    expect(result.current.error).toBe("Cannot read properties of undefined (reading 'ok')");
   });
 
   it('should handle non-ok response', async () => {

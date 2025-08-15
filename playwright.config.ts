@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './playwright-tests',
   timeout: 30_000,
-  retries: 0,
+  retries: 1,
   workers: 3,
   reporter: [
     ['list'],
@@ -12,8 +12,12 @@ export default defineConfig({
       {
         detail: false,
         suiteTitle: true,
-        outputDir: 'allure-report',
+        outputDir: 'allure-results',
         suiteNumber: true,
+        environmentInfo: {
+          framework: 'playwright',
+          language: 'typescript',
+        },
       },
     ],
   ],

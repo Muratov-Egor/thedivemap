@@ -292,7 +292,7 @@ describe('MapContainer', () => {
     expect(screen.getByTestId('selected-site')).toHaveTextContent('No site selected');
   });
 
-  it('показывает сообщение когда нет результатов после фильтрации', () => {
+  it('показывает уведомление когда нет результатов после фильтрации', () => {
     mockUseMap.mockReturnValue({
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
@@ -315,12 +315,12 @@ describe('MapContainer', () => {
 
     render(<MapContainer />);
 
-    expect(screen.getByTestId('no-results-message')).toBeInTheDocument();
-    expect(screen.getByText('map.noResults')).toBeInTheDocument();
-    expect(screen.getByText('map.tryChangeFilters')).toBeInTheDocument();
+    expect(screen.getByTestId('notification')).toBeInTheDocument();
+    expect(screen.getByText('notification.noResults')).toBeInTheDocument();
+    expect(screen.getByText('notification.noResultsDescription')).toBeInTheDocument();
   });
 
-  it('не показывает сообщение когда нет активных фильтров', () => {
+  it('не показывает уведомление когда нет активных фильтров', () => {
     mockUseMap.mockReturnValue({
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
@@ -340,10 +340,10 @@ describe('MapContainer', () => {
 
     render(<MapContainer />);
 
-    expect(screen.queryByTestId('no-results-message')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('notification')).not.toBeInTheDocument();
   });
 
-  it('не показывает сообщение во время загрузки', () => {
+  it('не показывает уведомление во время загрузки', () => {
     mockUseMap.mockReturnValue({
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
@@ -363,6 +363,6 @@ describe('MapContainer', () => {
 
     render(<MapContainer />);
 
-    expect(screen.queryByTestId('no-results-message')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('notification')).not.toBeInTheDocument();
   });
 });

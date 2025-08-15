@@ -23,13 +23,13 @@ export function useFilters() {
     const fetchFilters = async () => {
       setLoading(true);
       setError(null);
-      
+
       try {
         const response = await fetch(`/api/filters?lang=${currentLanguage}`);
         if (!response.ok) {
           throw new Error('Failed to fetch filters');
         }
-        
+
         const data = await response.json();
         setFilters(data);
       } catch (err) {

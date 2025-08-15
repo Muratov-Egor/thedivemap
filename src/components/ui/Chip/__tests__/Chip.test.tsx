@@ -21,7 +21,7 @@ describe('Chip', () => {
   it('handles click events', () => {
     const handleClick = jest.fn();
     render(<Chip onClick={handleClick}>Clickable</Chip>);
-    
+
     fireEvent.click(screen.getByRole('button'));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
@@ -51,7 +51,11 @@ describe('Chip', () => {
 
   it('renders with icon on right', () => {
     const icon = <span data-testid="icon">🚀</span>;
-    render(<Chip icon={icon} iconPosition="right">With Icon Right</Chip>);
+    render(
+      <Chip icon={icon} iconPosition="right">
+        With Icon Right
+      </Chip>,
+    );
     expect(screen.getByTestId('icon')).toBeInTheDocument();
     expect(screen.getByText('With Icon Right')).toBeInTheDocument();
   });
@@ -72,7 +76,11 @@ describe('Chip', () => {
   });
 
   it('applies correct styles for subtle variant when selected', () => {
-    render(<Chip variant="subtle" selected>Subtle Selected</Chip>);
+    render(
+      <Chip variant="subtle" selected>
+        Subtle Selected
+      </Chip>,
+    );
     expect(screen.getByRole('button')).toHaveClass('bg-blue-100');
   });
 });

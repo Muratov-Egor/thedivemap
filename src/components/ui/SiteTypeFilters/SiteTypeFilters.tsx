@@ -36,7 +36,7 @@ export default function SiteTypeFilters() {
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium text-gray-700">{t('siteTypes.title')}</h3>
       </div>
-      
+
       <div className="flex flex-wrap gap-2">
         {filters.site_types.map((siteType) => (
           <Chip

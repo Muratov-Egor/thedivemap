@@ -1,4 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { NextRequest } from 'next/server';
 import { GET } from '../route';
 import { supabase } from '@/lib/supabase';
 
@@ -83,13 +85,9 @@ describe('/api/filters', () => {
     });
 
     it('should return all filters in English when lang=en', async () => {
-      const mockSiteTypes = [
-        { id: 1, label_ru: 'Риф', label_en: 'Reef' },
-      ];
+      const mockSiteTypes = [{ id: 1, label_ru: 'Риф', label_en: 'Reef' }];
 
-      const mockDifficulties = [
-        { id: 1, label_ru: 'Легкий', label_en: 'Easy' },
-      ];
+      const mockDifficulties = [{ id: 1, label_ru: 'Легкий', label_en: 'Easy' }];
 
       mockSupabase.from.mockReturnValueOnce({
         select: jest.fn().mockReturnValue({
@@ -115,12 +113,8 @@ describe('/api/filters', () => {
 
       expect(response.status).toBe(200);
       expect(data).toEqual({
-        site_types: [
-          { id: 1, label: 'Reef' },
-        ],
-        difficulties: [
-          { id: 1, label: 'Easy' },
-        ],
+        site_types: [{ id: 1, label: 'Reef' }],
+        difficulties: [{ id: 1, label: 'Easy' }],
       });
     });
 
@@ -143,9 +137,7 @@ describe('/api/filters', () => {
     });
 
     it('should handle difficulties database error', async () => {
-      const mockSiteTypes = [
-        { id: 1, label_ru: 'Риф', label_en: 'Reef' },
-      ];
+      const mockSiteTypes = [{ id: 1, label_ru: 'Риф', label_en: 'Reef' }];
 
       mockSupabase.from.mockReturnValueOnce({
         select: jest.fn().mockReturnValue({

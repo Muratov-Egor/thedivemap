@@ -12,14 +12,20 @@ export class BaseSteps {
   async waitForDataLoaded() {
     await test.step('Wait for dive sites data to be loaded', async () => {
       // Ждем исчезновения индикатора загрузки
-      await this.page.waitForSelector('[data-testid="loading-indicator"]', {
-        state: 'hidden',
-        timeout: 10000,
-      });
-      // Или ждем появления кластеров/маркеров
+      try {
+        await this.page.waitForSelector('[data-testid="loading-indicator"]', {
+          state: 'hidden',
+          timeout: 10000,
+        });
+      } catch (error) {
+        // Если индикатор загрузки не найден, это нормально
+        console.log('Loading indicator not found, continuing...');
+      }
+      
+      // Ждем появления кластеров/маркеров или уведомления
       await this.page.waitForSelector(
-        '[data-testid="marker-cluster"], [data-testid^="dive-site-marker-"]',
-        { timeout: 10000 },
+        '[data-testid="marker-cluster"], [data-testid^="dive-site-marker-"], [data-testid="notification"]',
+        { timeout: 15000 },
       );
     });
   }

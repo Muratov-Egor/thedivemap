@@ -1,15 +1,19 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import maplibregl, { Map } from 'maplibre-gl';
 import { useMap } from '@/contexts/MapContext';
 import DiveSitesLayer from './DiveSitesLayer';
+import { Notification } from '@/components/ui';
 
 export default function MapContainer({ children }: { children?: React.ReactNode }) {
   const { t } = useTranslation();
+  const { t: tAutocomplete } = useTranslation('autocomplete');
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
+  const [showNoResultsNotification, setShowNoResultsNotification] = useState(false);
+  const [showNoDiveSitesNotification, setShowNoDiveSitesNotification] = useState(false);
   const {
     setMap,
     setLoaded,
@@ -18,6 +22,7 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     loading,
     error,
     activeFilters,
+    autocompleteInfoMessage,
     fetchDiveSites,
     onSiteClick,
     onClusterClick,
@@ -72,8 +77,19 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
   }, [setLoaded, setMap]);
 
   // Проверяем, есть ли активные фильтры и нет ли результатов
-  const hasActiveFilters = activeFilters.siteTypeIds.length > 0 || activeFilters.difficultyIds.length > 0;
+  const hasActiveFilters =
+    activeFilters.siteTypeIds.length > 0 || activeFilters.difficultyIds.length > 0;
   const showNoResultsMessage = hasActiveFilters && !loading && filteredDiveSites.length === 0;
+
+  // Управляем отображением уведомления о том, что нет результатов по фильтрам
+  useEffect(() => {
+    setShowNoResultsNotification(showNoResultsMessage);
+  }, [showNoResultsMessage]);
+
+  // Управляем отображением уведомления о том, что в локации нет дайв-сайтов
+  useEffect(() => {
+    setShowNoDiveSitesNotification(!!autocompleteInfoMessage);
+  }, [autocompleteInfoMessage]);
 
   return (
     <div className="flex-1 relative">
@@ -108,20 +124,25 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
         </div>
       )}
 
-      {/* Сообщение о том, что нет результатов */}
-      {showNoResultsMessage && (
-        <div 
-          data-testid="no-results-message"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg px-6 py-4 text-center"
-        >
-          <div className="text-gray-600 text-lg font-medium">
-            {t('map.noResults')}
-          </div>
-          <div className="text-gray-500 text-sm mt-2">
-            {t('map.tryChangeFilters')}
-          </div>
-        </div>
-      )}
+      {/* Уведомление о том, что нет результатов по фильтрам */}
+      <Notification
+        message={t('notification.noResults')}
+        description={t('notification.noResultsDescription')}
+        type="info"
+        show={showNoResultsNotification}
+        onClose={() => setShowNoResultsNotification(false)}
+        duration={0} // Не скрывать автоматически
+      />
+
+      {/* Уведомление о том, что в выбранной локации нет дайв-сайтов */}
+      <Notification
+        message={autocompleteInfoMessage || tAutocomplete('noDiveSites.title')}
+        description={tAutocomplete('noDiveSites.description')}
+        type="warning"
+        show={showNoDiveSitesNotification}
+        onClose={() => setShowNoDiveSitesNotification(false)}
+        duration={0} // Не скрывать автоматически
+      />
 
       {children}
     </div>

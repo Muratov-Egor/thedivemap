@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { I18nextProvider } from 'react-i18next';
 import { getI18n } from '@/i18n/i18n.client';
 import DifficultyFilters from '../DifficultyFilters';
@@ -13,10 +13,8 @@ const mockUseFilters = useFilters as jest.MockedFunction<typeof useFilters>;
 const renderWithProviders = (component: React.ReactElement) => {
   return render(
     <I18nextProvider i18n={getI18n()}>
-      <MapProvider>
-        {component}
-      </MapProvider>
-    </I18nextProvider>
+      <MapProvider>{component}</MapProvider>
+    </I18nextProvider>,
   );
 };
 
@@ -130,9 +128,7 @@ describe('DifficultyFilters', () => {
   it('should toggle difficulty filter when clicked twice', async () => {
     const mockFilters = {
       site_types: [],
-      difficulties: [
-        { id: 1, label: 'Легкий' },
-      ],
+      difficulties: [{ id: 1, label: 'Легкий' }],
     };
 
     mockUseFilters.mockReturnValue({

@@ -18,7 +18,6 @@ export default function Autocomplete({
   disabled = false,
   loading = false,
   error = null,
-  infoMessage = null,
   language = 'ru', // Добавляем параметр языка с дефолтным значением
 }: AutocompleteProps) {
   const { t } = useTranslation('autocomplete');
@@ -217,14 +216,13 @@ export default function Autocomplete({
       </div>
 
       {/* Dropdown List */}
-      {(state.isOpen || state.isLoading || error || infoMessage) && (
+      {(state.isOpen || state.isLoading || error) && (
         <AutocompleteList
           results={state.results}
           selectedIndex={state.selectedIndex}
           onSelect={actions.selectItem}
           isLoading={state.isLoading || loading}
           error={error || state.error}
-          infoMessage={infoMessage}
         />
       )}
 
