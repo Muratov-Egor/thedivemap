@@ -13,6 +13,7 @@ jest.mock('react-i18next', () => ({
 
 // Мокаем MapContext
 const mockCenterOnSelection = jest.fn();
+const mockClearFilters = jest.fn();
 const mockUseMap = jest.fn();
 
 jest.mock('@/contexts/MapContext', () => ({
@@ -48,6 +49,7 @@ describe('Filters', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockCenterOnSelection.mockClear();
+    mockClearFilters.mockClear();
 
     mockUseTranslation.mockImplementation((ns) => {
       if (ns === 'filters') {
@@ -55,6 +57,7 @@ describe('Filters', () => {
           t: (key: string) => {
             const translations: Record<string, string> = {
               title: 'Фильтры',
+              clearAll: 'Очистить все',
               'accessibility.openFilters': 'Открыть фильтры',
               'accessibility.closeFilters': 'Закрыть фильтры',
             };
@@ -78,6 +81,12 @@ describe('Filters', () => {
 
     mockUseMap.mockReturnValue({
       centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+      },
+      autocompleteInfoMessage: null,
     });
   });
 
@@ -177,6 +186,88 @@ describe('Filters', () => {
       name: 'Test Item',
       type: 'site',
     });
+  });
+
+  it('не показывает кнопку очистки когда нет активных фильтров', () => {
+    render(<Filters />);
+
+    expect(screen.queryByTestId('clear-all-filters-button')).not.toBeInTheDocument();
+  });
+
+  it('показывает кнопку очистки когда есть активные фильтры типа сайта', () => {
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      activeFilters: {
+        siteTypeIds: [1],
+        difficultyIds: [],
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    render(<Filters />);
+
+    expect(screen.getByTestId('clear-all-filters-button')).toBeInTheDocument();
+    expect(screen.getByText('Очистить все')).toBeInTheDocument();
+  });
+
+  it('показывает кнопку очистки когда есть активные фильтры сложности', () => {
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [2],
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    render(<Filters />);
+
+    expect(screen.getByTestId('clear-all-filters-button')).toBeInTheDocument();
+    expect(screen.getByText('Очистить все')).toBeInTheDocument();
+  });
+
+  it('вызывает clearFilters при клике на кнопку очистки в десктопной версии', () => {
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      activeFilters: {
+        siteTypeIds: [1],
+        difficultyIds: [],
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    render(<Filters />);
+
+    const clearButton = screen.getByTestId('clear-all-filters-button');
+    fireEvent.click(clearButton);
+
+    expect(mockClearFilters).toHaveBeenCalledTimes(1);
+  });
+
+  it('вызывает clearFilters при клике на кнопку очистки в мобильной версии', () => {
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      activeFilters: {
+        siteTypeIds: [1],
+        difficultyIds: [],
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    render(<Filters />);
+
+    // Открываем мобильную панель
+    const openButton = screen.getByTestId('open-filters-panel-button');
+    fireEvent.click(openButton);
+
+    const clearButton = screen.getByTestId('clear-all-filters-button-mobile');
+    fireEvent.click(clearButton);
+
+    expect(mockClearFilters).toHaveBeenCalledTimes(1);
   });
 
   it('имеет правильные классы для десктопной панели', () => {

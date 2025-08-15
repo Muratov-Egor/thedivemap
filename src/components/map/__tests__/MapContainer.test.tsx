@@ -59,9 +59,14 @@ describe('MapContainer', () => {
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
       diveSites: [],
+      filteredDiveSites: [],
       selectedSite: null,
       loading: false,
       error: null,
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+      },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
@@ -148,9 +153,14 @@ describe('MapContainer', () => {
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
       diveSites: [],
+      filteredDiveSites: [],
       selectedSite: null,
       loading: true,
       error: null,
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+      },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
@@ -168,9 +178,14 @@ describe('MapContainer', () => {
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
       diveSites: [],
+      filteredDiveSites: [],
       selectedSite: null,
       loading: false,
       error: 'Test error message',
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+      },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
@@ -194,9 +209,14 @@ describe('MapContainer', () => {
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
       diveSites: mockSites,
+      filteredDiveSites: mockSites,
       selectedSite: mockSelectedSite,
       loading: false,
       error: null,
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+      },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
@@ -231,9 +251,14 @@ describe('MapContainer', () => {
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
       diveSites: null,
+      filteredDiveSites: [],
       selectedSite: null,
       loading: false,
       error: null,
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+      },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
@@ -249,9 +274,14 @@ describe('MapContainer', () => {
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
       diveSites: [],
+      filteredDiveSites: [],
       selectedSite: null,
       loading: false,
       error: null,
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+      },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
@@ -260,5 +290,79 @@ describe('MapContainer', () => {
     render(<MapContainer />);
 
     expect(screen.getByTestId('selected-site')).toHaveTextContent('No site selected');
+  });
+
+  it('показывает сообщение когда нет результатов после фильтрации', () => {
+    mockUseMap.mockReturnValue({
+      setMap: mockSetMap,
+      setLoaded: mockSetLoaded,
+      diveSites: [
+        { id: 1, name: 'Site 1', site_type_id: 1, difficulty_id: 1 },
+        { id: 2, name: 'Site 2', site_type_id: 2, difficulty_id: 2 },
+      ],
+      filteredDiveSites: [], // Отфильтрованные сайты пустые
+      selectedSite: null,
+      loading: false,
+      error: null,
+      activeFilters: {
+        siteTypeIds: [3], // Активный фильтр, который не соответствует ни одному сайту
+        difficultyIds: [],
+      },
+      fetchDiveSites: mockFetchDiveSites,
+      onSiteClick: mockOnSiteClick,
+      onClusterClick: mockOnClusterClick,
+    });
+
+    render(<MapContainer />);
+
+    expect(screen.getByTestId('no-results-message')).toBeInTheDocument();
+    expect(screen.getByText('map.noResults')).toBeInTheDocument();
+    expect(screen.getByText('map.tryChangeFilters')).toBeInTheDocument();
+  });
+
+  it('не показывает сообщение когда нет активных фильтров', () => {
+    mockUseMap.mockReturnValue({
+      setMap: mockSetMap,
+      setLoaded: mockSetLoaded,
+      diveSites: [],
+      filteredDiveSites: [],
+      selectedSite: null,
+      loading: false,
+      error: null,
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+      },
+      fetchDiveSites: mockFetchDiveSites,
+      onSiteClick: mockOnSiteClick,
+      onClusterClick: mockOnClusterClick,
+    });
+
+    render(<MapContainer />);
+
+    expect(screen.queryByTestId('no-results-message')).not.toBeInTheDocument();
+  });
+
+  it('не показывает сообщение во время загрузки', () => {
+    mockUseMap.mockReturnValue({
+      setMap: mockSetMap,
+      setLoaded: mockSetLoaded,
+      diveSites: [],
+      filteredDiveSites: [],
+      selectedSite: null,
+      loading: true, // Загрузка активна
+      error: null,
+      activeFilters: {
+        siteTypeIds: [1],
+        difficultyIds: [],
+      },
+      fetchDiveSites: mockFetchDiveSites,
+      onSiteClick: mockOnSiteClick,
+      onClusterClick: mockOnClusterClick,
+    });
+
+    render(<MapContainer />);
+
+    expect(screen.queryByTestId('no-results-message')).not.toBeInTheDocument();
   });
 });

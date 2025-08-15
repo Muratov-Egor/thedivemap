@@ -13,10 +13,11 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
   const {
     setMap,
     setLoaded,
-    diveSites,
+    filteredDiveSites,
     selectedSite, // ✅ Добавляю selectedSite из MapContext
     loading,
     error,
+    activeFilters,
     fetchDiveSites,
     onSiteClick,
     onClusterClick,
@@ -70,6 +71,10 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     };
   }, [setLoaded, setMap]);
 
+  // Проверяем, есть ли активные фильтры и нет ли результатов
+  const hasActiveFilters = activeFilters.siteTypeIds.length > 0 || activeFilters.difficultyIds.length > 0;
+  const showNoResultsMessage = hasActiveFilters && !loading && filteredDiveSites.length === 0;
+
   return (
     <div className="flex-1 relative">
       <div ref={containerRef} className="absolute inset-0 h-full w-full" />
@@ -77,7 +82,7 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
       {/* Слой дайв-сайтов */}
       <DiveSitesLayer
         map={mapRef.current}
-        sites={diveSites}
+        sites={filteredDiveSites}
         selectedSite={selectedSite} // ✅ Передаю selectedSite в DiveSitesLayer
         onSiteClick={onSiteClick}
         onClusterClick={onClusterClick}
@@ -100,6 +105,21 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
       {error && (
         <div className="absolute top-4 left-4 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-lg text-sm">
           Error: {error}
+        </div>
+      )}
+
+      {/* Сообщение о том, что нет результатов */}
+      {showNoResultsMessage && (
+        <div 
+          data-testid="no-results-message"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg px-6 py-4 text-center"
+        >
+          <div className="text-gray-600 text-lg font-medium">
+            {t('map.noResults')}
+          </div>
+          <div className="text-gray-500 text-sm mt-2">
+            {t('map.tryChangeFilters')}
+          </div>
         </div>
       )}
 

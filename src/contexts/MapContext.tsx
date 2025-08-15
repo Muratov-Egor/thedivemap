@@ -11,10 +11,15 @@ interface MapContextValue {
   map: Map | null;
   isLoaded: boolean;
   diveSites: Site[];
+  filteredDiveSites: Site[];
   selectedSite: Site | null;
   loading: boolean;
   error: string | null;
   autocompleteInfoMessage: string | null;
+  activeFilters: {
+    siteTypeIds: number[];
+    difficultyIds: number[];
+  };
   setMap: (map: Map | null) => void;
   setLoaded: (loaded: boolean) => void;
   fetchDiveSites: () => Promise<void>;
@@ -24,6 +29,10 @@ interface MapContextValue {
   // Новые методы для центрирования карты
   centerOnSelection: (item: AutocompleteItem) => Promise<void>;
   clearAutocompleteInfoMessage: () => void;
+  // Методы для фильтрации
+  setSiteTypeFilter: (siteTypeId: number) => void;
+  setDifficultyFilter: (difficultyId: number) => void;
+  clearFilters: () => void;
 }
 
 const MapContext = createContext<MapContextValue | undefined>(undefined);
@@ -37,6 +46,10 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [autocompleteInfoMessage, setAutocompleteInfoMessage] = useState<string | null>(null);
+  const [activeFilters, setActiveFilters] = useState<{ siteTypeIds: number[]; difficultyIds: number[] }>({
+    siteTypeIds: [],
+    difficultyIds: [],
+  });
   const hasFetchedRef = useRef(false);
 
   // Загрузка дайв-сайтов
@@ -179,15 +192,63 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     setAutocompleteInfoMessage(null);
   }, []);
 
+  // Методы для фильтрации
+  const setSiteTypeFilter = useCallback((siteTypeId: number) => {
+    setActiveFilters(prev => {
+      const isSelected = prev.siteTypeIds.includes(siteTypeId);
+      if (isSelected) {
+        // Удаляем фильтр если он уже выбран
+        return { ...prev, siteTypeIds: prev.siteTypeIds.filter(id => id !== siteTypeId) };
+      } else {
+        // Добавляем фильтр если он не выбран
+        return { ...prev, siteTypeIds: [...prev.siteTypeIds, siteTypeId] };
+      }
+    });
+  }, []);
+
+  const setDifficultyFilter = useCallback((difficultyId: number) => {
+    setActiveFilters(prev => {
+      const isSelected = prev.difficultyIds.includes(difficultyId);
+      if (isSelected) {
+        // Удаляем фильтр если он уже выбран
+        return { ...prev, difficultyIds: prev.difficultyIds.filter(id => id !== difficultyId) };
+      } else {
+        // Добавляем фильтр если он не выбран
+        return { ...prev, difficultyIds: [...prev.difficultyIds, difficultyId] };
+      }
+    });
+  }, []);
+
+  const clearFilters = useCallback(() => {
+    setActiveFilters({ siteTypeIds: [], difficultyIds: [] });
+  }, []);
+
+  // Отфильтрованные дайв-сайты
+  const filteredDiveSites = useMemo(() => {
+    let filtered = diveSites;
+
+    if (activeFilters.siteTypeIds.length > 0) {
+      filtered = filtered.filter(site => activeFilters.siteTypeIds.includes(site.site_type_id));
+    }
+
+    if (activeFilters.difficultyIds.length > 0) {
+      filtered = filtered.filter(site => activeFilters.difficultyIds.includes(site.difficulty_id));
+    }
+
+    return filtered;
+  }, [diveSites, activeFilters.siteTypeIds, activeFilters.difficultyIds]);
+
   const value = useMemo(
     () => ({
       map,
       isLoaded,
       diveSites,
+      filteredDiveSites,
       selectedSite,
       loading,
       error,
       autocompleteInfoMessage,
+      activeFilters,
       setMap,
       setLoaded,
       fetchDiveSites,
@@ -196,21 +257,29 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       onClusterClick,
       centerOnSelection,
       clearAutocompleteInfoMessage,
+      setSiteTypeFilter,
+      setDifficultyFilter,
+      clearFilters,
     }),
     [
       map,
       isLoaded,
       diveSites,
+      filteredDiveSites,
       selectedSite,
       loading,
       error,
       autocompleteInfoMessage,
+      activeFilters,
       fetchDiveSites,
       selectSite,
       onSiteClick,
       onClusterClick,
       centerOnSelection,
       clearAutocompleteInfoMessage,
+      setSiteTypeFilter,
+      setDifficultyFilter,
+      clearFilters,
     ],
   );
 

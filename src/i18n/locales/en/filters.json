@@ -1,8 +1,19 @@
 {
   "title": "Filters",
   "stub": "Here will be filters",
+  "clearAll": "Clear filters",
+  "siteTypes": {
+    "title": "Dive Site Type",
+    "clearAll": "Clear",
+    "filterBy": "Filter by"
+  },
+  "difficulties": {
+    "title": "Difficulty Level",
+    "clearAll": "Clear",
+    "filterBy": "Filter by"
+  },
   "accessibility": {
-    "openFilters": "Open filters",
-    "closeFilters": "Close filters"
+    "openFilters": "Open filters panel",
+    "closeFilters": "Close filters panel"
   }
 }

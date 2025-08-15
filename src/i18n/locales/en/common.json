@@ -23,7 +23,9 @@
       "clickToZoom": "Click to zoom",
       "type": "Type",
       "closeTooltip": "Close"
-    }
+    },
+    "noResults": "No dive sites found with selected filters",
+    "tryChangeFilters": "Try changing filters"
   },
   "button": {
     "accessibility": {

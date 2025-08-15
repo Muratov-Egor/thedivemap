@@ -2,6 +2,9 @@ import '@testing-library/jest-dom';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+// Полифилл для fetch в тестовой среде
+global.fetch = jest.fn();
+
 // Полифилл для Request и Response в тестовой среде
 global.Request = class Request {
   constructor(url, options = {}) {
@@ -43,24 +46,52 @@ i18n.use(initReactI18next).init({
   resources: {
     ru: {
       common: {
-        // Пустые переводы для тестов
+        'search.placeholder': 'Поиск...',
       },
       autocomplete: {
-        // Пустые переводы для тестов
+        'noDiveSites.title': 'Нет дайв-сайтов в {location}',
       },
       filters: {
-        // Пустые переводы для тестов
+        title: 'Фильтры',
+        siteTypes: {
+          title: 'Тип дайв-сайта',
+          clearAll: 'Очистить',
+          filterBy: 'Фильтровать по',
+        },
+        difficulties: {
+          title: 'Уровень сложности',
+          clearAll: 'Очистить',
+          filterBy: 'Фильтровать по',
+        },
+        accessibility: {
+          openFilters: 'Открыть фильтры',
+          closeFilters: 'Закрыть фильтры',
+        },
       },
     },
     en: {
       common: {
-        // Пустые переводы для тестов
+        'search.placeholder': 'Search...',
       },
       autocomplete: {
-        // Пустые переводы для тестов
+        'noDiveSites.title': 'No dive sites in {location}',
       },
       filters: {
-        // Пустые переводы для тестов
+        title: 'Filters',
+        siteTypes: {
+          title: 'Dive Site Type',
+          clearAll: 'Clear',
+          filterBy: 'Filter by',
+        },
+        difficulties: {
+          title: 'Difficulty Level',
+          clearAll: 'Clear',
+          filterBy: 'Filter by',
+        },
+        accessibility: {
+          openFilters: 'Open filters',
+          closeFilters: 'Close filters',
+        },
       },
     },
   },

@@ -5,6 +5,8 @@ import Button from '@/components/ui/Button';
 import { useTranslation } from 'react-i18next';
 import { FiltersIcon, CloseIcon } from '@/components/icons';
 import Autocomplete from './ui/Autocomplete/Autocomplete';
+import SiteTypeFilters from './ui/SiteTypeFilters';
+import DifficultyFilters from './ui/DifficultyFilters';
 import { useMap } from '@/contexts/MapContext';
 import { AutocompleteItem } from '@/components/ui/Autocomplete/types';
 
@@ -12,7 +14,7 @@ export default function Filters() {
   const { t, i18n } = useTranslation('filters');
   const { t: tCommon } = useTranslation('common');
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
-  const { centerOnSelection, autocompleteInfoMessage } = useMap();
+  const { centerOnSelection, autocompleteInfoMessage, activeFilters, clearFilters } = useMap();
 
   // Получаем текущий язык из i18n
   const currentLanguage = i18n.language as 'ru' | 'en';
@@ -26,6 +28,12 @@ export default function Filters() {
     await centerOnSelection(item);
   };
 
+  const handleClearAll = () => {
+    clearFilters();
+  };
+
+  const hasActiveFilters = activeFilters.siteTypeIds.length > 0 || activeFilters.difficultyIds.length > 0;
+
   return (
     <>
       {/* Десктопная версия */}
@@ -34,12 +42,31 @@ export default function Filters() {
         data-testid="desktop-filters-panel"
       >
         <h2 className="text-xl font-bold text-gray-800 mb-6">{t('title')}</h2>
-        <Autocomplete
-          language={currentLanguage}
-          placeholder={tCommon('search.placeholder')}
-          onSelect={handleAutocompleteSelect}
-          infoMessage={autocompleteInfoMessage}
-        />
+        <div className="space-y-6 w-full">
+          <Autocomplete
+            language={currentLanguage}
+            placeholder={tCommon('search.placeholder')}
+            onSelect={handleAutocompleteSelect}
+            infoMessage={autocompleteInfoMessage}
+          />
+          <SiteTypeFilters />
+          <DifficultyFilters />
+          
+          {/* Общая кнопка очистки */}
+          {hasActiveFilters && (
+            <div className="pt-4 border-t border-gray-200">
+              <Button
+                variant="coral"
+                size="small"
+                onClick={handleClearAll}
+                data-testid="clear-all-filters-button"
+                className="w-full"
+              >
+                {t('clearAll')}
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="md:hidden fixed bottom-6 right-6 z-50">
@@ -75,13 +102,30 @@ export default function Filters() {
           </div>
 
           <div className="flex-1 p-4 overflow-y-auto">
-            <div className="space-y-4">
+            <div className="space-y-6">
               <Autocomplete
                 language={currentLanguage}
                 placeholder={tCommon('search.placeholder')}
                 onSelect={handleAutocompleteSelect}
                 infoMessage={autocompleteInfoMessage}
               />
+              <SiteTypeFilters />
+              <DifficultyFilters />
+              
+              {/* Общая кнопка очистки для мобильной версии */}
+              {hasActiveFilters && (
+                <div className="pt-4 border-t border-gray-200">
+                  <Button
+                    variant="coral"
+                    size="small"
+                    onClick={handleClearAll}
+                    data-testid="clear-all-filters-button-mobile"
+                    className="w-full"
+                  >
+                    {t('clearAll')}
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
