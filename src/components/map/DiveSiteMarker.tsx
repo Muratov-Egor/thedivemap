@@ -17,7 +17,7 @@ const DiveSiteMarker = React.memo<MarkerProps>(
 
     // Автоматическое закрытие tooltip через 8 секунд
     useEffect(() => {
-      if (isActive && !isTooltipVisible) {
+      if (isActive && !isTooltipVisible && !isTooltipClosed) {
         setIsTooltipVisible(true);
         setIsTooltipClosed(false);
 
@@ -36,7 +36,7 @@ const DiveSiteMarker = React.memo<MarkerProps>(
           autoCloseTimerRef.current = null;
         }
       };
-    }, [isActive, isTooltipVisible]);
+    }, [isActive, isTooltipVisible, isTooltipClosed]);
 
     // Форматирование координат
     const formatCoordinates = (lat: number, lng: number) => {
@@ -70,6 +70,8 @@ const DiveSiteMarker = React.memo<MarkerProps>(
 
     const handleClick = (e: React.MouseEvent) => {
       e.stopPropagation();
+      // Сбрасываем состояние закрытия при новом клике на маркер
+      setIsTooltipClosed(false);
       onClick?.(site);
     };
 
@@ -88,6 +90,7 @@ const DiveSiteMarker = React.memo<MarkerProps>(
 
     const handleMouseEnter = () => {
       setIsHovered(true);
+      // Сбрасываем состояние закрытия при наведении
       setIsTooltipClosed(false);
       onHover?.(site);
     };

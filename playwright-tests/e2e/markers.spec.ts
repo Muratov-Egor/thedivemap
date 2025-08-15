@@ -35,6 +35,7 @@ test.describe('Desktop: Interacting with markers', () => {
       '⭐️ 3/5',
     );
     await markersPage.closeMarkerTooltip();
+    await page.waitForTimeout(1000);
     await markersPage.expectMarkerTooltipToBeClosed();
   });
 });
