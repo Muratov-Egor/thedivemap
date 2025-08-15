@@ -12,6 +12,7 @@ import MarkerCluster from './MarkerCluster';
 interface DiveSitesLayerProps {
   map: Map | null;
   sites: Site[];
+  selectedSite: Site | null; // ✅ Добавляю пропс selectedSite
   onSiteClick?: (site: Site) => void;
   onClusterClick?: (cluster: Cluster) => void;
 }
@@ -19,12 +20,13 @@ interface DiveSitesLayerProps {
 export default function DiveSitesLayer({
   map,
   sites,
+  selectedSite, // ✅ Получаю selectedSite из пропсов
   onSiteClick,
   onClusterClick,
 }: DiveSitesLayerProps) {
   const [clusters, setClusters] = useState<Cluster[]>([]);
   const [individualSites, setIndividualSites] = useState<Site[]>([]);
-  const [selectedSite, setSelectedSite] = useState<Site | null>(null);
+  // ❌ Удаляю локальное состояние: const [selectedSite, setSelectedSite] = useState<Site | null>(null);
 
   // Сбрасываем состояние кластеризации если нет данных
   useEffect(() => {
@@ -186,7 +188,7 @@ export default function DiveSitesLayer({
   // Обработка клика по сайту
   const handleSiteClick = useCallback(
     (site: Site) => {
-      setSelectedSite(site);
+      // ❌ Удаляю: setSelectedSite(site);
       onSiteClick?.(site);
 
       console.log(site);
@@ -241,7 +243,7 @@ export default function DiveSitesLayer({
             <DiveSiteMarker
               site={site}
               onClick={handleSiteClick}
-              isActive={selectedSite?.id === site.id}
+              isActive={selectedSite?.id === site.id} // ✅ Использую selectedSite из пропсов
             />
           </div>
         ))}

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import type { Map } from 'maplibre-gl';
 import { Site } from '@/types/database';
 import { Cluster } from '@/types/clustering';
+import { AutocompleteItem } from '@/components/ui/Autocomplete/types';
 
 interface MapContextValue {
   map: Map | null;
@@ -19,6 +20,8 @@ interface MapContextValue {
   selectSite: (site: Site | null) => void;
   onSiteClick: (site: Site) => void;
   onClusterClick: (cluster: Cluster) => void;
+  // Новые методы для центрирования карты
+  centerOnSelection: (item: AutocompleteItem) => Promise<void>;
 }
 
 const MapContext = createContext<MapContextValue | undefined>(undefined);
@@ -62,20 +65,103 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     }
   }, [t, loading]);
 
+  // Выбор сайта
+  const selectSite = useCallback((site: Site | null) => {
+    setSelectedSite(site);
+  }, []);
+
+  // Центрирование карты на выбранном элементе
+  const centerOnSelection = useCallback(
+    async (item: AutocompleteItem) => {
+      if (!map) {
+        console.error('Map is not initialized');
+        return;
+      }
+
+      try {
+        switch (item.type) {
+          case 'site':
+            // Для конкретного сайта - центрируем на нем и зумим
+            const siteResponse = await fetch(`/api/dive-sites?id=${item.id}`);
+            if (siteResponse.ok) {
+              const sites = await siteResponse.json();
+              if (sites.length > 0) {
+                const site = sites[0];
+                map.flyTo({
+                  center: [site.longitude, site.latitude],
+                  zoom: 15, // Более детальный обзор для конкретного сайта
+                  duration: 1000,
+                });
+                // Выбираем сайт для показа попапа
+                selectSite(site);
+              }
+            }
+            break;
+
+          case 'country':
+          case 'region':
+          case 'location':
+            // Для страны/региона/локации - получаем границы и зумим к ним
+            const boundsResponse = await fetch(`/api/bounds?type=${item.type}&id=${item.id}`);
+            if (boundsResponse.ok) {
+              const bounds = await boundsResponse.json();
+
+              // Проверяем, не является ли ответ ошибкой
+              if (bounds.error) {
+                console.warn(
+                  `No dive sites found for ${item.type}: ${item.name} - ${bounds.error}`,
+                );
+                return;
+              }
+
+              if (bounds && bounds.length === 4) {
+                // Проверяем, что bounds корректные
+                const [minLng, minLat, maxLng, maxLat] = bounds;
+
+                if (minLng < maxLng && minLat < maxLat) {
+                  // Универсальный подход: используем fitBounds для всех устройств
+                  // Адаптивный padding и ограничения зума для оптимального отображения
+                  const mapContainer = map.getContainer();
+                  const isMobile = mapContainer.offsetWidth < 768;
+                  const padding = isMobile ? 50 : 300;
+                  const minZoom = 3; // Минимальный зум для очень больших областей
+                  const maxZoom = 12; // Максимальный зум для детального обзора
+
+                  map.fitBounds(bounds, {
+                    padding: padding,
+                    duration: 1000,
+                    maxZoom: maxZoom,
+                    minZoom: minZoom,
+                  });
+                } else {
+                  console.error('Invalid bounds: min values must be less than max values');
+                }
+              } else {
+                console.error('Invalid bounds format: expected array of 4 numbers');
+              }
+            } else if (boundsResponse.status === 404) {
+              console.warn(`No dive sites found for ${item.type}: ${item.name}`);
+            } else {
+              console.error('Failed to fetch bounds:', boundsResponse.status);
+            }
+            break;
+        }
+      } catch (err) {
+        console.error('Error centering on selection:', err);
+      }
+    },
+    [map, selectSite],
+  );
+
   // Обработка клика по сайту
   const onSiteClick = useCallback((site: Site) => {
     setSelectedSite(site);
   }, []);
 
   // Обработка клика по кластеру
-  const onClusterClick = useCallback((cluster: Cluster) => {
+  const onClusterClick = useCallback(() => {
     // Логика обработки клика по кластеру
-    console.log('Cluster clicked:', cluster);
-  }, []);
-
-  // Выбор сайта
-  const selectSite = useCallback((site: Site | null) => {
-    setSelectedSite(site);
+    // TODO: Реализовать логику обработки кластера
   }, []);
 
   const value = useMemo(
@@ -92,6 +178,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       selectSite,
       onSiteClick,
       onClusterClick,
+      centerOnSelection,
     }),
     [
       map,
@@ -104,6 +191,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       selectSite,
       onSiteClick,
       onClusterClick,
+      centerOnSelection,
     ],
   );
 

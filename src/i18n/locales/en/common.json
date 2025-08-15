@@ -4,20 +4,23 @@
     "logoAlt": "The Dive Map"
   },
   "home": {
-    "title": "Here will be a map"
+    "title": "Map will be here"
+  },
+  "search": {
+    "placeholder": "Search dive sites, countries, regions..."
   },
   "map": {
     "loading": "Loading dive sites...",
     "error": {
-      "fetchFailed": "Failed to fetch dive sites",
-      "fetchError": "Error fetching dive sites"
+      "fetchFailed": "Failed to load dive sites",
+      "fetchError": "Error loading dive sites"
     },
     "markers": {
-      "diveSite": "Dive site",
+      "diveSite": "Dive Site",
       "diveSites": "dive sites",
       "diveSiteSingular": "dive site",
       "diveSitePlural": "dive sites",
-      "clickToZoom": "Click to zoom in",
+      "clickToZoom": "Click to zoom",
       "type": "Type",
       "closeTooltip": "Close"
     }

@@ -3,6 +3,7 @@ import { BaseSteps } from './page-objects/baseSteps';
 import autocompleteMock from '../mocks/autocomplete.json';
 import { Autocomplete } from './page-objects/autocomplete';
 import { FiltersPanel } from './page-objects/filtersPanel';
+import { MarkersPage } from './page-objects/markersPage';
 
 test.describe('Mobile: Autocomplete tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -34,6 +35,7 @@ test.describe('Mobile: Autocomplete tests', () => {
   test('Should handle touch interactions on mobile', async ({ page }) => {
     const filtersPanel = new FiltersPanel(page);
     const autocomplete = new Autocomplete(page);
+    const markersPage = new MarkersPage(page);
 
     await filtersPanel.openMobileFiltersPanel();
     await autocomplete.typeText('xxx', true);
@@ -44,6 +46,14 @@ test.describe('Mobile: Autocomplete tests', () => {
     await autocomplete.clickOnFirstResult(true);
     await autocomplete.expectInputToHaveValue('Bungalow Bay North Wall', true);
     await autocomplete.expectListToBeHidden(true);
+
+    await filtersPanel.closeMobileFiltersPanel();
+    await markersPage.expectMarkerTooltipToBeVisible();
+    await markersPage.expectMarkerTooltipHaveValues(
+      'Bungalow Bay North Wall',
+      '7.6111°N, 98.3638°E',
+      'Bay',
+    );
   });
 
   test('Should close mobile filters panel and hide autocomplete', async ({ page }) => {
