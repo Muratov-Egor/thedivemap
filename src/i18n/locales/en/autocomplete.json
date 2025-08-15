@@ -15,5 +15,10 @@
   },
   "loading": "Searching...",
   "resultsLabel": "Search results",
-  "resultsCount": "Results found"
+  "resultsCount": "Results found",
+  "noDiveSites": {
+    "title": "No dive sites in {{location}} yet",
+    "description": "Try selecting another location or add a dive site",
+    "closeButton": "Close"
+  }
 }

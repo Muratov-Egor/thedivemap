@@ -12,6 +12,7 @@ interface AutocompleteListProps {
   onSelect: (item: AutocompleteItemType) => void;
   isLoading?: boolean;
   error?: string | null;
+  infoMessage?: string | null;
   className?: string;
 }
 
@@ -21,6 +22,7 @@ export default function AutocompleteList({
   onSelect,
   isLoading = false,
   error = null,
+  infoMessage = null,
   className,
 }: AutocompleteListProps) {
   const { t } = useTranslation('autocomplete');
@@ -63,6 +65,31 @@ export default function AutocompleteList({
             <div className="text-sm">
               <div className="font-medium">{t('errors.searchFailed')}</div>
               <div className="text-red-500">{error}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (infoMessage) {
+    return (
+      <div
+        className={cn(
+          'absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-xl border border-tropical-blue/20 rounded-2xl shadow-lg z-50',
+          'max-h-80 overflow-hidden',
+          className,
+        )}
+        data-testid="autocomplete-list-info"
+      >
+        <div className="flex items-center justify-center py-6 px-4">
+          <div className="flex items-center gap-3 text-tropical-blue">
+            <div className="w-5 h-5 flex items-center justify-center">
+              <span className="text-lg">🐠</span>
+            </div>
+            <div className="text-sm">
+              <div className="font-medium text-slate-800">{infoMessage}</div>
+              <div className="text-slate-600 mt-1">{t('noDiveSites.description')}</div>
             </div>
           </div>
         </div>

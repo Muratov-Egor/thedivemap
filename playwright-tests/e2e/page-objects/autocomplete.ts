@@ -15,6 +15,7 @@ export class Autocomplete {
   readonly autocompleteItemSelected: Locator;
   readonly autocompleteListResultsCount: Locator;
   readonly autocompleteSearchIcon: Locator;
+  readonly autocompleteListInfo: Locator;
 
   constructor(private page: Page) {
     // Desktop локаторы
@@ -32,6 +33,7 @@ export class Autocomplete {
     this.autocompleteItemSelected = page.getByTestId('autocomplete-item-selected');
     this.autocompleteListResultsCount = page.getByTestId('autocomplete-list-results-count');
     this.autocompleteSearchIcon = page.locator('[data-testid="autocomplete-input"] + div svg');
+    this.autocompleteListInfo = page.getByTestId('autocomplete-list-info');
   }
 
   // Приватные методы для получения локаторов в зависимости от контекста
@@ -142,6 +144,12 @@ export class Autocomplete {
     });
   }
 
+  async clickOnResultByIndex(index: number, isMobile: boolean = false) {
+    await test.step(`Click on ${isMobile ? 'mobile ' : ''}result at index ${index}`, async () => {
+      await this.getItemLocator(isMobile).nth(index).click();
+    });
+  }
+
   async pressKey(key: string, isMobile: boolean = false) {
     await test.step(`Press key on ${isMobile ? 'mobile ' : ''}: ${key}`, async () => {
       await this.getInputLocator(isMobile).press(key);
@@ -205,6 +213,37 @@ export class Autocomplete {
       await expect(this.autocompleteErrorMessage).toBeVisible();
       // Проверяем текст ошибки
       await expect(this.autocompleteErrorMessage).toContainText(errorMessage);
+    });
+  }
+
+  async expectInfoMessageToBeVisible(infoMessage: string, isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}info message to be visible: ${infoMessage}`, async () => {
+      const infoLocator = isMobile
+        ? this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-list-info')
+        : this.autocompleteListInfo;
+
+      await expect(infoLocator).toBeVisible();
+      await expect(infoLocator).toContainText(infoMessage);
+    });
+  }
+
+  async expectInfoMessageToBeHidden(isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}info message to be hidden`, async () => {
+      const infoLocator = isMobile
+        ? this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-list-info')
+        : this.autocompleteListInfo;
+
+      await expect(infoLocator).toBeHidden();
+    });
+  }
+
+  async expectInfoMessageToContainIcon(icon: string, isMobile: boolean = false) {
+    await test.step(`Expect ${isMobile ? 'mobile ' : ''}info message to contain icon: ${icon}`, async () => {
+      const infoLocator = isMobile
+        ? this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-list-info')
+        : this.autocompleteListInfo;
+
+      await expect(infoLocator).toContainText(icon);
     });
   }
 }

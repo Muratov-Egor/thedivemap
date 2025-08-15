@@ -66,4 +66,22 @@ export class BaseSteps {
       });
     });
   }
+
+  async mockApiBoundsError(pattern: string, status: number = 404) {
+    await test.step(`Mock API bounds error for pattern ${pattern} with status ${status}`, async () => {
+      await this.page.route(pattern, async (route) => {
+        if (status === 404) {
+          await route.fulfill({
+            status: 404,
+            body: JSON.stringify({ error: 'No sites found for the specified criteria' }),
+          });
+        } else {
+          await route.fulfill({
+            status,
+            body: JSON.stringify({ error: 'Failed to fetch bounds' }),
+          });
+        }
+      });
+    });
+  }
 }
