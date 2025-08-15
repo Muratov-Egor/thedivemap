@@ -3,9 +3,6 @@ import { supabase } from '@/lib/supabase';
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const lang = searchParams.get('lang') === 'en' ? 'en' : 'ru';
-
     // Загружаем все типы фильтров параллельно
     const [siteTypesResult, difficultiesResult] = await Promise.all([
       supabase.from('site_types').select('id, label_ru, label_en').order('id'),
@@ -20,20 +17,26 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: difficultiesResult.error.message }, { status: 500 });
     }
 
-    // Локализуем данные
-    const localizedSiteTypes = siteTypesResult.data.map((type) => ({
+    // Возвращаем данные на всех языках
+    const siteTypes = siteTypesResult.data.map((type) => ({
       id: type.id,
-      label: lang === 'en' ? type.label_en : type.label_ru,
+      labels: {
+        ru: type.label_ru,
+        en: type.label_en,
+      },
     }));
 
-    const localizedDifficulties = difficultiesResult.data.map((difficulty) => ({
+    const difficulties = difficultiesResult.data.map((difficulty) => ({
       id: difficulty.id,
-      label: lang === 'en' ? difficulty.label_en : difficulty.label_ru,
+      labels: {
+        ru: difficulty.label_ru,
+        en: difficulty.label_en,
+      },
     }));
 
     return NextResponse.json({
-      site_types: localizedSiteTypes,
-      difficulties: localizedDifficulties,
+      site_types: siteTypes,
+      difficulties: difficulties,
     });
   } catch (err) {
     console.error('Error fetching filters:', err);

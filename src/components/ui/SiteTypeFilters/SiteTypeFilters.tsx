@@ -20,7 +20,6 @@ export default function SiteTypeFilters() {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-medium text-gray-700">{t('siteTypes.title')}</h3>
-          <div className="animate-pulse bg-gray-200 h-4 w-16 rounded"></div>
         </div>
         <div className="flex flex-wrap gap-2">
           {[1, 2, 3, 4].map((i) => (
@@ -34,7 +33,7 @@ export default function SiteTypeFilters() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-gray-700">{t('siteTypes.title')}</h3>
+        <h3 className="text-md font-medium text-gray-700">{t('siteTypes.title')}</h3>
       </div>
 
       <div className="flex flex-wrap gap-2">

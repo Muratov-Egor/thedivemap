@@ -3,6 +3,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Filters from '../Filters';
+import { FiltersProvider } from '@/contexts/FiltersContext';
 
 // Мокаем react-i18next
 const mockUseTranslation = jest.fn();
@@ -44,6 +45,14 @@ jest.mock('@/components/icons', () => ({
   FiltersIcon: () => <div data-testid="filters-icon">Filters</div>,
   CloseIcon: () => <div data-testid="close-icon">Close</div>,
 }));
+
+const renderWithProviders = (component: React.ReactElement) => {
+  return render(
+    <FiltersProvider>
+      {component}
+    </FiltersProvider>
+  );
+};
 
 describe('Filters', () => {
   beforeEach(() => {
@@ -91,7 +100,7 @@ describe('Filters', () => {
   });
 
   it('рендерит десктопную панель фильтров', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const desktopPanel = screen.getByTestId('desktop-filters-panel');
     const title = screen.getByText('Фильтры');
@@ -103,7 +112,7 @@ describe('Filters', () => {
   });
 
   it('рендерит кнопку открытия мобильной панели', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
     const filtersIcon = screen.getByTestId('filters-icon');
@@ -114,7 +123,7 @@ describe('Filters', () => {
   });
 
   it('открывает мобильную панель при клике на кнопку', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
     fireEvent.click(openButton);
@@ -127,7 +136,7 @@ describe('Filters', () => {
   });
 
   it('закрывает мобильную панель при клике на кнопку закрытия', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     // Открываем панель
     const openButton = screen.getByTestId('open-filters-panel-button');
@@ -145,7 +154,7 @@ describe('Filters', () => {
   });
 
   it('переключает состояние мобильной панели', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
 
@@ -159,7 +168,7 @@ describe('Filters', () => {
   });
 
   it('обрабатывает выбор элемента в автокомплите', async () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const autocompleteInput = screen.getAllByTestId('autocomplete-input')[0];
     fireEvent.change(autocompleteInput, { target: { value: 'test' } });
@@ -172,7 +181,7 @@ describe('Filters', () => {
   });
 
   it('обрабатывает выбор элемента в мобильной панели', async () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     // Открываем мобильную панель
     const openButton = screen.getByTestId('open-filters-panel-button');
@@ -189,7 +198,7 @@ describe('Filters', () => {
   });
 
   it('не показывает кнопку очистки когда нет активных фильтров', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     expect(screen.queryByTestId('clear-all-filters-button')).not.toBeInTheDocument();
   });
@@ -205,7 +214,7 @@ describe('Filters', () => {
       autocompleteInfoMessage: null,
     });
 
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     expect(screen.getByTestId('clear-all-filters-button')).toBeInTheDocument();
     expect(screen.getByText('Очистить все')).toBeInTheDocument();
@@ -222,7 +231,7 @@ describe('Filters', () => {
       autocompleteInfoMessage: null,
     });
 
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     expect(screen.getByTestId('clear-all-filters-button')).toBeInTheDocument();
     expect(screen.getByText('Очистить все')).toBeInTheDocument();
@@ -239,7 +248,7 @@ describe('Filters', () => {
       autocompleteInfoMessage: null,
     });
 
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const clearButton = screen.getByTestId('clear-all-filters-button');
     fireEvent.click(clearButton);
@@ -258,7 +267,7 @@ describe('Filters', () => {
       autocompleteInfoMessage: null,
     });
 
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     // Открываем мобильную панель
     const openButton = screen.getByTestId('open-filters-panel-button');
@@ -271,7 +280,7 @@ describe('Filters', () => {
   });
 
   it('имеет правильные классы для десктопной панели', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const desktopPanel = screen.getByTestId('desktop-filters-panel');
     expect(desktopPanel).toHaveClass(
@@ -290,7 +299,7 @@ describe('Filters', () => {
   });
 
   it('имеет правильные классы для мобильной панели', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     // Открываем мобильную панель
     const openButton = screen.getByTestId('open-filters-panel-button');
@@ -316,14 +325,14 @@ describe('Filters', () => {
   });
 
   it('имеет правильные классы для кнопки открытия', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
     expect(openButton).toHaveClass('bg-gradient-coral', 'text-white', 'rounded-full');
   });
 
   it('имеет правильные классы для кнопки закрытия', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     // Открываем мобильную панель
     const openButton = screen.getByTestId('open-filters-panel-button');
@@ -349,7 +358,7 @@ describe('Filters', () => {
       return { t: (key: string) => key, i18n: { language: 'en' } };
     });
 
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const autocompleteInputs = screen.getAllByTestId('autocomplete-input');
     expect(autocompleteInputs.length).toBeGreaterThan(0);

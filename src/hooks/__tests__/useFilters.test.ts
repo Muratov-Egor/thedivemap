@@ -2,6 +2,7 @@
 
 import { renderHook, waitFor } from '@testing-library/react';
 import { useFilters } from '../useFilters';
+import { FiltersProvider } from '@/contexts/FiltersContext';
 
 // Мокаем react-i18next
 jest.mock('react-i18next', () => ({
@@ -21,7 +22,9 @@ global.fetch = jest.fn();
 const mockFetch = fetch as jest.MockedFunction<typeof fetch>;
 
 const renderHookWithProviders = () => {
-  return renderHook(() => useFilters());
+  return renderHook(() => useFilters(), {
+    wrapper: FiltersProvider,
+  });
 };
 
 describe('useFilters', () => {
@@ -32,12 +35,24 @@ describe('useFilters', () => {
   it('should fetch filters successfully', async () => {
     const mockFilters = {
       site_types: [
-        { id: 1, label: 'Риф' },
-        { id: 2, label: 'Затонувшее судно' },
+        { 
+          id: 1, 
+          labels: { ru: 'Риф', en: 'Reef' }
+        },
+        { 
+          id: 2, 
+          labels: { ru: 'Затонувшее судно', en: 'Wreck' }
+        },
       ],
       difficulties: [
-        { id: 1, label: 'Легкий' },
-        { id: 2, label: 'Средний' },
+        { 
+          id: 1, 
+          labels: { ru: 'Легкий', en: 'Easy' }
+        },
+        { 
+          id: 2, 
+          labels: { ru: 'Средний', en: 'Medium' }
+        },
       ],
     };
 
@@ -57,9 +72,19 @@ describe('useFilters', () => {
       expect(result.current.loading).toBe(false);
     });
 
-    expect(result.current.filters).toEqual(mockFilters);
+    // Проверяем, что возвращаются локализованные фильтры
+    expect(result.current.filters).toEqual({
+      site_types: [
+        { id: 1, label: 'Риф' },
+        { id: 2, label: 'Затонувшее судно' },
+      ],
+      difficulties: [
+        { id: 1, label: 'Легкий' },
+        { id: 2, label: 'Средний' },
+      ],
+    });
     expect(result.current.error).toBe(null);
-    expect(mockFetch).toHaveBeenCalledWith('/api/filters?lang=ru');
+    expect(mockFetch).toHaveBeenCalledWith('/api/filters');
   });
 
   it('should handle fetch error', async () => {
@@ -104,10 +129,16 @@ describe('useFilters', () => {
     expect(result.current.error).toBe('Failed to fetch filters');
   });
 
-  it('should refetch when language changes', async () => {
+  it('should fetch filters only once', async () => {
     const mockFilters = {
-      site_types: [{ id: 1, label: 'Reef' }],
-      difficulties: [{ id: 1, label: 'Easy' }],
+      site_types: [{ 
+        id: 1, 
+        labels: { ru: 'Риф', en: 'Reef' }
+      }],
+      difficulties: [{ 
+        id: 1, 
+        labels: { ru: 'Легкий', en: 'Easy' }
+      }],
     };
 
     mockFetch.mockResolvedValue({
@@ -121,6 +152,7 @@ describe('useFilters', () => {
       expect(result.current.loading).toBe(false);
     });
 
-    expect(mockFetch).toHaveBeenCalledWith('/api/filters?lang=ru');
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+    expect(mockFetch).toHaveBeenCalledWith('/api/filters');
   });
 });
