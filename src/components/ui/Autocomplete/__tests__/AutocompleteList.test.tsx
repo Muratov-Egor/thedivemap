@@ -13,6 +13,7 @@ jest.mock('react-i18next', () => ({
         'errors.searchFailed': 'Ошибка поиска',
         resultsLabel: 'Результаты поиска',
         resultsCount: 'Найдено результатов',
+        'noDiveSites.description': 'Попробуйте выбрать другую локацию или добавьте дайв-сайт',
       };
       return translations[key] || key;
     },
@@ -272,5 +273,48 @@ describe('AutocompleteList Component', () => {
     render(<AutocompleteList {...defaultProps} results={itemsWithSubtitle} />);
 
     expect(screen.getByTestId('autocomplete-item-0')).toBeInTheDocument();
+  });
+
+  it('отображает информационное сообщение', () => {
+    const infoMessage = 'В Москве пока нет известных нам дайв-сайтов';
+    render(<AutocompleteList {...defaultProps} infoMessage={infoMessage} />);
+
+    expect(screen.getByTestId('autocomplete-list-info')).toBeInTheDocument();
+    expect(screen.getByText(infoMessage)).toBeInTheDocument();
+    expect(
+      screen.getByText('Попробуйте выбрать другую локацию или добавьте дайв-сайт'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('🐠')).toBeInTheDocument();
+  });
+
+  it('не отображает результаты при информационном сообщении', () => {
+    render(<AutocompleteList {...defaultProps} infoMessage="Test info message" />);
+
+    expect(screen.queryByTestId('autocomplete-item-0')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('autocomplete-list-results-count')).not.toBeInTheDocument();
+  });
+
+  it('приоритизирует загрузку над информационным сообщением', () => {
+    render(<AutocompleteList {...defaultProps} isLoading={true} infoMessage="Test info" />);
+
+    expect(screen.getByTestId('autocomplete-list-loading')).toBeInTheDocument();
+    expect(screen.queryByTestId('autocomplete-list-info')).not.toBeInTheDocument();
+  });
+
+  it('приоритизирует ошибку над информационным сообщением', () => {
+    render(<AutocompleteList {...defaultProps} error="Test error" infoMessage="Test info" />);
+
+    expect(screen.getByTestId('autocomplete-list-error')).toBeInTheDocument();
+    expect(screen.queryByTestId('autocomplete-list-info')).not.toBeInTheDocument();
+  });
+
+  it('имеет правильную структуру DOM для информационного сообщения', () => {
+    render(<AutocompleteList {...defaultProps} infoMessage="Test info" />);
+
+    const infoContainer = screen.getByTestId('autocomplete-list-info');
+
+    expect(infoContainer.querySelector('.text-lg')).toBeInTheDocument(); // Иконка
+    expect(infoContainer.querySelector('.font-medium')).toBeInTheDocument(); // Заголовок
+    expect(infoContainer.querySelector('.text-slate-600')).toBeInTheDocument(); // Описание
   });
 });

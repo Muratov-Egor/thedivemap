@@ -14,6 +14,7 @@ interface MapContextValue {
   selectedSite: Site | null;
   loading: boolean;
   error: string | null;
+  autocompleteInfoMessage: string | null;
   setMap: (map: Map | null) => void;
   setLoaded: (loaded: boolean) => void;
   fetchDiveSites: () => Promise<void>;
@@ -22,6 +23,7 @@ interface MapContextValue {
   onClusterClick: (cluster: Cluster) => void;
   // Новые методы для центрирования карты
   centerOnSelection: (item: AutocompleteItem) => Promise<void>;
+  clearAutocompleteInfoMessage: () => void;
 }
 
 const MapContext = createContext<MapContextValue | undefined>(undefined);
@@ -34,6 +36,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   const [selectedSite, setSelectedSite] = useState<Site | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [autocompleteInfoMessage, setAutocompleteInfoMessage] = useState<string | null>(null);
   const hasFetchedRef = useRef(false);
 
   // Загрузка дайв-сайтов
@@ -141,6 +144,13 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
               }
             } else if (boundsResponse.status === 404) {
               console.warn(`No dive sites found for ${item.type}: ${item.name}`);
+              // Показываем сообщение об отсутствии дайв-сайтов
+              const message = t('autocomplete:noDiveSites.title', { location: item.name });
+              setAutocompleteInfoMessage(message);
+              // Автоматически очищаем сообщение через 8 секунд
+              setTimeout(() => {
+                setAutocompleteInfoMessage(null);
+              }, 8000);
             } else {
               console.error('Failed to fetch bounds:', boundsResponse.status);
             }
@@ -150,7 +160,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
         console.error('Error centering on selection:', err);
       }
     },
-    [map, selectSite],
+    [map, selectSite, t],
   );
 
   // Обработка клика по сайту
@@ -164,6 +174,11 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     // TODO: Реализовать логику обработки кластера
   }, []);
 
+  // Очистка сообщения об отсутствии дайв-сайтов
+  const clearAutocompleteInfoMessage = useCallback(() => {
+    setAutocompleteInfoMessage(null);
+  }, []);
+
   const value = useMemo(
     () => ({
       map,
@@ -172,6 +187,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       selectedSite,
       loading,
       error,
+      autocompleteInfoMessage,
       setMap,
       setLoaded,
       fetchDiveSites,
@@ -179,6 +195,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       onSiteClick,
       onClusterClick,
       centerOnSelection,
+      clearAutocompleteInfoMessage,
     }),
     [
       map,
@@ -187,11 +204,13 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       selectedSite,
       loading,
       error,
+      autocompleteInfoMessage,
       fetchDiveSites,
       selectSite,
       onSiteClick,
       onClusterClick,
       centerOnSelection,
+      clearAutocompleteInfoMessage,
     ],
   );
 

@@ -6,7 +6,12 @@ import type { Site } from '@/types/database';
 import type { Cluster } from '@/types/clustering';
 
 // Мокаем react-i18next
-const mockT = jest.fn((key) => key);
+const mockT = jest.fn((key, options) => {
+  if (key === 'autocomplete:noDiveSites.title' && options?.location) {
+    return `В ${options.location} пока нет известных нам дайв-сайтов`;
+  }
+  return key;
+});
 jest.mock('react-i18next', () => ({
   useTranslation: jest.fn(() => ({
     t: mockT,
@@ -74,6 +79,9 @@ function TestComponent() {
       <div data-testid="selected-site">{context.selectedSite?.name || 'No site selected'}</div>
       <div data-testid="loading">{context.loading ? 'Loading' : 'Not loading'}</div>
       <div data-testid="error">{context.error || 'No error'}</div>
+      <div data-testid="autocomplete-info-message">
+        {context.autocompleteInfoMessage || 'No message'}
+      </div>
     </div>
   );
 }
@@ -97,6 +105,7 @@ describe('MapContext', () => {
       expect(screen.getByTestId('selected-site')).toHaveTextContent('No site selected');
       expect(screen.getByTestId('loading')).toHaveTextContent('Not loading');
       expect(screen.getByTestId('error')).toHaveTextContent('No error');
+      expect(screen.getByTestId('autocomplete-info-message')).toHaveTextContent('No message');
     });
 
     it('позволяет установить карту', () => {
@@ -781,6 +790,109 @@ describe('MapContext', () => {
       await waitFor(() => {
         expect(console.warn).toHaveBeenCalledWith('No dive sites found for region: Test Region');
       });
+    });
+
+    it('показывает информационное сообщение при 404 ошибке', async () => {
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
+        ok: false,
+        status: 404,
+      });
+
+      const TestInfoMessageComponent = () => {
+        const context = useMap();
+        const [messageState, setMessageState] = React.useState('No message');
+
+        React.useEffect(() => {
+          if (context.autocompleteInfoMessage) {
+            setMessageState(context.autocompleteInfoMessage);
+          }
+        }, [context.autocompleteInfoMessage]);
+
+        return (
+          <div>
+            <div data-testid="info-message">{messageState}</div>
+            <div data-testid="map-state">{context.map ? 'Map loaded' : 'No map'}</div>
+            <button data-testid="set-map" onClick={() => context.setMap({} as Map)}>
+              Set Map
+            </button>
+            <button
+              data-testid="center-region"
+              onClick={() =>
+                context.centerOnSelection({ type: 'region', id: 1, name: 'Test Region' })
+              }
+            >
+              Center on Region
+            </button>
+          </div>
+        );
+      };
+
+      render(
+        <MapProvider>
+          <TestInfoMessageComponent />
+        </MapProvider>,
+      );
+
+      // Сначала устанавливаем карту
+      act(() => {
+        screen.getByTestId('set-map').click();
+      });
+
+      await waitFor(() => {
+        expect(screen.getByTestId('map-state')).toHaveTextContent('Map loaded');
+      });
+
+      // Затем пытаемся центрировать на регионе
+      act(() => {
+        screen.getByTestId('center-region').click();
+      });
+
+      await waitFor(() => {
+        expect(screen.getByTestId('info-message')).toHaveTextContent(
+          'В Test Region пока нет известных нам дайв-сайтов',
+        );
+      });
+    });
+
+    it('очищает информационное сообщение через clearAutocompleteInfoMessage', () => {
+      const TestClearMessageComponent = () => {
+        const context = useMap();
+        const [messageState, setMessageState] = React.useState('No message');
+
+        React.useEffect(() => {
+          if (context.autocompleteInfoMessage) {
+            setMessageState(context.autocompleteInfoMessage);
+          }
+        }, [context.autocompleteInfoMessage]);
+
+        return (
+          <div>
+            <div data-testid="info-message">{messageState}</div>
+            <button
+              data-testid="clear-message"
+              onClick={() => context.clearAutocompleteInfoMessage()}
+            >
+              Clear Message
+            </button>
+          </div>
+        );
+      };
+
+      render(
+        <MapProvider>
+          <TestClearMessageComponent />
+        </MapProvider>,
+      );
+
+      // Проверяем, что сообщение изначально пустое
+      expect(screen.getByTestId('info-message')).toHaveTextContent('No message');
+
+      // Очищаем сообщение (должно остаться пустым)
+      act(() => {
+        screen.getByTestId('clear-message').click();
+      });
+
+      expect(screen.getByTestId('info-message')).toHaveTextContent('No message');
     });
 
     it('обрабатывает ошибку когда карта не инициализирована', async () => {

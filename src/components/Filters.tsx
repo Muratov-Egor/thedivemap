@@ -12,7 +12,7 @@ export default function Filters() {
   const { t, i18n } = useTranslation('filters');
   const { t: tCommon } = useTranslation('common');
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
-  const { centerOnSelection } = useMap();
+  const { centerOnSelection, autocompleteInfoMessage } = useMap();
 
   // Получаем текущий язык из i18n
   const currentLanguage = i18n.language as 'ru' | 'en';
@@ -38,6 +38,7 @@ export default function Filters() {
           language={currentLanguage}
           placeholder={tCommon('search.placeholder')}
           onSelect={handleAutocompleteSelect}
+          infoMessage={autocompleteInfoMessage}
         />
       </div>
 
@@ -79,6 +80,7 @@ export default function Filters() {
                 language={currentLanguage}
                 placeholder={tCommon('search.placeholder')}
                 onSelect={handleAutocompleteSelect}
+                infoMessage={autocompleteInfoMessage}
               />
             </div>
           </div>
