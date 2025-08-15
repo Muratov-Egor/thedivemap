@@ -14,6 +14,7 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     setMap,
     setLoaded,
     diveSites,
+    selectedSite, // ✅ Добавляю selectedSite из MapContext
     loading,
     error,
     fetchDiveSites,
@@ -77,6 +78,7 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
       <DiveSitesLayer
         map={mapRef.current}
         sites={diveSites}
+        selectedSite={selectedSite} // ✅ Передаю selectedSite в DiveSitesLayer
         onSiteClick={onSiteClick}
         onClusterClick={onClusterClick}
       />

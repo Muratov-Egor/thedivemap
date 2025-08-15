@@ -2,6 +2,7 @@ import { test } from '@playwright/test';
 import { BaseSteps } from './page-objects/baseSteps';
 import autocompleteMock from '../mocks/autocomplete.json';
 import { Autocomplete } from './page-objects/autocomplete';
+import { MarkersPage } from './page-objects/markersPage';
 
 test.describe('Desktop: Autocomplete tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -48,6 +49,7 @@ test.describe('Desktop: Autocomplete tests', () => {
 
   test('Should select item when clicked', async ({ page }) => {
     const autocomplete = new Autocomplete(page);
+    const markersPage = new MarkersPage(page);
 
     await autocomplete.typeText('xxx');
     await autocomplete.expectListToBeVisible();
@@ -57,6 +59,13 @@ test.describe('Desktop: Autocomplete tests', () => {
     await page.waitForTimeout(500);
     await autocomplete.expectInputToHaveValue('Bungalow Bay North Wall');
     await autocomplete.expectListToBeHidden();
+
+    await markersPage.expectMarkerTooltipToBeVisible();
+    await markersPage.expectMarkerTooltipHaveValues(
+      'Bungalow Bay North Wall',
+      '7.6111°N, 98.3638°E',
+      'Bay',
+    );
   });
 
   test('Should navigate with keyboard arrows', async ({ page }) => {
