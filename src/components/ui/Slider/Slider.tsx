@@ -18,6 +18,7 @@ export interface SliderProps {
   valuePrefix?: string;
   valueSuffix?: string;
   variant?: 'default' | 'coral' | 'ocean';
+  dataTestId?: string | 'slider';
 }
 
 const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
@@ -37,6 +38,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       valuePrefix = '',
       valueSuffix = '',
       variant = 'default',
+      dataTestId,
     },
     ref,
   ) => {
@@ -172,7 +174,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     const currentVariant = variantStyles[variant];
 
     return (
-      <div ref={ref} className={cn('w-full', className)}>
+      <div ref={ref} className={cn('w-full', className)} data-testid={dataTestId}>
         {label && <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>}
 
         <div className="relative">

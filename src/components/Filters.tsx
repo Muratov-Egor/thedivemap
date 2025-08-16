@@ -194,6 +194,7 @@ export default function Filters() {
                 onChange={setDepthValue}
                 valueSuffix={` ${t('units.meters')}`}
                 variant="default"
+                dataTestId="max-depth-slider"
               />
 
               <Slider
@@ -205,6 +206,7 @@ export default function Filters() {
                 onChange={setVisibilityValue}
                 valueSuffix={` ${t('units.meters')}`}
                 variant="ocean"
+                dataTestId="min-visibility-slider"
               />
 
               <RatingFilters />
@@ -284,6 +286,7 @@ export default function Filters() {
                     onChange={setDepthValue}
                     valueSuffix={` ${t('units.meters')}`}
                     variant="default"
+                    dataTestId="max-depth-slider"
                   />
 
                   <Slider
@@ -295,6 +298,7 @@ export default function Filters() {
                     onChange={setVisibilityValue}
                     valueSuffix={` ${t('units.meters')}`}
                     variant="ocean"
+                    dataTestId="min-visibility-slider"
                   />
 
                   <RatingFilters />

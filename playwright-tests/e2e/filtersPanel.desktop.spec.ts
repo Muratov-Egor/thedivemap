@@ -9,10 +9,11 @@ test.describe('Desktop: Filters Panel', () => {
     await baseSteps.waitForDataLoaded();
   });
 
-  test('Desktop filters panel is always visible', async ({ page }) => {
+  test('Desktop filters panel is visible', async ({ page }) => {
     const filtersPanel = new FiltersPanel(page);
 
     await filtersPanel.expectDesktopFiltersPanelToBeVisible();
+    await filtersPanel.expectAllFiltersToBeVisible();
   });
 
   test('Button open mobile filters panel is not visible', async ({ page }) => {

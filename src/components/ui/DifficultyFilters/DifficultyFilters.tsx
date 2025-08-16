@@ -21,7 +21,7 @@ export default function DifficultyFilters() {
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3" data-testid="difficulty-filters">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium text-gray-700">{t('difficulties.title')}</h3>
       </div>

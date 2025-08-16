@@ -16,6 +16,7 @@ test.describe('Mobile: Filters Panel', () => {
     await filtersPanel.expectMobileFiltersPanelNotExists();
     await filtersPanel.openMobileFiltersPanel();
     await filtersPanel.expectMobileFiltersPanelToBeVisible();
+    await filtersPanel.expectAllFiltersToBeVisible();
   });
 
   test('Close mobile filters panel after click on close button', async ({ page }) => {
