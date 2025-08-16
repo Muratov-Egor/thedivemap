@@ -15,7 +15,7 @@ export class Autocomplete {
   readonly autocompleteItemSelected: Locator;
   readonly autocompleteListResultsCount: Locator;
   readonly autocompleteSearchIcon: Locator;
-  readonly autocompleteListInfo: Locator;
+  readonly notification: Locator;
 
   constructor(private page: Page) {
     // Desktop локаторы
@@ -33,7 +33,7 @@ export class Autocomplete {
     this.autocompleteItemSelected = page.getByTestId('autocomplete-item-selected');
     this.autocompleteListResultsCount = page.getByTestId('autocomplete-list-results-count');
     this.autocompleteSearchIcon = page.locator('[data-testid="autocomplete-input"] + div svg');
-    this.autocompleteListInfo = page.getByTestId('autocomplete-list-info');
+    this.notification = page.getByTestId('notification');
   }
 
   // Приватные методы для получения локаторов в зависимости от контекста
@@ -218,9 +218,7 @@ export class Autocomplete {
 
   async expectInfoMessageToBeVisible(infoMessage: string, isMobile: boolean = false) {
     await test.step(`Expect ${isMobile ? 'mobile ' : ''}info message to be visible: ${infoMessage}`, async () => {
-      const infoLocator = isMobile
-        ? this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-list-info')
-        : this.autocompleteListInfo;
+      const infoLocator = isMobile ? this.page.getByTestId('notification') : this.notification;
 
       await expect(infoLocator).toBeVisible();
       await expect(infoLocator).toContainText(infoMessage);
@@ -229,9 +227,7 @@ export class Autocomplete {
 
   async expectInfoMessageToBeHidden(isMobile: boolean = false) {
     await test.step(`Expect ${isMobile ? 'mobile ' : ''}info message to be hidden`, async () => {
-      const infoLocator = isMobile
-        ? this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-list-info')
-        : this.autocompleteListInfo;
+      const infoLocator = isMobile ? this.page.getByTestId('notification') : this.notification;
 
       await expect(infoLocator).toBeHidden();
     });
@@ -239,11 +235,11 @@ export class Autocomplete {
 
   async expectInfoMessageToContainIcon(icon: string, isMobile: boolean = false) {
     await test.step(`Expect ${isMobile ? 'mobile ' : ''}info message to contain icon: ${icon}`, async () => {
-      const infoLocator = isMobile
-        ? this.page.getByTestId('mobile-filters-panel').getByTestId('autocomplete-list-info')
-        : this.autocompleteListInfo;
+      const infoLocator = isMobile ? this.page.getByTestId('notification') : this.notification;
 
-      await expect(infoLocator).toContainText(icon);
+      // Проверяем наличие SVG иконки в notification
+      const svgIcon = infoLocator.locator('svg').first();
+      await expect(svgIcon).toBeVisible();
     });
   }
 }

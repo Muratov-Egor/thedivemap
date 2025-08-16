@@ -3,6 +3,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Filters from '../Filters';
+import { FiltersProvider } from '@/contexts/FiltersContext';
 
 // Мокаем react-i18next
 const mockUseTranslation = jest.fn();
@@ -13,10 +14,18 @@ jest.mock('react-i18next', () => ({
 
 // Мокаем MapContext
 const mockCenterOnSelection = jest.fn();
+const mockClearFilters = jest.fn();
 const mockUseMap = jest.fn();
 
 jest.mock('@/contexts/MapContext', () => ({
   useMap: () => mockUseMap(),
+}));
+
+// Мокаем useFilters
+const mockUseFilters = jest.fn();
+
+jest.mock('@/hooks/useFilters', () => ({
+  useFilters: () => mockUseFilters(),
 }));
 
 // Мокаем Autocomplete
@@ -38,16 +47,49 @@ jest.mock('@/components/ui/Autocomplete/Autocomplete', () => {
   };
 });
 
+// Мокаем SiteTypeFilters
+jest.mock('@/components/ui/SiteTypeFilters', () => {
+  return function MockSiteTypeFilters() {
+    return <div data-testid="site-type-filters">Site Type Filters</div>;
+  };
+});
+
+// Мокаем DifficultyFilters
+jest.mock('@/components/ui/DifficultyFilters', () => {
+  return function MockDifficultyFilters() {
+    return <div data-testid="difficulty-filters">Difficulty Filters</div>;
+  };
+});
+
+// Мокаем RatingFilters
+jest.mock('@/components/ui/RatingFilters', () => {
+  return function MockRatingFilters() {
+    return <div data-testid="rating-filters">Rating Filters</div>;
+  };
+});
+
+// Мокаем Slider
+jest.mock('@/components/ui/Slider', () => {
+  return function MockSlider({ label }: any) {
+    return <div data-testid="slider">{label}</div>;
+  };
+});
+
 // Мокаем иконки
 jest.mock('@/components/icons', () => ({
   FiltersIcon: () => <div data-testid="filters-icon">Filters</div>,
   CloseIcon: () => <div data-testid="close-icon">Close</div>,
 }));
 
+const renderWithProviders = (component: React.ReactElement) => {
+  return render(<FiltersProvider>{component}</FiltersProvider>);
+};
+
 describe('Filters', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockCenterOnSelection.mockClear();
+    mockClearFilters.mockClear();
 
     mockUseTranslation.mockImplementation((ns) => {
       if (ns === 'filters') {
@@ -55,6 +97,7 @@ describe('Filters', () => {
           t: (key: string) => {
             const translations: Record<string, string> = {
               title: 'Фильтры',
+              clearAll: 'Очистить все',
               'accessibility.openFilters': 'Открыть фильтры',
               'accessibility.closeFilters': 'Закрыть фильтры',
             };
@@ -78,14 +121,40 @@ describe('Filters', () => {
 
     mockUseMap.mockReturnValue({
       centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    // Устанавливаем состояние загруженных фильтров по умолчанию
+    mockUseFilters.mockReturnValue({
+      filters: {
+        site_types: [
+          { id: 1, label: 'Риф' },
+          { id: 2, label: 'Затонувшее судно' },
+        ],
+        difficulties: [
+          { id: 1, label: 'Легкий' },
+          { id: 2, label: 'Средний' },
+        ],
+      },
+      loading: false,
+      error: null,
     });
   });
 
   it('рендерит десктопную панель фильтров', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const desktopPanel = screen.getByTestId('desktop-filters-panel');
-    const title = screen.getByText('Фильтры');
+    const title = screen.getByRole('heading', { level: 2, name: 'Фильтры' });
     const autocomplete = screen.getByTestId('autocomplete');
 
     expect(desktopPanel).toBeInTheDocument();
@@ -93,8 +162,32 @@ describe('Filters', () => {
     expect(autocomplete).toBeInTheDocument();
   });
 
+  it('показывает лоадер во время загрузки фильтров', () => {
+    // Устанавливаем состояние загрузки
+    mockUseFilters.mockReturnValue({
+      filters: null,
+      loading: true,
+      error: null,
+    });
+
+    renderWithProviders(<Filters />);
+
+    const desktopPanel = screen.getByTestId('desktop-filters-panel');
+    const title = screen.getByRole('heading', { level: 2, name: 'Фильтры' });
+
+    expect(desktopPanel).toBeInTheDocument();
+    expect(title).toBeInTheDocument();
+
+    // Проверяем, что автокомплит не отображается во время загрузки
+    expect(screen.queryByTestId('autocomplete')).not.toBeInTheDocument();
+
+    // Проверяем наличие лоадеров (скелетонов)
+    const skeletonElements = screen.getAllByTestId('desktop-filters-panel');
+    expect(skeletonElements.length).toBeGreaterThan(0);
+  });
+
   it('рендерит кнопку открытия мобильной панели', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
     const filtersIcon = screen.getByTestId('filters-icon');
@@ -105,7 +198,7 @@ describe('Filters', () => {
   });
 
   it('открывает мобильную панель при клике на кнопку', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
     fireEvent.click(openButton);
@@ -118,7 +211,7 @@ describe('Filters', () => {
   });
 
   it('закрывает мобильную панель при клике на кнопку закрытия', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     // Открываем панель
     const openButton = screen.getByTestId('open-filters-panel-button');
@@ -136,7 +229,7 @@ describe('Filters', () => {
   });
 
   it('переключает состояние мобильной панели', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
 
@@ -150,7 +243,7 @@ describe('Filters', () => {
   });
 
   it('обрабатывает выбор элемента в автокомплите', async () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const autocompleteInput = screen.getAllByTestId('autocomplete-input')[0];
     fireEvent.change(autocompleteInput, { target: { value: 'test' } });
@@ -163,7 +256,7 @@ describe('Filters', () => {
   });
 
   it('обрабатывает выбор элемента в мобильной панели', async () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     // Открываем мобильную панель
     const openButton = screen.getByTestId('open-filters-panel-button');
@@ -179,8 +272,122 @@ describe('Filters', () => {
     });
   });
 
+  it('не показывает кнопку очистки когда нет активных фильтров', () => {
+    // Мокаем пустые фильтры без дефолтных значений слайдеров
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
+        minRating: null,
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    renderWithProviders(<Filters />);
+
+    expect(screen.queryByTestId('clear-all-filters-button')).not.toBeInTheDocument();
+  });
+
+  it('показывает кнопку очистки когда есть активные фильтры типа сайта', () => {
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
+      activeFilters: {
+        siteTypeIds: [1],
+        difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    renderWithProviders(<Filters />);
+
+    expect(screen.getByTestId('clear-all-filters-button')).toBeInTheDocument();
+    expect(screen.getByText('Очистить все')).toBeInTheDocument();
+  });
+
+  it('показывает кнопку очистки когда есть активные фильтры сложности', () => {
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [2],
+        maxDepth: null,
+        minVisibility: null,
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    renderWithProviders(<Filters />);
+
+    expect(screen.getByTestId('clear-all-filters-button')).toBeInTheDocument();
+    expect(screen.getByText('Очистить все')).toBeInTheDocument();
+  });
+
+  it('вызывает clearFilters при клике на кнопку очистки в десктопной версии', () => {
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
+      activeFilters: {
+        siteTypeIds: [1],
+        difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    renderWithProviders(<Filters />);
+
+    const clearButton = screen.getByTestId('clear-all-filters-button');
+    fireEvent.click(clearButton);
+
+    expect(mockClearFilters).toHaveBeenCalledTimes(1);
+  });
+
+  it('вызывает clearFilters при клике на кнопку очистки в мобильной версии', () => {
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
+      activeFilters: {
+        siteTypeIds: [1],
+        difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
+      },
+      autocompleteInfoMessage: null,
+    });
+
+    renderWithProviders(<Filters />);
+
+    // Открываем мобильную панель
+    const openButton = screen.getByTestId('open-filters-panel-button');
+    fireEvent.click(openButton);
+
+    const clearButton = screen.getByTestId('clear-all-filters-button-mobile');
+    fireEvent.click(clearButton);
+
+    expect(mockClearFilters).toHaveBeenCalledTimes(1);
+  });
+
   it('имеет правильные классы для десктопной панели', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const desktopPanel = screen.getByTestId('desktop-filters-panel');
     expect(desktopPanel).toHaveClass(
@@ -199,7 +406,7 @@ describe('Filters', () => {
   });
 
   it('имеет правильные классы для мобильной панели', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     // Открываем мобильную панель
     const openButton = screen.getByTestId('open-filters-panel-button');
@@ -225,14 +432,14 @@ describe('Filters', () => {
   });
 
   it('имеет правильные классы для кнопки открытия', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
     expect(openButton).toHaveClass('bg-gradient-coral', 'text-white', 'rounded-full');
   });
 
   it('имеет правильные классы для кнопки закрытия', () => {
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     // Открываем мобильную панель
     const openButton = screen.getByTestId('open-filters-panel-button');
@@ -258,7 +465,7 @@ describe('Filters', () => {
       return { t: (key: string) => key, i18n: { language: 'en' } };
     });
 
-    render(<Filters />);
+    renderWithProviders(<Filters />);
 
     const autocompleteInputs = screen.getAllByTestId('autocomplete-input');
     expect(autocompleteInputs.length).toBeGreaterThan(0);

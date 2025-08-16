@@ -1,22 +1,28 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import maplibregl, { Map } from 'maplibre-gl';
 import { useMap } from '@/contexts/MapContext';
 import DiveSitesLayer from './DiveSitesLayer';
+import { Notification } from '@/components/ui';
 
 export default function MapContainer({ children }: { children?: React.ReactNode }) {
   const { t } = useTranslation();
+  const { t: tAutocomplete } = useTranslation('autocomplete');
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
+  const [showNoResultsNotification, setShowNoResultsNotification] = useState(false);
+  const [showNoDiveSitesNotification, setShowNoDiveSitesNotification] = useState(false);
   const {
     setMap,
     setLoaded,
-    diveSites,
+    filteredDiveSites,
     selectedSite, // ✅ Добавляю selectedSite из MapContext
     loading,
     error,
+    activeFilters,
+    autocompleteInfoMessage,
     fetchDiveSites,
     onSiteClick,
     onClusterClick,
@@ -70,6 +76,24 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     };
   }, [setLoaded, setMap]);
 
+  // Проверяем, есть ли активные фильтры и нет ли результатов
+  const hasActiveFilters =
+    activeFilters.siteTypeIds.length > 0 ||
+    activeFilters.difficultyIds.length > 0 ||
+    activeFilters.maxDepth !== null ||
+    activeFilters.minVisibility !== null;
+  const showNoResultsMessage = hasActiveFilters && !loading && filteredDiveSites.length === 0;
+
+  // Управляем отображением уведомления о том, что нет результатов по фильтрам
+  useEffect(() => {
+    setShowNoResultsNotification(showNoResultsMessage);
+  }, [showNoResultsMessage]);
+
+  // Управляем отображением уведомления о том, что в локации нет дайв-сайтов
+  useEffect(() => {
+    setShowNoDiveSitesNotification(!!autocompleteInfoMessage);
+  }, [autocompleteInfoMessage]);
+
   return (
     <div className="flex-1 relative">
       <div ref={containerRef} className="absolute inset-0 h-full w-full" />
@@ -77,7 +101,7 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
       {/* Слой дайв-сайтов */}
       <DiveSitesLayer
         map={mapRef.current}
-        sites={diveSites}
+        sites={filteredDiveSites}
         selectedSite={selectedSite} // ✅ Передаю selectedSite в DiveSitesLayer
         onSiteClick={onSiteClick}
         onClusterClick={onClusterClick}
@@ -102,6 +126,26 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
           Error: {error}
         </div>
       )}
+
+      {/* Уведомление о том, что нет результатов по фильтрам */}
+      <Notification
+        message={t('notification.noResults')}
+        description={t('notification.noResultsDescription')}
+        type="info"
+        show={showNoResultsNotification}
+        onClose={() => setShowNoResultsNotification(false)}
+        duration={0} // Не скрывать автоматически
+      />
+
+      {/* Уведомление о том, что в выбранной локации нет дайв-сайтов */}
+      <Notification
+        message={autocompleteInfoMessage || tAutocomplete('noDiveSites.title')}
+        description={tAutocomplete('noDiveSites.description')}
+        type="warning"
+        show={showNoDiveSitesNotification}
+        onClose={() => setShowNoDiveSitesNotification(false)}
+        duration={0} // Не скрывать автоматически
+      />
 
       {children}
     </div>

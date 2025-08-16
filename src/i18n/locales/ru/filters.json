@@ -1,8 +1,33 @@
 {
   "title": "Фильтры",
   "stub": "Тут будут фильтры",
+  "clearAll": "Очистить фильтры",
+  "siteTypes": {
+    "title": "Тип дайв-сайта",
+    "clearAll": "Очистить",
+    "filterBy": "Фильтровать по"
+  },
+  "difficulties": {
+    "title": "Уровень сложности",
+    "clearAll": "Очистить",
+    "filterBy": "Фильтровать по"
+  },
   "accessibility": {
-    "openFilters": "Открыть фильтры",
-    "closeFilters": "Закрыть фильтры"
+    "openFilters": "Открыть панель фильтров",
+    "closeFilters": "Закрыть панель фильтров"
+  },
+  "rating": {
+    "title": "Рейтинг",
+    "filterBy": "Фильтровать по",
+    "star": "звезде",
+    "stars": "звездам",
+    "minimum": "Минимум"
+  },
+  "sliders": {
+    "maxDepth": "Максимальная глубина",
+    "minVisibility": "Минимальная видимость"
+  },
+  "units": {
+    "meters": "м"
   }
 }

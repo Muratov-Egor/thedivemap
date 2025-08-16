@@ -1,6 +1,14 @@
 'use client';
 
-import React, { createContext, useContext, useMemo, useState, useCallback, useRef } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Map } from 'maplibre-gl';
 import { Site } from '@/types/database';
@@ -11,10 +19,18 @@ interface MapContextValue {
   map: Map | null;
   isLoaded: boolean;
   diveSites: Site[];
+  filteredDiveSites: Site[];
   selectedSite: Site | null;
   loading: boolean;
   error: string | null;
   autocompleteInfoMessage: string | null;
+  activeFilters: {
+    siteTypeIds: number[];
+    difficultyIds: number[];
+    maxDepth: number | null;
+    minVisibility: number | null;
+    minRating: number | null;
+  };
   setMap: (map: Map | null) => void;
   setLoaded: (loaded: boolean) => void;
   fetchDiveSites: () => Promise<void>;
@@ -24,6 +40,13 @@ interface MapContextValue {
   // Новые методы для центрирования карты
   centerOnSelection: (item: AutocompleteItem) => Promise<void>;
   clearAutocompleteInfoMessage: () => void;
+  // Методы для фильтрации
+  setSiteTypeFilter: (siteTypeId: number) => void;
+  setDifficultyFilter: (difficultyId: number) => void;
+  setMaxDepthFilter: (maxDepth: number | null) => void;
+  setMinVisibilityFilter: (minVisibility: number | null) => void;
+  setMinRatingFilter: (minRating: number | null) => void;
+  clearFilters: () => void;
 }
 
 const MapContext = createContext<MapContextValue | undefined>(undefined);
@@ -37,6 +60,19 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [autocompleteInfoMessage, setAutocompleteInfoMessage] = useState<string | null>(null);
+  const [activeFilters, setActiveFilters] = useState<{
+    siteTypeIds: number[];
+    difficultyIds: number[];
+    maxDepth: number | null;
+    minVisibility: number | null;
+    minRating: number | null;
+  }>({
+    siteTypeIds: [],
+    difficultyIds: [],
+    maxDepth: null,
+    minVisibility: null,
+    minRating: null,
+  });
   const hasFetchedRef = useRef(false);
 
   // Загрузка дайв-сайтов
@@ -67,6 +103,13 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     }
   }, [t, loading]);
+
+  // Сброс флага при инициализации карты
+  useEffect(() => {
+    if (map && !hasFetchedRef.current) {
+      hasFetchedRef.current = false;
+    }
+  }, [map]);
 
   // Выбор сайта
   const selectSite = useCallback((site: Site | null) => {
@@ -179,15 +222,104 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     setAutocompleteInfoMessage(null);
   }, []);
 
+  // Методы для фильтрации
+  const setSiteTypeFilter = useCallback((siteTypeId: number) => {
+    setActiveFilters((prev) => {
+      const isSelected = prev.siteTypeIds.includes(siteTypeId);
+      if (isSelected) {
+        // Удаляем фильтр если он уже выбран
+        return { ...prev, siteTypeIds: prev.siteTypeIds.filter((id) => id !== siteTypeId) };
+      } else {
+        // Добавляем фильтр если он не выбран
+        return { ...prev, siteTypeIds: [...prev.siteTypeIds, siteTypeId] };
+      }
+    });
+  }, []);
+
+  const setDifficultyFilter = useCallback((difficultyId: number) => {
+    setActiveFilters((prev) => {
+      const isSelected = prev.difficultyIds.includes(difficultyId);
+      if (isSelected) {
+        // Удаляем фильтр если он уже выбран
+        return { ...prev, difficultyIds: prev.difficultyIds.filter((id) => id !== difficultyId) };
+      } else {
+        // Добавляем фильтр если он не выбран
+        return { ...prev, difficultyIds: [...prev.difficultyIds, difficultyId] };
+      }
+    });
+  }, []);
+
+  const clearFilters = useCallback(() => {
+    setActiveFilters({
+      siteTypeIds: [],
+      difficultyIds: [],
+      maxDepth: null,
+      minVisibility: null,
+      minRating: null,
+    });
+  }, []);
+
+  // Методы для фильтрации глубины и видимости
+  const setMaxDepthFilter = useCallback((maxDepth: number | null) => {
+    setActiveFilters((prev) => ({ ...prev, maxDepth }));
+  }, []);
+
+  const setMinVisibilityFilter = useCallback((minVisibility: number | null) => {
+    setActiveFilters((prev) => ({ ...prev, minVisibility }));
+  }, []);
+
+  // Метод для фильтрации по рейтингу
+  const setMinRatingFilter = useCallback((minRating: number | null) => {
+    setActiveFilters((prev) => ({ ...prev, minRating }));
+  }, []);
+
+  // Отфильтрованные дайв-сайты
+  const filteredDiveSites = useMemo(() => {
+    let filtered = diveSites;
+
+    if (activeFilters.siteTypeIds.length > 0) {
+      filtered = filtered.filter((site) => activeFilters.siteTypeIds.includes(site.site_type_id));
+    }
+
+    if (activeFilters.difficultyIds.length > 0) {
+      filtered = filtered.filter((site) =>
+        activeFilters.difficultyIds.includes(site.difficulty_id),
+      );
+    }
+
+    if (activeFilters.maxDepth !== null) {
+      filtered = filtered.filter((site) => site.depth_max <= activeFilters.maxDepth!);
+    }
+
+    if (activeFilters.minVisibility !== null) {
+      filtered = filtered.filter((site) => site.visibility >= activeFilters.minVisibility!);
+    }
+
+    if (activeFilters.minRating !== null) {
+      filtered = filtered.filter((site) => site.rating >= activeFilters.minRating!);
+    }
+
+    return filtered;
+  }, [
+    diveSites,
+    activeFilters.siteTypeIds,
+    activeFilters.difficultyIds,
+    activeFilters.maxDepth,
+    activeFilters.minVisibility,
+    activeFilters.minRating,
+  ]);
+
   const value = useMemo(
     () => ({
       map,
       isLoaded,
       diveSites,
+      filteredDiveSites,
       selectedSite,
       loading,
       error,
       autocompleteInfoMessage,
+      activeFilters,
       setMap,
       setLoaded,
       fetchDiveSites,
@@ -196,21 +328,35 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       onClusterClick,
       centerOnSelection,
       clearAutocompleteInfoMessage,
+      setSiteTypeFilter,
+      setDifficultyFilter,
+      setMaxDepthFilter,
+      setMinVisibilityFilter,
+      setMinRatingFilter,
+      clearFilters,
     }),
     [
       map,
       isLoaded,
       diveSites,
+      filteredDiveSites,
       selectedSite,
       loading,
       error,
       autocompleteInfoMessage,
+      activeFilters,
       fetchDiveSites,
       selectSite,
       onSiteClick,
       onClusterClick,
       centerOnSelection,
       clearAutocompleteInfoMessage,
+      setSiteTypeFilter,
+      setDifficultyFilter,
+      setMaxDepthFilter,
+      setMinVisibilityFilter,
+      setMinRatingFilter,
+      clearFilters,
     ],
   );
 
