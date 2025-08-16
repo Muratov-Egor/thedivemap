@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@/components/ui/Button';
 import { useTranslation } from 'react-i18next';
 import { FiltersIcon, CloseIcon } from '@/components/icons';
@@ -10,13 +10,28 @@ import DifficultyFilters from './ui/DifficultyFilters';
 import Slider from './ui/Slider';
 import { useMap } from '@/contexts/MapContext';
 import { AutocompleteItem } from '@/components/ui/Autocomplete/types';
+import { useDebounce } from '@/hooks/useDebounce';
 
 export default function Filters() {
   const { t, i18n } = useTranslation('filters');
   const { t: tCommon } = useTranslation('common');
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
-  const [sliderValue, setSliderValue] = useState(50);
-  const { centerOnSelection, activeFilters, clearFilters } = useMap();
+
+  // Состояния для слайдеров
+  const [depthValue, setDepthValue] = useState(50);
+  const [visibilityValue, setVisibilityValue] = useState(0);
+
+  // Debounce для предотвращения спама запросов
+  const debouncedDepthValue = useDebounce(depthValue, 500);
+  const debouncedVisibilityValue = useDebounce(visibilityValue, 500);
+
+  const {
+    centerOnSelection,
+    activeFilters,
+    clearFilters,
+    setMaxDepthFilter,
+    setMinVisibilityFilter,
+  } = useMap();
 
   // Получаем текущий язык из i18n
   const currentLanguage = i18n.language as 'ru' | 'en';
@@ -32,10 +47,38 @@ export default function Filters() {
 
   const handleClearAll = () => {
     clearFilters();
+    // Сбрасываем слайдеры к значениям по умолчанию
+    setDepthValue(50);
+    setVisibilityValue(0);
   };
 
+  // Применяем debounced значения к фильтрам
+  useEffect(() => {
+    setMaxDepthFilter(debouncedDepthValue);
+  }, [debouncedDepthValue, setMaxDepthFilter]);
+
+  useEffect(() => {
+    setMinVisibilityFilter(debouncedVisibilityValue);
+  }, [debouncedVisibilityValue, setMinVisibilityFilter]);
+
+  // Синхронизируем локальные состояния с активными фильтрами
+  useEffect(() => {
+    if (activeFilters.maxDepth === null) {
+      setDepthValue(50); // Значение по умолчанию
+    }
+  }, [activeFilters.maxDepth]);
+
+  useEffect(() => {
+    if (activeFilters.minVisibility === null) {
+      setVisibilityValue(0); // Значение по умолчанию
+    }
+  }, [activeFilters.minVisibility]);
+
   const hasActiveFilters =
-    activeFilters.siteTypeIds.length > 0 || activeFilters.difficultyIds.length > 0;
+    activeFilters.siteTypeIds.length > 0 ||
+    activeFilters.difficultyIds.length > 0 ||
+    activeFilters.maxDepth !== null ||
+    activeFilters.minVisibility !== null;
 
   return (
     <>
@@ -53,20 +96,31 @@ export default function Filters() {
           />
           <SiteTypeFilters />
           <DifficultyFilters />
-          
-          {/* Демонстрационные слайдеры */}
+
+          {/* Слайдеры фильтрации */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800">Демо слайдеры</h3>
-            
+            <h3 className="text-lg font-semibold text-gray-800">Фильтры</h3>
+
             <Slider
-              label="Глубина (м)"
+              label="Максимальная глубина (м)"
               min={0}
               max={50}
               step={1}
-              value={sliderValue}
-              onChange={setSliderValue}
+              value={depthValue}
+              onChange={setDepthValue}
               valueSuffix=" м"
               variant="default"
+            />
+
+            <Slider
+              label="Минимальная видимость (м)"
+              min={0}
+              max={30}
+              step={0.5}
+              value={visibilityValue}
+              onChange={setVisibilityValue}
+              valueSuffix=" м"
+              variant="ocean"
             />
           </div>
 
@@ -128,18 +182,29 @@ export default function Filters() {
               />
               <SiteTypeFilters />
               <DifficultyFilters />
-              
-              {/* Демонстрационные слайдеры для мобильной версии */}
+
+              {/* Слайдеры фильтрации для мобильной версии */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-800">Демо слайдеры</h3>
-                
+                <h3 className="text-lg font-semibold text-gray-800">Фильтры</h3>
+
                 <Slider
-                  label="Глубина (м)"
+                  label="Максимальная глубина (м)"
                   min={0}
                   max={50}
                   step={1}
-                  value={sliderValue}
-                  onChange={setSliderValue}
+                  value={depthValue}
+                  onChange={setDepthValue}
+                  valueSuffix=" м"
+                  variant="default"
+                />
+
+                <Slider
+                  label="Минимальная видимость (м)"
+                  min={0}
+                  max={30}
+                  step={0.5}
+                  value={visibilityValue}
+                  onChange={setVisibilityValue}
                   valueSuffix=" м"
                   variant="default"
                 />

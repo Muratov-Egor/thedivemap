@@ -87,9 +87,13 @@ describe('Filters', () => {
     mockUseMap.mockReturnValue({
       centerOnSelection: mockCenterOnSelection,
       clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       autocompleteInfoMessage: null,
     });
@@ -99,7 +103,7 @@ describe('Filters', () => {
     renderWithProviders(<Filters />);
 
     const desktopPanel = screen.getByTestId('desktop-filters-panel');
-    const title = screen.getByText('Фильтры');
+    const title = screen.getByRole('heading', { level: 2, name: 'Фильтры' });
     const autocomplete = screen.getByTestId('autocomplete');
 
     expect(desktopPanel).toBeInTheDocument();
@@ -203,9 +207,13 @@ describe('Filters', () => {
     mockUseMap.mockReturnValue({
       centerOnSelection: mockCenterOnSelection,
       clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
       activeFilters: {
         siteTypeIds: [1],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       autocompleteInfoMessage: null,
     });
@@ -220,9 +228,13 @@ describe('Filters', () => {
     mockUseMap.mockReturnValue({
       centerOnSelection: mockCenterOnSelection,
       clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [2],
+        maxDepth: null,
+        minVisibility: null,
       },
       autocompleteInfoMessage: null,
     });
@@ -237,9 +249,13 @@ describe('Filters', () => {
     mockUseMap.mockReturnValue({
       centerOnSelection: mockCenterOnSelection,
       clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
       activeFilters: {
         siteTypeIds: [1],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       autocompleteInfoMessage: null,
     });
@@ -256,9 +272,13 @@ describe('Filters', () => {
     mockUseMap.mockReturnValue({
       centerOnSelection: mockCenterOnSelection,
       clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
       activeFilters: {
         siteTypeIds: [1],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       autocompleteInfoMessage: null,
     });

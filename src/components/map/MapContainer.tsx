@@ -78,7 +78,10 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
 
   // Проверяем, есть ли активные фильтры и нет ли результатов
   const hasActiveFilters =
-    activeFilters.siteTypeIds.length > 0 || activeFilters.difficultyIds.length > 0;
+    activeFilters.siteTypeIds.length > 0 ||
+    activeFilters.difficultyIds.length > 0 ||
+    activeFilters.maxDepth !== null ||
+    activeFilters.minVisibility !== null;
   const showNoResultsMessage = hasActiveFilters && !loading && filteredDiveSites.length === 0;
 
   // Управляем отображением уведомления о том, что нет результатов по фильтрам

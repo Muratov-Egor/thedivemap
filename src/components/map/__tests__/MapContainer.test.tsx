@@ -66,6 +66,8 @@ describe('MapContainer', () => {
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
@@ -160,6 +162,8 @@ describe('MapContainer', () => {
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
@@ -185,6 +189,8 @@ describe('MapContainer', () => {
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
@@ -216,6 +222,8 @@ describe('MapContainer', () => {
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
@@ -258,6 +266,8 @@ describe('MapContainer', () => {
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
@@ -281,6 +291,8 @@ describe('MapContainer', () => {
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
@@ -307,6 +319,8 @@ describe('MapContainer', () => {
       activeFilters: {
         siteTypeIds: [3], // Активный фильтр, который не соответствует ни одному сайту
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
@@ -332,6 +346,8 @@ describe('MapContainer', () => {
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
@@ -355,6 +371,8 @@ describe('MapContainer', () => {
       activeFilters: {
         siteTypeIds: [1],
         difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
       },
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,

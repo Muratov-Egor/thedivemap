@@ -27,6 +27,8 @@ interface MapContextValue {
   activeFilters: {
     siteTypeIds: number[];
     difficultyIds: number[];
+    maxDepth: number | null;
+    minVisibility: number | null;
   };
   setMap: (map: Map | null) => void;
   setLoaded: (loaded: boolean) => void;
@@ -40,6 +42,8 @@ interface MapContextValue {
   // Методы для фильтрации
   setSiteTypeFilter: (siteTypeId: number) => void;
   setDifficultyFilter: (difficultyId: number) => void;
+  setMaxDepthFilter: (maxDepth: number | null) => void;
+  setMinVisibilityFilter: (minVisibility: number | null) => void;
   clearFilters: () => void;
 }
 
@@ -57,9 +61,13 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   const [activeFilters, setActiveFilters] = useState<{
     siteTypeIds: number[];
     difficultyIds: number[];
+    maxDepth: number | null;
+    minVisibility: number | null;
   }>({
     siteTypeIds: [],
     difficultyIds: [],
+    maxDepth: null,
+    minVisibility: null,
   });
   const hasFetchedRef = useRef(false);
 
@@ -238,7 +246,21 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const clearFilters = useCallback(() => {
-    setActiveFilters({ siteTypeIds: [], difficultyIds: [] });
+    setActiveFilters({
+      siteTypeIds: [],
+      difficultyIds: [],
+      maxDepth: null,
+      minVisibility: null,
+    });
+  }, []);
+
+  // Методы для фильтрации глубины и видимости
+  const setMaxDepthFilter = useCallback((maxDepth: number | null) => {
+    setActiveFilters((prev) => ({ ...prev, maxDepth }));
+  }, []);
+
+  const setMinVisibilityFilter = useCallback((minVisibility: number | null) => {
+    setActiveFilters((prev) => ({ ...prev, minVisibility }));
   }, []);
 
   // Отфильтрованные дайв-сайты
@@ -255,8 +277,22 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       );
     }
 
+    if (activeFilters.maxDepth !== null) {
+      filtered = filtered.filter((site) => site.depth_max <= activeFilters.maxDepth!);
+    }
+
+    if (activeFilters.minVisibility !== null) {
+      filtered = filtered.filter((site) => site.visibility >= activeFilters.minVisibility!);
+    }
+
     return filtered;
-  }, [diveSites, activeFilters.siteTypeIds, activeFilters.difficultyIds]);
+  }, [
+    diveSites,
+    activeFilters.siteTypeIds,
+    activeFilters.difficultyIds,
+    activeFilters.maxDepth,
+    activeFilters.minVisibility,
+  ]);
 
   const value = useMemo(
     () => ({
@@ -279,6 +315,8 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       clearAutocompleteInfoMessage,
       setSiteTypeFilter,
       setDifficultyFilter,
+      setMaxDepthFilter,
+      setMinVisibilityFilter,
       clearFilters,
     }),
     [
@@ -299,6 +337,8 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       clearAutocompleteInfoMessage,
       setSiteTypeFilter,
       setDifficultyFilter,
+      setMaxDepthFilter,
+      setMinVisibilityFilter,
       clearFilters,
     ],
   );

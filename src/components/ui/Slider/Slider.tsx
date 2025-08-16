@@ -84,6 +84,35 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       document.removeEventListener('mouseup', handleMouseUp);
     };
 
+    // Touch события для мобильных устройств
+    const handleTouchStart = (e: React.TouchEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      setIsDragging(true);
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd);
+      handleTouchMove(e);
+    };
+
+    const handleTouchMove = (e: TouchEvent | React.TouchEvent) => {
+      if (!sliderRef.current) return;
+      e.preventDefault();
+
+      const rect = sliderRef.current.getBoundingClientRect();
+      const touch = 'touches' in e ? e.touches[0] : (e as React.TouchEvent).nativeEvent.touches[0];
+      const clientX = touch.clientX;
+      const percentage = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      const newValue = min + percentage * (max - min);
+      const steppedValue = Math.round(newValue / step) * step;
+      handleValueChange(steppedValue);
+    };
+
+    const handleTouchEnd = () => {
+      setIsDragging(false);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+    };
+
     const handleKeyDown = (e: React.KeyboardEvent) => {
       if (disabled) return;
 
@@ -144,10 +173,8 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
 
     return (
       <div ref={ref} className={cn('w-full', className)}>
-        {label && (
-          <label className="block text-sm font-medium text-slate-700 mb-2">{label}</label>
-        )}
-        
+        {label && <label className="block text-sm font-medium text-slate-700 mb-2">{label}</label>}
+
         <div className="relative">
           {/* Слайдер трек */}
           <div
@@ -158,6 +185,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               disabled && 'opacity-50 cursor-not-allowed',
             )}
             onMouseDown={handleMouseDown}
+            onTouchStart={handleTouchStart}
             role="slider"
             aria-valuemin={min}
             aria-valuemax={max}
@@ -187,6 +215,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               )}
               style={{ left: `${percentage}%` }}
               onMouseDown={handleMouseDown}
+              onTouchStart={handleTouchStart}
             />
           </div>
 
@@ -194,13 +223,19 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           {showValue && (
             <div className="mt-3 flex justify-between items-center">
               <span className="text-xs text-slate-500 font-medium">
-                {valuePrefix}{min}{valueSuffix}
+                {valuePrefix}
+                {min}
+                {valueSuffix}
               </span>
               <span className="text-sm font-semibold text-slate-700 bg-white/80 px-3 py-1.5 rounded-2xl shadow-glass border border-slate-200 backdrop-blur-sm">
-                {valuePrefix}{value}{valueSuffix}
+                {valuePrefix}
+                {value}
+                {valueSuffix}
               </span>
               <span className="text-xs text-slate-500 font-medium">
-                {valuePrefix}{max}{valueSuffix}
+                {valuePrefix}
+                {max}
+                {valueSuffix}
               </span>
             </div>
           )}
