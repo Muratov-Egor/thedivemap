@@ -51,15 +51,26 @@ export default function Filters() {
     // Сбрасываем слайдеры к значениям по умолчанию
     setDepthValue(50);
     setVisibilityValue(0);
+    // Явно сбрасываем фильтры глубины и видимости
+    setMaxDepthFilter(null);
+    setMinVisibilityFilter(null);
   };
 
-  // Применяем debounced значения к фильтрам
+  // Применяем debounced значения к фильтрам только если они отличаются от дефолтных
   useEffect(() => {
-    setMaxDepthFilter(debouncedDepthValue);
+    if (debouncedDepthValue !== 50) {
+      setMaxDepthFilter(debouncedDepthValue);
+    } else {
+      setMaxDepthFilter(null);
+    }
   }, [debouncedDepthValue, setMaxDepthFilter]);
 
   useEffect(() => {
-    setMinVisibilityFilter(debouncedVisibilityValue);
+    if (debouncedVisibilityValue !== 0) {
+      setMinVisibilityFilter(debouncedVisibilityValue);
+    } else {
+      setMinVisibilityFilter(null);
+    }
   }, [debouncedVisibilityValue, setMinVisibilityFilter]);
 
   // Синхронизируем локальные состояния с активными фильтрами
@@ -78,8 +89,8 @@ export default function Filters() {
   const hasActiveFilters =
     activeFilters.siteTypeIds.length > 0 ||
     activeFilters.difficultyIds.length > 0 ||
-    activeFilters.maxDepth !== null ||
-    activeFilters.minVisibility !== null ||
+    (activeFilters.maxDepth !== null && activeFilters.maxDepth !== 50) ||
+    (activeFilters.minVisibility !== null && activeFilters.minVisibility !== 0) ||
     activeFilters.minRating !== null;
 
   return (

@@ -198,6 +198,22 @@ describe('Filters', () => {
   });
 
   it('не показывает кнопку очистки когда нет активных фильтров', () => {
+    // Мокаем пустые фильтры без дефолтных значений слайдеров
+    mockUseMap.mockReturnValue({
+      centerOnSelection: mockCenterOnSelection,
+      clearFilters: mockClearFilters,
+      setMaxDepthFilter: jest.fn(),
+      setMinVisibilityFilter: jest.fn(),
+      activeFilters: {
+        siteTypeIds: [],
+        difficultyIds: [],
+        maxDepth: null,
+        minVisibility: null,
+        minRating: null,
+      },
+      autocompleteInfoMessage: null,
+    });
+
     renderWithProviders(<Filters />);
 
     expect(screen.queryByTestId('clear-all-filters-button')).not.toBeInTheDocument();
