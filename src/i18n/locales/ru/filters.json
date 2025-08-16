@@ -15,5 +15,12 @@
   "accessibility": {
     "openFilters": "Открыть панель фильтров",
     "closeFilters": "Закрыть панель фильтров"
+  },
+  "rating": {
+    "title": "Рейтинг",
+    "filterBy": "Фильтровать по",
+    "star": "звезде",
+    "stars": "звездам",
+    "minimum": "Минимум"
   }
 }

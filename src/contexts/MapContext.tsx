@@ -29,6 +29,7 @@ interface MapContextValue {
     difficultyIds: number[];
     maxDepth: number | null;
     minVisibility: number | null;
+    minRating: number | null;
   };
   setMap: (map: Map | null) => void;
   setLoaded: (loaded: boolean) => void;
@@ -44,6 +45,7 @@ interface MapContextValue {
   setDifficultyFilter: (difficultyId: number) => void;
   setMaxDepthFilter: (maxDepth: number | null) => void;
   setMinVisibilityFilter: (minVisibility: number | null) => void;
+  setMinRatingFilter: (minRating: number | null) => void;
   clearFilters: () => void;
 }
 
@@ -63,11 +65,13 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     difficultyIds: number[];
     maxDepth: number | null;
     minVisibility: number | null;
+    minRating: number | null;
   }>({
     siteTypeIds: [],
     difficultyIds: [],
     maxDepth: null,
     minVisibility: null,
+    minRating: null,
   });
   const hasFetchedRef = useRef(false);
 
@@ -251,6 +255,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       difficultyIds: [],
       maxDepth: null,
       minVisibility: null,
+      minRating: null,
     });
   }, []);
 
@@ -261,6 +266,11 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
 
   const setMinVisibilityFilter = useCallback((minVisibility: number | null) => {
     setActiveFilters((prev) => ({ ...prev, minVisibility }));
+  }, []);
+
+  // Метод для фильтрации по рейтингу
+  const setMinRatingFilter = useCallback((minRating: number | null) => {
+    setActiveFilters((prev) => ({ ...prev, minRating }));
   }, []);
 
   // Отфильтрованные дайв-сайты
@@ -285,6 +295,10 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       filtered = filtered.filter((site) => site.visibility >= activeFilters.minVisibility!);
     }
 
+    if (activeFilters.minRating !== null) {
+      filtered = filtered.filter((site) => site.rating >= activeFilters.minRating!);
+    }
+
     return filtered;
   }, [
     diveSites,
@@ -292,6 +306,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     activeFilters.difficultyIds,
     activeFilters.maxDepth,
     activeFilters.minVisibility,
+    activeFilters.minRating,
   ]);
 
   const value = useMemo(
@@ -317,6 +332,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       setDifficultyFilter,
       setMaxDepthFilter,
       setMinVisibilityFilter,
+      setMinRatingFilter,
       clearFilters,
     }),
     [
@@ -339,6 +355,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       setDifficultyFilter,
       setMaxDepthFilter,
       setMinVisibilityFilter,
+      setMinRatingFilter,
       clearFilters,
     ],
   );

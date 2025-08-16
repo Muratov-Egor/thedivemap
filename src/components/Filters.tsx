@@ -7,6 +7,7 @@ import { FiltersIcon, CloseIcon } from '@/components/icons';
 import Autocomplete from './ui/Autocomplete/Autocomplete';
 import SiteTypeFilters from './ui/SiteTypeFilters';
 import DifficultyFilters from './ui/DifficultyFilters';
+import RatingFilters from './ui/RatingFilters';
 import Slider from './ui/Slider';
 import { useMap } from '@/contexts/MapContext';
 import { AutocompleteItem } from '@/components/ui/Autocomplete/types';
@@ -78,7 +79,8 @@ export default function Filters() {
     activeFilters.siteTypeIds.length > 0 ||
     activeFilters.difficultyIds.length > 0 ||
     activeFilters.maxDepth !== null ||
-    activeFilters.minVisibility !== null;
+    activeFilters.minVisibility !== null ||
+    activeFilters.minRating !== null;
 
   return (
     <>
@@ -97,10 +99,9 @@ export default function Filters() {
           <SiteTypeFilters />
           <DifficultyFilters />
 
+
           {/* Слайдеры фильтрации */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800">Фильтры</h3>
-
             <Slider
               label="Максимальная глубина (м)"
               min={0}
@@ -122,6 +123,8 @@ export default function Filters() {
               valueSuffix=" м"
               variant="ocean"
             />
+
+            <RatingFilters />
           </div>
 
           {/* Общая кнопка очистки */}
@@ -129,7 +132,7 @@ export default function Filters() {
             <div className="pt-4 border-t border-gray-200">
               <Button
                 variant="coral"
-                size="small"
+                size="medium"
                 onClick={handleClearAll}
                 data-testid="clear-all-filters-button"
                 className="w-full"
@@ -182,6 +185,7 @@ export default function Filters() {
               />
               <SiteTypeFilters />
               <DifficultyFilters />
+              <RatingFilters />
 
               {/* Слайдеры фильтрации для мобильной версии */}
               <div className="space-y-4">
@@ -215,7 +219,7 @@ export default function Filters() {
                 <div className="pt-4 border-t border-gray-200">
                   <Button
                     variant="coral"
-                    size="small"
+                    size="medium"
                     onClick={handleClearAll}
                     data-testid="clear-all-filters-button-mobile"
                     className="w-full"

@@ -15,5 +15,12 @@
   "accessibility": {
     "openFilters": "Open filters panel",
     "closeFilters": "Close filters panel"
+  },
+  "rating": {
+    "title": "Rating",
+    "filterBy": "Filter by",
+    "star": "star",
+    "stars": "stars",
+    "minimum": "Minimum"
   }
 }
