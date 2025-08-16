@@ -7,6 +7,7 @@ import { FiltersIcon, CloseIcon } from '@/components/icons';
 import Autocomplete from './ui/Autocomplete/Autocomplete';
 import SiteTypeFilters from './ui/SiteTypeFilters';
 import DifficultyFilters from './ui/DifficultyFilters';
+import Slider from './ui/Slider';
 import { useMap } from '@/contexts/MapContext';
 import { AutocompleteItem } from '@/components/ui/Autocomplete/types';
 
@@ -14,6 +15,7 @@ export default function Filters() {
   const { t, i18n } = useTranslation('filters');
   const { t: tCommon } = useTranslation('common');
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
+  const [sliderValue, setSliderValue] = useState(50);
   const { centerOnSelection, activeFilters, clearFilters } = useMap();
 
   // Получаем текущий язык из i18n
@@ -51,6 +53,22 @@ export default function Filters() {
           />
           <SiteTypeFilters />
           <DifficultyFilters />
+          
+          {/* Демонстрационные слайдеры */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-800">Демо слайдеры</h3>
+            
+            <Slider
+              label="Глубина (м)"
+              min={0}
+              max={50}
+              step={1}
+              value={sliderValue}
+              onChange={setSliderValue}
+              valueSuffix=" м"
+              variant="default"
+            />
+          </div>
 
           {/* Общая кнопка очистки */}
           {hasActiveFilters && (
@@ -110,6 +128,22 @@ export default function Filters() {
               />
               <SiteTypeFilters />
               <DifficultyFilters />
+              
+              {/* Демонстрационные слайдеры для мобильной версии */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-800">Демо слайдеры</h3>
+                
+                <Slider
+                  label="Глубина (м)"
+                  min={0}
+                  max={50}
+                  step={1}
+                  value={sliderValue}
+                  onChange={setSliderValue}
+                  valueSuffix=" м"
+                  variant="default"
+                />
+              </div>
 
               {/* Общая кнопка очистки для мобильной версии */}
               {hasActiveFilters && (
