@@ -27,12 +27,12 @@ export default function RatingFilters({ className }: RatingFiltersProps) {
       <button
         key={starNumber}
         onClick={() => handleRatingClick(starNumber)}
-                  className={cn(
-            'transition-all duration-200 ease-in-out focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-1',
-            'w-12 h-12 flex items-center justify-center',
+        className={cn(
+          'transition-all duration-200 ease-in-out focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-1',
+          'w-12 h-12 flex items-center justify-center',
           isSelected && 'text-yellow-400',
           !isSelected && isActive && 'text-yellow-400',
-          !isSelected && !isActive && 'text-gray-300 hover:text-yellow-400'
+          !isSelected && !isActive && 'text-gray-300 hover:text-yellow-400',
         )}
         data-testid={`rating-star-${starNumber}`}
         aria-label={`${t('rating.filterBy')} ${starNumber} ${starNumber === 1 ? t('rating.star') : t('rating.stars')}`}
@@ -63,7 +63,7 @@ export default function RatingFilters({ className }: RatingFiltersProps) {
         {[1, 2, 3, 4, 5].map((starNumber) => {
           const isSelected = activeFilters.minRating === starNumber;
           const isActive = activeFilters.minRating ? starNumber <= activeFilters.minRating : false;
-          
+
           return renderStar(starNumber, isSelected, isActive);
         })}
       </div>

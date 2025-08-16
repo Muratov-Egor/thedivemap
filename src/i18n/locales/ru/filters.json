@@ -22,5 +22,13 @@
     "star": "звезде",
     "stars": "звездам",
     "minimum": "Минимум"
+  },
+  "sliders": {
+    "maxDepth": "Максимальная глубина",
+    "minVisibility": "Минимальная видимость",
+    "filters": "Фильтры"
+  },
+  "units": {
+    "meters": "м"
   }
 }

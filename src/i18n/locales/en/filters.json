@@ -22,5 +22,13 @@
     "star": "star",
     "stars": "stars",
     "minimum": "Minimum"
+  },
+  "sliders": {
+    "maxDepth": "Maximum depth",
+    "minVisibility": "Minimum visibility",
+    "filters": "Filters"
+  },
+  "units": {
+    "meters": "m"
   }
 }

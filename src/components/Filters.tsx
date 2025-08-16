@@ -110,28 +110,27 @@ export default function Filters() {
           <SiteTypeFilters />
           <DifficultyFilters />
 
-
           {/* Слайдеры фильтрации */}
           <div className="space-y-4">
             <Slider
-              label="Максимальная глубина (м)"
+              label={`${t('sliders.maxDepth')} (${t('units.meters')})`}
               min={0}
               max={50}
               step={1}
               value={depthValue}
               onChange={setDepthValue}
-              valueSuffix=" м"
+              valueSuffix={` ${t('units.meters')}`}
               variant="default"
             />
 
             <Slider
-              label="Минимальная видимость (м)"
+              label={`${t('sliders.minVisibility')} (${t('units.meters')})`}
               min={0}
               max={30}
               step={0.5}
               value={visibilityValue}
               onChange={setVisibilityValue}
-              valueSuffix=" м"
+              valueSuffix={` ${t('units.meters')}`}
               variant="ocean"
             />
 
@@ -200,27 +199,27 @@ export default function Filters() {
 
               {/* Слайдеры фильтрации для мобильной версии */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-800">Фильтры</h3>
+                <h3 className="text-lg font-semibold text-gray-800">{t('sliders.filters')}</h3>
 
                 <Slider
-                  label="Максимальная глубина (м)"
+                  label={`${t('sliders.maxDepth')} (${t('units.meters')})`}
                   min={0}
                   max={50}
                   step={1}
                   value={depthValue}
                   onChange={setDepthValue}
-                  valueSuffix=" м"
+                  valueSuffix={` ${t('units.meters')}`}
                   variant="default"
                 />
 
                 <Slider
-                  label="Минимальная видимость (м)"
+                  label={`${t('sliders.minVisibility')} (${t('units.meters')})`}
                   min={0}
                   max={30}
                   step={0.5}
                   value={visibilityValue}
                   onChange={setVisibilityValue}
-                  valueSuffix=" м"
+                  valueSuffix={` ${t('units.meters')}`}
                   variant="default"
                 />
               </div>
