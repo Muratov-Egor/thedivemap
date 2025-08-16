@@ -23,7 +23,7 @@ describe('DifficultyFilters', () => {
     jest.clearAllMocks();
   });
 
-  it('should render loading state initially', () => {
+  it('should render loading state initially', async () => {
     mockUseFilters.mockReturnValue({
       filters: null,
       loading: true,
@@ -32,7 +32,8 @@ describe('DifficultyFilters', () => {
 
     renderWithProviders(<DifficultyFilters />);
 
-    expect(screen.getByText('Difficulty Level')).toBeInTheDocument();
+    // Компонент не должен рендериться во время загрузки
+    expect(screen.queryByText('Difficulty Level')).not.toBeInTheDocument();
   });
 
   it('should render difficulties after loading', async () => {
@@ -121,8 +122,8 @@ describe('DifficultyFilters', () => {
 
     renderWithProviders(<DifficultyFilters />);
 
-    // Проверяем, что компонент не упал и показывает заголовок
-    expect(screen.getByText('Difficulty Level')).toBeInTheDocument();
+    // Компонент не должен рендериться при ошибке
+    expect(screen.queryByText('Difficulty Level')).not.toBeInTheDocument();
   });
 
   it('should toggle difficulty filter when clicked twice', async () => {

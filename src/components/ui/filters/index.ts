@@ -8,12 +8,7 @@ export { FILTER_STYLES, createFilterClasses, RESPONSIVE_FILTERS } from './consta
 
 // Типы
 export type { FilterSectionProps } from './FilterSection';
-export type { 
-  FilterColor, 
-  FilterSize, 
-  FilterRadius, 
-  FilterTransition 
-} from './constants';
+export type { FilterColor, FilterSize, FilterRadius, FilterTransition } from './constants';
 
 // Переэкспорт существующих компонентов фильтров
 export { default as SiteTypeFilters } from '../SiteTypeFilters/SiteTypeFilters';

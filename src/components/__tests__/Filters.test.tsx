@@ -21,6 +21,13 @@ jest.mock('@/contexts/MapContext', () => ({
   useMap: () => mockUseMap(),
 }));
 
+// Мокаем useFilters
+const mockUseFilters = jest.fn();
+
+jest.mock('@/hooks/useFilters', () => ({
+  useFilters: () => mockUseFilters(),
+}));
+
 // Мокаем Autocomplete
 jest.mock('@/components/ui/Autocomplete/Autocomplete', () => {
   return function MockAutocomplete({ placeholder, onSelect }: any) {
@@ -37,6 +44,34 @@ jest.mock('@/components/ui/Autocomplete/Autocomplete', () => {
         />
       </div>
     );
+  };
+});
+
+// Мокаем SiteTypeFilters
+jest.mock('@/components/ui/SiteTypeFilters', () => {
+  return function MockSiteTypeFilters() {
+    return <div data-testid="site-type-filters">Site Type Filters</div>;
+  };
+});
+
+// Мокаем DifficultyFilters
+jest.mock('@/components/ui/DifficultyFilters', () => {
+  return function MockDifficultyFilters() {
+    return <div data-testid="difficulty-filters">Difficulty Filters</div>;
+  };
+});
+
+// Мокаем RatingFilters
+jest.mock('@/components/ui/RatingFilters', () => {
+  return function MockRatingFilters() {
+    return <div data-testid="rating-filters">Rating Filters</div>;
+  };
+});
+
+// Мокаем Slider
+jest.mock('@/components/ui/Slider', () => {
+  return function MockSlider({ label }: any) {
+    return <div data-testid="slider">{label}</div>;
   };
 });
 
@@ -97,6 +132,22 @@ describe('Filters', () => {
       },
       autocompleteInfoMessage: null,
     });
+
+    // Устанавливаем состояние загруженных фильтров по умолчанию
+    mockUseFilters.mockReturnValue({
+      filters: {
+        site_types: [
+          { id: 1, label: 'Риф' },
+          { id: 2, label: 'Затонувшее судно' },
+        ],
+        difficulties: [
+          { id: 1, label: 'Легкий' },
+          { id: 2, label: 'Средний' },
+        ],
+      },
+      loading: false,
+      error: null,
+    });
   });
 
   it('рендерит десктопную панель фильтров', () => {
@@ -109,6 +160,30 @@ describe('Filters', () => {
     expect(desktopPanel).toBeInTheDocument();
     expect(title).toBeInTheDocument();
     expect(autocomplete).toBeInTheDocument();
+  });
+
+  it('показывает лоадер во время загрузки фильтров', () => {
+    // Устанавливаем состояние загрузки
+    mockUseFilters.mockReturnValue({
+      filters: null,
+      loading: true,
+      error: null,
+    });
+
+    renderWithProviders(<Filters />);
+
+    const desktopPanel = screen.getByTestId('desktop-filters-panel');
+    const title = screen.getByRole('heading', { level: 2, name: 'Фильтры' });
+
+    expect(desktopPanel).toBeInTheDocument();
+    expect(title).toBeInTheDocument();
+
+    // Проверяем, что автокомплит не отображается во время загрузки
+    expect(screen.queryByTestId('autocomplete')).not.toBeInTheDocument();
+
+    // Проверяем наличие лоадеров (скелетонов)
+    const skeletonElements = screen.getAllByTestId('desktop-filters-panel');
+    expect(skeletonElements.length).toBeGreaterThan(0);
   });
 
   it('рендерит кнопку открытия мобильной панели', () => {

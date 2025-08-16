@@ -23,7 +23,7 @@ describe('SiteTypeFilters', () => {
     jest.clearAllMocks();
   });
 
-  it('should render loading state initially', () => {
+  it('should render loading state initially', async () => {
     mockUseFilters.mockReturnValue({
       filters: null,
       loading: true,
@@ -32,7 +32,8 @@ describe('SiteTypeFilters', () => {
 
     renderWithProviders(<SiteTypeFilters />);
 
-    expect(screen.getByText('Dive Site Type')).toBeInTheDocument();
+    // Компонент не должен рендериться во время загрузки
+    expect(screen.queryByText('Dive Site Type')).not.toBeInTheDocument();
   });
 
   it('should render site types after loading', async () => {
@@ -127,8 +128,8 @@ describe('SiteTypeFilters', () => {
 
     renderWithProviders(<SiteTypeFilters />);
 
-    // Проверяем, что компонент не упал и показывает заголовок
-    expect(screen.getByText('Dive Site Type')).toBeInTheDocument();
+    // Компонент не должен рендериться при ошибке
+    expect(screen.queryByText('Dive Site Type')).not.toBeInTheDocument();
   });
 
   it('should toggle site type filter when clicked twice', async () => {
