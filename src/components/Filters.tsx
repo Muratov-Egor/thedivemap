@@ -195,12 +195,10 @@ export default function Filters() {
               />
               <SiteTypeFilters />
               <DifficultyFilters />
-              <RatingFilters />
+
 
               {/* Слайдеры фильтрации для мобильной версии */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-800">{t('sliders.filters')}</h3>
-
                 <Slider
                   label={`${t('sliders.maxDepth')} (${t('units.meters')})`}
                   min={0}
@@ -220,8 +218,10 @@ export default function Filters() {
                   value={visibilityValue}
                   onChange={setVisibilityValue}
                   valueSuffix={` ${t('units.meters')}`}
-                  variant="default"
+                  variant="ocean"
                 />
+
+                <RatingFilters />
               </div>
 
               {/* Общая кнопка очистки для мобильной версии */}
