@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useMap } from '@/contexts/MapContext';
 import { useFilters } from '@/hooks/useFilters';
 import Chip from '../Chip/Chip';
+import { SiteTypeIcon } from '@/components/icons';
 
 export default function SiteTypeFilters() {
   const { t } = useTranslation('filters');
@@ -45,7 +46,10 @@ export default function SiteTypeFilters() {
             data-testid={`site-type-filter-${siteType.id}`}
             aria-label={`${t('siteTypes.filterBy')} ${siteType.label}`}
           >
-            {siteType.label}
+            <div className="flex items-center gap-2">
+              <SiteTypeIcon siteTypeId={siteType.id} className="w-4 h-4" />
+              <span>{siteType.label}</span>
+            </div>
           </Chip>
         ))}
       </div>

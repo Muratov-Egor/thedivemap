@@ -56,6 +56,12 @@ describe('SiteTypeFilters', () => {
     expect(screen.getByText('Затонувшее судно')).toBeInTheDocument();
     expect(screen.getByTestId('site-type-filter-1')).toBeInTheDocument();
     expect(screen.getByTestId('site-type-filter-2')).toBeInTheDocument();
+
+    // Проверяем, что иконки отображаются
+    const reefChip = screen.getByTestId('site-type-filter-1');
+    const shipChip = screen.getByTestId('site-type-filter-2');
+    expect(reefChip.querySelector('[data-testid="site-type-icon"]')).toBeInTheDocument();
+    expect(shipChip.querySelector('[data-testid="site-type-icon"]')).toBeInTheDocument();
   });
 
   it('should handle site type selection', async () => {

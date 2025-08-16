@@ -71,23 +71,23 @@ describe('/api/filters', () => {
       expect(response.status).toBe(200);
       expect(data).toEqual({
         site_types: [
-          { 
-            id: 1, 
-            labels: { ru: 'Риф', en: 'Reef' }
+          {
+            id: 1,
+            labels: { ru: 'Риф', en: 'Reef' },
           },
-          { 
-            id: 2, 
-            labels: { ru: 'Затонувшее судно', en: 'Wreck' }
+          {
+            id: 2,
+            labels: { ru: 'Затонувшее судно', en: 'Wreck' },
           },
         ],
         difficulties: [
-          { 
-            id: 1, 
-            labels: { ru: 'Легкий', en: 'Easy' }
+          {
+            id: 1,
+            labels: { ru: 'Легкий', en: 'Easy' },
           },
-          { 
-            id: 2, 
-            labels: { ru: 'Средний', en: 'Medium' }
+          {
+            id: 2,
+            labels: { ru: 'Средний', en: 'Medium' },
           },
         ],
       });

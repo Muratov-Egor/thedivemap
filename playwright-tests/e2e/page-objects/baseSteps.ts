@@ -21,7 +21,7 @@ export class BaseSteps {
         // Если индикатор загрузки не найден, это нормально
         console.log('Loading indicator not found, continuing...');
       }
-      
+
       // Ждем появления кластеров/маркеров или уведомления
       await this.page.waitForSelector(
         '[data-testid="marker-cluster"], [data-testid^="dive-site-marker-"], [data-testid="notification"]',

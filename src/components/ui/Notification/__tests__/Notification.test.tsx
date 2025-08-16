@@ -79,11 +79,10 @@ describe('Notification', () => {
 
   it('применяет правильные стили для разных типов', () => {
     const { rerender } = renderNotification({ ...defaultProps, type: 'info' });
-    const notificationContainer = screen.getByTestId('notification').querySelector('.flex.items-start');
-    expect(notificationContainer).toHaveClass(
-      'bg-white/90',
-      'border-tropical-blue/30',
-    );
+    const notificationContainer = screen
+      .getByTestId('notification')
+      .querySelector('.flex.items-start');
+    expect(notificationContainer).toHaveClass('bg-white/90', 'border-tropical-blue/30');
 
     rerender(<Notification {...defaultProps} type="warning" />);
     expect(notificationContainer).toHaveClass('bg-white/90', 'border-coral/30');
@@ -159,8 +158,8 @@ describe('Notification', () => {
     // Проверяем, что нет иконки типа (кнопка закрытия не считается)
     // Ищем SVG, который не является кнопкой закрытия
     const svgElements = screen.getByTestId('notification').querySelectorAll('svg');
-    const nonCloseButtonSvgs = Array.from(svgElements).filter(svg => 
-      !svg.closest('[data-testid="notification-close"]')
+    const nonCloseButtonSvgs = Array.from(svgElements).filter(
+      (svg) => !svg.closest('[data-testid="notification-close"]'),
     );
     expect(nonCloseButtonSvgs).toHaveLength(0);
   });

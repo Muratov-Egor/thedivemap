@@ -47,11 +47,7 @@ jest.mock('@/components/icons', () => ({
 }));
 
 const renderWithProviders = (component: React.ReactElement) => {
-  return render(
-    <FiltersProvider>
-      {component}
-    </FiltersProvider>
-  );
+  return render(<FiltersProvider>{component}</FiltersProvider>);
 };
 
 describe('Filters', () => {

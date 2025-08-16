@@ -1,6 +1,14 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useMemo, useRef, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  ReactNode,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 
 export interface FilterOption {
@@ -40,7 +48,7 @@ export function FiltersProvider({ children }: { children: ReactNode }) {
     const fetchFilters = async () => {
       // Загружаем фильтры только один раз
       if (hasFetched.current) return;
-      
+
       hasFetched.current = true;
       setLoading(true);
       setError(null);
@@ -86,11 +94,7 @@ export function FiltersProvider({ children }: { children: ReactNode }) {
     error,
   };
 
-  return (
-    <FiltersContext.Provider value={value}>
-      {children}
-    </FiltersContext.Provider>
-  );
+  return <FiltersContext.Provider value={value}>{children}</FiltersContext.Provider>;
 }
 
 export function useFilters() {

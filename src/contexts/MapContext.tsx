@@ -1,6 +1,14 @@
 'use client';
 
-import React, { createContext, useContext, useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Map } from 'maplibre-gl';
 import { Site } from '@/types/database';

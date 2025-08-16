@@ -20,7 +20,6 @@ export default function DifficultyFilters() {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-medium text-gray-700">{t('difficulties.title')}</h3>
-          <div className="animate-pulse bg-gray-200 h-4 w-16 rounded"></div>
         </div>
         <div className="flex flex-wrap gap-2">
           {[1, 2, 3, 4].map((i) => (

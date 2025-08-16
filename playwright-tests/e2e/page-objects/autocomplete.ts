@@ -218,9 +218,7 @@ export class Autocomplete {
 
   async expectInfoMessageToBeVisible(infoMessage: string, isMobile: boolean = false) {
     await test.step(`Expect ${isMobile ? 'mobile ' : ''}info message to be visible: ${infoMessage}`, async () => {
-      const infoLocator = isMobile
-        ? this.page.getByTestId('notification')
-        : this.notification;
+      const infoLocator = isMobile ? this.page.getByTestId('notification') : this.notification;
 
       await expect(infoLocator).toBeVisible();
       await expect(infoLocator).toContainText(infoMessage);
@@ -229,9 +227,7 @@ export class Autocomplete {
 
   async expectInfoMessageToBeHidden(isMobile: boolean = false) {
     await test.step(`Expect ${isMobile ? 'mobile ' : ''}info message to be hidden`, async () => {
-      const infoLocator = isMobile
-        ? this.page.getByTestId('notification')
-        : this.notification;
+      const infoLocator = isMobile ? this.page.getByTestId('notification') : this.notification;
 
       await expect(infoLocator).toBeHidden();
     });
@@ -239,9 +235,7 @@ export class Autocomplete {
 
   async expectInfoMessageToContainIcon(icon: string, isMobile: boolean = false) {
     await test.step(`Expect ${isMobile ? 'mobile ' : ''}info message to contain icon: ${icon}`, async () => {
-      const infoLocator = isMobile
-        ? this.page.getByTestId('notification')
-        : this.notification;
+      const infoLocator = isMobile ? this.page.getByTestId('notification') : this.notification;
 
       // Проверяем наличие SVG иконки в notification
       const svgIcon = infoLocator.locator('svg').first();

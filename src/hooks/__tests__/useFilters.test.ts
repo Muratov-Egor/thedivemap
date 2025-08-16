@@ -35,23 +35,23 @@ describe('useFilters', () => {
   it('should fetch filters successfully', async () => {
     const mockFilters = {
       site_types: [
-        { 
-          id: 1, 
-          labels: { ru: 'Риф', en: 'Reef' }
+        {
+          id: 1,
+          labels: { ru: 'Риф', en: 'Reef' },
         },
-        { 
-          id: 2, 
-          labels: { ru: 'Затонувшее судно', en: 'Wreck' }
+        {
+          id: 2,
+          labels: { ru: 'Затонувшее судно', en: 'Wreck' },
         },
       ],
       difficulties: [
-        { 
-          id: 1, 
-          labels: { ru: 'Легкий', en: 'Easy' }
+        {
+          id: 1,
+          labels: { ru: 'Легкий', en: 'Easy' },
         },
-        { 
-          id: 2, 
-          labels: { ru: 'Средний', en: 'Medium' }
+        {
+          id: 2,
+          labels: { ru: 'Средний', en: 'Medium' },
         },
       ],
     };
@@ -131,14 +131,18 @@ describe('useFilters', () => {
 
   it('should fetch filters only once', async () => {
     const mockFilters = {
-      site_types: [{ 
-        id: 1, 
-        labels: { ru: 'Риф', en: 'Reef' }
-      }],
-      difficulties: [{ 
-        id: 1, 
-        labels: { ru: 'Легкий', en: 'Easy' }
-      }],
+      site_types: [
+        {
+          id: 1,
+          labels: { ru: 'Риф', en: 'Reef' },
+        },
+      ],
+      difficulties: [
+        {
+          id: 1,
+          labels: { ru: 'Легкий', en: 'Easy' },
+        },
+      ],
     };
 
     mockFetch.mockResolvedValue({
