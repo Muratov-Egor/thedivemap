@@ -28,8 +28,8 @@ export default function RatingFilters({ className }: RatingFiltersProps) {
         key={starNumber}
         onClick={() => handleRatingClick(starNumber)}
         className={cn(
-          'transition-all duration-200 ease-in-out focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-1',
-          'w-12 h-12 flex items-center justify-center',
+          'transition-all duration-200 ease-in-out focus:outline-none focus:ring-1 focus:ring-coral-reef focus:ring-offset-1',
+          'w-10 h-10 flex items-center justify-center',
           isSelected && 'text-yellow-400',
           !isSelected && isActive && 'text-yellow-400',
           !isSelected && !isActive && 'text-gray-300 hover:text-yellow-400',
@@ -51,7 +51,7 @@ export default function RatingFilters({ className }: RatingFiltersProps) {
   return (
     <div className={cn('space-y-3', className)}>
       <div className="flex items-center justify-between">
-        <h3 className="text-md font-medium text-gray-700">{t('rating.title')}</h3>
+        <h3 className="text-sm font-medium text-gray-700">{t('rating.title')}</h3>
         {activeFilters.minRating && (
           <span className="text-sm text-gray-500">
             {t('rating.minimum')} {activeFilters.minRating}+
