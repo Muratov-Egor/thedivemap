@@ -14,7 +14,7 @@ jest.mock('../../components/map/MapContainer', () => {
   };
 });
 
-jest.mock('../../components/Filters', () => {
+jest.mock('../../components/FiltersPanel/Filters', () => {
   return function MockFilters() {
     return <div data-testid="filters">Filters</div>;
   };

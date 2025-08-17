@@ -48,21 +48,21 @@ jest.mock('@/components/ui/Autocomplete/Autocomplete', () => {
 });
 
 // Мокаем SiteTypeFilters
-jest.mock('@/components/ui/SiteTypeFilters', () => {
+jest.mock('@/components/FiltersPanel/SiteTypeFilters/SiteTypeFilters', () => {
   return function MockSiteTypeFilters() {
     return <div data-testid="site-type-filters">Site Type Filters</div>;
   };
 });
 
 // Мокаем DifficultyFilters
-jest.mock('@/components/ui/DifficultyFilters', () => {
+jest.mock('@/components/FiltersPanel/DifficultyFilters/DifficultyFilters', () => {
   return function MockDifficultyFilters() {
     return <div data-testid="difficulty-filters">Difficulty Filters</div>;
   };
 });
 
 // Мокаем RatingFilters
-jest.mock('@/components/ui/RatingFilters', () => {
+jest.mock('@/components/FiltersPanel/RatingFilters/RatingFilters', () => {
   return function MockRatingFilters() {
     return <div data-testid="rating-filters">Rating Filters</div>;
   };
