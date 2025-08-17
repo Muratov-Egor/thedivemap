@@ -136,6 +136,6 @@ test.describe('Mobile: Autocomplete Info Message Tests', () => {
 
     // Закрываем мобильную панель фильтров
     await filtersPanel.closeMobileFiltersPanel();
-    await filtersPanel.expectMobileFiltersPanelNotExists();
+    await filtersPanel.expectMobileFiltersPanelIsNotExist();
   });
 });
