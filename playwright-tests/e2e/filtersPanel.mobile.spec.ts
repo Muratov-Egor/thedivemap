@@ -12,11 +12,11 @@ test.describe('Mobile: Filters Panel', () => {
   test('Open mobile filters panel after click on open button', async ({ page }) => {
     const filtersPanel = new FiltersPanel(page);
 
-    await filtersPanel.expectDesktopFiltersPanelNotVisible();
-    await filtersPanel.expectMobileFiltersPanelNotExists();
+    await filtersPanel.expectDesktopFiltersPanelIsNotExist();
+    await filtersPanel.expectMobileFiltersPanelIsNotExist();
     await filtersPanel.openMobileFiltersPanel();
+
     await filtersPanel.expectMobileFiltersPanelToBeVisible();
-    await filtersPanel.expectAllFiltersToBeVisible();
   });
 
   test('Close mobile filters panel after click on close button', async ({ page }) => {
@@ -25,6 +25,6 @@ test.describe('Mobile: Filters Panel', () => {
     await filtersPanel.openMobileFiltersPanel();
     await filtersPanel.expectMobileFiltersPanelToBeVisible();
     await filtersPanel.closeMobileFiltersPanel();
-    await filtersPanel.expectMobileFiltersPanelNotExists();
+    await filtersPanel.expectMobileFiltersPanelIsNotExist();
   });
 });

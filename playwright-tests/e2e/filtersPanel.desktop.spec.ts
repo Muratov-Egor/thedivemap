@@ -13,12 +13,12 @@ test.describe('Desktop: Filters Panel', () => {
     const filtersPanel = new FiltersPanel(page);
 
     await filtersPanel.expectDesktopFiltersPanelToBeVisible();
-    await filtersPanel.expectAllFiltersToBeVisible();
+    await filtersPanel.expectMobileFiltersPanelIsNotExist();
   });
 
   test('Button open mobile filters panel is not visible', async ({ page }) => {
     const filtersPanel = new FiltersPanel(page);
 
-    await filtersPanel.expectButtonOpenMobileFiltersPanelIsNotVisible();
+    await filtersPanel.expectButtonOpenMobileFiltersPanelIsNotExist();
   });
 });

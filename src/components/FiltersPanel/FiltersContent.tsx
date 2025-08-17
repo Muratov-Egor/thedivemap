@@ -35,7 +35,7 @@ export default function FiltersContent({
   const { t: tCommon } = useTranslation('common');
 
   return (
-    <div className={`space-y-6 w-full ${className}`}>
+    <div className={`space-y-6 w-full ${className}`} data-testid={'filters-content'}>
       <Autocomplete
         language={currentLanguage}
         placeholder={tCommon('search.placeholder')}

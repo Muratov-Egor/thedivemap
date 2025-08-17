@@ -61,7 +61,7 @@ export default function Filters() {
       )}
 
       {/* Кнопка открытия мобильной панели - показываем только на мобильных */}
-      {isMobile && (
+      {isMobile && !isMobilePanelOpen && (
         <div className="fixed bottom-6 right-6 z-50">
           <Button
             variant="coral"
