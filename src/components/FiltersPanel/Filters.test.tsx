@@ -2,7 +2,7 @@ import React from 'react';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Filters from '../Filters';
+import Filters from '../FiltersPanel/Filters';
 import { FiltersProvider } from '@/contexts/FiltersContext';
 
 // Мокаем react-i18next

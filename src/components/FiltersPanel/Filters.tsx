@@ -4,15 +4,15 @@ import React, { useState, useEffect } from 'react';
 import Button from '@/components/ui/Button';
 import { useTranslation } from 'react-i18next';
 import { FiltersIcon, CloseIcon } from '@/components/icons';
-import Autocomplete from './ui/Autocomplete/Autocomplete';
-import SiteTypeFilters from './ui/SiteTypeFilters';
-import DifficultyFilters from './ui/DifficultyFilters';
-import RatingFilters from './ui/RatingFilters';
-import Slider from './ui/Slider';
+import Autocomplete from '../ui/Autocomplete/Autocomplete';
+import RatingFilters from './RatingFilters';
+import Slider from '../ui/Slider';
 import { useMap } from '@/contexts/MapContext';
 import { useFilters } from '@/hooks/useFilters';
 import { AutocompleteItem } from '@/components/ui/Autocomplete/types';
 import { useDebounce } from '@/hooks/useDebounce';
+import SiteTypeFilter from './SiteTypeFilters/SiteTypeFilters';
+import DifficultyFilter from './DifficultyFilters/DifficultyFilters';
 
 export default function Filters() {
   const { t, i18n } = useTranslation('filters');
@@ -180,8 +180,8 @@ export default function Filters() {
               placeholder={tCommon('search.placeholder')}
               onSelect={handleAutocompleteSelect}
             />
-            <SiteTypeFilters />
-            <DifficultyFilters />
+            <SiteTypeFilter />
+            <DifficultyFilter />
 
             {/* Слайдеры фильтрации */}
             <div className="space-y-4">
@@ -272,8 +272,8 @@ export default function Filters() {
                   placeholder={tCommon('search.placeholder')}
                   onSelect={handleAutocompleteSelect}
                 />
-                <SiteTypeFilters />
-                <DifficultyFilters />
+                <SiteTypeFilter />
+                <DifficultyFilter />
 
                 {/* Слайдеры фильтрации для мобильной версии */}
                 <div className="space-y-4">

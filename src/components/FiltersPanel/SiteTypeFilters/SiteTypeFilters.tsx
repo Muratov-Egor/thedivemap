@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMap } from '@/contexts/MapContext';
 import { useFilters } from '@/hooks/useFilters';
-import Chip from '../Chip/Chip';
+import Chip from '@/components/ui/Chip/Chip';
 import { SiteTypeIcon } from '@/components/icons';
 
 export default function SiteTypeFilters() {

@@ -44,3 +44,9 @@ next-env.d.ts
 allure-report
 allure-results
 test-results
+
+# vscode
+.vscode
+
+# idea
+.idea

@@ -2,7 +2,7 @@
 
 import Header from '@/components/Header';
 import MapContainer from '@/components/map/MapContainer';
-import Filters from '@/components/Filters';
+import Filters from '@/components/FiltersPanel/Filters';
 import { MapProvider } from '@/contexts/MapContext';
 
 export default function HomePage() {
