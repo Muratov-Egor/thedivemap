@@ -96,4 +96,11 @@ export class MarkersPage extends BaseSteps {
       expect(currentCount).toEqual(expectedCount);
     });
   }
+
+  async assertThatClustersCountLessThan(expectedCount: number) {
+    await test.step(`The number of clusters less than: ${expectedCount}`, async () => {
+      const currentCount = await this.getClustersCount();
+      expect(currentCount).toBeLessThan(expectedCount);
+    });
+  }
 }

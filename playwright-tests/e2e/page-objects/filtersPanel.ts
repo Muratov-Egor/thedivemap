@@ -29,15 +29,15 @@ export class FiltersPanel {
     this.minVisibilitySlider = page.getByTestId('min-visibility-slider')
   }
 
-  private diveSiteTypeFilter(id: string): Locator {
+  private diveSiteTypeFilter(id: number): Locator {
     return this.page.getByTestId(`site-type-filter-${id}`);
   }
 
-  private difficultyFilter(id: string): Locator {
+  private difficultyFilter(id: number): Locator {
     return this.page.getByTestId(`difficulty-filter-${id}`);
   }
 
-  private ratingStar(id: string): Locator {
+  private ratingStar(id: number): Locator {
     return this.page.getByTestId(`rating-star-${id}`);
   }
 
@@ -50,6 +50,24 @@ export class FiltersPanel {
   async closeMobileFiltersPanel() {
     await test.step('Close mobile filter panel', async () => {
       await this.buttonCloseMobileFiltersPanel.click();
+    })
+  }
+
+  async chooseSiteTypeFilterById(id: number) {
+    await test.step('Choose site type filter', async () => {
+      await this.diveSiteTypeFilter(id).click()
+    })
+  }
+
+  async chooseDifficultyFilterById(id: number) {
+    await test.step('Choose site type filter', async () => {
+      await this.difficultyFilter(id).click()
+    })
+  }
+
+  async chooseRatingById(id: number) {
+    await test.step('Choose site type filter', async () => {
+      await this.ratingStar(id).click()
     })
   }
 
