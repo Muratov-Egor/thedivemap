@@ -82,7 +82,7 @@ describe('DiveSiteMarker', () => {
     render(<DiveSiteMarker site={mockSite} onClick={mockOnClick} onHover={mockOnHover} />);
 
     const marker = screen.getByRole('button');
-    expect(marker).toHaveAttribute('aria-label', 'Дайв-сайт: Test Dive Site');
+    expect(marker).toHaveAttribute('aria-label', 'Dive site: Test Dive Site');
     expect(marker).toHaveAttribute('tabIndex', '0');
   });
 
