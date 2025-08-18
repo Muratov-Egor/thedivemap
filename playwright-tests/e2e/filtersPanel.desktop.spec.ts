@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { FiltersPanel } from './page-objects/filtersPanel';
 import { BaseSteps } from './page-objects/baseSteps';
-import allDiveSites from '../mocks/all-dive-sites.json'
+import allDiveSites from '../mocks/all-dive-sites.json';
 import { MarkersPage } from './page-objects/markersPage';
 
 test.describe('Desktop: Filters Panel', () => {
@@ -29,32 +29,32 @@ test.describe('Desktop: Filters Panel', () => {
     const filtersPanel = new FiltersPanel(page);
     const markers = new MarkersPage(page);
 
-    const initClusters = await markers.getClustersCount()
+    const initClusters = await markers.getClustersCount();
     await filtersPanel.chooseSiteTypeFilterById(1);
 
-    await filtersPanel.expectButtonCleanAllFiltersIsVisible()
+    await filtersPanel.expectButtonCleanAllFiltersIsVisible();
     await markers.assertThatClustersCountLessThan(initClusters);
-  })
+  });
 
   test('Choose dive difficulty filter', async ({ page }) => {
     const filtersPanel = new FiltersPanel(page);
     const markers = new MarkersPage(page);
 
-    const initClusters = await markers.getClustersCount()
+    const initClusters = await markers.getClustersCount();
     await filtersPanel.chooseDifficultyFilterById(2);
 
-    await filtersPanel.expectButtonCleanAllFiltersIsVisible()
+    await filtersPanel.expectButtonCleanAllFiltersIsVisible();
     await markers.assertThatClustersCountLessThan(initClusters);
-  })
+  });
 
   test('Choose dive rating filter', async ({ page }) => {
     const filtersPanel = new FiltersPanel(page);
     const markers = new MarkersPage(page);
 
-    const initClusters = await markers.getClustersCount()
+    const initClusters = await markers.getClustersCount();
     await filtersPanel.chooseRatingById(4);
 
-    await filtersPanel.expectButtonCleanAllFiltersIsVisible()
+    await filtersPanel.expectButtonCleanAllFiltersIsVisible();
     await markers.assertThatClustersCountLessThan(initClusters);
-  })
+  });
 });

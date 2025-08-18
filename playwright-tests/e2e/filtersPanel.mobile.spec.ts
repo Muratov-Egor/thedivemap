@@ -35,36 +35,36 @@ test.describe('Mobile: Filters Panel', () => {
     const filtersPanel = new FiltersPanel(page);
     const markers = new MarkersPage(page);
 
-    const initClusters = await markers.getClustersCount()
+    const initClusters = await markers.getClustersCount();
     await filtersPanel.openMobileFiltersPanel();
     await filtersPanel.chooseSiteTypeFilterById(2);
 
-    await filtersPanel.expectButtonCleanAllFiltersIsVisible()
+    await filtersPanel.expectButtonCleanAllFiltersIsVisible();
     await filtersPanel.closeMobileFiltersPanel();
     await markers.assertThatClustersCountLessThan(initClusters);
-  })
+  });
 
   test('Choose dive difficulty filter', async ({ page }) => {
     const filtersPanel = new FiltersPanel(page);
     const markers = new MarkersPage(page);
 
-    const initClusters = await markers.getClustersCount()
+    const initClusters = await markers.getClustersCount();
     await filtersPanel.openMobileFiltersPanel();
     await filtersPanel.chooseDifficultyFilterById(2);
 
-    await filtersPanel.expectButtonCleanAllFiltersIsVisible()
+    await filtersPanel.expectButtonCleanAllFiltersIsVisible();
     await markers.assertThatClustersCountLessThan(initClusters);
-  })
+  });
 
   test('Choose dive rating filter', async ({ page }) => {
     const filtersPanel = new FiltersPanel(page);
     const markers = new MarkersPage(page);
 
-    const initClusters = await markers.getClustersCount()
+    const initClusters = await markers.getClustersCount();
     await filtersPanel.openMobileFiltersPanel();
     await filtersPanel.chooseRatingById(4);
 
-    await filtersPanel.expectButtonCleanAllFiltersIsVisible()
+    await filtersPanel.expectButtonCleanAllFiltersIsVisible();
     await markers.assertThatClustersCountLessThan(initClusters);
-  })
+  });
 });

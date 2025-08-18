@@ -189,6 +189,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
             role="slider"
+            aria-label={label}
             aria-valuemin={min}
             aria-valuemax={max}
             aria-valuenow={value}

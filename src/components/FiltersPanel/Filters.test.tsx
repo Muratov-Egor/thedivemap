@@ -300,8 +300,9 @@ describe('Filters', () => {
     fireEvent.click(openButton);
     expect(screen.getByTestId('mobile-filters-panel')).toBeInTheDocument();
 
-    // Второй клик - закрывает
-    fireEvent.click(openButton);
+    // Второй шаг - закрываем через кнопку закрытия
+    const closeButton = screen.getByTestId('close-filters-panel-button');
+    fireEvent.click(closeButton);
     expect(screen.queryByTestId('mobile-filters-panel')).not.toBeInTheDocument();
   });
 

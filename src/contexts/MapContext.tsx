@@ -212,10 +212,23 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Обработка клика по кластеру
-  const onClusterClick = useCallback(() => {
-    // Логика обработки клика по кластеру
-    // TODO: Реализовать логику обработки кластера
-  }, []);
+  const onClusterClick = useCallback(
+    (cluster: Cluster) => {
+      // Зумируем к кластеру
+      if (map) {
+        const bounds = [
+          [cluster.bounds.minLng, cluster.bounds.minLat],
+          [cluster.bounds.maxLng, cluster.bounds.maxLat],
+        ] as [[number, number], [number, number]];
+
+        map.fitBounds(bounds, {
+          padding: 50,
+          duration: 500,
+        });
+      }
+    },
+    [map],
+  );
 
   // Очистка сообщения об отсутствии дайв-сайтов
   const clearAutocompleteInfoMessage = useCallback(() => {
