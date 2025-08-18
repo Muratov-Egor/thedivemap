@@ -39,8 +39,8 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: '/map-styles/arcgis_hybrid.json',
-      center: [98.379111, 7.609361],
-      zoom: 0,
+      center: [98.3774, 7.6079],
+      zoom: 15,
       maxZoom: 15,
       minZoom: 0,
       hash: false,

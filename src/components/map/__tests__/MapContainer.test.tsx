@@ -96,8 +96,8 @@ describe('MapContainer', () => {
     expect(Map).toHaveBeenCalledWith({
       container: expect.any(HTMLElement),
       style: '/map-styles/arcgis_hybrid.json',
-      center: [98.379111, 7.609361],
-      zoom: 0,
+      center: [98.3774, 7.6079],
+      zoom: 15,
       maxZoom: 15,
       minZoom: 0,
       hash: false,

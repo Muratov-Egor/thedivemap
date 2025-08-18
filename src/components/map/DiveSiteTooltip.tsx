@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarkerProps } from '@/types/clustering';
 import Button from '@/components/ui/Button';
-import { CloseIcon } from '@/components/icons';
+import { CloseIcon, SiteTypeIcon } from '@/components/icons';
 
 interface DiveSiteTooltipProps {
   site: MarkerProps['site'];
@@ -35,57 +35,90 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose }) => {
     <div
       data-testid={`dive-site-tooltip`}
       className={`
-        absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 
-        px-3 py-2 rounded-lg text-sm whitespace-nowrap z-20
-        bg-white/90 backdrop-blur-sm border border-white/20
-        shadow-lg shadow-black/10
+        absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 
+        px-4 py-3 rounded-2xl text-sm z-20
+        bg-white backdrop-blur-lg border border-tropical-blue/20
+        shadow-glass hover:shadow-glass-hover
         transition-all duration-300 ease-out
-        opacity-100 scale-100
+        min-w-[280px] max-w-[320px]
       `}
     >
+      {/* Заголовок */}
       <div
         data-testid={`dive-site-tooltip-name`}
-        className="font-semibold text-gray-900 mb-1 text-center"
+        className="font-semibold text-gray-900 mb-2 text-center text-base"
       >
         {site.name}
       </div>
 
+      {/* Координаты */}
       <div
         data-testid={`dive-site-tooltip-coordinates`}
-        className="text-gray-600 text-xs mb-2 text-center"
+        className="text-gray-600 text-xs mb-3 text-center flex items-center justify-center gap-1"
       >
-        📍 {formatCoordinates(site.latitude, site.longitude)}
+        <span className="text-tropical-blue flex items-center">📍</span>
+        {formatCoordinates(site.latitude, site.longitude)}
       </div>
 
-      <div className="flex justify-between gap-2">
+      {/* Тип, глубина и видимость */}
+      <div className="flex items-center justify-between gap-3 mb-3">
         {getSiteTypeLabel() && (
-          <div data-testid={`dive-site-tooltip-type`} className="text-gray-600 text-xs">
-            {t('map.markers.type')}: {getSiteTypeLabel()}
+          <div
+            data-testid={`dive-site-tooltip-type`}
+            className="flex items-center gap-2 text-gray-700 text-sm font-medium"
+          >
+            <SiteTypeIcon siteTypeId={site.site_type?.id || 12} className="w-4 h-4 flex-shrink-0 flex items-center justify-center" />
+            <span className="flex items-center">{getSiteTypeLabel()}</span>
           </div>
         )}
 
-        {site.rating > 0 && (
-          <div data-testid={`dive-site-tooltip-rating`} className="text-gray-600 text-xs">
-            ⭐️ {site.rating}/5
-          </div>
-        )}
+        <div
+          data-testid={`dive-site-tooltip-depth`}
+          className="flex items-center gap-2 text-gray-700 text-sm font-medium"
+        >
+          <span className="text-tropical-blue flex items-center justify-center">⬇</span>
+          <span className="flex items-center">{site.depth_max} {t('map.markers.meters')}</span>
+        </div>
+
+        <div
+          data-testid={`dive-site-tooltip-visibility`}
+          className="flex items-center gap-2 text-gray-700 text-sm font-medium"
+        >
+          <span className="text-tropical-blue flex items-center justify-center">👁️</span>
+          <span className="flex items-center">{site.visibility} {t('map.markers.meters')}</span>
+        </div>
       </div>
 
+      {/* Кнопка "Подробнее" */}
+      <div className="flex justify-center !mt-5">
+        <Button
+          onClick={() => console.log('click')}
+          variant="primary"
+          size="small"
+          className="justify-center"
+          aria-label={t('map.markers.more')}
+        >
+          {t('map.markers.more')}
+        </Button>
+      </div>
+
+      {/* Кнопка закрытия */}
       <Button
         onClick={onClose}
         variant="glass"
         shape="circle"
         size="small"
-        icon={<CloseIcon className="w-2 h-2" />}
-        className="!absolute !-top-2 !-right-2 !w-6 !h-6 !p-0"
+        icon={<CloseIcon className="w-3 h-3" />}
+        className="!absolute !-top-2 !-right-2 !w-7 !h-7 !p-0 shadow-md"
         aria-label={t('map.markers.closeTooltip')}
         data-testid={`dive-site-tooltip-close`}
       />
 
       {/* Стрелка tooltip */}
-      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white"></div>
+      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white/85"></div>
     </div>
   );
 };
 
 export default DiveSiteTooltip;
+

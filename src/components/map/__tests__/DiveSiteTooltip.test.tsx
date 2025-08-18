@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { I18nextProvider } from 'react-i18next';
-import i18n from '@/i18n/i18n.client';
+import { getI18n } from '@/i18n/i18n.client';
 import DiveSiteTooltip from '../DiveSiteTooltip';
 
 // Мок для дайв-сайта
@@ -41,7 +41,7 @@ const mockSite = {
 };
 
 const renderWithI18n = (component: React.ReactElement) => {
-  return render(<I18nextProvider i18n={i18n}>{component}</I18nextProvider>);
+  return render(<I18nextProvider i18n={getI18n()}>{component}</I18nextProvider>);
 };
 
 describe('DiveSiteTooltip', () => {
@@ -61,30 +61,26 @@ describe('DiveSiteTooltip', () => {
     renderWithI18n(<DiveSiteTooltip site={mockSite} onClose={mockOnClose} />);
 
     expect(screen.getByTestId('dive-site-tooltip-coordinates')).toHaveTextContent(
-      '📍 42.1234°N, 18.5678°E',
+      '📍42.1234°N, 18.5678°E',
     );
   });
 
   it('отображает тип сайта', () => {
     renderWithI18n(<DiveSiteTooltip site={mockSite} onClose={mockOnClose} />);
 
-    expect(screen.getByTestId('dive-site-tooltip-type')).toHaveTextContent(
-      /map\.markers\.type.*риф/i,
-    );
+    expect(screen.getByTestId('dive-site-tooltip-type')).toHaveTextContent('Риф');
   });
 
-  it('отображает рейтинг', () => {
+  it('отображает глубину', () => {
     renderWithI18n(<DiveSiteTooltip site={mockSite} onClose={mockOnClose} />);
 
-    expect(screen.getByTestId('dive-site-tooltip-rating')).toHaveTextContent('⭐️ 4/5');
+    expect(screen.getByTestId('dive-site-tooltip-depth')).toHaveTextContent('⬇30 m');
   });
 
-  it('не отображает рейтинг если он равен 0', () => {
-    const siteWithoutRating = { ...mockSite, rating: 0 };
+  it('отображает видимость', () => {
+    renderWithI18n(<DiveSiteTooltip site={mockSite} onClose={mockOnClose} />);
 
-    renderWithI18n(<DiveSiteTooltip site={siteWithoutRating} onClose={mockOnClose} />);
-
-    expect(screen.queryByTestId('dive-site-tooltip-rating')).not.toBeInTheDocument();
+    expect(screen.getByTestId('dive-site-tooltip-visibility')).toHaveTextContent('👁️20 m');
   });
 
   it('не отображает тип сайта если он отсутствует', () => {
@@ -115,24 +111,23 @@ describe('DiveSiteTooltip', () => {
       'left-1/2',
       'transform',
       '-translate-x-1/2',
-      'mb-2',
-      'px-3',
-      'py-2',
-      'rounded-lg',
+      'mb-3',
+      'px-4',
+      'py-3',
+      'rounded-2xl',
       'text-sm',
-      'whitespace-nowrap',
       'z-20',
-      'bg-white/90',
-      'backdrop-blur-sm',
+      'bg-white',
+      'backdrop-blur-lg',
       'border',
-      'border-white/20',
-      'shadow-lg',
-      'shadow-black/10',
+      'border-tropical-blue/20',
+      'shadow-glass',
+      'hover:shadow-glass-hover',
       'transition-all',
       'duration-300',
       'ease-out',
-      'opacity-100',
-      'scale-100',
+      'min-w-[280px]',
+      'max-w-[320px]',
     );
   });
 
@@ -154,7 +149,7 @@ describe('DiveSiteTooltip', () => {
       'border-r-8',
       'border-t-8',
       'border-transparent',
-      'border-t-white',
+      'border-t-white/85',
     );
   });
 });

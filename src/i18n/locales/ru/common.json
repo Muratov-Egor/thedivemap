@@ -22,7 +22,9 @@
       "diveSitePlural": "дайв-сайтов",
       "clickToZoom": "Нажмите для увеличения",
       "type": "Тип",
-      "closeTooltip": "Закрыть"
+      "closeTooltip": "Закрыть",
+      "more": "Подробнее",
+      "meters": "м"
     },
     "noResults": "По выбранным фильтрам дайв-сайты не найдены",
     "tryChangeFilters": "Попробуйте изменить фильтры"
