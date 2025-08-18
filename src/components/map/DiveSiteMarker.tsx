@@ -8,32 +8,7 @@ const DiveSiteMarker = React.memo<MarkerProps>(
   ({ site, onClick, onHover, isActive = false }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isTooltipClosed, setIsTooltipClosed] = useState(false);
-    const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const markerRef = useRef<HTMLDivElement>(null);
-    const autoCloseTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-    // Автоматическое закрытие tooltip через 8 секунд
-    useEffect(() => {
-      if (isActive && !isTooltipVisible && !isTooltipClosed) {
-        setIsTooltipVisible(true);
-        setIsTooltipClosed(false);
-
-        // Автоматическое закрытие через 8 секунд
-        autoCloseTimerRef.current = setTimeout(() => {
-          setIsTooltipVisible(false);
-        }, 8000);
-      } else if (!isActive) {
-        setIsTooltipVisible(false);
-        setIsTooltipClosed(false);
-      }
-
-      return () => {
-        if (autoCloseTimerRef.current) {
-          clearTimeout(autoCloseTimerRef.current);
-          autoCloseTimerRef.current = null;
-        }
-      };
-    }, [isActive, isTooltipVisible, isTooltipClosed]);
 
     // Анимация при наведении
     useEffect(() => {
@@ -50,7 +25,6 @@ const DiveSiteMarker = React.memo<MarkerProps>(
 
     const handleClick = (e: React.MouseEvent) => {
       e.stopPropagation();
-      // Сбрасываем состояние закрытия при новом клике на маркер
       setIsTooltipClosed(false);
       onClick?.(site);
     };
@@ -59,18 +33,10 @@ const DiveSiteMarker = React.memo<MarkerProps>(
       e.stopPropagation();
       setIsHovered(false);
       setIsTooltipClosed(true);
-      setIsTooltipVisible(false);
-
-      // Очищаем таймер при ручном закрытии
-      if (autoCloseTimerRef.current) {
-        clearTimeout(autoCloseTimerRef.current);
-        autoCloseTimerRef.current = null;
-      }
     };
 
     const handleMouseEnter = () => {
       setIsHovered(true);
-      // Сбрасываем состояние закрытия при наведении
       setIsTooltipClosed(false);
       onHover?.(site);
     };
@@ -80,7 +46,7 @@ const DiveSiteMarker = React.memo<MarkerProps>(
     };
 
     // Определяем, нужно ли показывать tooltip
-    const shouldShowTooltip = (isHovered || isActive) && !isTooltipClosed && isTooltipVisible;
+    const shouldShowTooltip = (isHovered || isActive) && !isTooltipClosed;
 
     return (
       <div

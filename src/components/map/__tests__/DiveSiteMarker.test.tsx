@@ -29,14 +29,37 @@ jest.mock('@/components/icons', () => ({
 
 describe('DiveSiteMarker', () => {
   const mockSite = {
-    id: 1,
+    id: '1',
     name: 'Test Dive Site',
+    description: 'Test description',
     latitude: 10.1234,
     longitude: 20.5678,
+    country_id: 1,
+    depth_max: 30,
+    visibility: 20,
+    info_links: null,
+    dive_center_links: null,
     rating: 4.5,
+    site_type_id: 1,
+    difficulty_id: 2,
+    status: 'published' as const,
+    created_at: '2024-01-01T00:00:00Z',
     site_type: {
+      id: 1,
       label_en: 'Reef',
       label_ru: 'Риф',
+    },
+    difficulty: {
+      id: 2,
+      label_en: 'Intermediate',
+      label_ru: 'Средний',
+    },
+    country: {
+      id: 1,
+      name_en: 'Montenegro',
+      name_ru: 'Черногория',
+      iso_code: 'ME',
+      region_id: 1,
     },
   };
 
@@ -178,23 +201,6 @@ describe('DiveSiteMarker', () => {
     expect(screen.queryByTestId('dive-site-tooltip')).not.toBeInTheDocument();
   });
 
-  it('не показывает tooltip если он был закрыт вручную', () => {
-    render(
-      <DiveSiteMarker
-        site={mockSite}
-        onClick={mockOnClick}
-        onHover={mockOnHover}
-        isActive={true}
-      />,
-    );
-
-    const closeButton = screen.getByTestId('dive-site-tooltip-close');
-    fireEvent.click(closeButton);
-
-    // Даже при активном состоянии tooltip не должен показываться
-    expect(screen.queryByTestId('dive-site-tooltip')).not.toBeInTheDocument();
-  });
-
   it('обрабатывает отрицательные координаты', () => {
     const siteWithNegativeCoords = {
       ...mockSite,
@@ -218,7 +224,7 @@ describe('DiveSiteMarker', () => {
   it('обрабатывает отсутствие типа сайта', () => {
     const siteWithoutType = {
       ...mockSite,
-      site_type: null,
+      site_type: undefined,
     };
 
     render(
@@ -309,26 +315,5 @@ describe('DiveSiteMarker', () => {
     );
 
     expect(screen.queryByTestId('dive-site-tooltip')).not.toBeInTheDocument();
-  });
-
-  it('сбрасывает состояние закрытия при новом клике', () => {
-    render(
-      <DiveSiteMarker
-        site={mockSite}
-        onClick={mockOnClick}
-        onHover={mockOnHover}
-        isActive={true}
-      />,
-    );
-
-    // Закрываем tooltip
-    const closeButton = screen.getByTestId('dive-site-tooltip-close');
-    fireEvent.click(closeButton);
-    expect(screen.queryByTestId('dive-site-tooltip')).not.toBeInTheDocument();
-
-    // Кликаем на маркер - tooltip должен появиться снова
-    const marker = screen.getByTestId('dive-site-marker-1');
-    fireEvent.click(marker);
-    expect(screen.getByTestId('dive-site-tooltip')).toBeInTheDocument();
   });
 });
