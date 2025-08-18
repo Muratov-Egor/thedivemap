@@ -1,192 +1,237 @@
-import { expect, test, Locator, Page } from '@playwright/test';
+import { expect, Locator, Page, test } from '@playwright/test';
+import { MarkersPage } from './markersPage';
 
 export class FiltersPanel {
-  readonly desktopFiltersPanel: Locator;
-  readonly mobileFiltersPanel: Locator;
-  readonly openFiltersPanelButton: Locator;
-  readonly closeFiltersPanelButton: Locator;
-
-  // Локаторы для элементов внутри десктопной панели
-  readonly desktopDifficultyFiltersBlock: Locator;
-  readonly desktopSiteTypeFiltersBlock: Locator;
-  readonly desktopRatingFiltersBlock: Locator;
-  readonly desktopMaxDepthSlider: Locator;
-  readonly desktopMinVisibilitySlider: Locator;
-  readonly desktopAutocompleteInput: Locator;
-
-  // Локаторы для элементов внутри мобильной панели
-  readonly mobileDifficultyFiltersBlock: Locator;
-  readonly mobileSiteTypeFiltersBlock: Locator;
-  readonly mobileRatingFiltersBlock: Locator;
-  readonly mobileMaxDepthSlider: Locator;
-  readonly mobileMinVisibilitySlider: Locator;
-  readonly mobileAutocompleteInput: Locator;
+  readonly filterPanelDesktop: Locator;
+  readonly filterPanelMobile: Locator;
+  readonly filtersContent: Locator;
+  readonly buttonOpenMobileFiltersPanel: Locator;
+  readonly buttonCloseMobileFiltersPanel: Locator;
+  readonly buttonCleanAllFilters: Locator;
+  readonly siteTypeFilters: Locator;
+  readonly difficultyTypeFilters: Locator;
+  readonly ratingFilters: Locator;
+  readonly maxDepthSlider: Locator;
+  readonly minVisibilitySlider: Locator;
 
   constructor(private page: Page) {
-    this.desktopFiltersPanel = page.getByTestId('desktop-filters-panel');
-    this.mobileFiltersPanel = page.getByTestId('mobile-filters-panel');
-    this.openFiltersPanelButton = page.getByTestId('open-filters-panel-button');
-    this.closeFiltersPanelButton = page.getByTestId('close-filters-panel-button');
+    this.filterPanelDesktop = page.getByTestId('desktop-filters-panel');
+    this.filterPanelMobile = page.getByTestId('mobile-filters-panel');
+    this.buttonOpenMobileFiltersPanel = page.getByTestId('open-filters-panel-button');
+    this.filtersContent = page.getByTestId('filters-content');
+    this.buttonCloseMobileFiltersPanel = page.getByTestId('close-filters-panel-button');
+    this.buttonCleanAllFilters = page.getByTestId('clear-all-filters-button');
+    this.siteTypeFilters = page.getByTestId('site-type-filters');
+    this.difficultyTypeFilters = page.getByTestId('difficulty-filters');
+    this.ratingFilters = page.getByTestId('rating-filters');
+    this.maxDepthSlider = page.getByTestId('max-depth-slider');
+    this.minVisibilitySlider = page.getByTestId('min-visibility-slider');
+  }
 
-    // Локаторы для десктопной панели
-    this.desktopDifficultyFiltersBlock = this.desktopFiltersPanel.getByTestId('difficulty-filters');
-    this.desktopSiteTypeFiltersBlock = this.desktopFiltersPanel.getByTestId('site-type-filters');
-    this.desktopRatingFiltersBlock = this.desktopFiltersPanel.getByTestId('rating-filters');
-    this.desktopMaxDepthSlider = this.desktopFiltersPanel.getByTestId('max-depth-slider');
-    this.desktopMinVisibilitySlider = this.desktopFiltersPanel.getByTestId('min-visibility-slider');
-    this.desktopAutocompleteInput = this.desktopFiltersPanel.getByTestId('autocomplete-input');
-
-    // Локаторы для мобильной панели
-    this.mobileDifficultyFiltersBlock = this.mobileFiltersPanel.getByTestId('difficulty-filters');
-    this.mobileSiteTypeFiltersBlock = this.mobileFiltersPanel.getByTestId('site-type-filters');
-    this.mobileRatingFiltersBlock = this.mobileFiltersPanel.getByTestId('rating-filters');
-    this.mobileMaxDepthSlider = this.mobileFiltersPanel.getByTestId('max-depth-slider');
-    this.mobileMinVisibilitySlider = this.mobileFiltersPanel.getByTestId('min-visibility-slider');
-    this.mobileAutocompleteInput = this.mobileFiltersPanel.getByTestId('autocomplete-input');
+  private diveSiteTypeFilter(id: number): Locator {
+    return this.page.getByTestId(`site-type-filter-${id}`);
   }
 
   private difficultyFilter(id: number): Locator {
     return this.page.getByTestId(`difficulty-filter-${id}`);
   }
 
-  private siteTypeFilter(id: number): Locator {
-    return this.page.getByTestId(`site-type-filter-${id}`);
-  }
-
-  private ratingFilter(id: number): Locator {
+  private ratingStar(id: number): Locator {
     return this.page.getByTestId(`rating-star-${id}`);
   }
 
-  // Метод для определения активной панели
-  private async getActivePanel() {
-    const isDesktopVisible = await this.desktopFiltersPanel.isVisible();
-    const isMobileVisible = await this.mobileFiltersPanel.isVisible();
-
-    if (isDesktopVisible && !isMobileVisible) {
-      return 'desktop';
-    } else if (isMobileVisible && !isDesktopVisible) {
-      return 'mobile';
-    } else {
-      throw new Error('Не удалось определить активную панель фильтров');
-    }
-  }
-
-  // Метод для получения локаторов активной панели
-  private async getActivePanelLocators() {
-    const activePanel = await this.getActivePanel();
-
-    if (activePanel === 'desktop') {
-      return {
-        difficultyFiltersBlock: this.desktopDifficultyFiltersBlock,
-        siteTypeFiltersBlock: this.desktopSiteTypeFiltersBlock,
-        ratingFiltersBlock: this.desktopRatingFiltersBlock,
-        maxDepthSlider: this.desktopMaxDepthSlider,
-        minVisibilitySlider: this.desktopMinVisibilitySlider,
-        autocompleteInput: this.desktopAutocompleteInput,
-      };
-    } else {
-      return {
-        difficultyFiltersBlock: this.mobileDifficultyFiltersBlock,
-        siteTypeFiltersBlock: this.mobileSiteTypeFiltersBlock,
-        ratingFiltersBlock: this.mobileRatingFiltersBlock,
-        maxDepthSlider: this.mobileMaxDepthSlider,
-        minVisibilitySlider: this.mobileMinVisibilitySlider,
-        autocompleteInput: this.mobileAutocompleteInput,
-      };
-    }
-  }
-
-  async expectDesktopFiltersPanelToBeVisible() {
-    await test.step(`Expect desktop filters panel to be visible`, async () => {
-      await expect(this.desktopFiltersPanel).toBeVisible();
-    });
-  }
-
-  async expectMobileFiltersPanelToBeVisible() {
-    await test.step(`Expect mobile filters panel to be visible`, async () => {
-      await expect(this.mobileFiltersPanel).toBeVisible();
-    });
-  }
-
-  async expectDesktopFiltersPanelNotVisible() {
-    await test.step(`Expect desktop filters panel not visible`, async () => {
-      await expect(this.desktopFiltersPanel).not.toBeVisible();
-    });
-  }
-
-  async expectMobileFiltersPanelNotExists() {
-    await test.step(`Expect mobile filters panel not exists`, async () => {
-      await expect(this.mobileFiltersPanel).not.toBeAttached();
-    });
-  }
-
-  async expectButtonOpenMobileFiltersPanelIsNotVisible() {
-    await test.step(`Expect button open mobile filters panel is not visible`, async () => {
-      await expect(this.openFiltersPanelButton).not.toBeVisible();
-    });
-  }
-
   async openMobileFiltersPanel() {
-    await test.step(`Open mobile filters panel`, async () => {
-      await this.openFiltersPanelButton.click();
+    await test.step('Open mobile filter panel', async () => {
+      await this.buttonOpenMobileFiltersPanel.click();
     });
   }
 
   async closeMobileFiltersPanel() {
-    await test.step(`Close mobile filters panel`, async () => {
-      await this.closeFiltersPanelButton.click();
+    await test.step('Close mobile filter panel', async () => {
+      await this.buttonCloseMobileFiltersPanel.click();
     });
   }
 
-  async expectDifficultyFilterToBeVisible(id: number) {
-    await test.step(`Expect difficulty filter to be visible`, async () => {
-      await expect(this.difficultyFilter(id)).toBeVisible();
+  async chooseSiteTypeFilterById(id: number) {
+    await test.step('Choose site type filter', async () => {
+      await this.diveSiteTypeFilter(id).click();
     });
   }
 
-  async expectSiteTypeFilterToBeVisible(id: number) {
-    await test.step(`Expect site type filter to be visible`, async () => {
-      await expect(this.siteTypeFilter(id)).toBeVisible();
+  async chooseDifficultyFilterById(id: number) {
+    await test.step('Choose site type filter', async () => {
+      await this.difficultyFilter(id).click();
     });
   }
 
-  async expectRatingFilterToBeVisible(id: number) {
-    await test.step(`Expect rating filter to be visible`, async () => {
-      await expect(this.ratingFilter(id)).toBeVisible();
+  async chooseRatingById(id: number) {
+    await test.step('Choose site type filter', async () => {
+      await this.ratingStar(id).click();
     });
   }
 
-  async expectMaxDepthSliderToBeVisible() {
-    await test.step(`Expect max depth slider to be visible`, async () => {
-      const locators = await this.getActivePanelLocators();
-      await expect(locators.maxDepthSlider).toBeVisible();
+  async expectDesktopFiltersPanelToBeVisible() {
+    await test.step('Expect that desktop filters panel to be visible', async () => {
+      await expect(this.filterPanelDesktop).toBeVisible();
+      await this.expectFiltersContentIsVisible();
     });
   }
 
-  async expectMinVisibilitySliderToBeVisible() {
-    await test.step(`Expect min visibility slider to be visible`, async () => {
-      const locators = await this.getActivePanelLocators();
-      await expect(locators.minVisibilitySlider).toBeVisible();
+  async expectMobileFiltersPanelToBeVisible() {
+    await test.step('Expect that mobile filters panel to be visible', async () => {
+      await expect(this.filterPanelMobile).toBeVisible();
+      await this.expectFiltersContentIsVisible();
+      await this.expectButtonOpenMobileFiltersPanelIsNotExist();
     });
   }
 
-  async expectAutocompleteInputToBeVisible() {
-    await test.step(`Expect autocomplete input to be visible`, async () => {
-      const locators = await this.getActivePanelLocators();
-      await expect(locators.autocompleteInput).toBeVisible();
+  async expectDesktopFiltersPanelIsNotExist() {
+    await test.step('Expect that desktop filters panel is not exist', async () => {
+      await expect(this.filterPanelDesktop).not.toBeAttached();
     });
   }
 
-  async expectAllFiltersToBeVisible() {
-    await test.step(`Expect all filters to be visible`, async () => {
-      const locators = await this.getActivePanelLocators();
+  async expectMobileFiltersPanelIsNotExist() {
+    await test.step('Expect that mobile filters panel is not exist', async () => {
+      await expect(this.filterPanelMobile).not.toBeAttached();
+    });
+  }
 
-      await expect(locators.autocompleteInput).toBeVisible();
-      await expect(locators.difficultyFiltersBlock).toBeVisible();
-      await expect(locators.siteTypeFiltersBlock).toBeVisible();
-      await expect(locators.ratingFiltersBlock).toBeVisible();
-      await expect(locators.maxDepthSlider).toBeVisible();
-      await expect(locators.minVisibilitySlider).toBeVisible();
+  async expectButtonOpenMobileFiltersPanelIsNotExist() {
+    await test.step('Expect that button open mobile panel is not exist', async () => {
+      await expect(this.buttonOpenMobileFiltersPanel).not.toBeAttached();
+    });
+  }
+
+  async expectFiltersContentIsVisible() {
+    await test.step('Expect the all filters are visible', async () => {
+      await this.filtersContent.isVisible();
+
+      await test.step('Expect the type dive sites type filters are visible', async () => {
+        await this.siteTypeFilters.isVisible();
+      });
+
+      await test.step('Expect the type difficulty filters are visible', async () => {
+        await this.difficultyTypeFilters.isVisible();
+      });
+
+      await test.step('Expect the type rating filters are visible', async () => {
+        await this.ratingFilters.isVisible();
+      });
+
+      await test.step('Expect the type slider max depth is visible', async () => {
+        await this.maxDepthSlider.isVisible();
+      });
+
+      await test.step('Expect the type slider min visibility is visible', async () => {
+        await this.minVisibilitySlider.isVisible();
+      });
+
+      await this.expectButtonCleanAllFiltersIsNotExist();
+    });
+  }
+
+  async expectButtonCleanAllFiltersIsVisible() {
+    await test.step('Expect that button clean all filters is visible', async () => {
+      await expect(this.buttonCleanAllFilters).toBeVisible();
+    });
+  }
+
+  async expectButtonCleanAllFiltersIsNotExist() {
+    await test.step('Expect that button clean all filters is not exist', async () => {
+      await expect(this.buttonCleanAllFilters).not.toBeAttached();
+    });
+  }
+
+  async setMaxDepthSlider(value: number) {
+    await test.step(`Set max depth slider to ${value}`, async () => {
+      const slider = this.maxDepthSlider.locator('[role="slider"]');
+      await slider.click();
+
+      // Получаем размеры слайдера для расчета позиции
+      const boundingBox = await slider.boundingBox();
+      if (!boundingBox) throw new Error('Slider bounding box not found');
+
+      // Рассчитываем позицию для нужного значения (0-50 диапазон)
+      const percentage = value / 50;
+      const clickX = boundingBox.x + boundingBox.width * percentage;
+      const clickY = boundingBox.y + boundingBox.height / 2;
+
+      await this.page.mouse.click(clickX, clickY);
+    });
+  }
+
+  async setMinVisibilitySlider(value: number) {
+    await test.step(`Set min visibility slider to ${value}`, async () => {
+      const slider = this.minVisibilitySlider.locator('[role="slider"]');
+      await slider.click();
+
+      // Получаем размеры слайдера для расчета позиции
+      const boundingBox = await slider.boundingBox();
+      if (!boundingBox) throw new Error('Slider bounding box not found');
+
+      // Рассчитываем позицию для нужного значения (0-30 диапазон)
+      const percentage = value / 30;
+      const clickX = boundingBox.x + boundingBox.width * percentage;
+      const clickY = boundingBox.y + boundingBox.height / 2;
+
+      await this.page.mouse.click(clickX, clickY);
+    });
+  }
+
+  async expectMaxDepthSliderValue(value: number) {
+    await test.step(`Expect max depth slider value to be ${value}`, async () => {
+      const valueDisplay = this.page.getByTestId('max-depth-slider-value');
+      await expect(valueDisplay).toHaveText(`${value} m`);
+    });
+  }
+
+  async expectMinVisibilitySliderValue(value: number) {
+    await test.step(`Expect min visibility slider value to be ${value}`, async () => {
+      const valueDisplay = this.page.getByTestId('min-visibility-slider-value');
+      await expect(valueDisplay).toHaveText(`${value} m`);
+    });
+  }
+
+  async expectSiteTypeFilterActive(id: number) {
+    await test.step(`Expect site type filter ${id} to be active`, async () => {
+      const filter = this.diveSiteTypeFilter(id);
+      await expect(filter).toHaveAttribute('aria-pressed', 'true');
+    });
+  }
+
+  async expectDifficultyFilterActive(id: number) {
+    await test.step(`Expect difficulty filter ${id} to be active`, async () => {
+      const filter = this.difficultyFilter(id);
+      await expect(filter).toHaveAttribute('aria-pressed', 'true');
+    });
+  }
+
+  async expectRatingFilterActive(id: number) {
+    await test.step(`Expect rating filter ${id} to be active`, async () => {
+      const ratingStar = this.ratingStar(id);
+      await expect(ratingStar).toHaveClass(/text-yellow-400/);
+    });
+  }
+
+  async expectSiteTypeFilterNotActive(id: number) {
+    await test.step(`Expect site type filter ${id} to be not active`, async () => {
+      const filter = this.diveSiteTypeFilter(id);
+      await expect(filter).toHaveAttribute('aria-pressed', 'false');
+    });
+  }
+
+  async expectDifficultyFilterNotActive(id: number) {
+    await test.step(`Expect difficulty filter ${id} to be not active`, async () => {
+      const filter = this.difficultyFilter(id);
+      await expect(filter).toHaveAttribute('aria-pressed', 'false');
+    });
+  }
+
+  async expectRatingFilterNotActive(id: number) {
+    await test.step(`Expect rating filter ${id} to be not active`, async () => {
+      const ratingStar = this.ratingStar(id);
+      await expect(ratingStar).toHaveClass(/text-gray-300/);
     });
   }
 }

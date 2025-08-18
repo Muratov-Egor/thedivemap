@@ -189,6 +189,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
             role="slider"
+            aria-label={label}
             aria-valuemin={min}
             aria-valuemax={max}
             aria-valuenow={value}
@@ -229,7 +230,10 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
                 {min}
                 {valueSuffix}
               </span>
-              <span className="text-sm font-semibold text-slate-700 bg-white/80 px-3 py-1.5 rounded-2xl shadow-glass border border-slate-200 backdrop-blur-sm">
+              <span
+                className="text-sm font-semibold text-slate-700 bg-white/80 px-3 py-1.5 rounded-2xl shadow-glass border border-slate-200 backdrop-blur-sm"
+                data-testid={`${dataTestId}-value`}
+              >
                 {valuePrefix}
                 {value}
                 {valueSuffix}

@@ -66,7 +66,7 @@ test.describe('Mobile: Autocomplete tests', () => {
     await autocomplete.expectListToBeVisible(true);
 
     await filtersPanel.closeMobileFiltersPanel();
-    await filtersPanel.expectMobileFiltersPanelNotExists();
+    await filtersPanel.expectMobileFiltersPanelIsNotExist();
   });
 
   test('Should handle keyboard navigation on mobile', async ({ page }) => {

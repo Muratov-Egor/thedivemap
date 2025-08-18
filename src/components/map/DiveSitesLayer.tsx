@@ -12,7 +12,7 @@ import MarkerCluster from './MarkerCluster';
 interface DiveSitesLayerProps {
   map: Map | null;
   sites: Site[];
-  selectedSite: Site | null; // ✅ Добавляю пропс selectedSite
+  selectedSite: Site | null;
   onSiteClick?: (site: Site) => void;
   onClusterClick?: (cluster: Cluster) => void;
 }
@@ -20,32 +20,34 @@ interface DiveSitesLayerProps {
 export default function DiveSitesLayer({
   map,
   sites,
-  selectedSite, // ✅ Получаю selectedSite из пропсов
+  selectedSite,
   onSiteClick,
   onClusterClick,
 }: DiveSitesLayerProps) {
   const [clusters, setClusters] = useState<Cluster[]>([]);
   const [individualSites, setIndividualSites] = useState<Site[]>([]);
-  // ❌ Удаляю локальное состояние: const [selectedSite, setSelectedSite] = useState<Site | null>(null);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   // Сбрасываем состояние кластеризации если нет данных
   useEffect(() => {
     if (!sites || sites.length === 0) {
       setClusters([]);
       setIndividualSites([]);
+      return;
     }
   }, [sites]);
 
   const clusteringManagerRef = useRef<ClusteringManager | null>(null);
   const performanceOptimizerRef = useRef<PerformanceOptimizer | null>(null);
+  const lastSitesRef = useRef<Site[]>([]);
 
   // Инициализация менеджеров
   useEffect(() => {
     if (!clusteringManagerRef.current) {
       clusteringManagerRef.current = new ClusteringManager({
-        minPoints: 2, // Минимальное количество точек для создания кластера (2+ точек = кластер)
-        maxZoom: 12, // Максимальный зум для кластеризации (выше 12 - только отдельные маркеры)
-        radius: 50, // Радиус кластеризации в пикселях (расстояние между точками для объединения)
+        minPoints: 2,
+        maxZoom: 12,
+        radius: 50,
       });
     }
 
@@ -88,71 +90,114 @@ export default function DiveSitesLayer({
     [map],
   );
 
+  // Проверка, изменились ли сайты (для оптимизации)
+  const hasSitesChanged = useCallback((newSites: Site[]): boolean => {
+    if (lastSitesRef.current.length !== newSites.length) {
+      return true;
+    }
+
+    // Проверяем, изменились ли ID сайтов
+    const oldIds = new Set(lastSitesRef.current.map((site) => site.id));
+    const newIds = new Set(newSites.map((site) => site.id));
+
+    if (oldIds.size !== newIds.size) {
+      return true;
+    }
+
+    for (const id of oldIds) {
+      if (!newIds.has(id)) {
+        return true;
+      }
+    }
+
+    return false;
+  }, []);
+
+  // Вынесенная функция для выполнения обновления кластеризации
+  const performClusteringUpdate = useCallback(() => {
+    if (!map || !clusteringManagerRef.current || sites.length === 0) {
+      return;
+    }
+
+    setIsUpdating(true);
+
+    try {
+      const bounds = getMapBounds();
+      const zoom = getCurrentZoom();
+
+      if (!bounds) {
+        return;
+      }
+
+      if (clusteringManagerRef.current) {
+        const newClusters = clusteringManagerRef.current.cluster(sites, bounds, zoom);
+        setClusters(newClusters);
+
+        // Определяем, какие сайты показывать индивидуально на основе уровня зума
+        const shouldShowIndividual = zoom > 12;
+
+        if (shouldShowIndividual) {
+          // На высоком зуме показываем все сайты как отдельные маркеры
+          setIndividualSites(sites);
+        } else {
+          // На среднем и низком зуме показываем сайты, которые не попали в кластеры
+          const clusteredSiteIds = new Set();
+          newClusters.forEach((cluster) => {
+            cluster.points.forEach((site) => {
+              clusteredSiteIds.add(site.id);
+            });
+          });
+
+          // Фильтруем сайты, которые не попали в кластеры
+          const individualSitesToShow = sites.filter((site) => !clusteredSiteIds.has(site.id));
+          setIndividualSites(individualSitesToShow);
+        }
+
+        // Обновляем ссылку на последние сайты
+        lastSitesRef.current = [...sites];
+      }
+    } catch (error) {
+      console.error('Error during clustering:', error);
+    } finally {
+      setIsUpdating(false);
+    }
+  }, [map, sites, getMapBounds, getCurrentZoom]);
+
   // Обновление кластеризации
   const updateClustering = useCallback(() => {
     if (!map || !clusteringManagerRef.current || sites.length === 0) {
       return;
     }
 
+    // Проверяем, изменились ли сайты
+    const sitesChanged = hasSitesChanged(sites);
+
+    // Если сайты не изменились и мы уже обновляемся, пропускаем
+    if (!sitesChanged && isUpdating) {
+      return;
+    }
+
     const bounds = getMapBounds();
-    const zoom = getCurrentZoom();
 
     if (!bounds) {
       return;
     }
 
-    // Оптимизируем обновление кластеризации
-    if (performanceOptimizerRef.current) {
+    // Для изменений фильтров (изменение sites) выполняем обновление немедленно
+    // Для движений карты используем throttling
+    const shouldThrottle = !sitesChanged;
+
+    if (shouldThrottle && performanceOptimizerRef.current) {
+      // Throttling только для движений карты
       const throttledUpdate = performanceOptimizerRef.current.throttle(() => {
-        try {
-          if (clusteringManagerRef.current) {
-            const newClusters = clusteringManagerRef.current.cluster(sites, bounds, zoom);
-            setClusters(newClusters);
-
-            // Определяем, какие сайты показывать индивидуально на основе уровня зума
-            const shouldShowIndividual = zoom > 12; // Порог для показа всех сайтов как отдельных маркеров
-
-            if (shouldShowIndividual) {
-              // На высоком зуме (zoom > 12) показываем все сайты как отдельные маркеры
-              setIndividualSites(sites); // Все сайты отображаются индивидуально
-            } else {
-              // На среднем и низком зуме показываем сайты, которые не попали в кластеры
-              const clusteredSiteIds = new Set(); // Множество ID сайтов, которые уже в кластерах
-              newClusters.forEach((cluster) => {
-                cluster.points.forEach((site) => {
-                  clusteredSiteIds.add(site.id); // Добавляем ID каждого сайта из кластера
-                });
-              });
-
-              // Фильтруем сайты, которые не попали в кластеры (показываем их отдельно)
-              const individualSitesToShow = sites.filter((site) => !clusteredSiteIds.has(site.id));
-              setIndividualSites(individualSitesToShow);
-            }
-          }
-        } catch (error) {
-          console.error('Error during clustering:', error);
-        }
+        performClusteringUpdate();
       }, 100);
-
       throttledUpdate();
     } else {
-      // Если нет оптимизатора, выполняем сразу
-      try {
-        if (clusteringManagerRef.current) {
-          const newClusters = clusteringManagerRef.current.cluster(sites, bounds, zoom);
-          setClusters(newClusters);
-          setIndividualSites(
-            sites.filter(
-              (site) =>
-                !newClusters.some((cluster) => cluster.points.some((p) => p.id === site.id)),
-            ),
-          );
-        }
-      } catch (error) {
-        console.error('Error during clustering:', error);
-      }
+      // Немедленное обновление для изменений фильтров
+      performClusteringUpdate();
     }
-  }, [map, sites, getMapBounds, getCurrentZoom]);
+  }, [map, sites, getMapBounds, hasSitesChanged, isUpdating, performClusteringUpdate]);
 
   // Обработка событий карты
   useEffect(() => {
@@ -175,23 +220,24 @@ export default function DiveSitesLayer({
     };
   }, [map, updateClustering]);
 
-  // Обновление при изменении данных
+  // Обновление при изменении данных (включая фильтры)
   useEffect(() => {
     if (sites.length === 0) {
       setClusters([]);
       setIndividualSites([]);
+      lastSitesRef.current = [];
       return;
     }
-    updateClustering();
-  }, [sites, updateClustering]);
+
+    // Принудительное обновление при изменении sites (фильтров)
+    performClusteringUpdate();
+  }, [sites, performClusteringUpdate]);
 
   // Обработка клика по сайту
   const handleSiteClick = useCallback(
     (site: Site) => {
-      // ❌ Удаляю: setSelectedSite(site);
       onSiteClick?.(site);
-
-      console.log(site);
+      console.log('Site clicked:', site);
     },
     [onSiteClick],
   );
@@ -243,7 +289,7 @@ export default function DiveSitesLayer({
             <DiveSiteMarker
               site={site}
               onClick={handleSiteClick}
-              isActive={selectedSite?.id === site.id} // ✅ Использую selectedSite из пропсов
+              isActive={selectedSite?.id === site.id}
             />
           </div>
         ))}
