@@ -1,6 +1,13 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useCallback,
+  useEffect,
+} from 'react';
 import { DiveSiteDetails } from '@/lib/types/supabase';
 
 type PanelMode = 'filters' | 'info';
@@ -26,28 +33,38 @@ export function PanelProvider({ children }: PanelProviderProps) {
   const [panelMode, setPanelMode] = useState<PanelMode>('filters');
   const [selectedDiveSite, setSelectedDiveSite] = useState<DiveSiteDetails | null>(null);
   const [clearDiveSiteHook, setClearDiveSiteHook] = useState<(() => void) | null>(null);
+  const [shouldClearDiveSite, setShouldClearDiveSite] = useState(false);
 
-  const selectDiveSite = (diveSite: DiveSiteDetails | null) => {
+  // Эффект для очистки состояния дайв-сайта
+  useEffect(() => {
+    if (shouldClearDiveSite && clearDiveSiteHook) {
+      clearDiveSiteHook();
+      setShouldClearDiveSite(false);
+    }
+  }, [shouldClearDiveSite, clearDiveSiteHook]);
+
+  const selectDiveSite = useCallback((diveSite: DiveSiteDetails | null) => {
     setSelectedDiveSite(diveSite);
-  };
+  }, []);
 
-  const showFilters = () => {
+  const showFilters = useCallback(() => {
     setPanelMode('filters');
     setSelectedDiveSite(null);
-    // Очищаем состояние в хуке, если функция доступна
-    if (clearDiveSiteHook) {
-      clearDiveSiteHook();
-    }
-  };
+    setShouldClearDiveSite(true);
+  }, []);
 
-  const showInfo = (diveSite: DiveSiteDetails) => {
+  const showInfo = useCallback((diveSite: DiveSiteDetails) => {
     setPanelMode('info');
     setSelectedDiveSite(diveSite);
-  };
+  }, []);
 
-  const clearDiveSite = () => {
+  const clearDiveSite = useCallback(() => {
     setSelectedDiveSite(null);
-  };
+  }, []);
+
+  const setClearDiveSiteHookFn = useCallback((clearFn: () => void) => {
+    setClearDiveSiteHook(() => clearFn);
+  }, []);
 
   const value: PanelContextType = {
     panelMode,
@@ -57,7 +74,7 @@ export function PanelProvider({ children }: PanelProviderProps) {
     showFilters,
     showInfo,
     clearDiveSite,
-    setClearDiveSiteHook,
+    setClearDiveSiteHook: setClearDiveSiteHookFn,
   };
 
   return <PanelContext.Provider value={value}>{children}</PanelContext.Provider>;

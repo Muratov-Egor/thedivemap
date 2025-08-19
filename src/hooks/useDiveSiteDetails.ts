@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { DiveSiteDetails } from '@/lib/types/supabase';
 
 interface UseDiveSiteDetailsReturn {
@@ -14,7 +14,7 @@ export function useDiveSiteDetails(): UseDiveSiteDetailsReturn {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchDiveSiteDetails = async (id: string) => {
+  const fetchDiveSiteDetails = useCallback(async (id: string) => {
     if (!id) {
       setError('Site ID is required');
       return;
@@ -40,12 +40,12 @@ export function useDiveSiteDetails(): UseDiveSiteDetailsReturn {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const clearDiveSite = () => {
+  const clearDiveSite = useCallback(() => {
     setDiveSite(null);
     setError(null);
-  };
+  }, []);
 
   return {
     diveSite,

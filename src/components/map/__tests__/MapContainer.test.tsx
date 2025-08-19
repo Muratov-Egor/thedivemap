@@ -26,6 +26,8 @@ jest.mock('@/contexts/MapContext', () => ({
 
 // Мокаем PanelContext
 const mockShowInfo = jest.fn();
+const mockClearDiveSite = jest.fn();
+const mockSetClearDiveSiteHook = jest.fn();
 const mockUsePanel = jest.fn();
 
 jest.mock('@/contexts/PanelContext', () => ({
@@ -35,6 +37,7 @@ jest.mock('@/contexts/PanelContext', () => ({
 
 // Мокаем useDiveSiteDetails
 const mockFetchDiveSiteDetails = jest.fn();
+const mockClearDiveSiteHook = jest.fn();
 const mockUseDiveSiteDetails = jest.fn();
 
 jest.mock('@/hooks/useDiveSiteDetails', () => ({
@@ -69,7 +72,7 @@ jest.mock('../DiveSitesLayer', () => {
 
 // Мокаем Notification
 jest.mock('@/components/ui', () => ({
-  Notification: ({ show, message }: any) => 
+  Notification: ({ show, message }: any) =>
     show ? <div data-testid="notification">{message}</div> : null,
 }));
 
@@ -100,19 +103,18 @@ describe('MapContainer', () => {
     });
     mockUsePanel.mockReturnValue({
       showInfo: mockShowInfo,
+      clearDiveSite: mockClearDiveSite,
+      setClearDiveSiteHook: mockSetClearDiveSiteHook,
     });
     mockUseDiveSiteDetails.mockReturnValue({
       fetchDiveSiteDetails: mockFetchDiveSiteDetails,
       diveSite: null,
+      clearDiveSite: mockClearDiveSiteHook,
     });
   });
 
   const renderWithProviders = (component: React.ReactElement) => {
-    return render(
-      <PanelProvider>
-        {component}
-      </PanelProvider>
-    );
+    return render(<PanelProvider>{component}</PanelProvider>);
   };
 
   it('рендерит контейнер карты', () => {
@@ -137,7 +139,7 @@ describe('MapContainer', () => {
       container: expect.any(HTMLElement),
       style: '/map-styles/arcgis_hybrid.json',
       center: [98.3774, 7.6079],
-      zoom: 15,
+      zoom: 0,
       maxZoom: 15,
       minZoom: 0,
       hash: false,
@@ -277,7 +279,7 @@ describe('MapContainer', () => {
     renderWithProviders(
       <MapContainer>
         <div data-testid="test-child">Test Child</div>
-      </MapContainer>
+      </MapContainer>,
     );
 
     expect(screen.getByTestId('test-child')).toBeInTheDocument();

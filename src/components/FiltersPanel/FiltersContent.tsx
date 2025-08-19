@@ -83,7 +83,7 @@ export default function FiltersContent({
             data-testid="clear-all-filters-button"
             className="w-full"
           >
-            {t('clearAll')}
+            <span suppressHydrationWarning>{t('clearAll')}</span>
           </Button>
         </div>
       )}

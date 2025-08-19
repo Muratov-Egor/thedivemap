@@ -7,6 +7,7 @@ import { usePanel } from '@/contexts/PanelContext';
 import { useDiveSiteDetails as useDiveSiteDetailsHook } from '@/hooks/useDiveSiteDetails';
 import Button from '@/components/ui/Button';
 import { SiteTypeIcon } from '@/components/icons';
+import Image from 'next/image';
 
 interface InfoPanelProps {
   diveSite?: DiveSiteDetails;
@@ -47,7 +48,9 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
       >
         <div className="flex items-center justify-center h-32">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <span className="ml-2 text-gray-600">{t('loading')}</span>
+          <span className="ml-2 text-gray-600" suppressHydrationWarning>
+            {t('loading')}
+          </span>
         </div>
       </div>
     );
@@ -59,11 +62,13 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
         className="flex flex-col justify-start items-center w-[500px] border-l border-gray-200 p-6 overflow-y-auto max-h-screen"
         data-testid="desktop-info-panel"
       >
-        <h2 className="text-xl font-bold text-gray-800 mb-6">{t('title')}</h2>
+        <h2 className="text-xl font-bold text-gray-800 mb-6" suppressHydrationWarning>
+          {t('title')}
+        </h2>
         <div className="text-center text-gray-600">
-          <p>{error || t('noData')}</p>
+          <p suppressHydrationWarning>{error || t('noData')}</p>
           <Button onClick={handleShowFilters} variant="primary" size="small" className="mt-4">
-            {t('backToFilters')}
+            <span suppressHydrationWarning>{t('backToFilters')}</span>
           </Button>
         </div>
       </div>
@@ -77,7 +82,9 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
     >
       {/* Заголовок с кнопкой возврата */}
       <div className="flex items-center justify-between w-full mb-6">
-        <h2 className="text-xl font-bold text-gray-800">{t('title')}</h2>
+        <h2 className="text-xl font-bold text-gray-800" suppressHydrationWarning>
+          {t('title')}
+        </h2>
         <Button
           onClick={handleShowFilters}
           variant="glass"
@@ -104,11 +111,15 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
 
         {/* Географическая информация */}
         <div className="bg-gray-50 rounded-lg p-4">
-          <h4 className="font-semibold text-gray-800 mb-3">{t('location')}</h4>
+          <h4 className="font-semibold text-gray-800 mb-3" suppressHydrationWarning>
+            {t('location')}
+          </h4>
           <div className="space-y-2 text-sm">
             {diveSite.country && (
               <div>
-                <span className="text-gray-600">{t('country')}: </span>
+                <span className="text-gray-600" suppressHydrationWarning>
+                  {t('country')}:{' '}
+                </span>
                 <span className="font-medium">
                   {getLocalizedName(diveSite.country.name_en, diveSite.country.name_ru)}
                 </span>
@@ -116,18 +127,25 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
             )}
             {diveSite.country?.region && (
               <div>
-                <span className="text-gray-600">{t('region')}: </span>
+                <span className="text-gray-600" suppressHydrationWarning>
+                  {t('region')}:{' '}
+                </span>
                 <span className="font-medium">
-                  {getLocalizedName(diveSite.country.region.name_en, diveSite.country.region.name_ru)}
+                  {getLocalizedName(
+                    diveSite.country.region.name_en,
+                    diveSite.country.region.name_ru,
+                  )}
                 </span>
               </div>
             )}
             {diveSite.site_locations && diveSite.site_locations.length > 0 && (
               <div>
-                <span className="text-gray-600">{t('locations')}: </span>
+                <span className="text-gray-600" suppressHydrationWarning>
+                  {t('locations')}:{' '}
+                </span>
                 <span className="font-medium">
                   {diveSite.site_locations
-                    .map(sl => getLocalizedName(sl.location.name_en, sl.location.name_ru))
+                    .map((sl) => getLocalizedName(sl.location.name_en, sl.location.name_ru))
                     .join(', ')}
                 </span>
               </div>
@@ -137,7 +155,9 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
 
         {/* Характеристики дайв-сайта */}
         <div className="bg-gray-50 rounded-lg p-4">
-          <h4 className="font-semibold text-gray-800 mb-3">{t('characteristics')}</h4>
+          <h4 className="font-semibold text-gray-800 mb-3" suppressHydrationWarning>
+            {t('characteristics')}
+          </h4>
           <div className="grid grid-cols-2 gap-4 text-sm">
             {diveSite.site_type && (
               <div className="flex items-center gap-2">
@@ -145,7 +165,9 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
                   siteTypeId={diveSite.site_type.id}
                   className="w-4 h-4 flex-shrink-0"
                 />
-                <span className="text-gray-600">{t('type')}: </span>
+                <span className="text-gray-600" suppressHydrationWarning>
+                  {t('type')}:{' '}
+                </span>
                 <span className="font-medium">
                   {getLocalizedName(diveSite.site_type.label_en, diveSite.site_type.label_ru)}
                 </span>
@@ -153,23 +175,35 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
             )}
             {diveSite.difficulty && (
               <div>
-                <span className="text-gray-600">{t('difficulty')}: </span>
+                <span className="text-gray-600" suppressHydrationWarning>
+                  {t('difficulty')}:{' '}
+                </span>
                 <span className="font-medium">
                   {getLocalizedName(diveSite.difficulty.label_en, diveSite.difficulty.label_ru)}
                 </span>
               </div>
             )}
             <div>
-              <span className="text-gray-600">{t('maxDepth')}: </span>
-              <span className="font-medium">{diveSite.depth_max} {t('meters')}</span>
+              <span className="text-gray-600" suppressHydrationWarning>
+                {t('maxDepth')}:{' '}
+              </span>
+              <span className="font-medium">
+                {diveSite.depth_max} <span suppressHydrationWarning>{t('meters')}</span>
+              </span>
             </div>
             <div>
-              <span className="text-gray-600">{t('visibility')}: </span>
-              <span className="font-medium">{diveSite.visibility} {t('meters')}</span>
+              <span className="text-gray-600" suppressHydrationWarning>
+                {t('visibility')}:{' '}
+              </span>
+              <span className="font-medium">
+                {diveSite.visibility} <span suppressHydrationWarning>{t('meters')}</span>
+              </span>
             </div>
             {diveSite.rating && (
               <div>
-                <span className="text-gray-600">{t('rating')}: </span>
+                <span className="text-gray-600" suppressHydrationWarning>
+                  {t('rating')}:{' '}
+                </span>
                 <span className="font-medium">{diveSite.rating}/5</span>
               </div>
             )}
@@ -179,11 +213,13 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
         {/* Изображения */}
         {diveSite.images && diveSite.images.length > 0 && (
           <div>
-            <h4 className="font-semibold text-gray-800 mb-3">{t('images')}</h4>
+            <h4 className="font-semibold text-gray-800 mb-3" suppressHydrationWarning>
+              {t('images')}
+            </h4>
             <div className="grid grid-cols-2 gap-2">
               {diveSite.images.map((image) => (
                 <div key={image.id} className="aspect-video rounded-lg overflow-hidden">
-                  <img
+                  <Image
                     src={image.url}
                     alt={`${diveSite.name} - ${t('image')}`}
                     className="w-full h-full object-cover"
@@ -197,9 +233,11 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
 
         {/* Ссылки */}
         {(diveSite.info_links && diveSite.info_links.length > 0) ||
-         (diveSite.dive_center_links && diveSite.dive_center_links.length > 0) ? (
+        (diveSite.dive_center_links && diveSite.dive_center_links.length > 0) ? (
           <div>
-            <h4 className="font-semibold text-gray-800 mb-3">{t('links')}</h4>
+            <h4 className="font-semibold text-gray-800 mb-3" suppressHydrationWarning>
+              {t('links')}
+            </h4>
             <div className="space-y-2">
               {diveSite.info_links?.map((link, index) => (
                 <a
@@ -209,7 +247,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
                   rel="noopener noreferrer"
                   className="block text-blue-600 hover:text-blue-800 text-sm underline"
                 >
-                  {t('infoLink')} {index + 1}
+                  <span suppressHydrationWarning>{t('infoLink')}</span> {index + 1}
                 </a>
               ))}
               {diveSite.dive_center_links?.map((link, index) => (
@@ -220,7 +258,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
                   rel="noopener noreferrer"
                   className="block text-blue-600 hover:text-blue-800 text-sm underline"
                 >
-                  {t('diveCenterLink')} {index + 1}
+                  <span suppressHydrationWarning>{t('diveCenterLink')}</span> {index + 1}
                 </a>
               ))}
             </div>

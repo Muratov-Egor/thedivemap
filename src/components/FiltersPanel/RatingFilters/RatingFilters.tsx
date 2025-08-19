@@ -36,6 +36,7 @@ export default function RatingFilters({ className }: RatingFiltersProps) {
         )}
         data-testid={`rating-star-${starNumber}`}
         aria-label={`${t('rating.filterBy')} ${starNumber} ${starNumber === 1 ? t('rating.star') : t('rating.stars')}`}
+        suppressHydrationWarning
       >
         <svg
           className="w-full h-full fill-current"
@@ -51,9 +52,11 @@ export default function RatingFilters({ className }: RatingFiltersProps) {
   return (
     <div className={cn('space-y-3', className)} data-testid="rating-filters">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-gray-700">{t('rating.title')}</h3>
+        <h3 className="text-sm font-medium text-gray-700" suppressHydrationWarning>
+          {t('rating.title')}
+        </h3>
         {activeFilters.minRating && (
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-500" suppressHydrationWarning>
             {t('rating.minimum')} {activeFilters.minRating}+
           </span>
         )}

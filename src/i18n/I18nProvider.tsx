@@ -5,6 +5,7 @@ import { getI18n } from '@/i18n/i18n.client';
 import { useEffect, useState } from 'react';
 
 export default function I18nProvider({ children }: { children: React.ReactNode }) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [ready, setReady] = useState(false);
   const i18n = getI18n();
 
@@ -16,7 +17,6 @@ export default function I18nProvider({ children }: { children: React.ReactNode }
     }
   }, [i18n]);
 
-  if (!ready) return null;
-
+  // Возвращаем children даже если i18n не готов, чтобы избежать проблем с гидратацией
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 }
