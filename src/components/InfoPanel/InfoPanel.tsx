@@ -116,7 +116,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
                 
         {/* Описание */}
         {diveSite.description && (
-          <div className="space-y-3">
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 shadow-sm">
             <p className="text-slate-600 text-lg leading-relaxed">{diveSite.description}</p>
           </div>
         )}
@@ -124,7 +124,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
         {/* Характеристики дайв-сайта */}
         <div className="bg-gradient-to-br from-blue-50/80 to-cyan-50/60 backdrop-blur-sm rounded-2xl p-4 border border-blue-200/50 shadow-sm">
           <h4
-            className="font-semibold text-slate-800 mb-4 flex items-center gap-2"
+            className="font-semibold text-slate-800 mb-4"
             suppressHydrationWarning
           >
             {t('characteristics')}
@@ -236,42 +236,44 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
 
         {/* Изображения */}
         {diveSite.images && diveSite.images.length > 0 && (
-          <div className="space-y-4">
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 shadow-sm">
             <h4
-              className="font-semibold text-slate-800 flex items-center gap-2"
+              className="font-semibold text-slate-800 mb-4"
               suppressHydrationWarning
             >
-              <span className="w-2 h-2 bg-coral rounded-full"></span>
               {t('images')}
             </h4>
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 shadow-sm">
-              <ImageGallery images={diveSite.images} siteName={diveSite.name} maxPreviewCount={3} />
-            </div>
+            <ImageGallery images={diveSite.images} siteName={diveSite.name} maxPreviewCount={3} />
           </div>
         )}
 
         {/* Ссылки */}
         {(diveSite.info_links && diveSite.info_links.length > 0) ||
         (diveSite.dive_center_links && diveSite.dive_center_links.length > 0) ? (
-          <div className="space-y-4">
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 shadow-sm">
             <h4
-              className="font-semibold text-slate-800 flex items-center gap-2"
+              className="font-semibold text-slate-800 mb-4"
               suppressHydrationWarning
             >
-              <span className="w-2 h-2 bg-sea-green rounded-full"></span>
               {t('links')}
             </h4>
-            <div className="bg-gradient-to-br from-green-50/80 to-emerald-50/60 backdrop-blur-sm rounded-2xl p-4 border border-green-200/50 shadow-sm space-y-3">
+            <div className="space-y-3">
               {diveSite.info_links?.map((link, index) => (
                 <a
                   key={index}
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-tropical-blue hover:text-deep-ocean text-sm font-medium transition-colors duration-200 hover:underline flex items-center gap-2"
+                  className="flex items-center gap-3 p-3 bg-slate-50/50 rounded-xl border border-slate-200/50 hover:bg-slate-100/50 transition-colors duration-200"
                 >
-                  <span className="text-sea-green">🔗</span>
-                  <span suppressHydrationWarning>{t('infoLink')}</span> {index + 1}
+                  <div className="p-2 bg-tropical-blue/15 rounded-lg">
+                    <svg className="w-5 h-5 text-tropical-blue" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <span className="text-sm font-medium text-slate-700">
+                    <span suppressHydrationWarning>{t('infoLink')}</span> {index + 1}
+                  </span>
                 </a>
               ))}
               {diveSite.dive_center_links?.map((link, index) => (
@@ -280,10 +282,16 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-tropical-blue hover:text-deep-ocean text-sm font-medium transition-colors duration-200 hover:underline flex items-center gap-2"
+                  className="flex items-center gap-3 p-3 bg-slate-50/50 rounded-xl border border-slate-200/50 hover:bg-slate-100/50 transition-colors duration-200"
                 >
-                  <span className="text-sea-green">🏊</span>
-                  <span suppressHydrationWarning>{t('diveCenterLink')}</span> {index + 1}
+                  <div className="p-2 bg-tropical-blue/15 rounded-lg">
+                    <svg className="w-5 h-5 text-tropical-blue" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                    </svg>
+                  </div>
+                  <span className="text-sm font-medium text-slate-700">
+                    <span suppressHydrationWarning>{t('diveCenterLink')}</span> {index + 1}
+                  </span>
                 </a>
               ))}
             </div>
