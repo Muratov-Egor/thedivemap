@@ -7,7 +7,7 @@ import { usePanel } from '@/contexts/PanelContext';
 import { useDiveSiteDetails as useDiveSiteDetailsHook } from '@/hooks/useDiveSiteDetails';
 import Button from '@/components/ui/Button';
 import { SiteTypeIcon } from '@/components/icons';
-import Image from 'next/image';
+import { ImageGallery } from '@/components/ui';
 import { formatCoordinates } from '@/lib/utils';
 
 interface InfoPanelProps {
@@ -17,7 +17,7 @@ interface InfoPanelProps {
 export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
   const { t } = useTranslation('infoPanel');
   const { showFilters } = usePanel();
-  const { diveSite: hookDiveSite, loading, error } = useDiveSiteDetailsHook();
+  const { diveSite: hookDiveSite, error } = useDiveSiteDetailsHook();
 
   // Используем данные из пропсов или из хука
   const diveSite = propDiveSite || hookDiveSite;
@@ -28,29 +28,11 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
     showFilters();
   };
 
-
-
   // Получение локализованного названия
   const getLocalizedName = (nameEn: string, nameRu: string) => {
     const currentLang = document.documentElement.lang || 'ru';
     return currentLang === 'ru' ? nameRu : nameEn;
   };
-
-  if (loading) {
-    return (
-      <div
-        className="flex flex-col justify-start items-center w-[500px] border-l border-gray-200 p-6 overflow-y-auto max-h-screen"
-        data-testid="desktop-info-panel"
-      >
-        <div className="flex items-center justify-center h-32">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <span className="ml-2 text-gray-600" suppressHydrationWarning>
-            {t('loading')}
-          </span>
-        </div>
-      </div>
-    );
-  }
 
   if (error || !diveSite) {
     return (
@@ -212,20 +194,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
             <h4 className="font-semibold text-gray-800 mb-3" suppressHydrationWarning>
               {t('images')}
             </h4>
-            <div className="grid grid-cols-2 gap-2">
-              {diveSite.images.map((image) => (
-                <div key={image.id} className="aspect-video rounded-lg overflow-hidden">
-                  <Image
-                    src={image.url}
-                    alt={`${diveSite.name} - ${t('image')}`}
-                    width={400}
-                    height={225}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
+            <ImageGallery images={diveSite.images} siteName={diveSite.name} maxPreviewCount={3} />
           </div>
         )}
 

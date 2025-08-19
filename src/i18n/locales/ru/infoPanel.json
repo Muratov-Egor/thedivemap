@@ -18,5 +18,11 @@
   "image": "изображение",
   "links": "Ссылки",
   "infoLink": "Информационная ссылка",
-  "diveCenterLink": "Ссылка на дайв-центр"
+  "diveCenterLink": "Ссылка на дайв-центр",
+  "gallery": {
+    "closeModal": "Закрыть",
+    "previousImage": "Предыдущее изображение",
+    "nextImage": "Следующее изображение",
+    "imageCounter": "{{current}} / {{total}}"
+  }
 }

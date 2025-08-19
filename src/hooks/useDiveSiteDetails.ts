@@ -3,7 +3,6 @@ import { DiveSiteDetails } from '@/lib/types/supabase';
 
 interface UseDiveSiteDetailsReturn {
   diveSite: DiveSiteDetails | null;
-  loading: boolean;
   error: string | null;
   fetchDiveSiteDetails: (id: string) => Promise<void>;
   clearDiveSite: () => void;
@@ -11,7 +10,6 @@ interface UseDiveSiteDetailsReturn {
 
 export function useDiveSiteDetails(): UseDiveSiteDetailsReturn {
   const [diveSite, setDiveSite] = useState<DiveSiteDetails | null>(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchDiveSiteDetails = useCallback(async (id: string) => {
@@ -20,7 +18,6 @@ export function useDiveSiteDetails(): UseDiveSiteDetailsReturn {
       return;
     }
 
-    setLoading(true);
     setError(null);
 
     try {
@@ -37,8 +34,6 @@ export function useDiveSiteDetails(): UseDiveSiteDetailsReturn {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
       setError(errorMessage);
       setDiveSite(null);
-    } finally {
-      setLoading(false);
     }
   }, []);
 
@@ -49,7 +44,6 @@ export function useDiveSiteDetails(): UseDiveSiteDetailsReturn {
 
   return {
     diveSite,
-    loading,
     error,
     fetchDiveSiteDetails,
     clearDiveSite,

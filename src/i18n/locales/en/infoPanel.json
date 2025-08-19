@@ -18,5 +18,11 @@
   "image": "image",
   "links": "Links",
   "infoLink": "Info Link",
-  "diveCenterLink": "Dive Center Link"
+  "diveCenterLink": "Dive Center Link",
+  "gallery": {
+    "closeModal": "Close",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "imageCounter": "{{current}} / {{total}}"
+  }
 }

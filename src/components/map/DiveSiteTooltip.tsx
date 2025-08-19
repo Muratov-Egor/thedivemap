@@ -16,8 +16,6 @@ interface DiveSiteTooltipProps {
 const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShowDetails }) => {
   const { t } = useTranslation();
 
-
-
   // Получение типа локации из данных API
   const getSiteTypeLabel = () => {
     if (site.site_type?.label_en && site.site_type?.label_ru) {
