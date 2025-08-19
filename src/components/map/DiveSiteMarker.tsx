@@ -4,8 +4,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MarkerProps } from '../../types/clustering';
 import DiveSiteTooltip from './DiveSiteTooltip';
 
-const DiveSiteMarker = React.memo<MarkerProps>(
-  ({ site, onClick, onHover, isActive = false }) => {
+interface ExtendedMarkerProps extends MarkerProps {
+  onShowDetails?: (siteId: string) => void;
+}
+
+const DiveSiteMarker = React.memo<ExtendedMarkerProps>(
+  ({ site, onClick, onHover, onShowDetails, isActive = false }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [isTooltipClosed, setIsTooltipClosed] = useState(false);
     const markerRef = useRef<HTMLDivElement>(null);
@@ -77,7 +81,9 @@ const DiveSiteMarker = React.memo<MarkerProps>(
         </div>
 
         {/* Tooltip с информацией и анимациями */}
-        {shouldShowTooltip && <DiveSiteTooltip site={site} onClose={handleClose} />}
+        {shouldShowTooltip && (
+          <DiveSiteTooltip site={site} onClose={handleClose} onShowDetails={onShowDetails} />
+        )}
       </div>
     );
   },
@@ -87,7 +93,8 @@ const DiveSiteMarker = React.memo<MarkerProps>(
       prevProps.site.id === nextProps.site.id &&
       prevProps.isActive === nextProps.isActive &&
       prevProps.onClick === nextProps.onClick &&
-      prevProps.onHover === nextProps.onHover
+      prevProps.onHover === nextProps.onHover &&
+      prevProps.onShowDetails === nextProps.onShowDetails
     );
   },
 );

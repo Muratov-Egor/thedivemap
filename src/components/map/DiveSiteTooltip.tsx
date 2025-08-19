@@ -9,9 +9,10 @@ import { CloseIcon, SiteTypeIcon } from '@/components/icons';
 interface DiveSiteTooltipProps {
   site: MarkerProps['site'];
   onClose: (e: React.MouseEvent) => void;
+  onShowDetails?: (siteId: string) => void;
 }
 
-const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose }) => {
+const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShowDetails }) => {
   const { t } = useTranslation();
 
   // Форматирование координат
@@ -29,6 +30,12 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose }) => {
       return currentLang === 'ru' ? site.site_type.label_ru : site.site_type.label_en;
     }
     return null; // Fallback если нет данных
+  };
+
+  const handleShowDetails = () => {
+    if (onShowDetails) {
+      onShowDetails(site.id);
+    }
   };
 
   return (
@@ -67,7 +74,10 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose }) => {
             data-testid={`dive-site-tooltip-type`}
             className="flex items-center gap-2 text-gray-700 text-sm font-medium"
           >
-            <SiteTypeIcon siteTypeId={site.site_type?.id || 12} className="w-4 h-4 flex-shrink-0 flex items-center justify-center" />
+            <SiteTypeIcon
+              siteTypeId={site.site_type?.id || 12}
+              className="w-4 h-4 flex-shrink-0 flex items-center justify-center"
+            />
             <span className="flex items-center">{getSiteTypeLabel()}</span>
           </div>
         )}
@@ -77,7 +87,9 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose }) => {
           className="flex items-center gap-2 text-gray-700 text-sm font-medium"
         >
           <span className="text-tropical-blue flex items-center justify-center">⬇</span>
-          <span className="flex items-center">{site.depth_max} {t('map.markers.meters')}</span>
+          <span className="flex items-center">
+            {site.depth_max} {t('map.markers.meters')}
+          </span>
         </div>
 
         <div
@@ -85,18 +97,21 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose }) => {
           className="flex items-center gap-2 text-gray-700 text-sm font-medium"
         >
           <span className="text-tropical-blue flex items-center justify-center">👁️</span>
-          <span className="flex items-center">{site.visibility} {t('map.markers.meters')}</span>
+          <span className="flex items-center">
+            {site.visibility} {t('map.markers.meters')}
+          </span>
         </div>
       </div>
 
       {/* Кнопка "Подробнее" */}
       <div className="flex justify-center !mt-5">
         <Button
-          onClick={() => console.log('click')}
+          onClick={handleShowDetails}
           variant="primary"
           size="small"
           className="justify-center"
           aria-label={t('map.markers.more')}
+          data-testid="dive-site-tooltip-more-button"
         >
           {t('map.markers.more')}
         </Button>
@@ -121,4 +136,3 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose }) => {
 };
 
 export default DiveSiteTooltip;
-

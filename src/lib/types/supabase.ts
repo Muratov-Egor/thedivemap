@@ -26,27 +26,57 @@ export interface SiteType {
   label_en: string;
 }
 
+export interface Difficulty {
+  id: number;
+  label_ru: string;
+  label_en: string;
+}
+
+export interface Image {
+  id: string;
+  site_id: string;
+  url: string;
+  uploaded_at: string;
+}
+
+export interface SiteLocation {
+  site_id: string;
+  location_id: number;
+  location: Location;
+}
+
 export interface Site {
   id: string;
   name: string;
+  description?: string;
+  latitude: number;
+  longitude: number;
   country_id: number;
+  depth_max: number;
+  visibility: number;
+  info_links?: string[];
+  dive_center_links?: string[];
+  created_at: string;
+  rating?: number;
   site_type_id: number;
-  country?: {
-    name_ru?: string;
-    name_en?: string;
-    region?: {
-      name_ru?: string;
-      name_en?: string;
-    };
+  difficulty_id: number;
+  status: 'draft' | 'published' | 'rejected';
+  country?: Country & {
+    region?: Region;
   };
-  site_type?: {
-    label_ru?: string;
-    label_en?: string;
+  site_type?: SiteType;
+  difficulty?: Difficulty;
+  site_locations?: SiteLocation[];
+  images?: Image[];
+}
+
+// Тип для полной информации о дайв-сайте
+export interface DiveSiteDetails extends Site {
+  country: Country & {
+    region: Region;
   };
-  site_locations?: Array<{
-    location: {
-      name_ru?: string;
-      name_en?: string;
-    };
-  }>;
+  site_type: SiteType;
+  difficulty: Difficulty;
+  site_locations: SiteLocation[];
+  images: Image[];
 }
