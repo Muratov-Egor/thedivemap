@@ -8,6 +8,7 @@ import { useDiveSiteDetails as useDiveSiteDetailsHook } from '@/hooks/useDiveSit
 import Button from '@/components/ui/Button';
 import { SiteTypeIcon } from '@/components/icons';
 import Image from 'next/image';
+import { formatCoordinates } from '@/lib/utils';
 
 interface InfoPanelProps {
   diveSite?: DiveSiteDetails;
@@ -27,12 +28,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
     showFilters();
   };
 
-  // Форматирование координат
-  const formatCoordinates = (lat: number, lng: number) => {
-    const latStr = Math.abs(lat).toFixed(4) + (lat >= 0 ? '°N' : '°S');
-    const lngStr = Math.abs(lng).toFixed(4) + (lng >= 0 ? '°E' : '°W');
-    return `${latStr}, ${lngStr}`;
-  };
+
 
   // Получение локализованного названия
   const getLocalizedName = (nameEn: string, nameRu: string) => {
@@ -222,6 +218,8 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
                   <Image
                     src={image.url}
                     alt={`${diveSite.name} - ${t('image')}`}
+                    width={400}
+                    height={225}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />

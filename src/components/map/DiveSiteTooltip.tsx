@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { MarkerProps } from '@/types/clustering';
 import Button from '@/components/ui/Button';
 import { CloseIcon, SiteTypeIcon } from '@/components/icons';
+import { formatCoordinates } from '@/lib/utils';
 
 interface DiveSiteTooltipProps {
   site: MarkerProps['site'];
@@ -15,12 +16,7 @@ interface DiveSiteTooltipProps {
 const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShowDetails }) => {
   const { t } = useTranslation();
 
-  // Форматирование координат
-  const formatCoordinates = (lat: number, lng: number) => {
-    const latStr = Math.abs(lat).toFixed(4) + (lat >= 0 ? '°N' : '°S');
-    const lngStr = Math.abs(lng).toFixed(4) + (lng >= 0 ? '°E' : '°W');
-    return `${latStr}, ${lngStr}`;
-  };
+
 
   // Получение типа локации из данных API
   const getSiteTypeLabel = () => {
