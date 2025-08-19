@@ -38,7 +38,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
   if (error || !diveSite) {
     return (
       <div
-        className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 overflow-y-auto max-h-screen"
+        className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
         data-testid="desktop-info-panel"
       >
         <h2 className="text-xl font-bold text-slate-800 mb-6" suppressHydrationWarning>
@@ -61,7 +61,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
 
   return (
     <div
-      className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 overflow-y-auto max-h-screen"
+      className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
       data-testid="desktop-info-panel"
     >
       {/* Заголовок с кнопкой возврата */}

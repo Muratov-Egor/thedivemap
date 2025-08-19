@@ -9,7 +9,7 @@ export default function Header() {
   const { t } = useTranslation('common');
 
   return (
-    <header className="sm:p-4 p-2 flex justify-between items-center border-b border-gray-200">
+    <header className="sm:p-4 p-2 flex justify-between items-center border-b border-gray-200 min-h-[4rem]">
       <Link href="/" className="flex sm:gap-2 gap-1 items-center hover:underline pr-4">
         <Image
           src="/img/Logo.ico"

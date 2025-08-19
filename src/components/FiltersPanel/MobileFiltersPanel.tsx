@@ -27,7 +27,7 @@ export default function MobileFiltersPanel({ onClose }: MobileFiltersPanelProps)
 
   return (
     <div
-      className="absolute right-0 top-0 h-full w-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 flex flex-col"
+      className="fixed inset-0 bg-white shadow-lg z-50 flex flex-col"
       onClick={(e) => e.stopPropagation()}
       data-testid="mobile-filters-panel"
     >
