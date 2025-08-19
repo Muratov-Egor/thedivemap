@@ -6,9 +6,10 @@ import { DiveSiteDetails } from '@/lib/types/supabase';
 import { usePanel } from '@/contexts/PanelContext';
 import { useDiveSiteDetails as useDiveSiteDetailsHook } from '@/hooks/useDiveSiteDetails';
 import Button from '@/components/ui/Button';
-import { SiteTypeIcon } from '@/components/icons';
+import { CloseIcon, SiteTypeIcon } from '@/components/icons';
 import { ImageGallery } from '@/components/ui';
-import { formatCoordinates } from '@/lib/utils';
+import { formatCoordinates, getCountryFlag } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface InfoPanelProps {
   diveSite?: DiveSiteDetails;
@@ -37,15 +38,20 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
   if (error || !diveSite) {
     return (
       <div
-        className="flex flex-col justify-start items-center w-[500px] border-l border-gray-200 p-6 overflow-y-auto max-h-screen"
+        className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 overflow-y-auto max-h-screen"
         data-testid="desktop-info-panel"
       >
-        <h2 className="text-xl font-bold text-gray-800 mb-6" suppressHydrationWarning>
+        <h2 className="text-xl font-bold text-slate-800 mb-6" suppressHydrationWarning>
           {t('title')}
         </h2>
-        <div className="text-center text-gray-600">
+        <div className="text-center text-slate-600">
           <p suppressHydrationWarning>{error || t('noData')}</p>
-          <Button onClick={handleShowFilters} variant="primary" size="small" className="mt-4">
+          <Button
+            onClick={handleShowFilters}
+            variant="primary"
+            size="medium"
+            className="mt-6 shadow-glow hover:shadow-glow-hover"
+          >
             <span suppressHydrationWarning>{t('backToFilters')}</span>
           </Button>
         </div>
@@ -55,134 +61,141 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
 
   return (
     <div
-      className="flex flex-col justify-start items-center w-[500px] border-l border-gray-200 p-6 overflow-y-auto max-h-screen"
+      className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 overflow-y-auto max-h-screen"
       data-testid="desktop-info-panel"
     >
       {/* Заголовок с кнопкой возврата */}
-      <div className="flex items-center justify-between w-full mb-6">
-        <h2 className="text-xl font-bold text-gray-800" suppressHydrationWarning>
-          {t('title')}
-        </h2>
-        <Button
-          onClick={handleShowFilters}
-          variant="glass"
-          size="small"
-          aria-label={t('backToFilters')}
-        >
-          {t('backToFilters')}
-        </Button>
+      <div className="w-full mb-8">
+        <div className="flex items-center justify-between">
+          <h2 className="text-3xl font-bold text-slate-800" suppressHydrationWarning>
+            {getCountryFlag(diveSite.country.iso_code)} {diveSite.name}
+          </h2>
+
+          <Button
+            onClick={handleShowFilters}
+            variant="glass"
+            size="small"
+            shape="circle"
+            aria-label={t('backToFilters')}
+            className="shadow-glass hover:shadow-glass-hover"
+          >
+            <CloseIcon />
+          </Button>
+        </div>
+        {/* Координаты и местоположение */}
+        <div className="flex items-center gap-4 mt-3 text-slate-600 text-sm">
+          <div className="flex items-center gap-2">
+            <span className="text-tropical-blue text-lg">📍</span>
+            <span className="font-medium">
+              {formatCoordinates(diveSite.latitude, diveSite.longitude)}
+            </span>
+          </div>
+          {diveSite.country && (
+            <div className="flex items-center gap-2">
+              <span className="text-lg">{getCountryFlag(diveSite.country.iso_code)}</span>
+              <span className="font-medium">
+                {getLocalizedName(diveSite.country.name_en, diveSite.country.name_ru)}
+              </span>
+            </div>
+          )}
+          {diveSite.site_locations && diveSite.site_locations.length > 0 && (
+            <div className="flex items-center gap-2">
+              <span className="text-lg">📍</span>
+              <span className="font-medium">
+                {diveSite.site_locations
+                  .map((sl) => getLocalizedName(sl.location.name_en, sl.location.name_ru))
+                  .join(', ')}
+              </span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Основная информация */}
-      <div className="w-full space-y-6">
-        {/* Название */}
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">{diveSite.name}</h3>
-          {diveSite.description && <p className="text-gray-600 text-sm">{diveSite.description}</p>}
-        </div>
-
-        {/* Координаты */}
-        <div className="flex items-center gap-2 text-gray-600 text-sm">
-          <span className="text-tropical-blue">📍</span>
-          {formatCoordinates(diveSite.latitude, diveSite.longitude)}
-        </div>
-
-        {/* Географическая информация */}
-        <div className="bg-gray-50 rounded-lg p-4">
-          <h4 className="font-semibold text-gray-800 mb-3" suppressHydrationWarning>
-            {t('location')}
-          </h4>
-          <div className="space-y-2 text-sm">
-            {diveSite.country && (
-              <div>
-                <span className="text-gray-600" suppressHydrationWarning>
-                  {t('country')}:{' '}
-                </span>
-                <span className="font-medium">
-                  {getLocalizedName(diveSite.country.name_en, diveSite.country.name_ru)}
-                </span>
-              </div>
-            )}
-            {diveSite.country?.region && (
-              <div>
-                <span className="text-gray-600" suppressHydrationWarning>
-                  {t('region')}:{' '}
-                </span>
-                <span className="font-medium">
-                  {getLocalizedName(
-                    diveSite.country.region.name_en,
-                    diveSite.country.region.name_ru,
-                  )}
-                </span>
-              </div>
-            )}
-            {diveSite.site_locations && diveSite.site_locations.length > 0 && (
-              <div>
-                <span className="text-gray-600" suppressHydrationWarning>
-                  {t('locations')}:{' '}
-                </span>
-                <span className="font-medium">
-                  {diveSite.site_locations
-                    .map((sl) => getLocalizedName(sl.location.name_en, sl.location.name_ru))
-                    .join(', ')}
-                </span>
-              </div>
-            )}
+      <div className="w-full space-y-8">
+                
+        {/* Описание */}
+        {diveSite.description && (
+          <div className="space-y-3">
+            <p className="text-slate-600 text-lg leading-relaxed">{diveSite.description}</p>
           </div>
-        </div>
+        )}
 
         {/* Характеристики дайв-сайта */}
-        <div className="bg-gray-50 rounded-lg p-4">
-          <h4 className="font-semibold text-gray-800 mb-3" suppressHydrationWarning>
+        <div className="bg-gradient-to-br from-blue-50/80 to-cyan-50/60 backdrop-blur-sm rounded-2xl p-6 border border-blue-200/50 shadow-sm">
+          <h4
+            className="font-semibold text-slate-800 mb-4 flex items-center gap-2"
+            suppressHydrationWarning
+          >
+            <span className="w-2 h-2 bg-deep-ocean rounded-full"></span>
             {t('characteristics')}
           </h4>
           <div className="grid grid-cols-2 gap-4 text-sm">
             {diveSite.site_type && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <SiteTypeIcon
                   siteTypeId={diveSite.site_type.id}
-                  className="w-4 h-4 flex-shrink-0"
+                  className="w-5 h-5 flex-shrink-0 text-tropical-blue"
                 />
-                <span className="text-gray-600" suppressHydrationWarning>
-                  {t('type')}:{' '}
-                </span>
-                <span className="font-medium">
-                  {getLocalizedName(diveSite.site_type.label_en, diveSite.site_type.label_ru)}
-                </span>
+                <div className="flex flex-col">
+                  <span className="text-slate-600 text-xs" suppressHydrationWarning>
+                    {t('type')}
+                  </span>
+                  <span className="font-medium text-slate-800">
+                    {getLocalizedName(diveSite.site_type.label_en, diveSite.site_type.label_ru)}
+                  </span>
+                </div>
               </div>
             )}
             {diveSite.difficulty && (
-              <div>
-                <span className="text-gray-600" suppressHydrationWarning>
-                  {t('difficulty')}:{' '}
+              <div className="flex flex-col">
+                <span className="text-slate-600 text-xs" suppressHydrationWarning>
+                  {t('difficulty')}
                 </span>
-                <span className="font-medium">
+                <span className="font-medium text-slate-800">
                   {getLocalizedName(diveSite.difficulty.label_en, diveSite.difficulty.label_ru)}
                 </span>
               </div>
             )}
-            <div>
-              <span className="text-gray-600" suppressHydrationWarning>
-                {t('maxDepth')}:{' '}
+            <div className="flex flex-col">
+              <span className="text-slate-600 text-xs" suppressHydrationWarning>
+                {t('maxDepth')}
               </span>
-              <span className="font-medium">
+              <span className="font-medium text-slate-800 flex items-center gap-1">
+                <span className="text-deep-ocean">↓</span>
                 {diveSite.depth_max} <span suppressHydrationWarning>{t('meters')}</span>
               </span>
             </div>
-            <div>
-              <span className="text-gray-600" suppressHydrationWarning>
-                {t('visibility')}:{' '}
+            <div className="flex flex-col">
+              <span className="text-slate-600 text-xs" suppressHydrationWarning>
+                {t('visibility')}
               </span>
-              <span className="font-medium">
+              <span className="font-medium text-slate-800 flex items-center gap-1">
+                <span className="text-deep-ocean">👁</span>
                 {diveSite.visibility} <span suppressHydrationWarning>{t('meters')}</span>
               </span>
             </div>
             {diveSite.rating && (
-              <div>
-                <span className="text-gray-600" suppressHydrationWarning>
-                  {t('rating')}:{' '}
+              <div className="flex flex-col col-span-2">
+                <span className="text-slate-600 text-xs" suppressHydrationWarning>
+                  {t('rating')}
                 </span>
-                <span className="font-medium">{diveSite.rating}/5</span>
+                <span className="font-medium text-slate-800 flex items-center gap-2">
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <span
+                        key={i}
+                        className={cn(
+                          'text-lg',
+                          i < diveSite.rating! ? 'text-yellow-400' : 'text-slate-300',
+                        )}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-slate-500">({diveSite.rating}/5)</span>
+                </span>
               </div>
             )}
           </div>
@@ -190,30 +203,41 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
 
         {/* Изображения */}
         {diveSite.images && diveSite.images.length > 0 && (
-          <div>
-            <h4 className="font-semibold text-gray-800 mb-3" suppressHydrationWarning>
+          <div className="space-y-4">
+            <h4
+              className="font-semibold text-slate-800 flex items-center gap-2"
+              suppressHydrationWarning
+            >
+              <span className="w-2 h-2 bg-coral rounded-full"></span>
               {t('images')}
             </h4>
-            <ImageGallery images={diveSite.images} siteName={diveSite.name} maxPreviewCount={3} />
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 shadow-sm">
+              <ImageGallery images={diveSite.images} siteName={diveSite.name} maxPreviewCount={3} />
+            </div>
           </div>
         )}
 
         {/* Ссылки */}
         {(diveSite.info_links && diveSite.info_links.length > 0) ||
         (diveSite.dive_center_links && diveSite.dive_center_links.length > 0) ? (
-          <div>
-            <h4 className="font-semibold text-gray-800 mb-3" suppressHydrationWarning>
+          <div className="space-y-4">
+            <h4
+              className="font-semibold text-slate-800 flex items-center gap-2"
+              suppressHydrationWarning
+            >
+              <span className="w-2 h-2 bg-sea-green rounded-full"></span>
               {t('links')}
             </h4>
-            <div className="space-y-2">
+            <div className="bg-gradient-to-br from-green-50/80 to-emerald-50/60 backdrop-blur-sm rounded-2xl p-4 border border-green-200/50 shadow-sm space-y-3">
               {diveSite.info_links?.map((link, index) => (
                 <a
                   key={index}
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-blue-600 hover:text-blue-800 text-sm underline"
+                  className="block text-tropical-blue hover:text-deep-ocean text-sm font-medium transition-colors duration-200 hover:underline flex items-center gap-2"
                 >
+                  <span className="text-sea-green">🔗</span>
                   <span suppressHydrationWarning>{t('infoLink')}</span> {index + 1}
                 </a>
               ))}
@@ -223,8 +247,9 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-blue-600 hover:text-blue-800 text-sm underline"
+                  className="block text-tropical-blue hover:text-deep-ocean text-sm font-medium transition-colors duration-200 hover:underline flex items-center gap-2"
                 >
+                  <span className="text-sea-green">🏊</span>
                   <span suppressHydrationWarning>{t('diveCenterLink')}</span> {index + 1}
                 </a>
               ))}
