@@ -1,6 +1,20 @@
 import { render } from '@testing-library/react';
 import HomePage from '../page';
 
+// Мокаем Next.js router
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    replace: jest.fn(),
+    push: jest.fn(),
+    back: jest.fn(),
+    forward: jest.fn(),
+  }),
+  useSearchParams: () => ({
+    get: jest.fn(),
+    has: jest.fn(),
+  }),
+}));
+
 // Мокаем компоненты
 jest.mock('../../components/Header', () => {
   return function MockHeader() {

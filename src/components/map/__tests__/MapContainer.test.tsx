@@ -18,6 +18,7 @@ const mockSetLoaded = jest.fn();
 const mockFetchDiveSites = jest.fn();
 const mockOnSiteClick = jest.fn();
 const mockOnClusterClick = jest.fn();
+const mockSetFetchDiveSiteDetailsCallback = jest.fn();
 const mockUseMap = jest.fn();
 
 jest.mock('@/contexts/MapContext', () => ({
@@ -29,6 +30,20 @@ const mockShowInfo = jest.fn();
 const mockClearDiveSite = jest.fn();
 const mockSetClearDiveSiteHook = jest.fn();
 const mockUsePanel = jest.fn();
+
+// Мокаем Next.js router
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    replace: jest.fn(),
+    push: jest.fn(),
+    back: jest.fn(),
+    forward: jest.fn(),
+  }),
+  useSearchParams: () => ({
+    get: jest.fn(),
+    has: jest.fn(),
+  }),
+}));
 
 jest.mock('@/contexts/PanelContext', () => ({
   usePanel: () => mockUsePanel(),
@@ -100,6 +115,7 @@ describe('MapContainer', () => {
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
+      setFetchDiveSiteDetailsCallback: mockSetFetchDiveSiteDetailsCallback,
     });
     mockUsePanel.mockReturnValue({
       showInfo: mockShowInfo,
@@ -139,7 +155,7 @@ describe('MapContainer', () => {
       container: expect.any(HTMLElement),
       style: '/map-styles/arcgis_hybrid.json',
       center: [98.3774, 7.6079],
-      zoom: 15,
+      zoom: 0,
       maxZoom: 15,
       minZoom: 0,
       hash: false,
@@ -211,6 +227,7 @@ describe('MapContainer', () => {
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
+      setFetchDiveSiteDetailsCallback: mockSetFetchDiveSiteDetailsCallback,
     });
 
     renderWithProviders(<MapContainer />);
@@ -237,6 +254,7 @@ describe('MapContainer', () => {
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
+      setFetchDiveSiteDetailsCallback: mockSetFetchDiveSiteDetailsCallback,
     });
 
     renderWithProviders(<MapContainer />);
@@ -266,6 +284,7 @@ describe('MapContainer', () => {
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
+      setFetchDiveSiteDetailsCallback: mockSetFetchDiveSiteDetailsCallback,
     });
 
     renderWithProviders(<MapContainer />);
@@ -311,6 +330,7 @@ describe('MapContainer', () => {
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
+      setFetchDiveSiteDetailsCallback: mockSetFetchDiveSiteDetailsCallback,
     });
 
     renderWithProviders(<MapContainer />);
@@ -337,6 +357,7 @@ describe('MapContainer', () => {
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
+      setFetchDiveSiteDetailsCallback: mockSetFetchDiveSiteDetailsCallback,
     });
 
     renderWithProviders(<MapContainer />);
@@ -363,6 +384,7 @@ describe('MapContainer', () => {
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
+      setFetchDiveSiteDetailsCallback: mockSetFetchDiveSiteDetailsCallback,
     });
 
     renderWithProviders(<MapContainer />);
@@ -390,6 +412,7 @@ describe('MapContainer', () => {
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
+      setFetchDiveSiteDetailsCallback: mockSetFetchDiveSiteDetailsCallback,
     });
 
     renderWithProviders(<MapContainer />);
@@ -416,6 +439,7 @@ describe('MapContainer', () => {
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
+      setFetchDiveSiteDetailsCallback: mockSetFetchDiveSiteDetailsCallback,
     });
 
     renderWithProviders(<MapContainer />);

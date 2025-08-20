@@ -235,7 +235,7 @@ describe('DiveSitesLayer', () => {
 
     // Проверяем, что ошибка была залогирована
     expect(consoleSpy).toHaveBeenCalledWith('Error during clustering:', expect.any(Error));
-    
+
     consoleSpy.mockRestore();
   });
 
