@@ -61,7 +61,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
 
   return (
     <div
-      className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
+      className="flex flex-col justify-start items-center w-[600px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
       data-testid="desktop-info-panel"
     >
       {/* Заголовок с кнопкой возврата */}
