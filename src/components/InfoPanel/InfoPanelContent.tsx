@@ -46,17 +46,18 @@ export default function InfoPanelContent({
             <Button
               onClick={handleShare}
               variant="secondary"
+              shape="circle"
               size="small"
               disabled={isCopying}
               aria-label="Поделиться ссылкой"
               className="shadow-glass hover:shadow-glass-hover"
               data-testid="info-panel-share-button"
             >
-              {showCopiedMessage ? '✓ Скопировано' : isCopying ? '...' : '🔗 Поделиться'}
+              {showCopiedMessage ? '✅' : isCopying ? '...' : '🔗'}
             </Button>
             <Button
               onClick={handleShowFilters}
-              variant="glass"
+              variant="primary"
               size="small"
               shape="circle"
               aria-label={t('backToFilters')}

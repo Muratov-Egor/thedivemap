@@ -53,7 +53,7 @@ export default function MobileFiltersPanel({ onClose }: MobileFiltersPanelProps)
       <div className="flex justify-between items-center p-4 border-b border-gray-200">
         <h2 className="text-lg font-bold text-gray-800">{t('title')}</h2>
         <Button
-          variant="ghost"
+          variant="primary"
           shape="circle"
           size="small"
           icon={<CloseIcon />}
