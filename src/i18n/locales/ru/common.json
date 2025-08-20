@@ -1,10 +1,8 @@
 {
   "appName": "The Dive Map",
   "header": {
-    "logoAlt": "The Dive Map"
-  },
-  "home": {
-    "title": "Тут будет карта"
+    "logoAlt": "The Dive Map",
+    "login": "Войти"
   },
   "search": {
     "placeholder": "Поиск дайв-сайтов, стран, регионов..."

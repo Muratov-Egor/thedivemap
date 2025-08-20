@@ -20,6 +20,7 @@ export default function LanguageSwitch() {
   return (
     <Button
       onClick={onToggle}
+      shape="pill"
       variant="secondary"
       size="small"
       data-testid="language-switch"

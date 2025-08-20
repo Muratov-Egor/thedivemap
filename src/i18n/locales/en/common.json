@@ -1,10 +1,8 @@
 {
   "appName": "The Dive Map",
   "header": {
-    "logoAlt": "The Dive Map"
-  },
-  "home": {
-    "title": "Map will be here"
+    "logoAlt": "The Dive Map",
+    "login": "Login"
   },
   "search": {
     "placeholder": "Search dive sites, countries, regions..."
