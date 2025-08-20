@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Yomogi:wght@400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -474,4 +476,15 @@ body {
 .dark .maplibregl-ctrl-zoom-in:hover,
 .dark .maplibregl-ctrl-zoom-out:hover {
   background-color: rgba(51, 65, 85, 0.9) !important;
+}
+
+/* Шрифт Yomogi для логотипа */
+.font-yomogi {
+  font-family: 'Yomogi', cursive;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
