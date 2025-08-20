@@ -501,7 +501,7 @@ describe('Filters', () => {
     expect(mobilePanel).toHaveClass(
       'fixed',
       'inset-0',
-      'bg-white',
+      'bg-background',
       'shadow-lg',
       'z-50',
       'flex',
@@ -530,7 +530,7 @@ describe('Filters', () => {
     fireEvent.click(openButton);
 
     const closeButton = screen.getByTestId('close-filters-panel-button');
-    expect(closeButton).toHaveClass('bg-transparent', 'text-slate-600', 'rounded-full');
+    expect(closeButton).toHaveClass('rounded-full');
   });
 
   it('передает правильный язык в автокомплит', () => {

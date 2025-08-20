@@ -75,7 +75,7 @@ export default function FiltersContent({
 
       {/* Общая кнопка очистки */}
       {hasActiveFilters && (
-        <div className="pt-4 border-t border-gray-200">
+        <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
           <Button
             variant="coral"
             size="medium"

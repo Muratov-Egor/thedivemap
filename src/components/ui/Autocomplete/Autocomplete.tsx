@@ -150,9 +150,9 @@ export default function Autocomplete({
           placeholder={placeholder || defaultPlaceholder}
           disabled={disabled}
           className={cn(
-            'w-full px-4 py-3 text-base text-slate-800 placeholder-slate-500',
-            'bg-white/80 backdrop-blur-sm border-2 border-slate-200 rounded-2xl',
-            'focus:border-tropical-blue focus:outline-none focus:ring-2 focus:ring-tropical-blue/20',
+            'w-full px-4 py-3 text-base text-foreground placeholder-slate-500 dark:placeholder-slate-400',
+            'bg-glass-bg backdrop-blur-sm border-2 border-slate-200 dark:border-slate-600 rounded-2xl',
+            'focus:border-tropical-blue dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-tropical-blue/20 dark:focus:ring-blue-400/20',
             'transition-all duration-300 ease-in-out',
             'disabled:opacity-50 disabled:cursor-not-allowed',
             'pr-12', // Space for clear button
@@ -231,20 +231,22 @@ export default function Autocomplete({
       {(error || state.error) && !state.isOpen && (
         <div
           id="autocomplete-error-message"
-          className="mt-2 bg-white/90 backdrop-blur-xl border border-red-200 rounded-2xl shadow-lg p-4"
+          className="mt-2 bg-glass-bg backdrop-blur-xl border border-red-200 dark:border-red-800 rounded-2xl shadow-lg p-4"
           data-testid="autocomplete-error-message"
           role="alert"
           aria-live="assertive"
         >
-          <div className="flex items-center gap-3 text-red-600">
+          <div className="flex items-center gap-3 text-red-600 dark:text-red-400">
             <div className="w-5 h-5 flex items-center justify-center">
               <span className="text-lg" aria-hidden="true">
                 ⚠️
               </span>
             </div>
             <div className="text-sm">
-              <div className="font-medium text-red-700">{t('errors.searchFailed')}</div>
-              <div className="text-red-600 mt-1">{error || state.error}</div>
+              <div className="font-medium text-red-700 dark:text-red-300">
+                {t('errors.searchFailed')}
+              </div>
+              <div className="text-red-600 dark:text-red-400 mt-1">{error || state.error}</div>
             </div>
           </div>
         </div>

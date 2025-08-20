@@ -117,7 +117,7 @@ describe('DiveSiteTooltip', () => {
       'rounded-2xl',
       'text-sm',
       'z-20',
-      'bg-white',
+      'bg-glass-bg',
       'backdrop-blur-lg',
       'border',
       'border-tropical-blue/20',
@@ -149,7 +149,7 @@ describe('DiveSiteTooltip', () => {
       'border-r-8',
       'border-t-8',
       'border-transparent',
-      'border-t-white/85',
+      'border-t-white/80',
     );
   });
 });

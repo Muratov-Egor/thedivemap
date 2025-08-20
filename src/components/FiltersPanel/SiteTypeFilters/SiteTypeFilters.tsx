@@ -24,7 +24,10 @@ export default function SiteTypeFilters() {
   return (
     <div className="space-y-3" data-testid="site-type-filters">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-gray-700" suppressHydrationWarning>
+        <h3
+          className="text-sm font-medium text-gray-700 dark:text-gray-300"
+          suppressHydrationWarning
+        >
           {t('siteTypes.title')}
         </h3>
       </div>

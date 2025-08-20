@@ -32,12 +32,13 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
         selected:
           'bg-tropical-blue text-white border border-tropical-blue shadow-sm hover:bg-deep-ocean',
         unselected:
-          'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 hover:border-slate-400',
+          'bg-glass-bg text-foreground border border-slate-300 dark:border-slate-600 hover:bg-glass-bg/90 hover:border-slate-400 dark:hover:border-slate-500',
       },
       subtle: {
-        selected: 'bg-blue-100 text-tropical-blue border-2 border-tropical-blue hover:bg-blue-200',
+        selected:
+          'bg-blue-100 dark:bg-blue-900/50 text-tropical-blue dark:text-blue-300 border-2 border-tropical-blue dark:border-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800/50',
         unselected:
-          'bg-white text-slate-600 border-2 border-slate-300 hover:bg-slate-50 hover:border-slate-400',
+          'bg-glass-bg text-foreground border-2 border-slate-300 dark:border-slate-600 hover:bg-glass-bg/90 hover:border-slate-400 dark:hover:border-slate-500',
       },
     };
 

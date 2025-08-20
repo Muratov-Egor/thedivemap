@@ -104,15 +104,15 @@ export default function MarkerCluster({
 
       {/* Tooltip с информацией */}
       {(isHovered || isActive) && (
-        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-white rounded-lg shadow-lg border border-gray-200 text-sm whitespace-nowrap z-20">
-          <div className="font-semibold text-gray-900">
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-glass-bg rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 text-sm whitespace-nowrap z-20">
+          <div className="font-semibold text-gray-900 dark:text-gray-100">
             {cluster.count}{' '}
             {cluster.count === 1
               ? t('map.markers.diveSiteSingular')
               : t('map.markers.diveSitePlural')}
           </div>
-          <div className="text-gray-600">{t('map.markers.clickToZoom')}</div>
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
+          <div className="text-gray-600 dark:text-gray-500">{t('map.markers.clickToZoom')}</div>
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/80 dark:border-t-slate-900/80"></div>
         </div>
       )}
     </div>

@@ -38,7 +38,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       className={`
         absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 
         px-4 py-3 rounded-2xl text-sm z-20
-        bg-white backdrop-blur-lg border border-tropical-blue/20
+        bg-glass-bg backdrop-blur-lg border border-tropical-blue/20 dark:border-blue-400/30
         shadow-glass hover:shadow-glass-hover
         transition-all duration-300 ease-out
         min-w-[280px] max-w-[320px]
@@ -54,7 +54,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       {/* Заголовок */}
       <div
         data-testid={`dive-site-tooltip-name`}
-        className="font-semibold text-gray-900 mb-2 text-center text-base"
+        className="font-semibold text-foreground mb-2 text-center text-base"
       >
         {site.name}
       </div>
@@ -62,7 +62,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       {/* Координаты */}
       <div
         data-testid={`dive-site-tooltip-coordinates`}
-        className="text-gray-600 text-xs mb-3 text-center flex items-center justify-center gap-1"
+        className="text-slate-600 dark:text-slate-400 text-xs mb-3 text-center flex items-center justify-center gap-1"
       >
         <span className="text-tropical-blue flex items-center">📍</span>
         {formatCoordinates(site.latitude, site.longitude)}
@@ -73,7 +73,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
         {getSiteTypeLabel() && (
           <div
             data-testid={`dive-site-tooltip-type`}
-            className="flex items-center gap-2 text-gray-700 text-sm font-medium"
+            className="flex items-center gap-2 text-slate-700 dark:text-slate-300 text-sm font-medium"
           >
             <SiteTypeIcon
               siteTypeId={site.site_type?.id || 12}
@@ -85,7 +85,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
 
         <div
           data-testid={`dive-site-tooltip-depth`}
-          className="flex items-center gap-2 text-gray-700 text-sm font-medium"
+          className="flex items-center gap-2 text-slate-700 dark:text-slate-300 text-sm font-medium"
         >
           <span className="text-tropical-blue flex items-center justify-center">⬇</span>
           <span className="flex items-center">
@@ -95,7 +95,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
 
         <div
           data-testid={`dive-site-tooltip-visibility`}
-          className="flex items-center gap-2 text-gray-700 text-sm font-medium"
+          className="flex items-center gap-2 text-slate-700 dark:text-slate-300 text-sm font-medium"
         >
           <span className="text-tropical-blue flex items-center justify-center">👁️</span>
           <span className="flex items-center">
@@ -131,7 +131,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       />
 
       {/* Стрелка tooltip */}
-      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white/85"></div>
+      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white/80 dark:border-t-slate-900/80"></div>
     </div>
   );
 };

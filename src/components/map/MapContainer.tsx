@@ -6,6 +6,7 @@ import maplibregl, { Map } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { useMap } from '@/contexts/MapContext';
 import { usePanel } from '@/contexts/PanelContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useDiveSiteDetails } from '@/hooks/useDiveSiteDetails';
 import DiveSitesLayer from './DiveSitesLayer';
 import Notification from '@/components/ui/Notification';
@@ -13,6 +14,7 @@ import Notification from '@/components/ui/Notification';
 export default function MapContainer({ children }: { children?: React.ReactNode }) {
   const { t } = useTranslation();
   const { t: tAutocomplete } = useTranslation('autocomplete');
+  const { theme } = useTheme();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
   const [showNoResultsNotification, setShowNoResultsNotification] = useState(false);
@@ -71,12 +73,19 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     fetchDiveSites();
   }, [fetchDiveSites]);
 
+  // Функция для получения стиля карты в зависимости от темы
+  const getMapStyle = useCallback(() => {
+    return theme === 'dark'
+      ? '/map-styles/arcgis_hybrid_dark.json'
+      : '/map-styles/arcgis_hybrid.json';
+  }, [theme]);
+
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: '/map-styles/arcgis_hybrid.json',
+      style: getMapStyle(),
       center: [98.3774, 7.6079],
       zoom: 0,
       maxZoom: 15,
@@ -112,7 +121,14 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
       mapRef.current?.remove();
       mapRef.current = null;
     };
-  }, [setLoaded, setMap]);
+  }, [setLoaded, setMap, getMapStyle]);
+
+  // Переключение стиля карты при изменении темы
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.setStyle(getMapStyle());
+    }
+  }, [theme, getMapStyle]);
 
   // Проверяем, есть ли активные фильтры и нет ли результатов
   const hasActiveFilters =
@@ -150,10 +166,10 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
       {loading && (
         <div
           data-testid="loading-indicator"
-          className="absolute top-4 left-4 bg-white rounded-lg shadow-md px-4 py-2 text-sm text-gray-600"
+          className="absolute top-4 left-4 bg-glass-bg rounded-lg shadow-md px-4 py-2 text-sm text-gray-600 dark:text-gray-300"
         >
           <div className="flex items-center gap-2">
-            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 dark:border-blue-400"></div>
             {t('map.loading')}
           </div>
         </div>
@@ -161,7 +177,7 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
 
       {/* Индикатор ошибки */}
       {error && (
-        <div className="absolute top-4 left-4 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-lg text-sm">
+        <div className="absolute top-4 left-4 bg-red-100 dark:bg-red-900/20 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-400 px-4 py-2 rounded-lg text-sm">
           Error: {error}
         </div>
       )}

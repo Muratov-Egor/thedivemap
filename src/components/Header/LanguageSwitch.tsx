@@ -20,7 +20,8 @@ export default function LanguageSwitch() {
   return (
     <Button
       onClick={onToggle}
-      variant="secondary"
+      shape="pill"
+      variant="success"
       size="small"
       data-testid="language-switch"
       suppressHydrationWarning

@@ -15,3 +15,6 @@ export type { NotificationProps } from './Notification';
 
 // ImageGallery component
 export { ImageGallery } from './ImageGallery';
+
+// ThemeToggle component
+export { ThemeToggle } from './ThemeToggle';

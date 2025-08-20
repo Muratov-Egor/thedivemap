@@ -46,12 +46,12 @@ export default function MobileFiltersPanel({ onClose }: MobileFiltersPanelProps)
 
   return (
     <div
-      className="fixed inset-0 bg-white shadow-lg z-50 flex flex-col"
+      className="fixed inset-0 bg-background shadow-lg z-50 flex flex-col"
       onClick={(e) => e.stopPropagation()}
       data-testid="mobile-filters-panel"
     >
-      <div className="flex justify-between items-center p-4 border-b border-gray-200">
-        <h2 className="text-lg font-bold text-gray-800">{t('title')}</h2>
+      <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+        <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200">{t('title')}</h2>
         <Button
           variant="primary"
           shape="circle"

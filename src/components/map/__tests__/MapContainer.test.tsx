@@ -31,6 +31,9 @@ const mockClearDiveSite = jest.fn();
 const mockSetClearDiveSiteHook = jest.fn();
 const mockUsePanel = jest.fn();
 
+// Мокаем ThemeContext
+const mockUseTheme = jest.fn();
+
 // Мокаем Next.js router
 jest.mock('next/navigation', () => ({
   useRouter: () => ({
@@ -50,6 +53,10 @@ jest.mock('@/contexts/PanelContext', () => ({
   PanelProvider: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
 
+jest.mock('@/contexts/ThemeContext', () => ({
+  useTheme: () => mockUseTheme(),
+}));
+
 // Мокаем useDiveSiteDetails
 const mockFetchDiveSiteDetails = jest.fn();
 const mockClearDiveSiteHook = jest.fn();
@@ -65,6 +72,7 @@ const mockMap = {
   off: jest.fn(),
   remove: jest.fn(),
   addControl: jest.fn(),
+  setStyle: jest.fn(),
 };
 
 jest.mock('maplibre-gl', () => ({
@@ -126,6 +134,10 @@ describe('MapContainer', () => {
       fetchDiveSiteDetails: mockFetchDiveSiteDetails,
       diveSite: null,
       clearDiveSite: mockClearDiveSiteHook,
+    });
+    mockUseTheme.mockReturnValue({
+      theme: 'light',
+      toggleTheme: jest.fn(),
     });
   });
 

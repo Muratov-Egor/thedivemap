@@ -1,13 +1,23 @@
 {
   "appName": "The Dive Map",
   "header": {
-    "logoAlt": "The Dive Map"
-  },
-  "home": {
-    "title": "Тут будет карта"
+    "logoAlt": "The Dive Map",
+    "motto": "Dive where it's interesting!",
+    "login": "Войти",
+    "menu": {
+      "open": "Открыть меню",
+      "close": "Закрыть меню",
+      "settings": "Настройки",
+      "theme": "Тема",
+      "language": "Язык"
+    }
   },
   "search": {
     "placeholder": "Поиск дайв-сайтов, стран, регионов..."
+  },
+  "theme": {
+    "light": "Переключить на светлую тему",
+    "dark": "Переключить на темную тему"
   },
   "map": {
     "loading": "Загрузка дайв-сайтов...",
