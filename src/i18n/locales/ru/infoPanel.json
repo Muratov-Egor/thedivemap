@@ -1,0 +1,27 @@
+{
+  "loading": "Загрузка...",
+  "noData": "Нет данных для отображения",
+  "backToFilters": "К фильтрам",
+  "location": "Расположение",
+  "country": "Страна",
+  "region": "Регион",
+  "locations": "Локации",
+  "characteristics": "Характеристики",
+  "type": "Тип",
+  "difficulty": "Сложность",
+  "maxDepth": "Максимальная глубина",
+  "visibility": "Видимость",
+  "rating": "Рейтинг",
+  "meters": "м",
+  "images": "Изображения",
+  "image": "изображение",
+  "links": "Ссылки",
+  "infoLink": "Информационная ссылка",
+  "diveCenterLink": "Ссылка на дайв-центр",
+  "gallery": {
+    "closeModal": "Закрыть",
+    "previousImage": "Предыдущее изображение",
+    "nextImage": "Следующее изображение",
+    "imageCounter": "{{current}} / {{total}}"
+  }
+}

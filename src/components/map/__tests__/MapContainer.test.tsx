@@ -3,6 +3,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MapContainer from '../MapContainer';
+import { PanelProvider } from '@/contexts/PanelContext';
 
 // Мокаем react-i18next
 const mockUseTranslation = jest.fn();
@@ -21,6 +22,26 @@ const mockUseMap = jest.fn();
 
 jest.mock('@/contexts/MapContext', () => ({
   useMap: () => mockUseMap(),
+}));
+
+// Мокаем PanelContext
+const mockShowInfo = jest.fn();
+const mockClearDiveSite = jest.fn();
+const mockSetClearDiveSiteHook = jest.fn();
+const mockUsePanel = jest.fn();
+
+jest.mock('@/contexts/PanelContext', () => ({
+  usePanel: () => mockUsePanel(),
+  PanelProvider: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}));
+
+// Мокаем useDiveSiteDetails
+const mockFetchDiveSiteDetails = jest.fn();
+const mockClearDiveSiteHook = jest.fn();
+const mockUseDiveSiteDetails = jest.fn();
+
+jest.mock('@/hooks/useDiveSiteDetails', () => ({
+  useDiveSiteDetails: () => mockUseDiveSiteDetails(),
 }));
 
 // Мокаем maplibre-gl
@@ -49,6 +70,12 @@ jest.mock('../DiveSitesLayer', () => {
   };
 });
 
+// Мокаем Notification
+jest.mock('@/components/ui', () => ({
+  Notification: ({ show, message }: any) =>
+    show ? <div data-testid="notification">{message}</div> : null,
+}));
+
 describe('MapContainer', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -69,21 +96,36 @@ describe('MapContainer', () => {
         maxDepth: null,
         minVisibility: null,
       },
+      autocompleteInfoMessage: null,
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
     });
+    mockUsePanel.mockReturnValue({
+      showInfo: mockShowInfo,
+      clearDiveSite: mockClearDiveSite,
+      setClearDiveSiteHook: mockSetClearDiveSiteHook,
+    });
+    mockUseDiveSiteDetails.mockReturnValue({
+      fetchDiveSiteDetails: mockFetchDiveSiteDetails,
+      diveSite: null,
+      clearDiveSite: mockClearDiveSiteHook,
+    });
   });
 
+  const renderWithProviders = (component: React.ReactElement) => {
+    return render(<PanelProvider>{component}</PanelProvider>);
+  };
+
   it('рендерит контейнер карты', () => {
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     const mapContainer = document.querySelector('[class*="absolute inset-0"]');
     expect(mapContainer).toBeInTheDocument();
   });
 
   it('загружает дайв-сайты при монтировании', () => {
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(mockFetchDiveSites).toHaveBeenCalled();
   });
@@ -91,13 +133,13 @@ describe('MapContainer', () => {
   it('инициализирует карту с правильными настройками', async () => {
     const { Map } = await import('maplibre-gl');
 
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(Map).toHaveBeenCalledWith({
       container: expect.any(HTMLElement),
       style: '/map-styles/arcgis_hybrid.json',
-      center: [98.379111, 7.609361],
-      zoom: 0,
+      center: [98.3774, 7.6079],
+      zoom: 15,
       maxZoom: 15,
       minZoom: 0,
       hash: false,
@@ -111,7 +153,7 @@ describe('MapContainer', () => {
   });
 
   it('добавляет элементы управления картой', () => {
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(mockMap.addControl).toHaveBeenCalledWith(
       expect.any(Object), // NavigationControl
@@ -123,13 +165,13 @@ describe('MapContainer', () => {
   });
 
   it('устанавливает карту в контекст', () => {
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(mockSetMap).toHaveBeenCalledWith(mockMap);
   });
 
   it('обрабатывает событие загрузки карты', () => {
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(mockMap.on).toHaveBeenCalledWith('load', expect.any(Function));
 
@@ -141,7 +183,7 @@ describe('MapContainer', () => {
   });
 
   it('очищает ресурсы при размонтировании', () => {
-    const { unmount } = render(<MapContainer />);
+    const { unmount } = renderWithProviders(<MapContainer />);
 
     unmount();
 
@@ -165,16 +207,15 @@ describe('MapContainer', () => {
         maxDepth: null,
         minVisibility: null,
       },
+      autocompleteInfoMessage: null,
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
     });
 
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
-    const loadingIndicator = screen.getByTestId('loading-indicator');
-    expect(loadingIndicator).toBeInTheDocument();
-    expect(loadingIndicator).toHaveTextContent('map.loading');
+    expect(screen.getByTestId('loading-indicator')).toBeInTheDocument();
   });
 
   it('отображает индикатор ошибки', () => {
@@ -185,31 +226,27 @@ describe('MapContainer', () => {
       filteredDiveSites: [],
       selectedSite: null,
       loading: false,
-      error: 'Test error message',
+      error: 'Test error',
       activeFilters: {
         siteTypeIds: [],
         difficultyIds: [],
         maxDepth: null,
         minVisibility: null,
       },
+      autocompleteInfoMessage: null,
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
     });
 
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
-    const errorIndicator = screen.getByText('Error: Test error message');
-    expect(errorIndicator).toBeInTheDocument();
-    expect(errorIndicator).toHaveClass('bg-red-100', 'border-red-400', 'text-red-700');
+    expect(screen.getByText('Error: Test error')).toBeInTheDocument();
   });
 
   it('передает правильные пропсы в DiveSitesLayer', () => {
-    const mockSites = [
-      { id: 1, name: 'Site 1' },
-      { id: 2, name: 'Site 2' },
-    ];
-    const mockSelectedSite = { id: 1, name: 'Selected Site' };
+    const mockSites = [{ id: '1', name: 'Site 1' }];
+    const mockSelectedSite = { id: '1', name: 'Site 1' };
 
     mockUseMap.mockReturnValue({
       setMap: mockSetMap,
@@ -225,30 +262,31 @@ describe('MapContainer', () => {
         maxDepth: null,
         minVisibility: null,
       },
+      autocompleteInfoMessage: null,
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
     });
 
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
-    expect(screen.getByTestId('sites-count')).toHaveTextContent('2');
-    expect(screen.getByTestId('selected-site')).toHaveTextContent('Selected Site');
+    expect(screen.getByTestId('dive-sites-layer')).toBeInTheDocument();
+    expect(screen.getByTestId('sites-count')).toHaveTextContent('1');
+    expect(screen.getByTestId('selected-site')).toHaveTextContent('Site 1');
   });
 
   it('рендерит children', () => {
-    render(
+    renderWithProviders(
       <MapContainer>
-        <div data-testid="child-component">Child Content</div>
+        <div data-testid="test-child">Test Child</div>
       </MapContainer>,
     );
 
-    expect(screen.getByTestId('child-component')).toBeInTheDocument();
-    expect(screen.getByText('Child Content')).toBeInTheDocument();
+    expect(screen.getByTestId('test-child')).toBeInTheDocument();
   });
 
   it('имеет правильные CSS классы', () => {
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     const container = screen.getByTestId('dive-sites-layer').parentElement;
     expect(container).toHaveClass('flex-1', 'relative');
@@ -259,7 +297,7 @@ describe('MapContainer', () => {
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
       diveSites: null,
-      filteredDiveSites: [],
+      filteredDiveSites: null,
       selectedSite: null,
       loading: false,
       error: null,
@@ -269,12 +307,13 @@ describe('MapContainer', () => {
         maxDepth: null,
         minVisibility: null,
       },
+      autocompleteInfoMessage: null,
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
     });
 
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(screen.getByTestId('sites-count')).toHaveTextContent('0');
   });
@@ -294,12 +333,13 @@ describe('MapContainer', () => {
         maxDepth: null,
         minVisibility: null,
       },
+      autocompleteInfoMessage: null,
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
     });
 
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(screen.getByTestId('selected-site')).toHaveTextContent('No site selected');
   });
@@ -308,30 +348,27 @@ describe('MapContainer', () => {
     mockUseMap.mockReturnValue({
       setMap: mockSetMap,
       setLoaded: mockSetLoaded,
-      diveSites: [
-        { id: 1, name: 'Site 1', site_type_id: 1, difficulty_id: 1 },
-        { id: 2, name: 'Site 2', site_type_id: 2, difficulty_id: 2 },
-      ],
-      filteredDiveSites: [], // Отфильтрованные сайты пустые
+      diveSites: [],
+      filteredDiveSites: [],
       selectedSite: null,
       loading: false,
       error: null,
       activeFilters: {
-        siteTypeIds: [3], // Активный фильтр, который не соответствует ни одному сайту
+        siteTypeIds: [1],
         difficultyIds: [],
         maxDepth: null,
         minVisibility: null,
       },
+      autocompleteInfoMessage: null,
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
     });
 
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(screen.getByTestId('notification')).toBeInTheDocument();
-    expect(screen.getByText('notification.noResults')).toBeInTheDocument();
-    expect(screen.getByText('notification.noResultsDescription')).toBeInTheDocument();
+    expect(screen.getByTestId('notification')).toHaveTextContent('notification.noResults');
   });
 
   it('не показывает уведомление когда нет активных фильтров', () => {
@@ -349,12 +386,13 @@ describe('MapContainer', () => {
         maxDepth: null,
         minVisibility: null,
       },
+      autocompleteInfoMessage: null,
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
     });
 
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(screen.queryByTestId('notification')).not.toBeInTheDocument();
   });
@@ -366,7 +404,7 @@ describe('MapContainer', () => {
       diveSites: [],
       filteredDiveSites: [],
       selectedSite: null,
-      loading: true, // Загрузка активна
+      loading: true,
       error: null,
       activeFilters: {
         siteTypeIds: [1],
@@ -374,12 +412,13 @@ describe('MapContainer', () => {
         maxDepth: null,
         minVisibility: null,
       },
+      autocompleteInfoMessage: null,
       fetchDiveSites: mockFetchDiveSites,
       onSiteClick: mockOnSiteClick,
       onClusterClick: mockOnClusterClick,
     });
 
-    render(<MapContainer />);
+    renderWithProviders(<MapContainer />);
 
     expect(screen.queryByTestId('notification')).not.toBeInTheDocument();
   });

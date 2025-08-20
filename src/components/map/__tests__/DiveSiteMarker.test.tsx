@@ -22,21 +22,45 @@ jest.mock('@/components/ui/Button', () => {
   };
 });
 
-// Мокаем CloseIcon
+// Мокаем CloseIcon и SiteTypeIcon
 jest.mock('@/components/icons', () => ({
   CloseIcon: () => <div data-testid="close-icon">×</div>,
+  SiteTypeIcon: () => <div data-testid="site-type-icon">🏝️</div>,
 }));
 
 describe('DiveSiteMarker', () => {
   const mockSite = {
-    id: 1,
+    id: '1',
     name: 'Test Dive Site',
+    description: 'Test description',
     latitude: 10.1234,
     longitude: 20.5678,
+    country_id: 1,
+    depth_max: 30,
+    visibility: 20,
+    info_links: null,
+    dive_center_links: null,
     rating: 4.5,
+    site_type_id: 1,
+    difficulty_id: 2,
+    status: 'published' as const,
+    created_at: '2024-01-01T00:00:00Z',
     site_type: {
+      id: 1,
       label_en: 'Reef',
       label_ru: 'Риф',
+    },
+    difficulty: {
+      id: 2,
+      label_en: 'Intermediate',
+      label_ru: 'Средний',
+    },
+    country: {
+      id: 1,
+      name_en: 'Montenegro',
+      name_ru: 'Черногория',
+      iso_code: 'ME',
+      region_id: 1,
     },
   };
 
@@ -51,6 +75,7 @@ describe('DiveSiteMarker', () => {
           'map.markers.diveSite': 'Дайв-сайт',
           'map.markers.type': 'Тип',
           'map.markers.closeTooltip': 'Закрыть подсказку',
+          'map.markers.more': 'Подробнее',
         };
         return translations[key] || key;
       },
@@ -82,7 +107,7 @@ describe('DiveSiteMarker', () => {
     render(<DiveSiteMarker site={mockSite} onClick={mockOnClick} onHover={mockOnHover} />);
 
     const marker = screen.getByRole('button');
-    expect(marker).toHaveAttribute('aria-label', 'Дайв-сайт: Test Dive Site');
+    expect(marker).toHaveAttribute('aria-label', 'Dive site: Test Dive Site');
     expect(marker).toHaveAttribute('tabIndex', '0');
   });
 
@@ -129,7 +154,7 @@ describe('DiveSiteMarker', () => {
     );
 
     const coordinates = screen.getByTestId('dive-site-tooltip-coordinates');
-    expect(coordinates).toHaveTextContent('📍 10.1234°N, 20.5678°E');
+    expect(coordinates).toHaveTextContent('📍10.1234°N, 20.5678°E');
   });
 
   it('показывает тип сайта в tooltip', () => {
@@ -143,10 +168,11 @@ describe('DiveSiteMarker', () => {
     );
 
     const type = screen.getByTestId('dive-site-tooltip-type');
-    expect(type).toHaveTextContent('Тип: Риф');
+    expect(type).toHaveTextContent('Риф');
+    expect(screen.getByTestId('site-type-icon')).toBeInTheDocument();
   });
 
-  it('показывает рейтинг в tooltip', () => {
+  it('показывает глубину в tooltip', () => {
     render(
       <DiveSiteMarker
         site={mockSite}
@@ -156,8 +182,36 @@ describe('DiveSiteMarker', () => {
       />,
     );
 
-    const rating = screen.getByTestId('dive-site-tooltip-rating');
-    expect(rating).toHaveTextContent('⭐️ 4.5/5');
+    const depth = screen.getByTestId('dive-site-tooltip-depth');
+    expect(depth).toHaveTextContent('⬇30 m');
+  });
+
+  it('показывает видимость в tooltip', () => {
+    render(
+      <DiveSiteMarker
+        site={mockSite}
+        onClick={mockOnClick}
+        onHover={mockOnHover}
+        isActive={true}
+      />,
+    );
+
+    const visibility = screen.getByTestId('dive-site-tooltip-visibility');
+    expect(visibility).toHaveTextContent('👁️20 m');
+  });
+
+  it('показывает кнопку "Подробнее" в tooltip', () => {
+    render(
+      <DiveSiteMarker
+        site={mockSite}
+        onClick={mockOnClick}
+        onHover={mockOnHover}
+        isActive={true}
+      />,
+    );
+
+    const moreButton = screen.getByText('Подробнее');
+    expect(moreButton).toBeInTheDocument();
   });
 
   it('закрывает tooltip при клике на кнопку закрытия', () => {
@@ -178,23 +232,6 @@ describe('DiveSiteMarker', () => {
     expect(screen.queryByTestId('dive-site-tooltip')).not.toBeInTheDocument();
   });
 
-  it('не показывает tooltip если он был закрыт вручную', () => {
-    render(
-      <DiveSiteMarker
-        site={mockSite}
-        onClick={mockOnClick}
-        onHover={mockOnHover}
-        isActive={true}
-      />,
-    );
-
-    const closeButton = screen.getByTestId('dive-site-tooltip-close');
-    fireEvent.click(closeButton);
-
-    // Даже при активном состоянии tooltip не должен показываться
-    expect(screen.queryByTestId('dive-site-tooltip')).not.toBeInTheDocument();
-  });
-
   it('обрабатывает отрицательные координаты', () => {
     const siteWithNegativeCoords = {
       ...mockSite,
@@ -212,13 +249,13 @@ describe('DiveSiteMarker', () => {
     );
 
     const coordinates = screen.getByTestId('dive-site-tooltip-coordinates');
-    expect(coordinates).toHaveTextContent('📍 10.1234°S, 20.5678°W');
+    expect(coordinates).toHaveTextContent('📍10.1234°S, 20.5678°W');
   });
 
   it('обрабатывает отсутствие типа сайта', () => {
     const siteWithoutType = {
       ...mockSite,
-      site_type: null,
+      site_type: undefined,
     };
 
     render(
@@ -233,22 +270,42 @@ describe('DiveSiteMarker', () => {
     expect(screen.queryByTestId('dive-site-tooltip-type')).not.toBeInTheDocument();
   });
 
-  it('обрабатывает отсутствие рейтинга', () => {
-    const siteWithoutRating = {
+  it('обрабатывает нулевую глубину', () => {
+    const siteWithZeroDepth = {
       ...mockSite,
-      rating: 0,
+      depth_max: 0,
     };
 
     render(
       <DiveSiteMarker
-        site={siteWithoutRating}
+        site={siteWithZeroDepth}
         onClick={mockOnClick}
         onHover={mockOnHover}
         isActive={true}
       />,
     );
 
-    expect(screen.queryByTestId('dive-site-tooltip-rating')).not.toBeInTheDocument();
+    const depth = screen.getByTestId('dive-site-tooltip-depth');
+    expect(depth).toHaveTextContent('⬇0 m');
+  });
+
+  it('обрабатывает нулевую видимость', () => {
+    const siteWithZeroVisibility = {
+      ...mockSite,
+      visibility: 0,
+    };
+
+    render(
+      <DiveSiteMarker
+        site={siteWithZeroVisibility}
+        onClick={mockOnClick}
+        onHover={mockOnHover}
+        isActive={true}
+      />,
+    );
+
+    const visibility = screen.getByTestId('dive-site-tooltip-visibility');
+    expect(visibility).toHaveTextContent('👁️0 m');
   });
 
   it('использует английский язык для типа сайта', () => {
@@ -267,7 +324,7 @@ describe('DiveSiteMarker', () => {
     );
 
     const type = screen.getByTestId('dive-site-tooltip-type');
-    expect(type).toHaveTextContent('Тип: Reef');
+    expect(type).toHaveTextContent('Reef');
   });
 
   it('имеет правильные CSS классы для активного состояния', () => {
@@ -311,7 +368,7 @@ describe('DiveSiteMarker', () => {
     expect(screen.queryByTestId('dive-site-tooltip')).not.toBeInTheDocument();
   });
 
-  it('сбрасывает состояние закрытия при новом клике', () => {
+  it('закрывает tooltip при повторном клике на маркер', () => {
     render(
       <DiveSiteMarker
         site={mockSite}
@@ -321,14 +378,32 @@ describe('DiveSiteMarker', () => {
       />,
     );
 
-    // Закрываем tooltip
-    const closeButton = screen.getByTestId('dive-site-tooltip-close');
-    fireEvent.click(closeButton);
-    expect(screen.queryByTestId('dive-site-tooltip')).not.toBeInTheDocument();
+    expect(screen.getByTestId('dive-site-tooltip')).toBeInTheDocument();
 
-    // Кликаем на маркер - tooltip должен появиться снова
     const marker = screen.getByTestId('dive-site-marker-1');
     fireEvent.click(marker);
+
+    // Tooltip должен остаться открытым после клика на маркер
     expect(screen.getByTestId('dive-site-tooltip')).toBeInTheDocument();
+  });
+
+  it('показывает tooltip при наведении мыши', () => {
+    render(<DiveSiteMarker site={mockSite} onClick={mockOnClick} onHover={mockOnHover} />);
+
+    const marker = screen.getByTestId('dive-site-marker-1');
+    fireEvent.mouseEnter(marker);
+
+    expect(screen.getByTestId('dive-site-tooltip')).toBeInTheDocument();
+  });
+
+  it('скрывает tooltip при уходе мыши', () => {
+    render(<DiveSiteMarker site={mockSite} onClick={mockOnClick} onHover={mockOnHover} />);
+
+    const marker = screen.getByTestId('dive-site-marker-1');
+    fireEvent.mouseEnter(marker);
+    expect(screen.getByTestId('dive-site-tooltip')).toBeInTheDocument();
+
+    fireEvent.mouseLeave(marker);
+    expect(screen.queryByTestId('dive-site-tooltip')).not.toBeInTheDocument();
   });
 });

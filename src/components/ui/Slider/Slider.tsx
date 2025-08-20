@@ -175,7 +175,11 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
 
     return (
       <div ref={ref} className={cn('w-full', className)} data-testid={dataTestId}>
-        {label && <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>}
+        {label && (
+          <label className="block text-sm font-medium text-gray-700 mb-2" suppressHydrationWarning>
+            {label}
+          </label>
+        )}
 
         <div className="relative">
           {/* Слайдер трек */}
@@ -196,6 +200,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             aria-disabled={disabled}
             tabIndex={disabled ? -1 : 0}
             onKeyDown={handleKeyDown}
+            suppressHydrationWarning
           >
             {/* Заполненная часть трека */}
             <div
@@ -225,7 +230,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           {/* Отображение значения */}
           {showValue && (
             <div className="mt-3 flex justify-between items-center">
-              <span className="text-xs text-slate-500 font-medium">
+              <span className="text-xs text-slate-500 font-medium" suppressHydrationWarning>
                 {valuePrefix}
                 {min}
                 {valueSuffix}
@@ -233,12 +238,13 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
               <span
                 className="text-sm font-semibold text-slate-700 bg-white/80 px-3 py-1.5 rounded-2xl shadow-glass border border-slate-200 backdrop-blur-sm"
                 data-testid={`${dataTestId}-value`}
+                suppressHydrationWarning
               >
                 {valuePrefix}
                 {value}
                 {valueSuffix}
               </span>
-              <span className="text-xs text-slate-500 font-medium">
+              <span className="text-xs text-slate-500 font-medium" suppressHydrationWarning>
                 {valuePrefix}
                 {max}
                 {valueSuffix}

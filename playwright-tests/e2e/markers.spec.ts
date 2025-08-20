@@ -11,7 +11,7 @@ test.describe('Desktop: Interacting with markers', () => {
     await baseSteps.waitForDataLoaded();
   });
 
-  test('Click on marker should open tooltip without rating', async ({ page }) => {
+  test('Open element into dive site tooltip', async ({ page }) => {
     const markersPage = new MarkersPage(page);
 
     await markersPage.clickOnMarker('6c2daaf5-ecf5-4449-822b-60fe80f78806');
@@ -20,22 +20,9 @@ test.describe('Desktop: Interacting with markers', () => {
       'Marlas Mystery',
       '7.6079°N, 98.3801°E',
       'Wreck',
+      '32',
+      '10',
     );
-  });
-
-  test('Click on marker should open tooltip with rating and close it', async ({ page }) => {
-    const markersPage = new MarkersPage(page);
-
-    await markersPage.clickOnMarker('02b914c4-c3d7-4181-badb-391ad8bf1e09');
-    await markersPage.expectMarkerTooltipToBeVisible();
-    await markersPage.expectMarkerTooltipHaveValues(
-      'Ada Lake',
-      '44.7765°N, 20.3747°E',
-      'Lake',
-      '⭐️ 3/5',
-    );
-    await markersPage.closeMarkerTooltip();
-    await page.waitForTimeout(1000);
-    await markersPage.expectMarkerTooltipToBeClosed();
+    await markersPage.expectButtonReadMoreToBeVisible();
   });
 });

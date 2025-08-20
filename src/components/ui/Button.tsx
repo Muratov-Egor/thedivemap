@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large' | 'xl';
-  variant?: 'primary' | 'secondary' | 'coral' | 'glass' | 'ghost' | 'success';
+  variant?: 'primary' | 'secondary' | 'coral' | 'glass' | 'ghost' | 'success' | 'gallery';
   shape?: 'rounded' | 'circle' | 'pill';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
@@ -75,6 +75,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         'bg-transparent text-slate-600 hover:bg-slate-100 focus:ring-slate-400 button-shine transform transition-all duration-300 border border-slate-200',
       success:
         'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 focus:ring-green-400 shadow-lg hover:shadow-xl button-shine transform transition-all duration-300 border-0',
+      gallery:
+        'bg-black bg-opacity-50 text-white hover:bg-opacity-70 focus:ring-white/30 border-0 shadow-none backdrop-blur-sm',
     };
 
     const shapeStyles = {

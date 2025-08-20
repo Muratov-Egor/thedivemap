@@ -53,6 +53,8 @@ test.describe('Mobile: Autocomplete tests', () => {
       'Bungalow Bay North Wall',
       '7.6111°N, 98.3638°E',
       'Bay',
+      '25',
+      '15'
     );
   });
 

@@ -15,6 +15,7 @@ interface DiveSitesLayerProps {
   selectedSite: Site | null;
   onSiteClick?: (site: Site) => void;
   onClusterClick?: (cluster: Cluster) => void;
+  onShowDetails?: (siteId: string) => void;
 }
 
 export default function DiveSitesLayer({
@@ -23,6 +24,7 @@ export default function DiveSitesLayer({
   selectedSite,
   onSiteClick,
   onClusterClick,
+  onShowDetails,
 }: DiveSitesLayerProps) {
   const [clusters, setClusters] = useState<Cluster[]>([]);
   const [individualSites, setIndividualSites] = useState<Site[]>([]);
@@ -290,6 +292,7 @@ export default function DiveSitesLayer({
               site={site}
               onClick={handleSiteClick}
               isActive={selectedSite?.id === site.id}
+              onShowDetails={onShowDetails}
             />
           </div>
         ))}

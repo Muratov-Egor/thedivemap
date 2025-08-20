@@ -22,7 +22,9 @@
       "diveSitePlural": "dive sites",
       "clickToZoom": "Click to zoom",
       "type": "Type",
-      "closeTooltip": "Close"
+      "closeTooltip": "Close",
+      "more": "Read more",
+      "meters": "m"
     },
     "noResults": "No dive sites found with selected filters",
     "tryChangeFilters": "Try changing filters"

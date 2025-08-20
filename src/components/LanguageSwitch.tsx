@@ -18,7 +18,13 @@ export default function LanguageSwitch() {
   }, [i18n, nextLang]);
 
   return (
-    <Button onClick={onToggle} variant="secondary" size="small" data-testid="language-switch">
+    <Button
+      onClick={onToggle}
+      variant="secondary"
+      size="small"
+      data-testid="language-switch"
+      suppressHydrationWarning
+    >
       {current.startsWith('ru') ? 'RU' : 'EN'}
     </Button>
   );

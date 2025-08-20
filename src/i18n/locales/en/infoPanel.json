@@ -1,0 +1,27 @@
+{
+  "loading": "Loading...",
+  "noData": "No data to display",
+  "backToFilters": "Back to Filters",
+  "location": "Location",
+  "country": "Country",
+  "region": "Region",
+  "locations": "Locations",
+  "characteristics": "Characteristics",
+  "type": "Type",
+  "difficulty": "Difficulty",
+  "maxDepth": "Max Depth",
+  "visibility": "Visibility",
+  "rating": "Rating",
+  "meters": "m",
+  "images": "Images",
+  "image": "image",
+  "links": "Links",
+  "infoLink": "Info Link",
+  "diveCenterLink": "Dive Center Link",
+  "gallery": {
+    "closeModal": "Close",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "imageCounter": "{{current}} / {{total}}"
+  }
+}

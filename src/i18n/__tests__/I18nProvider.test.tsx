@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import I18nProvider from '../I18nProvider';
 
@@ -27,7 +27,7 @@ describe('I18nProvider', () => {
     mockI18n.isInitialized = false;
   });
 
-  it('рендерит children когда i18n инициализирован', async () => {
+  it('рендерит children когда i18n инициализирован', () => {
     mockI18n.isInitialized = true;
 
     render(
@@ -41,16 +41,18 @@ describe('I18nProvider', () => {
     expect(screen.getByText('Test Content')).toBeInTheDocument();
   });
 
-  it('не рендерит children когда i18n не инициализирован', () => {
+  it('рендерит children даже когда i18n не инициализирован', () => {
     mockI18n.isInitialized = false;
 
-    const { container } = render(
+    render(
       <I18nProvider>
         <div data-testid="test-child">Test Content</div>
       </I18nProvider>,
     );
 
-    expect(container.firstChild).toBeNull();
+    expect(screen.getByTestId('i18next-provider')).toBeInTheDocument();
+    expect(screen.getByTestId('test-child')).toBeInTheDocument();
+    expect(screen.getByText('Test Content')).toBeInTheDocument();
   });
 
   it('подписывается на событие initialized когда i18n не инициализирован', () => {
@@ -75,41 +77,6 @@ describe('I18nProvider', () => {
     );
 
     expect(mockI18n.on).not.toHaveBeenCalled();
-  });
-
-  it('рендерит children после инициализации i18n', async () => {
-    mockI18n.isInitialized = false;
-
-    const { rerender } = render(
-      <I18nProvider>
-        <div data-testid="test-child">Test Content</div>
-      </I18nProvider>,
-    );
-
-    // Изначально ничего не рендерится
-    expect(screen.queryByTestId('test-child')).not.toBeInTheDocument();
-
-    // Симулируем инициализацию
-    mockI18n.isInitialized = true;
-
-    // Получаем callback функцию
-    const initializedCallback = mockI18n.on.mock.calls[0][1];
-
-    // Вызываем callback в act()
-    act(() => {
-      initializedCallback();
-    });
-
-    // Перерендериваем компонент
-    rerender(
-      <I18nProvider>
-        <div data-testid="test-child">Test Content</div>
-      </I18nProvider>,
-    );
-
-    await waitFor(() => {
-      expect(screen.getByTestId('test-child')).toBeInTheDocument();
-    });
   });
 
   it('обрабатывает множественные children', () => {

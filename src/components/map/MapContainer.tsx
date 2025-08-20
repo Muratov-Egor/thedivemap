@@ -1,11 +1,14 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import maplibregl, { Map } from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { useMap } from '@/contexts/MapContext';
+import { usePanel } from '@/contexts/PanelContext';
+import { useDiveSiteDetails } from '@/hooks/useDiveSiteDetails';
 import DiveSitesLayer from './DiveSitesLayer';
-import { Notification } from '@/components/ui';
+import Notification from '@/components/ui/Notification';
 
 export default function MapContainer({ children }: { children?: React.ReactNode }) {
   const { t } = useTranslation();
@@ -18,7 +21,7 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     setMap,
     setLoaded,
     filteredDiveSites,
-    selectedSite, // ✅ Добавляю selectedSite из MapContext
+    selectedSite,
     loading,
     error,
     activeFilters,
@@ -27,6 +30,35 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     onSiteClick,
     onClusterClick,
   } = useMap();
+
+  const { showInfo, setClearDiveSiteHook } = usePanel();
+  const { fetchDiveSiteDetails, diveSite, clearDiveSite: clearDiveSiteHook } = useDiveSiteDetails();
+
+  // Регистрируем функцию очистки в контексте
+  const registerClearFunction = useCallback(() => {
+    setClearDiveSiteHook(clearDiveSiteHook);
+  }, [clearDiveSiteHook, setClearDiveSiteHook]);
+
+  useEffect(() => {
+    registerClearFunction();
+  }, [registerClearFunction]);
+
+  // Отслеживаем изменения в diveSite и переключаемся на информационную панель
+  // только если это новая загрузка данных (не ручное переключение)
+  useEffect(() => {
+    if (diveSite && !loading) {
+      showInfo(diveSite);
+    }
+  }, [diveSite, loading, showInfo]);
+
+  // Обработчик показа деталей дайв-сайта
+  const handleShowDetails = async (siteId: string) => {
+    try {
+      await fetchDiveSiteDetails(siteId);
+    } catch (error) {
+      console.error('Failed to fetch dive site details:', error);
+    }
+  };
 
   // Загружаем дайв-сайты при монтировании компонента
   useEffect(() => {
@@ -39,7 +71,7 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: '/map-styles/arcgis_hybrid.json',
-      center: [98.379111, 7.609361],
+      center: [98.3774, 7.6079],
       zoom: 0,
       maxZoom: 15,
       minZoom: 0,
@@ -102,9 +134,10 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
       <DiveSitesLayer
         map={mapRef.current}
         sites={filteredDiveSites}
-        selectedSite={selectedSite} // ✅ Передаю selectedSite в DiveSitesLayer
+        selectedSite={selectedSite}
         onSiteClick={onSiteClick}
         onClusterClick={onClusterClick}
+        onShowDetails={handleShowDetails}
       />
 
       {/* Индикатор загрузки */}

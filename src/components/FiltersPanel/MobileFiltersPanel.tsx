@@ -1,8 +1,10 @@
+import React, { useEffect } from 'react';
 import Button from '@/components/ui/Button';
 import { CloseIcon } from '@/components/icons';
 import { useTranslation } from 'react-i18next';
 import { useFilters } from '@/hooks/useFilters';
 import { useFiltersPanel } from '@/hooks/useFiltersPanel';
+import { useBodyOverflow } from '@/hooks/useBodyOverflow';
 import FiltersLoader from './FiltersLoader';
 import FiltersContent from './FiltersContent';
 
@@ -25,9 +27,26 @@ export default function MobileFiltersPanel({ onClose }: MobileFiltersPanelProps)
 
   const currentLanguage = i18n.language as 'ru' | 'en';
 
+  // Управляем overflow body и закрываем tooltip'ы при открытии панели
+  useBodyOverflow(true);
+
+  // Закрываем все открытые tooltip'ы при открытии мобильной панели
+  useEffect(() => {
+    // Находим и закрываем все открытые tooltip'ы
+    const tooltips = document.querySelectorAll('[data-testid*="dive-site-tooltip"]');
+    tooltips.forEach((tooltip) => {
+      const closeButton = tooltip.querySelector(
+        '[data-testid*="dive-site-tooltip-close"]',
+      ) as HTMLElement;
+      if (closeButton) {
+        closeButton.click();
+      }
+    });
+  }, []);
+
   return (
     <div
-      className="absolute right-0 top-0 h-full w-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 flex flex-col"
+      className="fixed inset-0 bg-white shadow-lg z-50 flex flex-col"
       onClick={(e) => e.stopPropagation()}
       data-testid="mobile-filters-panel"
     >

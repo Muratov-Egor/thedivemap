@@ -1,12 +1,19 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default function LangAttribute() {
   const { i18n } = useTranslation();
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
     const html = document.documentElement;
     const update = () => {
       const lang = i18n.resolvedLanguage || i18n.language || 'ru';
@@ -17,7 +24,7 @@ export default function LangAttribute() {
     return () => {
       i18n.off('languageChanged', update);
     };
-  }, [i18n]);
+  }, [i18n, isMounted]);
 
   return null;
 }

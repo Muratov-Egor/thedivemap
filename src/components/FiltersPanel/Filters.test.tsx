@@ -476,12 +476,14 @@ describe('Filters', () => {
       'flex-col',
       'justify-start',
       'items-center',
-      'w-[500px]',
+      'w-[600px]',
       'border-l',
       'border-gray-200',
       'p-6',
       'overflow-y-auto',
-      'max-h-screen',
+      'h-full',
+      'max-h-[calc(100vh-4rem)]',
+      'sm:max-h-full',
     );
   });
 
@@ -497,17 +499,10 @@ describe('Filters', () => {
 
     const mobilePanel = screen.getByTestId('mobile-filters-panel');
     expect(mobilePanel).toHaveClass(
-      'absolute',
-      'right-0',
-      'top-0',
-      'h-full',
-      'w-full',
+      'fixed',
+      'inset-0',
       'bg-white',
       'shadow-lg',
-      'transform',
-      'transition-transform',
-      'duration-300',
-      'ease-in-out',
       'z-50',
       'flex',
       'flex-col',

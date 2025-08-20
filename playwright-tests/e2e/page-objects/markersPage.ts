@@ -6,9 +6,11 @@ export class MarkersPage extends BaseSteps {
   readonly markerTooltipName: Locator;
   readonly markerTooltipCoordinates: Locator;
   readonly markerTooltipType: Locator;
-  readonly markerTooltipRating: Locator;
+  readonly markerTooltipDepth: Locator;
+  readonly markerTooltipVisibility: Locator;
   readonly markerTooltipClose: Locator;
   readonly cluster: Locator;
+  readonly buttonReadMore: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -16,9 +18,11 @@ export class MarkersPage extends BaseSteps {
     this.markerTooltipName = page.getByTestId('dive-site-tooltip-name');
     this.markerTooltipCoordinates = page.getByTestId('dive-site-tooltip-coordinates');
     this.markerTooltipType = page.getByTestId('dive-site-tooltip-type');
-    this.markerTooltipRating = page.getByTestId('dive-site-tooltip-rating');
+    this.markerTooltipDepth = page.getByTestId('dive-site-tooltip-depth');
+    this.markerTooltipVisibility = page.getByTestId('dive-site-tooltip-visibility');
     this.markerTooltipClose = page.getByTestId('dive-site-tooltip-close');
     this.cluster = page.getByTestId('marker-cluster');
+    this.buttonReadMore = page.getByTestId('dive-site-tooltip-more-button');
   }
 
   private marker(id: string): Locator {
@@ -53,7 +57,8 @@ export class MarkersPage extends BaseSteps {
     name: string,
     coordinates: string,
     type: string,
-    rating?: string,
+    depth: string,
+    visibility: string,
   ) {
     await test.step(`Expect tooltip name is equal: ${name}`, async () => {
       await expect(this.markerTooltipName).toHaveText(name);
@@ -67,15 +72,13 @@ export class MarkersPage extends BaseSteps {
       await expect(this.markerTooltipType).toContainText(type);
     });
 
-    if (rating) {
-      await test.step(`Expect tooltip rating is equal: ${rating}`, async () => {
-        await expect(this.markerTooltipRating).toHaveText(rating);
-      });
-    } else {
-      await test.step(`Expect tooltip rating is not visible`, async () => {
-        await expect(this.markerTooltipRating).toBeHidden();
-      });
-    }
+    await test.step(`Expect tooltip depth is equal: ${depth}`, async () => {
+      await expect(this.markerTooltipDepth).toContainText(depth);
+    });
+
+    await test.step(`Expect tooltip visibility is equal: ${visibility}`, async () => {
+      await expect(this.markerTooltipVisibility).toContainText(visibility);
+    });
   }
 
   async clickOnCluster() {
@@ -101,6 +104,12 @@ export class MarkersPage extends BaseSteps {
     await test.step(`The number of clusters less than: ${expectedCount}`, async () => {
       const currentCount = await this.getClustersCount();
       expect(currentCount).toBeLessThan(expectedCount);
+    });
+  }
+
+  async expectButtonReadMoreToBeVisible() {
+    await test.step(`Expect button read more to be visible`, async () => {
+      await expect(this.buttonReadMore).toBeVisible();
     });
   }
 }

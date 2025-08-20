@@ -168,6 +168,7 @@ export default function Autocomplete({
           aria-haspopup="listbox"
           aria-label={t('searchLabel')}
           data-testid="autocomplete-input"
+          suppressHydrationWarning
         />
 
         {/* Loading Indicator */}
