@@ -233,7 +233,9 @@ describe('DiveSitesLayer', () => {
     // Ждем выполнения useEffect
     await new Promise((resolve) => setTimeout(resolve, 0));
 
+    // Проверяем, что ошибка была залогирована
     expect(consoleSpy).toHaveBeenCalledWith('Error during clustering:', expect.any(Error));
+    
     consoleSpy.mockRestore();
   });
 

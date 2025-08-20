@@ -139,7 +139,7 @@ describe('MapContainer', () => {
       container: expect.any(HTMLElement),
       style: '/map-styles/arcgis_hybrid.json',
       center: [98.3774, 7.6079],
-      zoom: 0,
+      zoom: 15,
       maxZoom: 15,
       minZoom: 0,
       hash: false,
