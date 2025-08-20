@@ -33,7 +33,7 @@ describe('Chip', () => {
 
   it('applies correct styles for unselected state', () => {
     render(<Chip>Unselected</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-white');
+    expect(screen.getByRole('button')).toHaveClass('bg-glass-bg');
   });
 
   it('renders with icon only', () => {
@@ -67,12 +67,12 @@ describe('Chip', () => {
 
   it('renders with default variant', () => {
     render(<Chip variant="default">Default</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-white');
+    expect(screen.getByRole('button')).toHaveClass('bg-glass-bg');
   });
 
   it('renders with subtle variant', () => {
     render(<Chip variant="subtle">Subtle</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-white');
+    expect(screen.getByRole('button')).toHaveClass('bg-glass-bg');
   });
 
   it('applies correct styles for subtle variant when selected', () => {

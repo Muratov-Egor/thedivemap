@@ -39,6 +39,22 @@ jest.mock('@/components/LanguageSwitch', () => {
   };
 });
 
+// Мокаем ThemeContext
+jest.mock('@/contexts/ThemeContext', () => ({
+  useTheme: () => ({
+    theme: 'light',
+    toggleTheme: jest.fn(),
+  }),
+  ThemeProvider: ({ children }: any) => <div>{children}</div>,
+}));
+
+// Мокаем ThemeToggle
+jest.mock('@/components/ui/ThemeToggle', () => ({
+  ThemeToggle: function MockThemeToggle() {
+    return <div data-testid="theme-toggle">Theme Toggle</div>;
+  },
+}));
+
 describe('Header', () => {
   it('рендерит заголовок с логотипом и названием', () => {
     render(<Header />);
@@ -81,7 +97,8 @@ describe('Header', () => {
     const header = container.querySelector('header');
     expect(header).toBeInTheDocument();
     expect(header).toHaveClass(
-      'sm:p-4',
+      'sm:py-2',
+      'sm:px-10',
       'p-2',
       'flex',
       'justify-between',

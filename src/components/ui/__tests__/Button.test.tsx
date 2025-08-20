@@ -51,7 +51,7 @@ describe('Button Component', () => {
     expect(screen.getByRole('button')).toHaveClass('bg-gradient-coral', 'text-white');
 
     rerender(<Button variant="glass">Glass</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-white/80', 'text-slate-800');
+    expect(screen.getByRole('button')).toHaveClass('bg-glass-bg', 'text-foreground');
 
     rerender(<Button variant="success">Success</Button>);
     expect(screen.getByRole('button')).toHaveClass(

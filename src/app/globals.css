@@ -428,3 +428,50 @@ body {
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
+
+/* Стили для кнопок управления MapLibre GL в темной теме */
+.dark .maplibregl-ctrl-group button {
+  background-color: rgba(30, 41, 59, 0.9) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(71, 85, 105, 0.5) !important;
+}
+
+.dark .maplibregl-ctrl-group button:hover {
+  background-color: rgba(51, 65, 85, 0.9) !important;
+  border-color: rgba(100, 116, 139, 0.8) !important;
+}
+
+.dark .maplibregl-ctrl-group button:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.5) !important;
+  outline-offset: 2px !important;
+}
+
+.dark .maplibregl-ctrl-group {
+  background-color: rgba(30, 41, 59, 0.9) !important;
+  border: 1px solid rgba(71, 85, 105, 0.5) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Стили для компаса в темной теме */
+.dark .maplibregl-ctrl-compass {
+  background-color: rgba(30, 41, 59, 0.9) !important;
+  border: 1px solid rgba(71, 85, 105, 0.5) !important;
+}
+
+.dark .maplibregl-ctrl-compass:hover {
+  background-color: rgba(51, 65, 85, 0.9) !important;
+}
+
+/* Стили для кнопок зума в темной теме */
+.dark .maplibregl-ctrl-zoom-in,
+.dark .maplibregl-ctrl-zoom-out {
+  background-color: rgba(30, 41, 59, 0.9) !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(71, 85, 105, 0.5) !important;
+}
+
+.dark .maplibregl-ctrl-zoom-in:hover,
+.dark .maplibregl-ctrl-zoom-out:hover {
+  background-color: rgba(51, 65, 85, 0.9) !important;
+}
