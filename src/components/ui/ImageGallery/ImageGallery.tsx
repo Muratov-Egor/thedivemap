@@ -134,7 +134,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
 
   useEffect(() => {
     setMounted(true);
-    
+
     // Cleanup: восстанавливаем прокрутку при размонтировании
     return () => {
       document.body.style.overflow = 'unset';
@@ -199,17 +199,19 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
         )}
       </div>
 
-      {isModalOpen && mounted && createPortal(
-        <ImageModal
-          images={images}
-          currentIndex={currentImageIndex}
-          siteName={siteName}
-          onClose={closeModal}
-          onPrevious={goToPrevious}
-          onNext={goToNext}
-        />,
-        document.body
-      )}
+      {isModalOpen &&
+        mounted &&
+        createPortal(
+          <ImageModal
+            images={images}
+            currentIndex={currentImageIndex}
+            siteName={siteName}
+            onClose={closeModal}
+            onPrevious={goToPrevious}
+            onNext={goToNext}
+          />,
+          document.body,
+        )}
     </>
   );
 };
