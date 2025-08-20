@@ -4,6 +4,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import I18nProvider from '../i18n/I18nProvider';
 import LangAttribute from '../i18n/LangAttribute';
 import { FiltersProvider } from '../contexts/FiltersContext';
+import { ThemeProvider } from '../contexts/ThemeContext';
 
 export const metadata: Metadata = {
   title: 'The Dive Map',
@@ -15,10 +16,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <I18nProvider>
-          <FiltersProvider>
-            <LangAttribute />
-            {children}
-          </FiltersProvider>
+          <ThemeProvider>
+            <FiltersProvider>
+              <LangAttribute />
+              {children}
+            </FiltersProvider>
+          </ThemeProvider>
         </I18nProvider>
       </body>
     </html>

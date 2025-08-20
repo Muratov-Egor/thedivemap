@@ -57,12 +57,12 @@ export default function MobileInfoPanel({ diveSite: propDiveSite, onClose }: Mob
   if (error || !diveSite) {
     return (
       <div
-        className="fixed inset-0 bg-white shadow-lg z-50 flex flex-col"
+        className="fixed inset-0 bg-background shadow-lg z-50 flex flex-col"
         onClick={(e) => e.stopPropagation()}
         data-testid="mobile-info-panel"
       >
-        <div className="flex justify-between items-center p-4 border-b border-gray-200">
-          <h2 className="text-lg font-bold text-gray-800">{t('title')}</h2>
+        <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200">{t('title')}</h2>
           <Button
             variant="ghost"
             shape="circle"
@@ -74,7 +74,7 @@ export default function MobileInfoPanel({ diveSite: propDiveSite, onClose }: Mob
           />
         </div>
         <div className="flex-1 p-4 overflow-y-auto">
-          <div className="text-center text-slate-600">
+          <div className="text-center text-slate-600 dark:text-slate-400">
             <p suppressHydrationWarning>{error || t('noData')}</p>
             <Button
               onClick={handleClose}
@@ -92,7 +92,7 @@ export default function MobileInfoPanel({ diveSite: propDiveSite, onClose }: Mob
 
   return (
     <div
-      className="fixed inset-0 bg-white shadow-lg z-50 flex flex-col"
+      className="fixed inset-0 bg-background shadow-lg z-50 flex flex-col"
       onClick={(e) => e.stopPropagation()}
       data-testid="mobile-info-panel"
     >

@@ -4,13 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitch from '@/components/LanguageSwitch';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import Button from './ui/Button';
 
 export default function Header() {
   const { t } = useTranslation('common');
 
   return (
-    <header className="sm:py-2 sm:px-10 p-2 flex justify-between items-center border-b border-gray-200 min-h-[4rem]">
+    <header className="sm:py-2 sm:px-10 p-2 flex justify-between items-center border-b border-gray-200 dark:border-gray-700 min-h-[4rem] bg-background transition-colors">
       <Link href="/" className="flex sm:gap-2 gap-1 items-center hover:underline pr-4 ">
         <Image
           src="/img/Logo.ico"
@@ -20,7 +21,7 @@ export default function Header() {
           className="sm:w-24 sm:h-24 w-16 h-16"
           data-testid="header-logo"
         />
-        <h1 className="text-xl sm:text-3xl font-bold" suppressHydrationWarning>
+        <h1 className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-white" suppressHydrationWarning>
           {t('appName')}
         </h1>
       </Link>
@@ -35,6 +36,7 @@ export default function Header() {
           {t('header.login')}
         </Button>
         <LanguageSwitch />
+        <ThemeToggle />
       </div>
     </header>
   );

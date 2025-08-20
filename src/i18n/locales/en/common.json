@@ -7,6 +7,10 @@
   "search": {
     "placeholder": "Search dive sites, countries, regions..."
   },
+  "theme": {
+    "light": "Switch to light theme",
+    "dark": "Switch to dark theme"
+  },
   "map": {
     "loading": "Loading dive sites...",
     "error": {

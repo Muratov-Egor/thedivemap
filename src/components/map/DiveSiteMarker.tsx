@@ -72,7 +72,7 @@ const DiveSiteMarker = React.memo<ExtendedMarkerProps>(
           bg-gradient-ocean
           text-white
           flex items-center justify-center
-          shadow-glow-blue border-2 border-white
+          shadow-glow-blue border-2 border-white/90 dark:border-slate-200
           transition-all duration-200
           ${isHovered || isActive ? 'shadow-glow-hover' : 'shadow-glow-blue'}`}
           data-testid={`dive-site-marker-${site.id}`}

@@ -39,13 +39,13 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
   if (error || !diveSite) {
     return (
       <div
-        className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
+        className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-glass-bg backdrop-blur-xl p-6 h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
         data-testid="desktop-info-panel"
       >
-        <h2 className="text-xl font-bold text-slate-800 mb-6" suppressHydrationWarning>
+        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-6" suppressHydrationWarning>
           {t('title')}
         </h2>
-        <div className="text-center text-slate-600">
+        <div className="text-center text-slate-600 dark:text-slate-400">
           <p suppressHydrationWarning>{error || t('noData')}</p>
           <Button
             onClick={handleShowFilters}
@@ -64,7 +64,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
     <>
       {!isMobile && !isMobilePanelOpen && (
         <div
-          className="flex flex-col justify-start items-center w-[600px] border-l border-slate-200 bg-white/80 backdrop-blur-xl p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full z-[60]"
+          className="flex flex-col justify-start items-center w-[600px] border-l border-slate-200 bg-glass-bg backdrop-blur-xl p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full z-[60]"
           data-testid="desktop-info-panel"
         >
           <InfoPanelContent diveSite={diveSite} handleShowFilters={handleShowFilters} />

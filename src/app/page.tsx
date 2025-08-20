@@ -8,7 +8,7 @@ import PanelSwitcher from '@/components/PanelSwitcher';
 
 export default function HomePage() {
   return (
-    <main className="h-full w-full flex flex-col min-h-screen">
+    <main className="h-full w-full flex flex-col min-h-screen bg-background transition-colors">
       <Header />
       <MapProvider>
         <PanelProvider>

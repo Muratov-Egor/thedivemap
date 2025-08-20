@@ -38,10 +38,10 @@ export default function Filters() {
       {/* Десктопная версия - рендерим только на десктопе и когда мобильная панель закрыта */}
       {!isMobile && !isMobilePanelOpen && (
         <div
-          className="flex flex-col justify-start items-center w-[600px] border-l border-gray-200 p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
+          className="flex flex-col justify-start items-center w-[600px] border-l border-gray-200 dark:border-gray-700 p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
           data-testid="desktop-filters-panel"
         >
-          <h2 className="text-xl font-bold text-gray-800 mb-6" suppressHydrationWarning>
+          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-6" suppressHydrationWarning>
             {t('title')}
           </h2>
 

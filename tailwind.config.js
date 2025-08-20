@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
@@ -10,11 +11,21 @@ module.exports = {
         coral: '#F47B25',
         'sea-green': '#11B981',
 
-        // Фоны - светлая тема
-        'dark-ocean': '#f8fafc', // Slate 50
-        'deep-water': '#f1f5f9', // Slate 100
-        'glass-bg': 'rgba(255, 255, 255, 0.8)',
-        'frosted-glass': 'rgba(255, 255, 255, 0.6)',
+        // Основные фоны (универсальные для светлой и темной темы)
+        background: 'rgb(var(--background))',
+        foreground: 'rgb(var(--foreground))',
+
+        // Фоны - универсальные (используют CSS переменные)
+        'deep-water': 'rgb(var(--deep-water))',
+        'glass-bg': 'var(--glass-bg)',
+        'frosted-glass': 'var(--frosted-glass)',
+
+        // Темная тема
+        'dark': {
+          'background': 'rgb(var(--background))',
+          'foreground': 'rgb(var(--foreground))',
+          'deep-water': 'rgb(var(--deep-water))',
+        },
 
         // Статусные цвета
         success: '#10b981',
