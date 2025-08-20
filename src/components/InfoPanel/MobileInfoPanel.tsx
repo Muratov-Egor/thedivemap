@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DiveSiteDetails } from '@/lib/types/supabase';
 import { usePanel } from '@/contexts/PanelContext';
 import { useDiveSiteDetails as useDiveSiteDetailsHook } from '@/hooks/useDiveSiteDetails';
+import { useBodyOverflow } from '@/hooks/useBodyOverflow';
 import Button from '@/components/ui/Button';
 import { CloseIcon } from '@/components/icons';
 import InfoPanelContent from './InfoPanelContent';
@@ -21,6 +22,23 @@ export default function MobileInfoPanel({ diveSite: propDiveSite, onClose }: Mob
 
   // Используем данные из пропсов или из хука
   const diveSite = propDiveSite || hookDiveSite;
+
+  // Управляем overflow body и закрываем tooltip'ы при открытии панели
+  useBodyOverflow(true);
+
+  // Закрываем все открытые tooltip'ы при открытии мобильной панели
+  useEffect(() => {
+    // Находим и закрываем все открытые tooltip'ы
+    const tooltips = document.querySelectorAll('[data-testid*="dive-site-tooltip"]');
+    tooltips.forEach((tooltip) => {
+      const closeButton = tooltip.querySelector(
+        '[data-testid*="dive-site-tooltip-close"]',
+      ) as HTMLElement;
+      if (closeButton) {
+        closeButton.click();
+      }
+    });
+  }, []);
 
   const handleShowFilters = (e: React.MouseEvent) => {
     e.preventDefault();

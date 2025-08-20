@@ -42,7 +42,14 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
         shadow-glass hover:shadow-glass-hover
         transition-all duration-300 ease-out
         min-w-[280px] max-w-[320px]
+        pointer-events-auto
       `}
+      style={{
+        // Предотвращаем выход за границы viewport
+        maxWidth: 'calc(100vw - 2rem)',
+        left: '50%',
+        transform: 'translateX(-50%)',
+      }}
     >
       {/* Заголовок */}
       <div

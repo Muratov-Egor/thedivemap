@@ -75,10 +75,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
         </div>
       )}
       {isMobile && isMobilePanelOpen && (
-        <MobileInfoPanel 
-          diveSite={diveSite} 
-          onClose={() => setIsMobilePanelOpen(false)}
-        />
+        <MobileInfoPanel diveSite={diveSite} onClose={() => setIsMobilePanelOpen(false)} />
       )}
     </>
   );
