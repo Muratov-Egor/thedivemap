@@ -194,7 +194,9 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
             className="aspect-video rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
             onClick={() => openModal(maxPreviewCount)}
           >
-            <div className="text-gray-600 dark:text-gray-300 font-semibold text-lg">+{hiddenCount}</div>
+            <div className="text-gray-600 dark:text-gray-300 font-semibold text-lg">
+              +{hiddenCount}
+            </div>
           </div>
         )}
       </div>

@@ -176,7 +176,10 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     return (
       <div ref={ref} className={cn('w-full', className)} data-testid={dataTestId}>
         {label && (
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" suppressHydrationWarning>
+          <label
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            suppressHydrationWarning
+          >
             {label}
           </label>
         )}
@@ -230,7 +233,10 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           {/* Отображение значения */}
           {showValue && (
             <div className="mt-3 flex justify-between items-center">
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium" suppressHydrationWarning>
+              <span
+                className="text-xs text-slate-500 dark:text-slate-400 font-medium"
+                suppressHydrationWarning
+              >
                 {valuePrefix}
                 {min}
                 {valueSuffix}
@@ -244,7 +250,10 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
                 {value}
                 {valueSuffix}
               </span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium" suppressHydrationWarning>
+              <span
+                className="text-xs text-slate-500 dark:text-slate-400 font-medium"
+                suppressHydrationWarning
+              >
                 {valuePrefix}
                 {max}
                 {valueSuffix}

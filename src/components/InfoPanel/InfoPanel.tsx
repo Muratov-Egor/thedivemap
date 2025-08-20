@@ -42,7 +42,10 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
         className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-glass-bg backdrop-blur-xl p-6 h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
         data-testid="desktop-info-panel"
       >
-        <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-6" suppressHydrationWarning>
+        <h2
+          className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-6"
+          suppressHydrationWarning
+        >
           {t('title')}
         </h2>
         <div className="text-center text-slate-600 dark:text-slate-400">

@@ -67,7 +67,8 @@ export default function AutocompleteItem({
         'hover:bg-gradient-to-r hover:from-tropical-blue/5 hover:to-deep-ocean/5 dark:hover:from-blue-400/10 dark:hover:to-blue-600/10',
         'focus:bg-gradient-to-r focus:from-tropical-blue/10 focus:to-deep-ocean/10 dark:focus:from-blue-400/20 dark:focus:to-blue-600/20',
         'focus:outline-none focus:ring-2 focus:ring-tropical-blue/20 dark:focus:ring-blue-400/30',
-        isSelected && 'bg-gradient-to-r from-tropical-blue/10 to-deep-ocean/10 dark:from-blue-400/20 dark:to-blue-600/20',
+        isSelected &&
+          'bg-gradient-to-r from-tropical-blue/10 to-deep-ocean/10 dark:from-blue-400/20 dark:to-blue-600/20',
         'border-b border-slate-100 dark:border-slate-700 last:border-b-0',
         className,
       )}

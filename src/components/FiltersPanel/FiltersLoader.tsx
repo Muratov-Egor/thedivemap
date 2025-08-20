@@ -13,7 +13,10 @@ export default function FiltersLoader() {
         </div>
         <div className="flex flex-wrap gap-2">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
-            <div key={i} className="animate-pulse bg-gray-200 dark:bg-gray-700 h-8 w-24 rounded-full"></div>
+            <div
+              key={i}
+              className="animate-pulse bg-gray-200 dark:bg-gray-700 h-8 w-24 rounded-full"
+            ></div>
           ))}
         </div>
       </div>
@@ -25,7 +28,10 @@ export default function FiltersLoader() {
         </div>
         <div className="flex flex-wrap gap-2">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="animate-pulse bg-gray-200 dark:bg-gray-700 h-8 w-28 rounded-full"></div>
+            <div
+              key={i}
+              className="animate-pulse bg-gray-200 dark:bg-gray-700 h-8 w-28 rounded-full"
+            ></div>
           ))}
         </div>
       </div>
@@ -57,7 +63,10 @@ export default function FiltersLoader() {
           <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-4 w-16 rounded"></div>
           <div className="flex gap-1">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="animate-pulse bg-gray-200 dark:bg-gray-700 h-6 w-6 rounded"></div>
+              <div
+                key={i}
+                className="animate-pulse bg-gray-200 dark:bg-gray-700 h-6 w-6 rounded"
+              ></div>
             ))}
           </div>
         </div>

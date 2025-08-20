@@ -32,19 +32,22 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   // Применение темы к документу
   const applyTheme = useCallback((newTheme: Theme) => {
     if (typeof document === 'undefined') return;
-    
+
     document.documentElement.setAttribute('data-theme', newTheme);
   }, []);
 
   // Установка темы
-  const setTheme = useCallback((newTheme: Theme) => {
-    setThemeState(newTheme);
-    applyTheme(newTheme);
-    
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(THEME_STORAGE_KEY, newTheme);
-    }
-  }, [applyTheme]);
+  const setTheme = useCallback(
+    (newTheme: Theme) => {
+      setThemeState(newTheme);
+      applyTheme(newTheme);
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(THEME_STORAGE_KEY, newTheme);
+      }
+    },
+    [applyTheme],
+  );
 
   // Переключение темы
   const toggleTheme = useCallback(() => {
@@ -59,7 +62,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     // Загружаем сохраненную тему
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
     const initialTheme = savedTheme || 'light';
-    
+
     setThemeState(initialTheme);
     applyTheme(initialTheme);
     setIsInitialized(true);

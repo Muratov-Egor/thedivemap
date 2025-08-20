@@ -34,7 +34,7 @@
 }
 
 /* Темная тема */
-[data-theme="dark"] {
+[data-theme='dark'] {
   /* Основные цвета остаются теми же */
   --tropical-blue: 27, 104, 164;
   --deep-ocean: 25, 155, 215;
@@ -82,7 +82,9 @@ body {
     'Segoe UI',
     Roboto,
     sans-serif;
-  transition: color var(--transition-medium), background-color var(--transition-medium);
+  transition:
+    color var(--transition-medium),
+    background-color var(--transition-medium);
 }
 
 /* Улучшение доступности ссылок в атрибуции карты */

@@ -21,7 +21,10 @@ export default function Header() {
           className="sm:w-24 sm:h-24 w-16 h-16"
           data-testid="header-logo"
         />
-        <h1 className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-white" suppressHydrationWarning>
+        <h1
+          className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-white"
+          suppressHydrationWarning
+        >
           {t('appName')}
         </h1>
       </Link>

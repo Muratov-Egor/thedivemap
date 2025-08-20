@@ -243,7 +243,9 @@ export default function Autocomplete({
               </span>
             </div>
             <div className="text-sm">
-              <div className="font-medium text-red-700 dark:text-red-300">{t('errors.searchFailed')}</div>
+              <div className="font-medium text-red-700 dark:text-red-300">
+                {t('errors.searchFailed')}
+              </div>
               <div className="text-red-600 dark:text-red-400 mt-1">{error || state.error}</div>
             </div>
           </div>

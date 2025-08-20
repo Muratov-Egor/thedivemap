@@ -10,18 +10,12 @@ interface ThemeToggleProps {
   className?: string;
 }
 
-export function ThemeToggle({ 
-  className = ''
-}: ThemeToggleProps) {
+export function ThemeToggle({ className = '' }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation('common');
 
   const getIcon = () => {
-    return theme === 'dark' ? (
-      <MoonIcon size={22} />
-    ) : (
-      <SunIcon size={22} />
-    );
+    return theme === 'dark' ? <MoonIcon size={22} /> : <SunIcon size={22} />;
   };
 
   const getTooltipText = () => {

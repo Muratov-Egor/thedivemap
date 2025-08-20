@@ -75,8 +75,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         'bg-transparent text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-800 focus:ring-slate-400 dark:focus:ring-slate-500 button-shine transform transition-all duration-300 border border-slate-200 dark:border-slate-600',
       success:
         'bg-gradient-to-r from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 text-white hover:from-green-600 hover:to-emerald-700 dark:hover:from-green-500 dark:hover:to-emerald-600 focus:ring-green-400 dark:focus:ring-emerald-400 shadow-lg hover:shadow-xl button-shine transform transition-all duration-300 border-0',
-      sun:
-        'bg-gradient-to-r from-yellow-300 to-yellow-500 dark:from-yellow-500 dark:to-amber-600 text-gray-900 dark:text-white hover:from-yellow-200 hover:to-yellow-400 dark:hover:from-yellow-400 dark:hover:to-amber-500 focus:ring-yellow-400 dark:focus:ring-amber-400 shadow-lg hover:shadow-xl hover:shadow-yellow-200/50 dark:hover:shadow-amber-200/30 button-shine transform transition-all duration-300 border border-yellow-300/50 dark:border-amber-400/30 backdrop-blur-sm',
+      sun: 'bg-gradient-to-r from-yellow-300 to-yellow-500 dark:from-yellow-500 dark:to-amber-600 text-gray-900 dark:text-white hover:from-yellow-200 hover:to-yellow-400 dark:hover:from-yellow-400 dark:hover:to-amber-500 focus:ring-yellow-400 dark:focus:ring-amber-400 shadow-lg hover:shadow-xl hover:shadow-yellow-200/50 dark:hover:shadow-amber-200/30 button-shine transform transition-all duration-300 border border-yellow-300/50 dark:border-amber-400/30 backdrop-blur-sm',
       gallery:
         'bg-black bg-opacity-50 dark:bg-gray-900 dark:bg-opacity-70 text-white hover:bg-opacity-70 dark:hover:bg-opacity-80 focus:ring-white/30 dark:focus:ring-gray-400/30 border-0 shadow-none backdrop-blur-sm',
     };

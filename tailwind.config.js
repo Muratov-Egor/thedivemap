@@ -21,9 +21,9 @@ module.exports = {
         'frosted-glass': 'var(--frosted-glass)',
 
         // Темная тема
-        'dark': {
-          'background': 'rgb(var(--background))',
-          'foreground': 'rgb(var(--foreground))',
+        dark: {
+          background: 'rgb(var(--background))',
+          foreground: 'rgb(var(--foreground))',
           'deep-water': 'rgb(var(--deep-water))',
         },
 

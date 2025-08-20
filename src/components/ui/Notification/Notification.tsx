@@ -64,24 +64,32 @@ const Notification: React.FC<NotificationProps> = ({
 
   const typeStyles = {
     info: {
-      container: 'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-tropical-blue/30 dark:border-blue-400/30 shadow-glass',
+      container:
+        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-tropical-blue/30 dark:border-blue-400/30 shadow-glass',
       icon: 'text-tropical-blue dark:text-blue-400',
-      closeButton: 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+      closeButton:
+        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
     },
     warning: {
-      container: 'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-coral/30 dark:border-orange-400/30 shadow-glass',
+      container:
+        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-coral/30 dark:border-orange-400/30 shadow-glass',
       icon: 'text-coral dark:text-orange-400',
-      closeButton: 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+      closeButton:
+        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
     },
     error: {
-      container: 'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-error/30 dark:border-red-400/30 shadow-glass',
+      container:
+        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-error/30 dark:border-red-400/30 shadow-glass',
       icon: 'text-error dark:text-red-400',
-      closeButton: 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+      closeButton:
+        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
     },
     success: {
-      container: 'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-sea-green/30 dark:border-green-400/30 shadow-glass',
+      container:
+        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-sea-green/30 dark:border-green-400/30 shadow-glass',
       icon: 'text-sea-green dark:text-green-400',
-      closeButton: 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+      closeButton:
+        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
     },
     custom: {
       container: '',
@@ -163,7 +171,9 @@ const Notification: React.FC<NotificationProps> = ({
         {/* Контент */}
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold text-slate-800 dark:text-slate-200">{message}</div>
-          {description && <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">{description}</div>}
+          {description && (
+            <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">{description}</div>
+          )}
         </div>
 
         {/* Кнопка закрытия */}

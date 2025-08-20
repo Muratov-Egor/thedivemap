@@ -52,7 +52,10 @@ export default function RatingFilters({ className }: RatingFiltersProps) {
   return (
     <div className={cn('space-y-3', className)} data-testid="rating-filters">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300" suppressHydrationWarning>
+        <h3
+          className="text-sm font-medium text-gray-700 dark:text-gray-300"
+          suppressHydrationWarning
+        >
           {t('rating.title')}
         </h3>
         {activeFilters.minRating && (
