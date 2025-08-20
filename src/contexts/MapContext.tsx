@@ -9,6 +9,7 @@ import React, {
   useRef,
   useEffect,
 } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import type { Map } from 'maplibre-gl';
 import { Site } from '@/types/database';
@@ -47,12 +48,15 @@ interface MapContextValue {
   setMinVisibilityFilter: (minVisibility: number | null) => void;
   setMinRatingFilter: (minRating: number | null) => void;
   clearFilters: () => void;
+  // Для URL sharing
+  setFetchDiveSiteDetailsCallback: (callback: (id: string) => Promise<void>) => void;
 }
 
 const MapContext = createContext<MapContextValue | undefined>(undefined);
 
 export function MapProvider({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation();
+  const searchParams = useSearchParams();
   const [map, setMap] = useState<Map | null>(null);
   const [isLoaded, setLoaded] = useState(false);
   const [diveSites, setDiveSites] = useState<Site[]>([]);
@@ -74,6 +78,11 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     minRating: null,
   });
   const hasFetchedRef = useRef(false);
+  const hasProcessedUrlParamRef = useRef(false);
+  const isInitialLoadRef = useRef(true);
+  const [fetchDiveSiteDetailsCallback, setFetchDiveSiteDetailsCallback] = useState<
+    ((id: string) => Promise<void>) | null
+  >(null);
 
   // Загрузка дайв-сайтов
   const fetchDiveSites = useCallback(async () => {
@@ -286,6 +295,14 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     setActiveFilters((prev) => ({ ...prev, minRating }));
   }, []);
 
+  // Метод для установки callback'а загрузки деталей дайв-сайта
+  const setFetchDiveSiteDetailsCallbackFn = useCallback(
+    (callback: (id: string) => Promise<void>) => {
+      setFetchDiveSiteDetailsCallback(() => callback);
+    },
+    [],
+  );
+
   // Отфильтрованные дайв-сайты
   const filteredDiveSites = useMemo(() => {
     let filtered = diveSites;
@@ -322,6 +339,77 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
     activeFilters.minRating,
   ]);
 
+  // Вспомогательная функция для создания AutocompleteItem из site ID
+  const createAutocompleteItemFromSiteId = useCallback(
+    async (siteId: string): Promise<AutocompleteItem | null> => {
+      try {
+        const response = await fetch(`/api/dive-sites?id=${siteId}`);
+        if (response.ok) {
+          const sites = await response.json();
+          if (sites.length > 0) {
+            const site = sites[0];
+            return {
+              id: site.id,
+              name: site.name,
+              type: 'site',
+              subtitle: `${site.country?.name || ''} ${site.country?.region?.name || ''}`.trim(),
+              metadata: {
+                site_type: site.site_type?.label,
+                locations: site.site_locations?.map((loc) => loc.location?.name) || [],
+              },
+            };
+          }
+        }
+      } catch (err) {
+        console.error('Error creating autocomplete item from site ID:', err);
+      }
+      return null;
+    },
+    [],
+  );
+
+  // Обработка URL параметров для sharing ссылок
+  useEffect(() => {
+    const processSiteFromUrl = async () => {
+      const siteId = searchParams?.get('site_id');
+
+      // Проверяем, что все необходимые условия выполнены
+      if (siteId && map && isLoaded && diveSites.length > 0 && fetchDiveSiteDetailsCallback) {
+        try {
+          // Если это первоначальная загрузка - центрируем карту
+          if (isInitialLoadRef.current && !hasProcessedUrlParamRef.current) {
+            hasProcessedUrlParamRef.current = true;
+            isInitialLoadRef.current = false;
+
+            // Создаем автокомплит-элемент и центрируем карту
+            const autocompleteItem = await createAutocompleteItemFromSiteId(siteId);
+            if (autocompleteItem) {
+              await centerOnSelection(autocompleteItem);
+            }
+          }
+
+          // В любом случае загружаем полную информацию для открытия панели
+          await fetchDiveSiteDetailsCallback(siteId);
+        } catch (err) {
+          console.error('Error processing site from URL:', err);
+        }
+      } else if (!siteId) {
+        // Если site_id нет в URL, сбрасываем флаг первоначальной загрузки
+        isInitialLoadRef.current = false;
+      }
+    };
+
+    processSiteFromUrl();
+  }, [
+    searchParams,
+    map,
+    isLoaded,
+    diveSites.length,
+    centerOnSelection,
+    createAutocompleteItemFromSiteId,
+    fetchDiveSiteDetailsCallback,
+  ]);
+
   const value = useMemo(
     () => ({
       map,
@@ -347,6 +435,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       setMinVisibilityFilter,
       setMinRatingFilter,
       clearFilters,
+      setFetchDiveSiteDetailsCallback: setFetchDiveSiteDetailsCallbackFn,
     }),
     [
       map,
@@ -370,6 +459,7 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
       setMinVisibilityFilter,
       setMinRatingFilter,
       clearFilters,
+      setFetchDiveSiteDetailsCallbackFn,
     ],
   );
 

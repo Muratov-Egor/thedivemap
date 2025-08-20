@@ -8,6 +8,7 @@ import React, {
   useCallback,
   useEffect,
 } from 'react';
+import { useRouter } from 'next/navigation';
 import { DiveSiteDetails } from '@/lib/types/supabase';
 
 type PanelMode = 'filters' | 'info';
@@ -30,6 +31,7 @@ interface PanelProviderProps {
 }
 
 export function PanelProvider({ children }: PanelProviderProps) {
+  const router = useRouter();
   const [panelMode, setPanelMode] = useState<PanelMode>('filters');
   const [selectedDiveSite, setSelectedDiveSite] = useState<DiveSiteDetails | null>(null);
   const [clearDiveSiteHook, setClearDiveSiteHook] = useState<(() => void) | null>(null);
@@ -51,12 +53,21 @@ export function PanelProvider({ children }: PanelProviderProps) {
     setPanelMode('filters');
     setSelectedDiveSite(null);
     setShouldClearDiveSite(true);
-  }, []);
+    // Очищаем URL от site_id
+    router.replace(window.location.pathname, { scroll: false });
+  }, [router]);
 
-  const showInfo = useCallback((diveSite: DiveSiteDetails) => {
-    setPanelMode('info');
-    setSelectedDiveSite(diveSite);
-  }, []);
+  const showInfo = useCallback(
+    (diveSite: DiveSiteDetails) => {
+      setPanelMode('info');
+      setSelectedDiveSite(diveSite);
+      // Обновляем URL с site_id (без перезагрузки и центрирования карты)
+      const url = new URL(window.location.href);
+      url.searchParams.set('site_id', diveSite.id);
+      router.replace(url.pathname + url.search, { scroll: false });
+    },
+    [router],
+  );
 
   const clearDiveSite = useCallback(() => {
     setSelectedDiveSite(null);

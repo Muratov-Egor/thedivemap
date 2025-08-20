@@ -29,19 +29,25 @@ export default function MapContainer({ children }: { children?: React.ReactNode 
     fetchDiveSites,
     onSiteClick,
     onClusterClick,
+    setFetchDiveSiteDetailsCallback,
   } = useMap();
 
   const { showInfo, setClearDiveSiteHook } = usePanel();
   const { fetchDiveSiteDetails, diveSite, clearDiveSite: clearDiveSiteHook } = useDiveSiteDetails();
 
-  // Регистрируем функцию очистки в контексте
+  // Регистрируем функции в контекстах
   const registerClearFunction = useCallback(() => {
     setClearDiveSiteHook(clearDiveSiteHook);
   }, [clearDiveSiteHook, setClearDiveSiteHook]);
 
+  const registerFetchDetailsFunction = useCallback(() => {
+    setFetchDiveSiteDetailsCallback(fetchDiveSiteDetails);
+  }, [fetchDiveSiteDetails, setFetchDiveSiteDetailsCallback]);
+
   useEffect(() => {
     registerClearFunction();
-  }, [registerClearFunction]);
+    registerFetchDetailsFunction();
+  }, [registerClearFunction, registerFetchDetailsFunction]);
 
   // Отслеживаем изменения в diveSite и переключаемся на информационную панель
   // только если это новая загрузка данных (не ручное переключение)

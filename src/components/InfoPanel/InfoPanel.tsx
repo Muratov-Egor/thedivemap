@@ -21,10 +21,6 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
   const isMobile = useIsMobile();
 
-  const toggleIsMobileFiltersPanelOpen = () => {
-    setIsMobilePanelOpen(!isMobilePanelOpen);
-  };
-
   // Используем данные из пропсов или из хука
   const diveSite = propDiveSite || hookDiveSite;
 
@@ -33,6 +29,12 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
     e.stopPropagation();
     showFilters();
   };
+
+  useEffect(() => {
+    if (isMobile && diveSite && !isMobilePanelOpen) {
+      setIsMobilePanelOpen(true);
+    }
+  }, [isMobile, diveSite, isMobilePanelOpen]);
 
   if (error || !diveSite) {
     return (
@@ -57,12 +59,6 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
       </div>
     );
   }
-
-  useEffect(() => {
-    if (isMobile && diveSite && !isMobilePanelOpen) {
-      setIsMobilePanelOpen(true);
-    }
-  }, [isMobile, diveSite, isMobilePanelOpen]);
 
   return (
     <>

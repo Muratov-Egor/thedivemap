@@ -54,7 +54,7 @@ test.describe('Mobile: Autocomplete tests', () => {
       '7.6111°N, 98.3638°E',
       'Bay',
       '25',
-      '15'
+      '15',
     );
   });
 

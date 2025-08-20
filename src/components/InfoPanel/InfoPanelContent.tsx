@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { DiveSiteDetails } from '@/lib/types/supabase';
 import { getCountryFlag } from '@/lib/utils';
 import { formatCoordinates } from '@/lib/utils';
@@ -6,6 +7,7 @@ import { CloseIcon, SiteTypeIcon } from '@/components/icons';
 import { Button } from '@/components/ui';
 import { ImageGallery } from '@/components/ui';
 import { useTranslation } from 'react-i18next';
+import { useShareableLink } from '@/hooks/useShareableLink';
 
 export default function InfoPanelContent({
   diveSite,
@@ -15,11 +17,21 @@ export default function InfoPanelContent({
   handleShowFilters: (e: React.MouseEvent) => void;
 }) {
   const { t } = useTranslation('infoPanel');
+  const { copyShareableLink, isCopying } = useShareableLink();
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   // Получение локализованного названия
   const getLocalizedName = (nameEn: string, nameRu: string) => {
     const currentLang = document.documentElement.lang || 'ru';
     return currentLang === 'ru' ? nameRu : nameEn;
+  };
+
+  const handleShare = async () => {
+    const success = await copyShareableLink(diveSite.id);
+    if (success) {
+      setShowCopiedMessage(true);
+      setTimeout(() => setShowCopiedMessage(false), 2000);
+    }
   };
   return (
     <>
@@ -30,16 +42,29 @@ export default function InfoPanelContent({
             {getCountryFlag(diveSite.country.iso_code)} {diveSite.name}
           </h2>
 
-          <Button
-            onClick={handleShowFilters}
-            variant="glass"
-            size="small"
-            shape="circle"
-            aria-label={t('backToFilters')}
-            className="shadow-glass hover:shadow-glass-hover"
-          >
-            <CloseIcon />
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              onClick={handleShare}
+              variant="secondary"
+              size="small"
+              disabled={isCopying}
+              aria-label="Поделиться ссылкой"
+              className="shadow-glass hover:shadow-glass-hover"
+              data-testid="info-panel-share-button"
+            >
+              {showCopiedMessage ? '✓ Скопировано' : isCopying ? '...' : '🔗 Поделиться'}
+            </Button>
+            <Button
+              onClick={handleShowFilters}
+              variant="glass"
+              size="small"
+              shape="circle"
+              aria-label={t('backToFilters')}
+              className="shadow-glass hover:shadow-glass-hover"
+            >
+              <CloseIcon />
+            </Button>
+          </div>
         </div>
         {/* Координаты и местоположение */}
         <div className="flex items-center gap-4 mt-3 text-slate-600 text-sm">
