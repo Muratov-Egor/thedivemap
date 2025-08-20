@@ -23,7 +23,7 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
   };
 
   const getButtonColor = () => {
-    return theme === 'dark' ? 'glass' : 'sun';
+    return theme === 'dark' ? 'glass' : 'coral';
   };
 
   return (

@@ -30,7 +30,7 @@ export default function Header() {
       </Link>
       <div className="flex items-center gap-4 sm:mr-10 mr-4">
         <Button
-          variant="coral"
+          variant="primary"
           shape="pill"
           size="small"
           aria-label={t('header.login')}
