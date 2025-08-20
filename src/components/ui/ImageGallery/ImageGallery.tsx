@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { Image as ImageType } from '@/types/database';
 import Button from '@/components/ui/Button';
+import { createPortal } from 'react-dom';
 
 interface ImageGalleryProps {
   images: ImageType[];
@@ -45,7 +46,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black z-50 flex items-center justify-center"
+      className="fixed inset-0 bg-black z-[100] flex items-center justify-center"
       onClick={onClose}
       onKeyDown={handleKeyDown}
       tabIndex={0}
@@ -129,6 +130,16 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    
+    // Cleanup: восстанавливаем прокрутку при размонтировании
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   const previewImages = images.slice(0, maxPreviewCount);
   const hiddenCount = images.length - maxPreviewCount;
@@ -136,10 +147,14 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
   const openModal = (index: number) => {
     setCurrentImageIndex(index);
     setIsModalOpen(true);
+    // Блокируем прокрутку body
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    // Восстанавливаем прокрутку body
+    document.body.style.overflow = 'unset';
   };
 
   const goToPrevious = () => {
@@ -184,7 +199,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
         )}
       </div>
 
-      {isModalOpen && (
+      {isModalOpen && mounted && createPortal(
         <ImageModal
           images={images}
           currentIndex={currentImageIndex}
@@ -192,7 +207,8 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
           onClose={closeModal}
           onPrevious={goToPrevious}
           onNext={goToNext}
-        />
+        />,
+        document.body
       )}
     </>
   );
