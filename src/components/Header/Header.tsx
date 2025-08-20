@@ -3,9 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import LanguageSwitch from '@/components/LanguageSwitch';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import Button from './ui/Button';
+import NavBar from './NavBar';
 
 export default function Header() {
   const { t } = useTranslation('common');
@@ -28,19 +26,7 @@ export default function Header() {
           {t('appName')}
         </h1>
       </Link>
-      <div className="flex items-center gap-4 sm:mr-10 mr-4">
-        <Button
-          variant="primary"
-          shape="pill"
-          size="small"
-          aria-label={t('header.login')}
-          onClick={() => alert('Тут будет форма авторизации или переход на новую страницу')}
-        >
-          {t('header.login')}
-        </Button>
-        <LanguageSwitch />
-        <ThemeToggle />
-      </div>
+      <NavBar />
     </header>
   );
 }

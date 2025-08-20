@@ -2,7 +2,14 @@
   "appName": "The Dive Map",
   "header": {
     "logoAlt": "The Dive Map",
-    "login": "Войти"
+    "login": "Войти",
+    "menu": {
+      "open": "Открыть меню",
+      "close": "Закрыть меню",
+      "settings": "Настройки",
+      "theme": "Тема",
+      "language": "Язык"
+    }
   },
   "search": {
     "placeholder": "Поиск дайв-сайтов, стран, регионов..."

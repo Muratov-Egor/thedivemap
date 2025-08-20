@@ -2,7 +2,14 @@
   "appName": "The Dive Map",
   "header": {
     "logoAlt": "The Dive Map",
-    "login": "Login"
+    "login": "Login",
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu",
+      "settings": "Settings",
+      "theme": "Theme",
+      "language": "Language"
+    }
   },
   "search": {
     "placeholder": "Search dive sites, countries, regions..."

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import LanguageSwitch from '../LanguageSwitch';
+import LanguageSwitch from '../Header/LanguageSwitch';
 
 // Мокаем react-i18next
 const mockChangeLanguage = jest.fn();

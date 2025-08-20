@@ -1,6 +1,6 @@
 'use client';
 
-import Header from '@/components/Header';
+import Header from '@/components/Header/Header';
 import MapContainer from '@/components/map/MapContainer';
 import { MapProvider } from '@/contexts/MapContext';
 import { PanelProvider } from '@/contexts/PanelContext';
