@@ -355,7 +355,11 @@ export function MapProvider({ children }: { children: React.ReactNode }) {
               subtitle: `${site.country?.name || ''} ${site.country?.region?.name || ''}`.trim(),
               metadata: {
                 site_type: site.site_type?.label,
-                locations: site.site_locations?.map((loc) => loc.location?.name) || [],
+
+                locations:
+                  site.site_locations?.map(
+                    (loc: { location: { name: string } }) => loc.location?.name,
+                  ) || [],
               },
             };
           }
