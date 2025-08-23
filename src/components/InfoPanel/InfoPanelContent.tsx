@@ -129,8 +129,8 @@ export default function InfoPanelContent({
           </div>
         )}
 
-        {/* Характеристики дайв-сайта */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-slate-300/70 dark:border-slate-600 shadow-simple">
+        {/* Характеристики дайв-сайта - ИСПРАВЛЕНО */}
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border-2 border-slate-200 dark:border-slate-600 shadow-simple">
           <h4
             className="font-semibold text-slate-800 dark:text-slate-200 mb-4"
             suppressHydrationWarning
@@ -140,11 +140,11 @@ export default function InfoPanelContent({
 
           <div className="space-y-2">
             {diveSite.site_type && (
-              <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-gray-700 rounded-xl border border-slate-200 dark:border-slate-600">
+              <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
                 <div className="flex items-center gap-3">
                   <SiteTypeIcon
                     siteTypeId={diveSite.site_type.id}
-                    className="w-5 h-5 text-tropical-blue"
+                    className="w-5 h-5 text-primary-action"
                   />
 
                   <span
@@ -161,13 +161,13 @@ export default function InfoPanelContent({
             )}
 
             {diveSite.difficulty && (
-              <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-gray-700 rounded-xl border border-slate-200 dark:border-slate-600">
+              <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
                 <div className="flex items-center gap-3">
                   <DifficultyIcon
                     difficulty={diveSite.difficulty.id as 1 | 2 | 3}
                     size={20}
                     withBackground={true}
-                    className="text-tropical-blue"
+                    className="text-primary-action"
                     scale={150}
                   />
 
@@ -184,26 +184,26 @@ export default function InfoPanelContent({
               </div>
             )}
 
-            <div className="flex items-center justify-between p-3 bg-background/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
+            <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3">
                 <DepthIcon size={16} withBackground scale={200} />
-                <span className="text-sm font-medium text-slate-600" suppressHydrationWarning>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400" suppressHydrationWarning>
                   {t('maxDepth')}
                 </span>
               </div>
-              <span className="text-sm font-bold text-slate-800">
+              <span className="text-sm font-bold text-slate-800 dark:text-slate-200">
                 {diveSite.depth_max} <span suppressHydrationWarning>{t('meters')}</span>
               </span>
             </div>
 
-            <div className="flex items-center justify-between p-3 bg-background/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
+            <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3">
                 <VisibilityIcon size={16} withBackground scale={200} />
-                <span className="text-sm font-medium text-slate-600" suppressHydrationWarning>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400" suppressHydrationWarning>
                   {t('visibility')}
                 </span>
               </div>
-              <span className="text-sm font-bold text-slate-800">
+              <span className="text-sm font-bold text-slate-800 dark:text-slate-200">
                 {diveSite.visibility} <span suppressHydrationWarning>{t('meters')}</span>
               </span>
             </div>

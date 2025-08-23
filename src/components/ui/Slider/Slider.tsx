@@ -150,33 +150,33 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
 
     const percentage = ((value - min) / (max - min)) * 100;
 
-    // МОРСКАЯ ТЕМАТИКА - два оттенка синего + базовые варианты
+    // ===== ИСПРАВЛЕННАЯ КОНТРАСТНАЯ СИСТЕМА =====
     const variantStyles = {
       default: {
-        track: 'bg-blue-50 border border-outline-purple/20',
-        filled: 'bg-outline-purple',
-        thumb: 'bg-background border-2 border-outline-purple shadow-simple',
-        thumbHover: 'hover:scale-110 hover:shadow-simple-hover',
+        track: 'bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600',
+        filled: 'bg-primary-action',
+        thumb: 'bg-white dark:bg-slate-800 border-2 border-primary-action shadow-simple',
+        thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-blue-600',
       },
       depth: {
-        track: 'bg-blue-50 border border-slate-700/20',
-        filled: 'bg-blue-400 dark:bg-blue-600',
-        thumb: 'bg-background border-2 border-slate-700 dark:border-slate-600 shadow-simple',
+        track: 'bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600',
+        filled: 'bg-primary-action dark:bg-blue-400',
+        thumb: 'bg-white dark:bg-slate-800 border-2 border-primary-action dark:border-blue-400 shadow-simple',
         thumbHover:
-          'hover:scale-110 hover:shadow-simple-hover hover:border-slate-700 dark:hover:border-slate-600',
+          'hover:scale-110 hover:shadow-simple-hover hover:border-blue-600 dark:hover:border-blue-300',
       },
       visibility: {
-        track: 'bg-blue-50 border border-pastel-turquoise/30',
-        filled: 'bg-pastel-turquoise',
-        thumb: 'bg-background border-2 border-pastel-turquoise shadow-simple',
-        thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-pastel-turquoise',
+        track: 'bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600',
+        filled: 'bg-info-accent dark:bg-blue-400',
+        thumb: 'bg-white dark:bg-slate-800 border-2 border-info-accent dark:border-blue-400 shadow-simple',
+        thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-blue-600 dark:hover:border-blue-300',
       },
       rating: {
-        track: 'bg-blue-50 border border-gray-300 dark:border-gray-600',
-        filled: 'bg-gray-400 dark:bg-gray-500',
-        thumb: 'bg-background border-2 border-gray-400 dark:border-gray-500 shadow-simple',
+        track: 'bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600',
+        filled: 'bg-secondary-action dark:bg-gray-400',
+        thumb: 'bg-white dark:bg-slate-800 border-2 border-secondary-action dark:border-gray-400 shadow-simple',
         thumbHover:
-          'hover:scale-110 hover:shadow-simple-hover hover:border-gray-400 dark:hover:border-gray-500',
+          'hover:scale-110 hover:shadow-simple-hover hover:border-gray-600 dark:hover:border-gray-300',
       },
     };
 
@@ -198,7 +198,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           <div
             ref={sliderRef}
             className={cn(
-              'relative w-full h-4 rounded-full cursor-pointer transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-pastel-blue/50 focus:ring-offset-2',
+              'relative w-full h-4 rounded-full cursor-pointer transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-primary-action/50 focus:ring-offset-2',
               currentVariant.track,
               disabled && 'opacity-50 cursor-not-allowed',
             )}
@@ -227,7 +227,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             <div
               ref={thumbRef}
               className={cn(
-                'absolute top-1/2 w-7 h-7 rounded-full transform -translate-x-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing transition-all duration-200 ease-out focus:outline-none focus:scale-110 focus:ring-2 focus:ring-pastel-blue/50',
+                'absolute top-1/2 w-7 h-7 rounded-full transform -translate-x-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing transition-all duration-200 ease-out focus:outline-none focus:scale-110 focus:ring-2 focus:ring-primary-action/50',
                 currentVariant.thumb,
                 currentVariant.thumbHover,
                 isDragging && 'scale-125 border-4',
