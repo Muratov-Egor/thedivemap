@@ -5,17 +5,29 @@
 @tailwind utilities;
 
 :root {
-  /* Основные цвета - новая тропическая палитра */
-  --tropical-blue: 27, 104, 164;
-  --deep-ocean: 25, 155, 215;
-  --coral: 244, 123, 37;
-  --sea-green: 17, 185, 129;
+  /* ===== НОВАЯ ПАСТЕЛЬНАЯ ПАЛИТРА ===== */
+  /* Контурный цвет - основной accent */
+  --outline-purple: 74, 60, 90; /* #4A3C5A */
+  
+  /* Пастельные цвета - основная палитра */
+  --pastel-blue: 168, 218, 220; /* #A8DADC */
+  --pastel-turquoise: 128, 206, 215; /* #80CED7 */
+  --pastel-green: 200, 230, 201; /* #C8E6C9 */
+  --pastel-pink: 248, 200, 220; /* #F8C8DC */
+  --pastel-cream: 253, 253, 150; /* #FDFD96 */
+  --pastel-yellow: 255, 236, 179; /* #FFECB3 */
 
-  /* Градиенты */
-  --gradient-ocean: linear-gradient(135deg, #1b68a4, #199bd7);
-  --gradient-coral: linear-gradient(135deg, #f47b25, #ea580c);
-  --gradient-sunset: linear-gradient(135deg, #ff6b6b, #feca57);
-  --gradient-deep-sea: linear-gradient(135deg, #199bd7, #1e40af);
+  /* ===== СТАРЫЕ ЦВЕТА (для rollback) ===== */
+  /* --tropical-blue: 27, 104, 164; */
+  /* --deep-ocean: 25, 155, 215; */
+  /* --coral: 244, 123, 37; */
+  /* --sea-green: 17, 185, 129; */
+
+  /* ===== УБИРАЕМ ГРАДИЕНТЫ (плоский дизайн) ===== */
+  /* --gradient-ocean: linear-gradient(135deg, #1b68a4, #199bd7); */
+  /* --gradient-coral: linear-gradient(135deg, #f47b25, #ea580c); */
+  /* --gradient-sunset: linear-gradient(135deg, #ff6b6b, #feca57); */
+  /* --gradient-deep-sea: linear-gradient(135deg, #199bd7, #1e40af); */
 
   /* Фоны - светлая тема */
   --background: 248, 250, 252; /* Slate 50 - светло-серый */
@@ -24,10 +36,14 @@
   --glass-bg: rgba(255, 255, 255, 0.8);
   --frosted-glass: rgba(255, 255, 255, 0.6);
 
-  /* Эффекты */
-  --glass-blur: blur(20px);
-  --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.2);
-  --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.3);
+  /* ===== НОВЫЕ ЭФФЕКТЫ (минималистичные) ===== */
+  --glass-blur: blur(20px); /* Сохраняем для backup compatibility */
+  --shadow-simple: 0 2px 8px rgba(74, 60, 90, 0.1);
+  --shadow-hover: 0 4px 12px rgba(74, 60, 90, 0.15);
+  
+  /* ===== СТАРЫЕ GLOW ЭФФЕКТЫ (убираем) ===== */
+  /* --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.2); */
+  /* --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.3); */
 
   /* Переходы */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -37,17 +53,29 @@
 
 /* Темная тема */
 [data-theme='dark'] {
-  /* Основные цвета остаются теми же */
-  --tropical-blue: 27, 104, 164;
-  --deep-ocean: 25, 155, 215;
-  --coral: 244, 123, 37;
-  --sea-green: 17, 185, 129;
+  /* ===== НОВАЯ ПАСТЕЛЬНАЯ ПАЛИТРА (темная тема) ===== */
+  /* Контурный цвет - основной accent */
+  --outline-purple: 74, 60, 90; /* #4A3C5A */
+  
+  /* Пастельные цвета - адаптированы для темной темы */
+  --pastel-blue: 168, 218, 220; /* #A8DADC */
+  --pastel-turquoise: 128, 206, 215; /* #80CED7 */
+  --pastel-green: 200, 230, 201; /* #C8E6C9 */
+  --pastel-pink: 248, 200, 220; /* #F8C8DC */
+  --pastel-cream: 253, 253, 150; /* #FDFD96 */
+  --pastel-yellow: 255, 236, 179; /* #FFECB3 */
 
-  /* Градиенты остаются теми же */
-  --gradient-ocean: linear-gradient(135deg, #1b68a4, #199bd7);
-  --gradient-coral: linear-gradient(135deg, #f47b25, #ea580c);
-  --gradient-sunset: linear-gradient(135deg, #ff6b6b, #feca57);
-  --gradient-deep-sea: linear-gradient(135deg, #199bd7, #1e40af);
+  /* ===== СТАРЫЕ ЦВЕТА (для rollback) ===== */
+  /* --tropical-blue: 27, 104, 164; */
+  /* --deep-ocean: 25, 155, 215; */
+  /* --coral: 244, 123, 37; */
+  /* --sea-green: 17, 185, 129; */
+
+  /* ===== УБИРАЕМ ГРАДИЕНТЫ (плоский дизайн) ===== */
+  /* --gradient-ocean: linear-gradient(135deg, #1b68a4, #199bd7); */
+  /* --gradient-coral: linear-gradient(135deg, #f47b25, #ea580c); */
+  /* --gradient-sunset: linear-gradient(135deg, #ff6b6b, #feca57); */
+  /* --gradient-deep-sea: linear-gradient(135deg, #199bd7, #1e40af); */
 
   /* Фоны - темная тема */
   --background: 40, 46, 61; /* Slate 900 - темно-серый */
@@ -56,10 +84,14 @@
   --glass-bg: rgba(15, 23, 42, 0.8);
   --frosted-glass: rgba(15, 23, 42, 0.6);
 
-  /* Эффекты для темной темы */
-  --glass-blur: blur(20px);
-  --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.3);
-  --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.4);
+  /* ===== НОВЫЕ ЭФФЕКТЫ (минималистичные темная тема) ===== */
+  --glass-blur: blur(20px); /* Сохраняем для backup compatibility */
+  --shadow-simple: 0 4px 12px rgba(74, 60, 90, 0.2);
+  --shadow-hover: 0 6px 16px rgba(74, 60, 90, 0.25);
+  
+  /* ===== СТАРЫЕ GLOW ЭФФЕКТЫ (убираем) ===== */
+  /* --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.3); */
+  /* --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.4); */
 
   /* Переходы остаются теми же */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -262,6 +294,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  /* СОЛНЕЧНЫЙ БЛИК - белый цвет */
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   transform: translateX(-100%) skewX(-15deg);
   transition: none;
@@ -303,7 +336,8 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(27, 104, 164, 0.2), transparent);
+  /* СОЛНЕЧНЫЙ БЛИК НА ВОДЕ - белый цвет */
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transition: left 0.5s;
   pointer-events: none;
 }
@@ -330,12 +364,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  /* МНОЖЕСТВЕННЫЕ СОЛНЕЧНЫЕ БЛИКИ - белый + лёгкий голубой */
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(27, 104, 164, 0.1),
+    rgba(255, 255, 255, 0.3),
     transparent,
-    rgba(27, 104, 164, 0.2),
+    rgba(255, 255, 255, 0.15),
     transparent
   );
   transform: translateX(-100%) skewX(-15deg);
@@ -372,7 +407,8 @@ body {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(27, 104, 164, 0.2);
+  /* СОЛНЕЧНЫЕ ОТРАЖЕНИЯ НА ВОДЕ - белый цвет */
+  background: rgba(255, 255, 255, 0.4);
   transform: translate(-50%, -50%);
   animation: water-ripple 0.6s ease-out;
 }
@@ -396,10 +432,11 @@ body {
 @keyframes glow-pulse {
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(27, 104, 164, 0.2);
+    /* СОЛНЕЧНОЕ СИЯНИЕ - белый цвет */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(27, 104, 164, 0.4);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
   }
 }
 

@@ -121,25 +121,25 @@ variant: 'primary' | 'secondary' | 'coral' | 'glass' | 'ghost' | 'success' | 'su
 
 ### Анимации бликов - адаптация
 
-**Button-shine анимация:**
+**Button-shine анимация (ОБНОВЛЕНО - солнечные блики):**
 ```css
 .button-shine::before {
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(74, 60, 90, 0.2),  /* outline-purple */
+    rgba(255, 255, 255, 0.4),  /* белый солнечный блик */
     transparent
   );
 }
 ```
 
-**Water-shimmer-multiple (shimmer prop):**
+**Water-shimmer-multiple (shimmer prop) - ОБНОВЛЕНО:**
 ```css
 .water-shimmer-multiple::before {
   background: linear-gradient(90deg,
     transparent,
-    rgba(163, 213, 240, 0.15), /* pastel-blue */
+    rgba(255, 255, 255, 0.3),   /* белый солнечный блик */
     transparent,
-    rgba(74, 60, 90, 0.1),     /* outline-purple */
+    rgba(255, 255, 255, 0.15),  /* второй белый блик */
     transparent
   );
 }
@@ -156,15 +156,15 @@ variant: 'primary' | 'secondary' | 'coral' | 'glass' | 'ghost' | 'success' | 'su
 4. **UX:** Пользователи понимают назначение по цвету
 5. **Анимации:** Хорошо сочетается с бликами
 
-### Финальные варианты кнопок
+### Финальные варианты кнопок (ОБНОВЛЕНО)
 
 ```typescript
-// Новый mapping вариантов
+// Новый mapping вариантов (обновлен по feedback)
 type ButtonVariant = 
   | 'primary'    // bg-pastel-blue - основные действия
-  | 'secondary'  // bg-pastel-cream - вторичные  
+  | 'secondary'  // bg-pastel-yellow - вторичные (изменено!)
   | 'success'    // bg-pastel-green - успешные
-  | 'warning'    // bg-pastel-yellow - предупреждения
+  | 'warning'    // bg-pastel-cream - предупреждения (изменено!)
   | 'danger'     // bg-pastel-pink - опасные
   | 'info'       // bg-pastel-turquoise - информационные
   | 'ghost'      // transparent - призрачные
@@ -182,10 +182,10 @@ type ButtonVariant =
   @apply button-shine transition-all duration-300;
 }
 
-/* Secondary - вторичные действия */
+/* Secondary - вторичные действия (ОБНОВЛЕНО) */
 .btn-secondary {
-  @apply bg-pastel-cream text-outline-purple border border-outline-purple/30;
-  @apply hover:bg-pastel-cream/90 hover:border-outline-purple;
+  @apply bg-pastel-yellow text-outline-purple border border-outline-purple/30;
+  @apply hover:bg-pastel-yellow/90 hover:border-outline-purple;
   @apply focus:ring-2 focus:ring-outline-purple/30;
   @apply button-shine transition-all duration-300;
 }
@@ -198,10 +198,10 @@ type ButtonVariant =
   @apply button-shine transition-all duration-300;
 }
 
-/* Warning - предупреждения */
+/* Warning - предупреждения (ОБНОВЛЕНО) */
 .btn-warning {
-  @apply bg-pastel-yellow text-outline-purple border border-outline-purple/30;
-  @apply hover:bg-pastel-yellow/90 hover:border-outline-purple;
+  @apply bg-pastel-cream text-outline-purple border border-outline-purple/30;
+  @apply hover:bg-pastel-cream/90 hover:border-outline-purple;
   @apply focus:ring-2 focus:ring-outline-purple/30;
   @apply button-shine transition-all duration-300;
 }
@@ -265,34 +265,122 @@ type ButtonVariant =
 
 ## 6️⃣ DARK THEME ADAPTATIONS
 
-### Адаптация для темной темы
+### Адаптация для темной темы (ИСПРАВЛЕНО - проблема прозрачности)
 ```css
 [data-theme='dark'] {
-  /* Кнопки в темной теме - инвертированные */
+  /* ИСПРАВЛЕНО: Используем пастельные фоны вместо outline-purple */
   .btn-primary {
-    @apply bg-outline-purple/20 text-pastel-blue border-pastel-blue/50;
-    @apply hover:bg-outline-purple/30 hover:border-pastel-blue;
+    background-color: rgba(168, 218, 220, 0.15); /* pastel-blue/15 */
+    color: rgb(var(--pastel-blue));
+    border: 2px solid rgb(var(--pastel-blue));
+  }
+  
+  .btn-primary:hover {
+    background-color: rgba(168, 218, 220, 0.25);
+    border-color: rgb(var(--pastel-blue));
+  }
+  
+  /* Secondary теперь yellow */
+  .btn-secondary {
+    background-color: rgba(255, 236, 179, 0.15); /* pastel-yellow/15 */
+    color: rgb(var(--pastel-yellow));
+    border: 2px solid rgb(var(--pastel-yellow));
+  }
+  
+  .btn-secondary:hover {
+    background-color: rgba(255, 236, 179, 0.25);
+    border-color: rgb(var(--pastel-yellow));
+  }
+  
+  .btn-success {
+    background-color: rgba(200, 230, 201, 0.15); /* pastel-green/15 */
+    color: rgb(var(--pastel-green));
+    border: 2px solid rgb(var(--pastel-green));
+  }
+  
+  .btn-success:hover {
+    background-color: rgba(200, 230, 201, 0.25);
+    border-color: rgb(var(--pastel-green));
+  }
+  
+  /* Warning теперь cream */
+  .btn-warning {
+    background-color: rgba(253, 253, 150, 0.15); /* pastel-cream/15 */
+    color: rgb(var(--pastel-cream));
+    border: 2px solid rgb(var(--pastel-cream));
+  }
+  
+  .btn-warning:hover {
+    background-color: rgba(253, 253, 150, 0.25);
+    border-color: rgb(var(--pastel-cream));
+  }
+  
+  .btn-danger {
+    background-color: rgba(248, 200, 220, 0.15); /* pastel-pink/15 */
+    color: rgb(var(--pastel-pink));
+    border: 2px solid rgb(var(--pastel-pink));
+  }
+  
+  .btn-danger:hover {
+    background-color: rgba(248, 200, 220, 0.25);
+    border-color: rgb(var(--pastel-pink));
+  }
+  
+  .btn-info {
+    background-color: rgba(128, 206, 215, 0.15); /* pastel-turquoise/15 */
+    color: rgb(var(--pastel-turquoise));
+    border: 2px solid rgb(var(--pastel-turquoise));
+  }
+  
+  .btn-info:hover {
+    background-color: rgba(128, 206, 215, 0.25);
+    border-color: rgb(var(--pastel-turquoise));
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-white border-white/30;
+    @apply hover:bg-white/5 hover:border-white/60;
+  }
+  
+  .btn-outline {
+    @apply bg-transparent text-white border-2 border-white;
+    @apply hover:bg-white hover:text-outline-purple;
+  }
+}
+
+/* АЛЬТЕРНАТИВНЫЙ ВАРИАНТ - Полноцветные фоны для максимальной видимости */
+/*
+[data-theme='dark'] {
+  .btn-primary {
+    @apply bg-pastel-blue text-outline-purple border-pastel-blue;
+    @apply hover:bg-pastel-blue/90;
   }
   
   .btn-secondary {
-    @apply bg-outline-purple/10 text-pastel-cream border-pastel-cream/50;
-    @apply hover:bg-outline-purple/20 hover:border-pastel-cream;
+    @apply bg-pastel-yellow text-outline-purple border-pastel-yellow;
+    @apply hover:bg-pastel-yellow/90;
   }
   
-  /* Остальные варианты аналогично */
+  .btn-warning {
+    @apply bg-pastel-cream text-outline-purple border-pastel-cream;
+    @apply hover:bg-pastel-cream/90;
+  }
+  
+  // ... остальные варианты аналогично
 }
+*/
 ```
 
 ## 🎨 VISUALIZATION
 
-### Компоненты кнопок
+### Компоненты кнопок (ОБНОВЛЕНО)
 ```
-🔵 Primary    - bg-pastel-blue (#A3D5F0)
-🟤 Secondary  - bg-pastel-cream (#EBDCC4)  
-🟢 Success    - bg-pastel-green (#B2E5C2)
-🟡 Warning    - bg-pastel-yellow (#FEE8B0)
-🌸 Danger     - bg-pastel-pink (#F4C2D7)
-🌊 Info       - bg-pastel-turquoise (#92E3DB)
+🔵 Primary    - bg-pastel-blue (#A8DADC)
+🟡 Secondary  - bg-pastel-yellow (#FFECB3) [ИЗМЕНЕНО]
+🟢 Success    - bg-pastel-green (#C8E6C9)
+🟤 Warning    - bg-pastel-cream (#FDFD96) [ИЗМЕНЕНО]
+🌸 Danger     - bg-pastel-pink (#F8C8DC)
+🌊 Info       - bg-pastel-turquoise (#80CED7)
 👻 Ghost      - bg-transparent
 📋 Outline    - border-only
 ```
@@ -306,8 +394,20 @@ Active:   [🔵 Primary Button  ] + scale-95 + блик
 Disabled: [🔵 Primary Button  ] + opacity-50
 ```
 
-🎨🎨🎨 EXITING CREATIVE PHASE - BUTTON DECISION MADE 🎨🎨🎨
+## 🔄 UPDATE LOG
 
-**Результат:** Семантическая система кнопок с 8 вариантами без градиентов  
-**Статус:** Готова к реализации  
+**Дата обновления:** $(date)  
+**Изменения по пользовательскому feedback:**
+- **Secondary:** `pastel-cream` → `pastel-yellow` (более активный цвет для вторичных действий)
+- **Warning:** `pastel-yellow` → `pastel-cream` (более нейтральный цвет для предупреждений)
+
+**Обоснование изменений:**
+- Warning должен быть спокойнее и менее привлекающим внимание
+- Secondary может быть более ярким, так как это важные, но не критичные действия
+- Улучшена семантическая логика цветов
+
+🎨🎨🎨 EXITING CREATIVE PHASE - BUTTON DECISION UPDATED 🎨🎨🎨
+
+**Результат:** Семантическая система кнопок с 8 вариантами без градиентов (обновлена)  
+**Статус:** Готова к реализации с обновленными цветами  
 **Следующий компонент:** Icon система

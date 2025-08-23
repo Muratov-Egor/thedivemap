@@ -16,11 +16,23 @@ module.exports = {
         1000: '10',
       },
       colors: {
-        // Тропическая палитра
-        'tropical-blue': '#1B68A4',
-        'deep-ocean': '#199BD7',
-        coral: '#F47B25',
-        'sea-green': '#11B981',
+        // ===== НОВАЯ ПАСТЕЛЬНАЯ ПАЛИТРА =====
+        // Контурный цвет - основной accent
+        'outline-purple': '#4A3C5A',
+        
+        // Пастельные цвета - основная палитра
+        'pastel-blue': '#A8DADC',
+        'pastel-turquoise': '#80CED7',
+        'pastel-green': '#C8E6C9',
+        'pastel-pink': '#F8C8DC',
+        'pastel-cream': '#FDFD96',
+        'pastel-yellow': '#FFECB3',
+
+        // ===== СТАРЫЕ ЦВЕТА (для rollback) =====
+        // 'tropical-blue': '#1B68A4',
+        // 'deep-ocean': '#199BD7',
+        // coral: '#F47B25',
+        // 'sea-green': '#11B981',
 
         // Основные фоны (универсальные для светлой и темной темы)
         background: 'rgb(var(--background))',
@@ -45,10 +57,11 @@ module.exports = {
         info: '#3b82f6',
       },
       backgroundImage: {
-        'gradient-ocean': 'linear-gradient(135deg, #1B68A4, #199BD7)',
-        'gradient-coral': 'linear-gradient(135deg, #F47B25, #ea580c)',
-        'gradient-sunset': 'linear-gradient(135deg, #ff6b6b, #feca57)',
-        'gradient-deep-sea': 'linear-gradient(135deg, #199BD7, #1e40af)',
+        // ===== УБИРАЕМ ГРАДИЕНТЫ (плоский дизайн) =====
+        // 'gradient-ocean': 'linear-gradient(135deg, #1B68A4, #199BD7)',
+        // 'gradient-coral': 'linear-gradient(135deg, #F47B25, #ea580c)',
+        // 'gradient-sunset': 'linear-gradient(135deg, #ff6b6b, #feca57)',
+        // 'gradient-deep-sea': 'linear-gradient(135deg, #199BD7, #1e40af)',
         'gradient-neumorph': 'linear-gradient(145deg, #f8fafc, #e2e8f0)',
         'gradient-neumorph-inset': 'linear-gradient(145deg, #e2e8f0, #f8fafc)',
       },
@@ -62,14 +75,21 @@ module.exports = {
         '3xl': '64px',
       },
       boxShadow: {
+        // Основные тени (минималистичные)
         glass: '0 8px 32px rgba(0, 0, 0, 0.1)',
         'glass-hover': '0 16px 48px rgba(0, 0, 0, 0.15)',
         neumorph: '8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.8)',
         'neumorph-hover':
           '12px 12px 24px rgba(0, 0, 0, 0.15), -12px -12px 24px rgba(255, 255, 255, 0.9)',
-        'glow-blue': '0 8px 32px rgba(27, 104, 164, 0.2)',
-        'glow-coral': '0 8px 32px rgba(244, 123, 37, 0.2)',
-        'glow-hover': '0 12px 40px rgba(27, 104, 164, 0.3)',
+        
+        // ===== НОВЫЕ МИНИМАЛИСТИЧНЫЕ ТЕНИ =====
+        'simple': '0 2px 8px rgba(74, 60, 90, 0.1)',
+        'simple-hover': '0 4px 12px rgba(74, 60, 90, 0.15)',
+        
+        // ===== СТАРЫЕ GLOW ЭФФЕКТЫ (убираем) =====
+        // 'glow-blue': '0 8px 32px rgba(27, 104, 164, 0.2)',
+        // 'glow-coral': '0 8px 32px rgba(244, 123, 37, 0.2)',
+        // 'glow-hover': '0 12px 40px rgba(27, 104, 164, 0.3)',
       },
       animation: {
         float: 'float 3s ease-in-out infinite',
@@ -86,10 +106,11 @@ module.exports = {
         },
         'pulse-glow': {
           '0%, 100%': {
-            boxShadow: '0 8px 32px rgba(27, 104, 164, 0.2)',
+            // СОЛНЕЧНОЕ СИЯНИЕ - белый цвет
+            boxShadow: '0 8px 32px rgba(255, 255, 255, 0.2)',
           },
           '50%': {
-            boxShadow: '0 8px 32px rgba(27, 104, 164, 0.4), 0 0 20px rgba(27, 104, 164, 0.2)',
+            boxShadow: '0 8px 32px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.3)',
           },
         },
         'water-ripple': {
