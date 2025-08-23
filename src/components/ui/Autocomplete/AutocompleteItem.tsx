@@ -23,7 +23,11 @@ const getTypeIcon = (
     case 'country':
       // Используем флаг страны если есть ISO код
       const isoCode = metadata?.iso_code as string;
-      return isoCode ? getCountryFlag(isoCode) : '🌍';
+      return (
+        <div className="px-1 bg-tropical-blue/15 rounded-lg">
+          <span className="text-2xl">{isoCode ? getCountryFlag(isoCode) : '🌍'}</span>
+        </div>
+      );
     case 'region':
       return <MapIcon size={16} scale={200} withBackground />;
     case 'location':
