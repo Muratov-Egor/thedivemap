@@ -33,13 +33,13 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
         selected:
           'bg-pastel-blue border-2 border-outline-purple text-outline-purple dark:text-black shadow-simple hover:bg-pastel-blue/80 hover:shadow-simple-hover focus:ring-pastel-blue/50',
         unselected:
-          'bg-background dark:bg-gray-800 border-2 border-outline-purple/40 text-slate-700 dark:text-white hover:bg-pastel-blue/20 hover:border-outline-purple focus:ring-outline-purple/30',
+          'bg-blue-50 border-2 border-outline-purple/40 text-slate-700 dark:text-white hover:bg-pastel-blue/20 hover:border-outline-purple focus:ring-outline-purple/30',
       },
       subtle: {
         selected:
           'bg-pastel-blue/60 border border-outline-purple text-outline-purple dark:text-black shadow-simple hover:bg-pastel-blue/80 hover:shadow-simple-hover focus:ring-pastel-blue/50',
         unselected:
-          'bg-background dark:bg-gray-800 border border-outline-purple/30 text-slate-600 dark:text-white/90 hover:bg-pastel-blue/15 hover:border-outline-purple/50 focus:ring-outline-purple/30',
+          'bg-blue-50 border border-outline-purple/30 text-slate-600 dark:text-white/90 hover:bg-pastel-blue/15 hover:border-outline-purple/50 focus:ring-outline-purple/30',
       },
     };
 

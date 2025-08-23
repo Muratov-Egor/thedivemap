@@ -153,26 +153,26 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     // МОРСКАЯ ТЕМАТИКА - два оттенка синего + базовые варианты
     const variantStyles = {
       default: {
-        track: 'bg-gray-50 dark:bg-gray-800 border border-outline-purple/20',
+        track: 'bg-blue-50 border border-outline-purple/20',
         filled: 'bg-outline-purple',
         thumb: 'bg-background border-2 border-outline-purple shadow-simple',
         thumbHover: 'hover:scale-110 hover:shadow-simple-hover',
       },
       depth: {
-        track: 'bg-gray-50 dark:bg-gray-800 border border-slate-700/20',
+        track: 'bg-blue-50 border border-slate-700/20',
         filled: 'bg-blue-400 dark:bg-blue-600',
         thumb: 'bg-background border-2 border-slate-700 dark:border-slate-600 shadow-simple',
         thumbHover:
           'hover:scale-110 hover:shadow-simple-hover hover:border-slate-700 dark:hover:border-slate-600',
       },
       visibility: {
-        track: 'bg-gray-50 dark:bg-gray-800 border border-pastel-turquoise/30',
+        track: 'bg-blue-50 border border-pastel-turquoise/30',
         filled: 'bg-pastel-turquoise',
         thumb: 'bg-background border-2 border-pastel-turquoise shadow-simple',
         thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-pastel-turquoise',
       },
       rating: {
-        track: 'bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600',
+        track: 'bg-blue-50 border border-gray-300 dark:border-gray-600',
         filled: 'bg-gray-400 dark:bg-gray-500',
         thumb: 'bg-background border-2 border-gray-400 dark:border-gray-500 shadow-simple',
         thumbHover:

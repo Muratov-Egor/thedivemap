@@ -152,8 +152,8 @@ export default function Autocomplete({
           disabled={disabled}
           className={cn(
             'w-full px-4 py-3 text-base text-foreground placeholder-slate-500 dark:placeholder-slate-400',
-            'bg-background border-2 border-slate-200 dark:border-slate-600 rounded-2xl',
-            'focus:border-pastel-blue dark:focus:border-pastel-blue focus:outline-none focus:ring-2 focus:ring-pastel-blue/30 dark:focus:ring-pastel-blue/40',
+            'bg-blue-50 border-2 border-slate-200 dark:border-slate-600 rounded-2xl',
+            'focus:border-pastel-blue dark:focus:border-pastel-blue focus:outline-none focus:ring-2 focus:ring-pastel-blue/30 dark:focus:ring-pastel-blue/40 text-black dark:text-white',
             'transition-all duration-300 ease-in-out',
             'disabled:opacity-50 disabled:cursor-not-allowed',
             'pr-12', // Space for clear button

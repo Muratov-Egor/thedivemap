@@ -67,8 +67,8 @@ export default function AutocompleteItem({
       id={`autocomplete-option-${index}`}
       className={cn(
         'relative flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ease-in-out',
-        'hover:bg-pastel-blue/10 dark:hover:bg-pastel-blue/15',
-        'focus:bg-pastel-blue/15 dark:focus:bg-pastel-blue/20',
+        'hover:bg-pastel-blue/50 dark:hover:bg-pastel-blue/15',
+        'focus:bg-pastel-blue/50 dark:focus:bg-pastel-blue/20',
         'focus:outline-none focus:ring-2 focus:ring-pastel-blue/30 dark:focus:ring-pastel-blue/40',
         isSelected && 'bg-pastel-blue/20 dark:bg-pastel-blue/25',
         'border-b border-slate-100 dark:border-slate-700 last:border-b-0',

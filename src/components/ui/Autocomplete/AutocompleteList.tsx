@@ -29,7 +29,7 @@ export default function AutocompleteList({
     return (
       <div
         className={cn(
-          'absolute top-full left-0 right-0 mt-1 bg-background border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
+          'absolute top-full left-0 right-0 mt-1 bg-blue-50 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
           'max-h-80 overflow-hidden',
           className,
         )}
@@ -49,7 +49,7 @@ export default function AutocompleteList({
     return (
       <div
         className={cn(
-          'absolute top-full left-0 right-0 mt-1 bg-background border border-red-200 dark:border-red-800 rounded-2xl shadow-lg z-50',
+          'absolute top-full left-0 right-0 mt-1 bg-blue-50 border border-red-200 dark:border-red-800 rounded-2xl shadow-lg z-50',
           'max-h-80 overflow-hidden',
           className,
         )}
@@ -78,7 +78,7 @@ export default function AutocompleteList({
     <div
       id="autocomplete-listbox"
       className={cn(
-        'absolute top-full left-0 right-0 mt-1 bg-background border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
+        'absolute top-full left-0 right-0 mt-1 bg-blue-50 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
         'max-h-120 overflow-y-auto',
         'scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent',
         className,
@@ -99,7 +99,7 @@ export default function AutocompleteList({
 
       {/* Results count indicator */}
       <div
-        className="px-4 py-2 text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50"
+        className="px-4 py-2 text-xs bg-blue-100 bg-opacity-50 text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50"
         data-testid="autocomplete-list-results-count"
         aria-live="polite"
         aria-label={`${t('resultsCount')}: ${results.length}`}

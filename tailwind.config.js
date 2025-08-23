@@ -43,6 +43,11 @@ module.exports = {
         'glass-bg': 'var(--glass-bg)',
         'frosted-glass': 'var(--frosted-glass)',
 
+        // Адаптивные blue оттенки
+        blue: {
+          50: 'rgb(var(--blue-50))',
+        },
+
         // Темная тема
         dark: {
           background: 'rgb(var(--background))',
