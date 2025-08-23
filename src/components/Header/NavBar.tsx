@@ -79,7 +79,7 @@ export default function NavBar() {
     <div className="relative mr-4" ref={accordionRef}>
       {/* Кнопка меню */}
       <Button
-        variant="secondary"
+        variant="outline"
         shape="pill"
         size="medium"
         onClick={toggleAccordion}

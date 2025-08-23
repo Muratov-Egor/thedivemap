@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large' | 'xl';
-  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info';
+  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info' | 'outline' | 'glass';
   shape?: 'rounded' | 'circle' | 'pill';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
@@ -86,6 +86,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // Info - информационные действия (pastel-turquoise)
       info:
         'bg-pastel-turquoise border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-turquoise/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-turquoise/15 dark:border-pastel-turquoise dark:text-pastel-turquoise',
+
+      // Outline - обводка (pastel-blue)
+      outline:
+        'bg-transparent border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-blue/50 shadow-simple button-shine transition-all duration-300 dark:border-pastel-blue dark:text-pastel-blue',
+
+      // Glass - прозрачная обводка (pastel-blue)
+      glass:
+        'bg-transparent border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-blue/50 shadow-simple button-shine transition-all duration-300 dark:border-pastel-blue dark:text-pastel-blue',
     };
 
     const shapeStyles = {
