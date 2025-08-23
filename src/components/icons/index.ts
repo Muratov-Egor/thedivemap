@@ -21,3 +21,5 @@ export { CaveIcon } from './CaveIcon';
 export { BayIcon } from './BayIcon';
 export { ArtificialReefIcon } from './ArtificialReefIcon';
 export { DifficultyIcon } from './DifficultyIcon';
+export { CheckIcon } from './CheckIcon';
+export { LinkIcon } from './LinkIcon';

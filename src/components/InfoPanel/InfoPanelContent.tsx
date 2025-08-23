@@ -15,6 +15,7 @@ import { Button } from '@/components/ui';
 import { ImageGallery } from '@/components/ui';
 import { useTranslation } from 'react-i18next';
 import { useShareableLink } from '@/hooks/useShareableLink';
+import { CheckIcon, LinkIcon } from '@/components/icons';
 
 export default function InfoPanelContent({
   diveSite,
@@ -64,7 +65,13 @@ export default function InfoPanelContent({
               className="shadow-glass hover:shadow-glass-hover"
               data-testid="info-panel-share-button"
             >
-              {showCopiedMessage ? '✅' : isCopying ? '...' : '🔗'}
+              {showCopiedMessage ? (
+                <CheckIcon size={16} scale={200} />
+              ) : isCopying ? (
+                '...'
+              ) : (
+                <LinkIcon size={16} scale={200} />
+              )}
             </Button>
             <Button
               onClick={handleShowFilters}
