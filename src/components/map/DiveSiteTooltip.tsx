@@ -90,7 +90,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
           <DepthIcon size={16} withBackground scale={200} />
           <span className="flex items-center">
             {site.depth_max} {t('map.markers.meters')}
-          </span> 
+          </span>
         </div>
 
         <div

@@ -8,12 +8,12 @@ interface IconProps {
   withBackground?: boolean;
 }
 
-export function Icon({ 
-  name, 
-  className = '', 
-  size = 24, 
-  scale = 100, 
-  withBackground = false 
+export function Icon({
+  name,
+  className = '',
+  size = 24,
+  scale = 100,
+  withBackground = false,
 }: IconProps) {
   const scaleValue = scale / 100; // Преобразуем scale в десятичное значение
 
@@ -25,17 +25,13 @@ export function Icon({
         height: size,
         backgroundImage: `url(/img/${encodeURIComponent(name)}.svg)`,
         transform: `scale(${scaleValue})`,
-        transformOrigin: 'center'
+        transformOrigin: 'center',
       }}
     />
   );
 
   if (withBackground) {
-    return (
-      <div className="p-2 bg-tropical-blue/15 rounded-lg">
-        {iconContent}
-      </div>
-    );
+    return <div className="p-2 bg-tropical-blue/15 rounded-lg">{iconContent}</div>;
   }
 
   return iconContent;

@@ -3,7 +3,14 @@ import { DiveSiteDetails } from '@/lib/types/supabase';
 import { getCountryFlag } from '@/lib/utils';
 import { formatCoordinates } from '@/lib/utils';
 import { cn } from '@/lib/utils';
-import { CloseIcon, SiteTypeIcon, DifficultyIcon, MarkIcon, DepthIcon, VisibilityIcon } from '@/components/icons';
+import {
+  CloseIcon,
+  SiteTypeIcon,
+  DifficultyIcon,
+  MarkIcon,
+  DepthIcon,
+  VisibilityIcon,
+} from '@/components/icons';
 import { Button } from '@/components/ui';
 import { ImageGallery } from '@/components/ui';
 import { useTranslation } from 'react-i18next';
@@ -124,12 +131,11 @@ export default function InfoPanelContent({
             {diveSite.site_type && (
               <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
                 <div className="flex items-center gap-3">
-                  
-                    <SiteTypeIcon
-                      siteTypeId={diveSite.site_type.id}
-                      className="w-5 h-5 text-tropical-blue"
-                    />
-                  
+                  <SiteTypeIcon
+                    siteTypeId={diveSite.site_type.id}
+                    className="w-5 h-5 text-tropical-blue"
+                  />
+
                   <span
                     className="text-sm font-medium text-slate-600 dark:text-slate-400"
                     suppressHydrationWarning
@@ -146,15 +152,14 @@ export default function InfoPanelContent({
             {diveSite.difficulty && (
               <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
                 <div className="flex items-center gap-3">
-                  
-                    <DifficultyIcon 
-                      difficulty={diveSite.difficulty.id as 1 | 2 | 3} 
-                      size={20} 
-                      withBackground={true}
-                      className="text-tropical-blue"
-                      scale={150}
-                    />
-                  
+                  <DifficultyIcon
+                    difficulty={diveSite.difficulty.id as 1 | 2 | 3}
+                    size={20}
+                    withBackground={true}
+                    className="text-tropical-blue"
+                    scale={150}
+                  />
+
                   <span
                     className="text-sm font-medium text-slate-600 dark:text-slate-400"
                     suppressHydrationWarning

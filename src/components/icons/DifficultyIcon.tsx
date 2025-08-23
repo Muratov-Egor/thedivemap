@@ -9,58 +9,58 @@ interface DifficultyIconProps {
   withBackground?: boolean;
 }
 
-export function DifficultyIcon({ 
-  difficulty, 
-  className = '', 
-  size = 16, 
-  scale = 100, 
-  withBackground = false 
+export function DifficultyIcon({
+  difficulty,
+  className = '',
+  size = 16,
+  scale = 100,
+  withBackground = false,
 }: DifficultyIconProps) {
   const getDifficultyIcon = (level: number) => {
     switch (level) {
       case 1: // Beginner - один баллон
         return (
-          <TankIcon 
-            size={size} 
-            scale={scale} 
-            withBackground={withBackground} 
-            className={className} 
+          <TankIcon
+            size={size}
+            scale={scale}
+            withBackground={withBackground}
+            className={className}
           />
         );
       case 2: // Intermediate - два баллона
         return (
-          <Tank2Icon 
-            size={size} 
-            scale={scale} 
-            withBackground={withBackground} 
-            className={className} 
+          <Tank2Icon
+            size={size}
+            scale={scale}
+            withBackground={withBackground}
+            className={className}
           />
         );
-        case 3: // Advanced - технический дайвер
+      case 3: // Advanced - технический дайвер
         return (
-          <Tank3Icon 
-            size={size} 
-            scale={scale} 
-            withBackground={withBackground} 
-            className={className} 
+          <Tank3Icon
+            size={size}
+            scale={scale}
+            withBackground={withBackground}
+            className={className}
           />
         );
       case 4: // Technical diver - технический дайвер
         return (
-          <TechDiverIcon 
-            size={size} 
-            scale={scale} 
-            withBackground={withBackground} 
-            className={className} 
+          <TechDiverIcon
+            size={size}
+            scale={scale}
+            withBackground={withBackground}
+            className={className}
           />
         );
       default:
         return (
-          <TankIcon 
-            size={size} 
-            scale={scale} 
-            withBackground={withBackground} 
-            className={className} 
+          <TankIcon
+            size={size}
+            scale={scale}
+            withBackground={withBackground}
+            className={className}
           />
         );
     }

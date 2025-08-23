@@ -42,7 +42,12 @@ export default function DifficultyFilters() {
             aria-label={`${t('difficulties.filterBy')} ${difficulty.label}`}
           >
             <div className="flex items-center gap-2">
-              <DifficultyIcon difficulty={difficulty.id as 1 | 2 | 3} size={16} withBackground scale={200} />  
+              <DifficultyIcon
+                difficulty={difficulty.id as 1 | 2 | 3}
+                size={16}
+                withBackground
+                scale={200}
+              />
               {difficulty.label}
             </div>
           </Chip>
