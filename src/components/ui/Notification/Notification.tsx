@@ -67,30 +67,30 @@ const Notification: React.FC<NotificationProps> = ({
     info: {
       container:
         'bg-pastel-turquoise dark:bg-pastel-turquoise border-l-4 border-outline-purple shadow-simple',
-      icon: 'text-outline-purple dark:text-outline-purple',
+      icon: 'text-outline-purple dark:text-black',
       closeButton:
-        'text-outline-purple/70 dark:text-outline-purple/70 hover:text-outline-purple dark:hover:text-outline-purple hover:bg-white/10 dark:hover:bg-black/20',
+        'text-outline-purple/70 dark:text-black/70 hover:text-outline-purple dark:hover:text-black hover:bg-white/10 dark:hover:bg-white/20',
     },
     warning: {
       container:
         'bg-pastel-yellow dark:bg-pastel-yellow border-l-4 border-outline-purple shadow-simple',
-      icon: 'text-outline-purple dark:text-outline-purple',
+      icon: 'text-outline-purple dark:text-black',
       closeButton:
-        'text-outline-purple/70 dark:text-outline-purple/70 hover:text-outline-purple dark:hover:text-outline-purple hover:bg-white/10 dark:hover:bg-black/20',
+        'text-outline-purple/70 dark:text-black/70 hover:text-outline-purple dark:hover:text-black hover:bg-white/10 dark:hover:bg-white/20',
     },
     error: {
       container:
         'bg-pastel-pink dark:bg-pastel-pink border-l-4 border-outline-purple shadow-simple',
-      icon: 'text-outline-purple dark:text-outline-purple',
+      icon: 'text-outline-purple dark:text-black',
       closeButton:
-        'text-outline-purple/70 dark:text-outline-purple/70 hover:text-outline-purple dark:hover:text-outline-purple hover:bg-white/10 dark:hover:bg-black/20',
+        'text-outline-purple/70 dark:text-black/70 hover:text-outline-purple dark:hover:text-black hover:bg-white/10 dark:hover:bg-white/20',
     },
     success: {
       container:
         'bg-pastel-green dark:bg-pastel-green border-l-4 border-outline-purple shadow-simple',
-      icon: 'text-outline-purple dark:text-outline-purple',
+      icon: 'text-outline-purple dark:text-black',
       closeButton:
-        'text-outline-purple/70 dark:text-outline-purple/70 hover:text-outline-purple dark:hover:text-outline-purple hover:bg-white/10 dark:hover:bg-black/20',
+        'text-outline-purple/70 dark:text-black/70 hover:text-outline-purple dark:hover:text-black hover:bg-white/10 dark:hover:bg-white/20',
     },
     custom: {
       container: '',
@@ -171,9 +171,9 @@ const Notification: React.FC<NotificationProps> = ({
 
         {/* Контент */}
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold text-outline-purple dark:text-white">{message}</div>
+          <div className="text-sm font-semibold text-outline-purple dark:text-black">{message}</div>
           {description && (
-            <div className="text-sm text-outline-purple/80 dark:text-gray-300 mt-1">{description}</div>
+            <div className="text-sm text-outline-purple/80 dark:text-black/80 mt-1">{description}</div>
           )}
         </div>
 
