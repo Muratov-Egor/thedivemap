@@ -15,7 +15,7 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
   const { t } = useTranslation('common');
 
   const getIcon = () => {
-    return theme === 'dark' ? <MoonIcon size={18} /> : <SunIcon size={18} />;
+    return theme === 'dark' ? <MoonIcon size={18} scale={200} /> : <SunIcon size={18} scale={200} />;
   };
 
   const getTooltipText = () => {
@@ -29,7 +29,7 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
   return (
     <Button
       onClick={toggleTheme}
-      variant={getButtonColor()}
+      variant='glass'
       size="small"
       shape="pill"
       icon={getIcon()}

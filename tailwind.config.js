@@ -4,6 +4,10 @@ module.exports = {
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
+      scale: {
+        '200': '2',
+        '300': '3',
+      },
       colors: {
         // Тропическая палитра
         'tropical-blue': '#1B68A4',
