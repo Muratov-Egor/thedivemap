@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MarkerProps } from '../../types/clustering';
 import DiveSiteTooltip from './DiveSiteTooltip';
+import { MaskIcon } from '../icons';
 
 interface ExtendedMarkerProps extends MarkerProps {
   onShowDetails?: (siteId: string) => void;
@@ -77,7 +78,7 @@ const DiveSiteMarker = React.memo<ExtendedMarkerProps>(
           ${isHovered || isActive ? 'shadow-glow-hover' : 'shadow-glow-blue'}`}
           data-testid={`dive-site-marker-${site.id}`}
         >
-          <span className="text-sm sm:text-lg">🤿</span>
+          <MaskIcon size={16} scale={200}/>
         </div>
 
         {/* Tooltip с информацией и анимациями */}
