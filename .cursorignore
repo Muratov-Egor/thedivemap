@@ -26,7 +26,6 @@ test-results
 # *.png
 # *.jpg
 # *.jpeg
-*.svg
 *.pdf
 *.zip
 *.tar.gz
