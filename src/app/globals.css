@@ -8,7 +8,7 @@
   /* ===== НОВАЯ ПАСТЕЛЬНАЯ ПАЛИТРА ===== */
   /* Контурный цвет - основной accent */
   --outline-purple: 74, 60, 90; /* #4A3C5A */
-  
+
   /* Пастельные цвета - основная палитра */
   --pastel-blue: 168, 218, 220; /* #A8DADC */
   --pastel-turquoise: 128, 206, 215; /* #80CED7 */
@@ -30,9 +30,9 @@
   /* --gradient-deep-sea: linear-gradient(135deg, #199bd7, #1e40af); */
 
   /* Фоны - светлая тема */
-  --background: 248, 250, 252; /* Slate 50 - светло-серый */
+  --background: 252, 248, 240; /* Заметный теплый кремово-бежевый фон */
   --foreground: 15, 23, 42; /* Slate 900 - темный текст */
-  --deep-water: 241, 245, 249; /* Slate 100 - более светлый серый */
+  --deep-water: 248, 244, 236; /* Более темный кремово-бежевый для панелей */
   --glass-bg: rgba(255, 255, 255, 0.8);
   --frosted-glass: rgba(255, 255, 255, 0.6);
 
@@ -40,7 +40,7 @@
   --glass-blur: blur(20px); /* Сохраняем для backup compatibility */
   --shadow-simple: 0 2px 8px rgba(74, 60, 90, 0.1);
   --shadow-hover: 0 4px 12px rgba(74, 60, 90, 0.15);
-  
+
   /* ===== СТАРЫЕ GLOW ЭФФЕКТЫ (убираем) ===== */
   /* --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.2); */
   /* --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.3); */
@@ -56,7 +56,7 @@
   /* ===== НОВАЯ ПАСТЕЛЬНАЯ ПАЛИТРА (темная тема) ===== */
   /* Контурный цвет - основной accent */
   --outline-purple: 74, 60, 90; /* #4A3C5A */
-  
+
   /* Пастельные цвета - адаптированы для темной темы */
   --pastel-blue: 168, 218, 220; /* #A8DADC */
   --pastel-turquoise: 128, 206, 215; /* #80CED7 */
@@ -88,7 +88,7 @@
   --glass-blur: blur(20px); /* Сохраняем для backup compatibility */
   --shadow-simple: 0 4px 12px rgba(74, 60, 90, 0.2);
   --shadow-hover: 0 6px 16px rgba(74, 60, 90, 0.25);
-  
+
   /* ===== СТАРЫЕ GLOW ЭФФЕКТЫ (убираем) ===== */
   /* --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.3); */
   /* --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.4); */

@@ -6,7 +6,15 @@ import { cn } from '@/lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large' | 'xl';
-  variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info' | 'outline' | 'glass';
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning'
+    | 'danger'
+    | 'info'
+    | 'outline'
+    | 'glass';
   shape?: 'rounded' | 'circle' | 'pill';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
@@ -66,26 +74,25 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // Primary - основные действия (pastel-blue)
       primary:
         'bg-pastel-blue border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-blue/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-blue/15 dark:border-pastel-blue dark:text-pastel-blue',
-      
+
       // Secondary - вторичные действия (pastel-yellow - согласно feedback)
       secondary:
         'bg-pastel-yellow border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-yellow/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-yellow/15 dark:border-pastel-yellow dark:text-pastel-yellow',
-      
+
       // Success - успешные действия (pastel-green)
       success:
         'bg-pastel-green border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-green/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-green/15 dark:border-pastel-green dark:text-pastel-green',
-      
+
       // Warning - предупреждения (pastel-cream - согласно feedback)
       warning:
         'bg-pastel-cream border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-cream/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-cream/15 dark:border-pastel-cream dark:text-pastel-cream',
-      
+
       // Danger - опасные действия (pastel-pink)
       danger:
         'bg-pastel-pink border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-pink/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-pink/15 dark:border-pastel-pink dark:text-pastel-pink',
-      
+
       // Info - информационные действия (pastel-turquoise)
-      info:
-        'bg-pastel-turquoise border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-turquoise/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-turquoise/15 dark:border-pastel-turquoise dark:text-pastel-turquoise',
+      info: 'bg-pastel-turquoise border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-turquoise/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-turquoise/15 dark:border-pastel-turquoise dark:text-pastel-turquoise',
 
       // Outline - обводка (pastel-blue)
       outline:

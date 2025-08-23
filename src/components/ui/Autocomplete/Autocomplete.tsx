@@ -152,7 +152,7 @@ export default function Autocomplete({
           disabled={disabled}
           className={cn(
             'w-full px-4 py-3 text-base text-foreground placeholder-slate-500 dark:placeholder-slate-400',
-            'bg-glass-bg backdrop-blur-sm border-2 border-slate-200 dark:border-slate-600 rounded-2xl',
+            'bg-background border-2 border-slate-200 dark:border-slate-600 rounded-2xl',
             'focus:border-pastel-blue dark:focus:border-pastel-blue focus:outline-none focus:ring-2 focus:ring-pastel-blue/30 dark:focus:ring-pastel-blue/40',
             'transition-all duration-300 ease-in-out',
             'disabled:opacity-50 disabled:cursor-not-allowed',
@@ -225,7 +225,7 @@ export default function Autocomplete({
       {(error || state.error) && !state.isOpen && (
         <div
           id="autocomplete-error-message"
-          className="mt-2 bg-glass-bg backdrop-blur-xl border border-red-200 dark:border-red-800 rounded-2xl shadow-lg p-4"
+          className="mt-2 bg-background border border-red-200 dark:border-red-800 rounded-2xl shadow-lg p-4"
           data-testid="autocomplete-error-message"
           role="alert"
           aria-live="assertive"

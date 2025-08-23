@@ -28,12 +28,21 @@ describe('Chip', () => {
 
   it('applies correct styles for selected state', () => {
     render(<Chip selected>Selected</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-pastel-blue', 'border-outline-purple', 'text-outline-purple');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-pastel-blue',
+      'border-outline-purple',
+      'text-outline-purple',
+    );
   });
 
   it('applies correct styles for unselected state', () => {
     render(<Chip>Unselected</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-white', 'border-outline-purple/40', 'text-outline-purple', 'dark:text-white');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-background',
+      'border-outline-purple/40',
+      'text-slate-700',
+      'dark:text-white',
+    );
   });
 
   it('renders with icon only', () => {
@@ -67,12 +76,22 @@ describe('Chip', () => {
 
   it('renders with default variant', () => {
     render(<Chip variant="default">Default</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-white', 'border-outline-purple/40', 'dark:text-white');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-background',
+      'border-outline-purple/40',
+      'text-slate-700',
+      'dark:text-white',
+    );
   });
 
   it('renders with subtle variant', () => {
     render(<Chip variant="subtle">Subtle</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-white', 'border-outline-purple/30', 'dark:text-white/90');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-background',
+      'border-outline-purple/30',
+      'text-slate-600',
+      'dark:text-white/90',
+    );
   });
 
   it('applies correct styles for subtle variant when selected', () => {
@@ -81,6 +100,10 @@ describe('Chip', () => {
         Subtle Selected
       </Chip>,
     );
-    expect(screen.getByRole('button')).toHaveClass('bg-pastel-blue/60', 'border-outline-purple', 'text-outline-purple');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-pastel-blue/60',
+      'border-outline-purple',
+      'text-outline-purple',
+    );
   });
 });

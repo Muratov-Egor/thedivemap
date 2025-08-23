@@ -100,7 +100,9 @@ export default function MarkerCluster({
       </div>
 
       {/* Пульсирующая анимация для активного кластера */}
-      {isActive && <div className="absolute inset-0 rounded-full bg-pastel-blue/60 animate-ping"></div>}
+      {isActive && (
+        <div className="absolute inset-0 rounded-full bg-pastel-blue/60 animate-ping"></div>
+      )}
 
       {/* Tooltip с информацией */}
       {(isHovered || isActive) && (

@@ -9,29 +9,33 @@
 ## 1️⃣ PROBLEM STATEMENT
 
 ### Описание проблемы
+
 Текущие чипы используют tropical-blue и deep-ocean для выбранных состояний, что не соответствует новой пастельной палитре.
 
 ### Текущие проблемы
+
 ```typescript
 variantStyles = {
   default: {
     selected: 'bg-tropical-blue text-white border-tropical-blue hover:bg-deep-ocean',
-    unselected: 'bg-glass-bg text-foreground border-slate-300'
+    unselected: 'bg-glass-bg text-foreground border-slate-300',
   },
   subtle: {
     selected: 'bg-blue-100 text-tropical-blue border-tropical-blue',
-    unselected: 'bg-glass-bg text-foreground border-slate-300'
-  }
-}
+    unselected: 'bg-glass-bg text-foreground border-slate-300',
+  },
+};
 ```
 
 **Проблемные элементы:**
+
 - `bg-tropical-blue` для выбранных чипов
 - `hover:bg-deep-ocean` для hover состояний
 - `text-tropical-blue` для subtle варианта
 - `bg-glass-bg` glassmorphism эффекты
 
 ### Требования
+
 - ✅ **Плоский дизайн:** Убрать glassmorphism
 - ✅ **Пастельные цвета:** Использовать новую палитру
 - ✅ **Четкие состояния:** Selected/unselected должны быть различимы
@@ -39,6 +43,7 @@ variantStyles = {
 - ✅ **Accessibility:** Keyboard navigation, screen readers
 
 ### Ограничения
+
 - **API совместимость:** selected, children, icon props
 - **Использование:** Фильтры сайтов, difficulty levels, ratings
 - **Responsive:** Работа на mobile и desktop
@@ -47,62 +52,75 @@ variantStyles = {
 ## 2️⃣ OPTIONS ANALYSIS
 
 ### Option A: Monochrome Minimalism (Монохромный минимализм)
+
 **Описание**: Один цвет для всех выбранных чипов
 
 **Стили:**
+
 - **Selected**: `bg-outline-purple` + `text-white` + `border-outline-purple`
 - **Unselected**: `bg-transparent` + `text-outline-purple` + `border-outline-purple/30`
 - **Hover**: `bg-outline-purple/10` для unselected, `bg-outline-purple/90` для selected
 
 **Pros:**
+
 - Максимальная консистентность
 - Простота реализации
 - Четкий контраст состояний
 
 **Cons:**
+
 - Нет семантического различия
 - Может быть монотонным
 - Не использует пастельную палитру
 
 ### Option B: Semantic Pastel Chips (Семантические пастельные)
+
 **Описание**: Разные пастельные цвета в зависимости от категории
 
 **Категории:**
+
 - **Site Type**: `pastel-blue` (дайв-сайты)
 - **Difficulty**: `pastel-pink` (сложность)
 - **Rating**: `pastel-yellow` (рейтинги)
 - **General**: `pastel-green` (общие фильтры)
 
 **Стили:**
+
 - **Selected**: `bg-pastel-*` + `text-outline-purple` + `border-pastel-*`
 - **Unselected**: `bg-transparent` + `text-outline-purple` + `border-outline-purple/30`
 
 **Pros:**
+
 - Семантически правильно
 - Использует всю палитру
 - Интуитивно понятно
 - Красиво визуально
 
 **Cons:**
+
 - Сложность определения категорий
 - Больше вариантов для поддержки
 
 ### Option C: Balanced Flat Design (Сбалансированный плоский)
+
 **Описание**: Пастельные фоны для selected, outline для unselected
 
 **Стили:**
+
 - **Selected**: `bg-pastel-cream` + `text-outline-purple` + `border-outline-purple`
 - **Unselected**: `bg-transparent` + `text-outline-purple/70` + `border-outline-purple/30`
 - **Hover Selected**: `bg-pastel-cream/80` + stronger border
 - **Hover Unselected**: `bg-pastel-cream/30` + stronger border
 
 **Pros:**
+
 - Хороший баланс
 - Не слишком яркий
 - Легко различимые состояния
 - Минималистично
 
 **Cons:**
+
 - Менее семантичен
 - Может показаться generic
 
@@ -115,15 +133,16 @@ variantStyles = {
 
 ### Состояния чипов
 
-| Состояние | Selected | Unselected |
-|-----------|----------|------------|
-| **Normal** | `bg-pastel-cream` + `border-outline-purple` | `bg-transparent` + `border-outline-purple/30` |
-| **Hover** | `bg-pastel-cream/80` + stronger border | `bg-pastel-cream/30` + stronger border |
-| **Focus** | Ring `outline-purple/30` | Ring `outline-purple/30` |
-| **Active** | Slight scale down | Slight scale down |
-| **Disabled** | Opacity 50% + no interaction | Opacity 50% + no interaction |
+| Состояние    | Selected                                    | Unselected                                    |
+| ------------ | ------------------------------------------- | --------------------------------------------- |
+| **Normal**   | `bg-pastel-cream` + `border-outline-purple` | `bg-transparent` + `border-outline-purple/30` |
+| **Hover**    | `bg-pastel-cream/80` + stronger border      | `bg-pastel-cream/30` + stronger border        |
+| **Focus**    | Ring `outline-purple/30`                    | Ring `outline-purple/30`                      |
+| **Active**   | Slight scale down                           | Slight scale down                             |
+| **Disabled** | Opacity 50% + no interaction                | Opacity 50% + no interaction                  |
 
 ### Icon integration
+
 ```typescript
 // Chip с иконкой
 <Chip selected icon={<ReefIcon size={16} />}>
@@ -138,11 +157,12 @@ variantStyles = {
 ```
 
 ### Multiple selection behavior
+
 ```typescript
 // SiteTypeFilters использование
 const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
-<Chip 
+<Chip
   selected={selectedTypes.includes('reef')}
   onClick={() => toggleType('reef')}
   icon={<ReefIcon />}
@@ -156,6 +176,7 @@ const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 **Выбранный вариант:** **Option C - Balanced Flat Design**
 
 ### Rationale (Обоснование)
+
 1. **Минимализм:** Соответствует плоскому дизайну
 2. **Универсальность:** Подходит для всех типов фильтров
 3. **Читаемость:** Хорошая контрастность в обеих темах
@@ -165,6 +186,7 @@ const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 ### Финальные стили Chip
 
 #### Базовые стили
+
 ```css
 .chip-base {
   @apply inline-flex items-center justify-center gap-2;
@@ -222,6 +244,7 @@ const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 ```
 
 #### TypeScript интерфейс
+
 ```typescript
 export interface ChipProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   selected?: boolean;
@@ -234,6 +257,7 @@ export interface ChipProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 ```
 
 #### Обновленный компонент
+
 ```typescript
 const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
   ({
@@ -245,7 +269,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
     disabled = false,
     ...props
   }, ref) => {
-    
+
     const classes = cn(
       'chip-base',
       selected ? 'chip-selected' : 'chip-unselected',
@@ -254,9 +278,9 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
     );
 
     return (
-      <button 
-        ref={ref} 
-        className={classes} 
+      <button
+        ref={ref}
+        className={classes}
         aria-pressed={selected}
         disabled={disabled}
         {...props}
@@ -277,23 +301,27 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 ## 5️⃣ IMPLEMENTATION PLAN
 
 ### Этап 1: Обновить Chip.tsx
+
 - [ ] Заменить variantStyles объект
 - [ ] Убрать bg-glass-bg эффекты
 - [ ] Заменить tropical-blue на pastel-cream/outline-purple
 - [ ] Обновить hover состояния
 
 ### Этап 2: Интерактивные состояния
+
 - [ ] Реализовать новые hover эффекты
 - [ ] Добавить focus states с rings
 - [ ] Обновить active (pressed) состояния
 - [ ] Добавить disabled состояние
 
 ### Этап 3: Темная тема
+
 - [ ] Адаптировать pastel-cream для dark theme
 - [ ] Обновить border colors
 - [ ] Проверить контрастность текста
 
 ### Этап 4: Integration testing
+
 - [ ] Протестировать в SiteTypeFilters
 - [ ] Проверить в DifficultyFilters
 - [ ] Валидировать keyboard navigation
@@ -301,27 +329,28 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 ## 6️⃣ DARK THEME ADAPTATIONS
 
 ### Адаптация для темной темы
+
 ```css
 [data-theme='dark'] {
   .chip-selected {
     @apply bg-outline-purple/20 text-white;
     @apply border-pastel-cream/60;
   }
-  
+
   .chip-selected:hover {
     @apply bg-outline-purple/30;
     border-color: rgb(var(--pastel-cream));
   }
-  
+
   .chip-unselected {
     @apply text-white/70 border-white/30;
   }
-  
+
   .chip-unselected:hover {
     @apply bg-white/10 text-white;
     @apply border-white/60;
   }
-  
+
   .chip-base:focus {
     @apply ring-pastel-blue/50;
   }
@@ -331,6 +360,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 ## 🎨 VISUALIZATION
 
 ### Chip состояния
+
 ```
 Site Type Filters:
 [🏊 Reef] [🚢 Wreck] [🕳️ Cave] [🏖️ Bay]
@@ -350,10 +380,11 @@ Active:      [🏊 Reef] ← scale-95
 ```
 
 ### Usage examples
+
 ```typescript
 // Site type filter
-<Chip 
-  selected={isSelected} 
+<Chip
+  selected={isSelected}
   icon={<ReefIcon size={16} />}
   onClick={() => toggle('reef')}
 >
@@ -361,7 +392,7 @@ Active:      [🏊 Reef] ← scale-95
 </Chip>
 
 // Difficulty level
-<Chip 
+<Chip
   selected={difficulty >= 1}
   icon={<TankIcon size={16} />}
 >
@@ -369,7 +400,7 @@ Active:      [🏊 Reef] ← scale-95
 </Chip>
 
 // Rating filter
-<Chip 
+<Chip
   selected={minRating >= 4}
   icon={<StarIcon size={16} />}
 >

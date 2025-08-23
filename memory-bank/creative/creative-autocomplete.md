@@ -9,11 +9,13 @@
 ## 1️⃣ PROBLEM STATEMENT
 
 ### Описание проблемы
+
 Текущая AutoComplete система сильно зависит от градиентов для выделения выбранных элементов и фокуса. Необходимо адаптировать под плоский дизайн с пастельными цветами.
 
 ### Текущие проблемные места
 
 **AutocompleteItem.tsx:**
+
 ```css
 /* Градиенты в hover/focus состояниях */
 hover:bg-gradient-to-r hover:from-tropical-blue/5 hover:to-deep-ocean/5
@@ -27,6 +29,7 @@ bg-tropical-blue rounded-full (индикатор выбора)
 ```
 
 **Autocomplete.tsx:**
+
 ```css
 /* Фокус и границы */
 focus:border-tropical-blue focus:ring-tropical-blue/20
@@ -35,6 +38,7 @@ border-tropical-blue/20 (для tooltip)
 ```
 
 ### Требования
+
 - ✅ **Плоский дизайн:** Убрать все градиенты
 - ✅ **Пастельные цвета:** Использовать новую палитру
 - ✅ **Четкие состояния:** Hover, focus, selected должны быть различимы
@@ -42,6 +46,7 @@ border-tropical-blue/20 (для tooltip)
 - ✅ **Smooth transitions:** Сохранить плавные переходы
 
 ### Ограничения
+
 - **API совместимость:** Сохранить все пропсы
 - **Функциональность:** Keyboard navigation, selection logic
 - **Performance:** Не замедлить поиск и отображение
@@ -50,76 +55,92 @@ border-tropical-blue/20 (для tooltip)
 ## 2️⃣ OPTIONS ANALYSIS
 
 ### Option A: Subtle Highlight System (Тонкая система выделения)
+
 **Описание**: Минимальные изменения с тонкими пастельными акцентами
 
 **Состояния:**
-- **Normal**: `bg-transparent` 
+
+- **Normal**: `bg-transparent`
 - **Hover**: `bg-pastel-cream/30`
 - **Focus**: `bg-pastel-blue/20` + `ring-2 ring-outline-purple/30`
 - **Selected**: `bg-pastel-blue/30` + `border-l-4 border-outline-purple`
 
 **Input поле:**
+
 - **Normal**: `border-outline-purple/30`
 - **Focus**: `border-outline-purple` + `ring-2 ring-outline-purple/20`
 
 **Pros:**
+
 - Минимальные изменения
 - Очень тонкий дизайн
 - Быстрая реализация
 
 **Cons:**
+
 - Может быть слишком subtle
 - Сложность различения состояний
 - Низкая контрастность
 
-### Option B: High Contrast Flat Design (Высококонтрастный плоский дизайн)  
+### Option B: High Contrast Flat Design (Высококонтрастный плоский дизайн)
+
 **Описание**: Четкие различия между состояниями с высокой контрастностью
 
 **Состояния:**
+
 - **Normal**: `bg-white border-outline-purple/20`
 - **Hover**: `bg-pastel-cream/50 border-outline-purple/50` + subtle scale
 - **Focus**: `bg-pastel-blue/40 border-outline-purple text-outline-purple`
 - **Selected**: `bg-outline-purple/10 border-2 border-outline-purple`
 
 **Visual indicators:**
+
 - **Selected item**: Цветной dot `bg-outline-purple`
 - **Item type badges**: Пастельные фоны по семантике
 - **Focus ring**: Яркий outline-purple ring
 
 **Pros:**
+
 - Очень четкие состояния
 - Отличная accessibility
 - Легко различимы все элементы
 
 **Cons:**
+
 - Может показаться "громким"
 - Много визуального шума
 - Отход от минимализма
 
 ### Option C: Balanced Semantic Design (Сбалансированный семантический дизайн)
+
 **Описание**: Использование семантических цветов с умеренной контрастностью
 
 **Состояния по типам элементов:**
+
 - **Places (города)**: `hover:bg-pastel-turquoise/20`
 - **Sites (дайв-сайты)**: `hover:bg-pastel-blue/20`
 - **Countries**: `hover:bg-pastel-green/20`
 
 **Универсальные состояния:**
+
 - **Focus**: `bg-pastel-cream/30 ring-2 ring-outline-purple/30`
 - **Selected**: `bg-pastel-*/40` (в зависимости от типа) + `border-l-3 border-outline-purple`
 
 **Input поле:**
+
 - **Normal**: `border-outline-purple/30 bg-glass-bg/50`
 - **Focus**: `border-outline-purple bg-white shadow-sm`
 - **Error**: `border-pastel-pink bg-pastel-pink/10`
 
 **Pros:**
+
 - Семантически правильно
 - Хороший баланс контраста
 - Использует полную палитру
 - Интуитивно понятно
 
 **Cons:**
+
 - Сложнее реализация
 - Нужно определить семантику всех типов
 
@@ -132,17 +153,18 @@ border-tropical-blue/20 (для tooltip)
 
 ### Keyboard Navigation Enhancement
 
-| Action | Key | Visual Feedback |
-|--------|-----|----------------|
-| **Navigate down** | ↓ | `bg-pastel-blue/20` + smooth transition |
-| **Navigate up** | ↑ | `bg-pastel-blue/20` + smooth transition |
-| **Select item** | Enter | Flash animation + selection state |
-| **Close dropdown** | Esc | Fade out animation |
-| **Clear input** | Ctrl+A → Delete | Input clear + dropdown close |
+| Action             | Key             | Visual Feedback                         |
+| ------------------ | --------------- | --------------------------------------- |
+| **Navigate down**  | ↓               | `bg-pastel-blue/20` + smooth transition |
+| **Navigate up**    | ↑               | `bg-pastel-blue/20` + smooth transition |
+| **Select item**    | Enter           | Flash animation + selection state       |
+| **Close dropdown** | Esc             | Fade out animation                      |
+| **Clear input**    | Ctrl+A → Delete | Input clear + dropdown close            |
 
 ### Loading & Empty States
 
 **Loading indicator:**
+
 ```css
 /* Заменить spinner цвет */
 .loading-spinner {
@@ -152,6 +174,7 @@ border-tropical-blue/20 (для tooltip)
 ```
 
 **Empty state:**
+
 ```css
 .empty-state {
   @apply text-outline-purple/60 bg-pastel-cream/20;
@@ -160,6 +183,7 @@ border-tropical-blue/20 (для tooltip)
 ```
 
 **Error state:**
+
 ```css
 .error-state {
   @apply text-outline-purple bg-pastel-pink/20;
@@ -172,6 +196,7 @@ border-tropical-blue/20 (для tooltip)
 **Выбранный вариант:** **Option C - Balanced Semantic Design**
 
 ### Rationale (Обоснование)
+
 1. **Семантика:** Разные типы элементов визуально различимы
 2. **Баланс:** Не слишком тонко, не слишком контрастно
 3. **Палитра:** Использует всю пастельную палитру эффективно
@@ -191,15 +216,15 @@ border-tropical-blue/20 (для tooltip)
 }
 
 /* Semantic hover states */
-.autocomplete-item[data-type="place"] {
+.autocomplete-item[data-type='place'] {
   @apply hover:bg-pastel-turquoise/20;
 }
 
-.autocomplete-item[data-type="site"] {
+.autocomplete-item[data-type='site'] {
   @apply hover:bg-pastel-blue/20;
 }
 
-.autocomplete-item[data-type="country"] {
+.autocomplete-item[data-type='country'] {
   @apply hover:bg-pastel-green/20;
 }
 
@@ -214,15 +239,15 @@ border-tropical-blue/20 (для tooltip)
   @apply border-l-4 border-outline-purple;
 }
 
-.autocomplete-item.selected[data-type="place"] {
+.autocomplete-item.selected[data-type='place'] {
   @apply bg-pastel-turquoise/30;
 }
 
-.autocomplete-item.selected[data-type="site"] {
+.autocomplete-item.selected[data-type='site'] {
   @apply bg-pastel-blue/30;
 }
 
-.autocomplete-item.selected[data-type="country"] {
+.autocomplete-item.selected[data-type='country'] {
   @apply bg-pastel-green/30;
 }
 
@@ -238,15 +263,15 @@ border-tropical-blue/20 (для tooltip)
   @apply border border-outline-purple/20 text-outline-purple;
 }
 
-.type-badge[data-type="site"] {
+.type-badge[data-type='site'] {
   @apply bg-pastel-blue/20;
 }
 
-.type-badge[data-type="place"] {
+.type-badge[data-type='place'] {
   @apply bg-pastel-turquoise/20;
 }
 
-.type-badge[data-type="country"] {
+.type-badge[data-type='country'] {
   @apply bg-pastel-green/20;
 }
 ```
@@ -300,24 +325,28 @@ border-tropical-blue/20 (для tooltip)
 ## 5️⃣ IMPLEMENTATION PLAN
 
 ### Этап 1: AutocompleteItem.tsx обновление
+
 - [ ] Убрать все градиенты (`bg-gradient-to-r`)
 - [ ] Добавить semantic hover states с `data-type` атрибутом
 - [ ] Реализовать новые selected состояния
 - [ ] Обновить type badges цвета
 
-### Этап 2: Autocomplete.tsx обновление  
+### Этап 2: Autocomplete.tsx обновление
+
 - [ ] Обновить input field стили
 - [ ] Заменить focus цвета на outline-purple
 - [ ] Адаптировать dropdown container
 - [ ] Обновить loading spinner цвет
 
 ### Этап 3: Состояния и анимации
+
 - [ ] Реализовать smooth transitions
 - [ ] Добавить selection indicator
 - [ ] Протестировать keyboard navigation
 - [ ] Проверить accessibility
 
 ### Этап 4: Темная тема
+
 - [ ] Адаптировать все состояния для dark theme
 - [ ] Проверить контрастность
 - [ ] Валидировать читаемость
@@ -341,7 +370,7 @@ interface AutocompleteItem {
 // Type detection logic
 const getItemType = (item: AutocompleteItem): string => {
   if (item.type === 'site') return 'site';
-  if (item.type === 'place') return 'place';  
+  if (item.type === 'place') return 'place';
   if (item.type === 'country') return 'country';
   return 'general';
 };
@@ -361,15 +390,16 @@ const CountryFlag = ({ isoCode }: { isoCode: string }) => (
 ## 🎨 VISUALIZATION
 
 ### AutoComplete состояния
+
 ```
 🔍 Input field (normal):
    [  Search dive sites...              ] ⌕
 
-🔍 Input field (focus):  
+🔍 Input field (focus):
    [  Search dive sites...              ] ⌕  ← ring + border
-   
+
 📋 Dropdown item (normal):
-   🏊 Blue Hole, Belize                     
+   🏊 Blue Hole, Belize
 
 📋 Dropdown item (hover - site):
    🏊 Blue Hole, Belize                     ← bg-pastel-blue/20
@@ -385,9 +415,10 @@ const CountryFlag = ({ isoCode }: { isoCode: string }) => (
 ```
 
 ### Type badge система
+
 ```
 [DIVE SITE]  - bg-pastel-blue/20
-[PLACE]      - bg-pastel-turquoise/20  
+[PLACE]      - bg-pastel-turquoise/20
 [COUNTRY]    - bg-pastel-green/20
 ```
 

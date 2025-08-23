@@ -38,7 +38,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       className={`
         absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 
         px-4 py-3 rounded-2xl text-sm z-20
-        bg-white dark:bg-gray-800 border border-pastel-turquoise/30 dark:border-pastel-turquoise/50
+        bg-background dark:bg-gray-800 border border-pastel-turquoise/30 dark:border-pastel-turquoise/50
         shadow-simple hover:shadow-simple-hover
         transition-all duration-300 ease-out
         min-w-[280px] max-w-[320px]
@@ -108,7 +108,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       <div className="flex justify-center !mt-5">
         <Button
           onClick={handleShowDetails}
-          variant="primary"
+          variant="info"
           size="small"
           className="justify-center"
           aria-label={t('map.markers.more')}
@@ -125,7 +125,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
         shape="circle"
         size="small"
         icon={<CloseIcon className="w-3 h-3" />}
-        className="!absolute !-top-2 !-right-2 !w-7 !h-7 !p-0 shadow-md bg-white dark:bg-gray-800 hover:bg-pastel-pink/20 dark:hover:bg-pastel-pink/20"
+        className="!absolute !-top-2 !-right-2 !w-7 !h-7 !p-0 shadow-md bg-background dark:bg-gray-800 hover:bg-pastel-pink/20 dark:hover:bg-pastel-pink/20"
         aria-label={t('map.markers.closeTooltip')}
         data-testid={`dive-site-tooltip-close`}
       />

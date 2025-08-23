@@ -19,7 +19,7 @@ module.exports = {
         // ===== НОВАЯ ПАСТЕЛЬНАЯ ПАЛИТРА =====
         // Контурный цвет - основной accent
         'outline-purple': '#4A3C5A',
-        
+
         // Пастельные цвета - основная палитра
         'pastel-blue': '#A8DADC',
         'pastel-turquoise': '#80CED7',
@@ -81,11 +81,11 @@ module.exports = {
         neumorph: '8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.8)',
         'neumorph-hover':
           '12px 12px 24px rgba(0, 0, 0, 0.15), -12px -12px 24px rgba(255, 255, 255, 0.9)',
-        
+
         // ===== НОВЫЕ МИНИМАЛИСТИЧНЫЕ ТЕНИ =====
-        'simple': '0 2px 8px rgba(74, 60, 90, 0.1)',
+        simple: '0 2px 8px rgba(74, 60, 90, 0.1)',
         'simple-hover': '0 4px 12px rgba(74, 60, 90, 0.15)',
-        
+
         // ===== СТАРЫЕ GLOW ЭФФЕКТЫ (убираем) =====
         // 'glow-blue': '0 8px 32px rgba(27, 104, 164, 0.2)',
         // 'glow-coral': '0 8px 32px rgba(244, 123, 37, 0.2)',

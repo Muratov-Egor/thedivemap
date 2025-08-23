@@ -9,34 +9,38 @@
 ## 1️⃣ PROBLEM STATEMENT
 
 ### Описание проблемы
+
 Текущие слайдеры используют градиенты и glow эффекты, что противоречит минималистичному плоскому дизайну.
 
 ### Текущие проблемы
+
 ```typescript
 variantStyles = {
   default: {
     track: 'bg-gradient-to-r from-slate-200 to-slate-300',
     filled: 'bg-gradient-to-r from-tropical-blue to-deep-ocean',
     thumb: 'bg-gradient-to-r from-tropical-blue to-deep-ocean shadow-glow-blue',
-    thumbHover: 'hover:shadow-glow-hover'
+    thumbHover: 'hover:shadow-glow-hover',
   },
   coral: {
     filled: 'bg-gradient-to-r from-coral to-orange-500',
-    thumb: 'bg-gradient-to-r from-coral to-orange-500 shadow-glow-coral'
+    thumb: 'bg-gradient-to-r from-coral to-orange-500 shadow-glow-coral',
   },
   ocean: {
     filled: 'bg-gradient-to-r from-deep-ocean to-cyan-500',
-    thumb: 'shadow-glow-blue'
-  }
-}
+    thumb: 'shadow-glow-blue',
+  },
+};
 ```
 
 **Эффекты для замены:**
+
 - Все градиенты (`bg-gradient-to-r`)
 - Glow эффекты (`shadow-glow-*`)
 - Hover shadows
 
 ### Требования
+
 - ✅ **Плоский дизайн:** Убрать все градиенты и glow
 - ✅ **Пастельные цвета:** Использовать новую палитру
 - ✅ **Четкое взаимодействие:** Hover, focus, active состояния
@@ -44,6 +48,7 @@ variantStyles = {
 - ✅ **Smooth animation:** Плавные переходы
 
 ### Ограничения
+
 - **Функциональность:** Drag, click, keyboard control
 - **Варианты:** 'default' | 'coral' | 'ocean' → семантические
 - **Responsive:** Работа на touch устройствах
@@ -52,28 +57,34 @@ variantStyles = {
 ## 2️⃣ OPTIONS ANALYSIS
 
 ### Option A: Minimal Single Color (Минимальный одноцветный)
+
 **Описание**: Один пастельный цвет для всех слайдеров
 
 **Стили:**
+
 - **Track**: `bg-outline-purple/10` (фон трека)
 - **Filled**: `bg-pastel-blue` (заполненная часть)
 - **Thumb**: `bg-outline-purple` (ползунок)
 - **Hover**: `bg-outline-purple/90` + small scale
 
 **Pros:**
+
 - Максимальная консистентность
-- Простота реализации  
+- Простота реализации
 - Четкая читаемость
 
 **Cons:**
+
 - Монотонность
 - Нет семантического различия вариантов
 - Может быть скучным
 
 ### Option B: Semantic Pastel Colors (Семантические пастельные)
+
 **Описание**: Разные пастельные цвета в зависимости от назначения
 
 **Стили:**
+
 - **Default**: `pastel-blue` - общие слайдеры
 - **Depth**: `pastel-turquoise` - глубина (морская тематика)
 - **Rating**: `pastel-yellow` - рейтинги/оценки
@@ -84,18 +95,22 @@ variantStyles = {
 **Filled**: семантический цвет
 
 **Pros:**
+
 - Семантически правильно
 - Использует полную палитру
 - Интуитивно понятно
 
 **Cons:**
+
 - Сложнее поддержка
 - Нужно переосмыслить naming
 
 ### Option C: Interactive Minimalism (Интерактивный минимализм)
+
 **Описание**: Минимальный дизайн с акцентом на интерактивности
 
 **Стили:**
+
 - **Track**: `bg-pastel-cream` (нейтральный фон)
 - **Filled**: `bg-outline-purple` (основной цвет)
 - **Thumb**: `bg-white` + `border-2 border-outline-purple`
@@ -103,12 +118,14 @@ variantStyles = {
 - **Hover**: Subtle scale + border highlight
 
 **Pros:**
+
 - Очень минималистично
 - Отличная интерактивность
 - Современный дизайн
 - Хорошая accessibility
 
 **Cons:**
+
 - Белый thumb может потеряться на светлом фоне
 - Нужна адаптация для темной темы
 
@@ -121,23 +138,24 @@ variantStyles = {
 
 ### Состояния ползунка (thumb)
 
-| Состояние | Visual Design | Interaction |
-|-----------|---------------|-------------|
-| **Normal** | White bg + outline-purple border | Static |
-| **Hover** | Scale 1.1 + border highlight | Pointer cursor |
-| **Focus** | Ring + border highlight | Keyboard accessible |
-| **Active** | Scale 1.2 + stronger border | During drag |
-| **Disabled** | Opacity 50% + no interaction | Not draggable |
+| Состояние    | Visual Design                    | Interaction         |
+| ------------ | -------------------------------- | ------------------- |
+| **Normal**   | White bg + outline-purple border | Static              |
+| **Hover**    | Scale 1.1 + border highlight     | Pointer cursor      |
+| **Focus**    | Ring + border highlight          | Keyboard accessible |
+| **Active**   | Scale 1.2 + stronger border      | During drag         |
+| **Disabled** | Opacity 50% + no interaction     | Not draggable       |
 
 ### Трек и заполнение
 
-| Элемент | Normal | Hover | Focus |
-|---------|---------|--------|-------|
-| **Track** | `bg-pastel-cream` | No change | No change |
-| **Filled** | `bg-outline-purple` | Slightly darker | Ring на thumb |
-| **Value indicator** | `text-outline-purple` | No change | No change |
+| Элемент             | Normal                | Hover           | Focus         |
+| ------------------- | --------------------- | --------------- | ------------- |
+| **Track**           | `bg-pastel-cream`     | No change       | No change     |
+| **Filled**          | `bg-outline-purple`   | Slightly darker | Ring на thumb |
+| **Value indicator** | `text-outline-purple` | No change       | No change     |
 
 ### Анимации
+
 ```css
 /* Thumb hover */
 .slider-thumb:hover {
@@ -169,6 +187,7 @@ variantStyles = {
 **Выбранный вариант:** **Option C - Interactive Minimalism**
 
 ### Rationale (Обоснование)
+
 1. **Минимализм:** Соответствует плоскому дизайну
 2. **Интерактивность:** Отличные hover/focus состояния
 3. **Accessibility:** Четкие visual indicators
@@ -178,6 +197,7 @@ variantStyles = {
 ### Финальные стили Slider
 
 #### Базовые компоненты
+
 ```css
 /* Track (фон слайдера) */
 .slider-track {
@@ -230,46 +250,51 @@ variantStyles = {
 ```
 
 #### Semantic variants (если нужны)
+
 ```typescript
 const variantStyles = {
   default: {
     track: 'bg-pastel-cream border-outline-purple/20',
     filled: 'bg-outline-purple',
-    thumb: 'bg-white border-outline-purple'
+    thumb: 'bg-white border-outline-purple',
   },
   depth: {
     track: 'bg-pastel-cream border-outline-purple/20',
     filled: 'bg-pastel-turquoise',
-    thumb: 'bg-white border-pastel-turquoise'
+    thumb: 'bg-white border-pastel-turquoise',
   },
   rating: {
-    track: 'bg-pastel-cream border-outline-purple/20', 
+    track: 'bg-pastel-cream border-outline-purple/20',
     filled: 'bg-pastel-yellow',
-    thumb: 'bg-white border-pastel-yellow'
-  }
+    thumb: 'bg-white border-pastel-yellow',
+  },
 };
 ```
 
 ## 5️⃣ IMPLEMENTATION PLAN
 
 ### Этап 1: Обновить Slider.tsx
+
 - [ ] Заменить variantStyles объект
 - [ ] Убрать все градиенты (`bg-gradient-to-r`)
 - [ ] Заменить glow эффекты на simple shadows
 - [ ] Обновить цвета на пастельные
 
 ### Этап 2: Интерактивные состояния
+
 - [ ] Реализовать новые hover эффекты
 - [ ] Добавить focus states с rings
 - [ ] Обновить active (dragging) состояния
 - [ ] Протестировать keyboard navigation
 
 ### Этап 3: Темная тема
+
 - [ ] Адаптировать белый thumb для dark theme
 - [ ] Обновить track colors
 - [ ] Проверить контрастность
 
 ### Этап 4: Touch optimization
+
 - [ ] Увеличить touch targets
 - [ ] Протестировать drag на mobile
 - [ ] Валидировать smooth performance
@@ -277,25 +302,26 @@ const variantStyles = {
 ## 6️⃣ DARK THEME ADAPTATIONS
 
 ### Адаптация для темной темы
+
 ```css
 [data-theme='dark'] {
   .slider-track {
     @apply bg-slate-700 border-outline-purple/40;
   }
-  
+
   .slider-filled {
     @apply bg-pastel-blue; /* Более заметный в темной теме */
   }
-  
+
   .slider-thumb {
     @apply bg-slate-800 border-pastel-blue;
     @apply shadow-lg;
   }
-  
+
   .slider-thumb:hover {
     @apply bg-slate-700 border-pastel-blue;
   }
-  
+
   .slider-thumb:focus {
     @apply ring-pastel-blue/60;
   }
@@ -303,12 +329,13 @@ const variantStyles = {
 ```
 
 ### Value label adaptation
+
 ```css
 [data-theme='dark'] {
   .slider-value {
     @apply text-white;
   }
-  
+
   .slider-label {
     @apply text-slate-300;
   }
@@ -318,24 +345,26 @@ const variantStyles = {
 ## 🎨 VISUALIZATION
 
 ### Slider компоненты
+
 ```
 📏 Default Slider (depth: 15m)
-   ├─────────●─────┤ 
+   ├─────────●─────┤
    0              50m
-   
+
 📏 Slider states:
-   Normal:  ├─────●─────┤ 
+   Normal:  ├─────●─────┤
    Hover:   ├─────⚪────┤ ← scale + shadow
    Focus:   ├─────◉─────┤ ← ring
    Active:  ├─────●─────┤ ← bigger scale
-   
+
 🎨 Colors:
    Track:   bg-pastel-cream
-   Filled:  bg-outline-purple  
+   Filled:  bg-outline-purple
    Thumb:   bg-white + border-outline-purple
 ```
 
 ### Touch targets
+
 ```
 Mobile optimization:
    ├────────●────────┤

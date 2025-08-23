@@ -117,7 +117,7 @@ describe('DiveSiteTooltip', () => {
       'rounded-2xl',
       'text-sm',
       'z-20',
-      'bg-white',
+      'bg-background',
       'border',
       'border-pastel-turquoise/30',
       'shadow-simple',

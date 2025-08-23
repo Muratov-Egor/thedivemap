@@ -113,13 +113,13 @@ const Notification: React.FC<NotificationProps> = ({
       )}
     >
       <div
-                  className={cn(
-            'rounded-2xl hover:shadow-simple-hover',
-            'flex items-start gap-3 p-4',
-            'transition-all duration-300 ease-in-out',
-            currentStyles.container,
-            containerClassName,
-          )}
+        className={cn(
+          'rounded-2xl hover:shadow-simple-hover',
+          'flex items-start gap-3 p-4',
+          'transition-all duration-300 ease-in-out',
+          currentStyles.container,
+          containerClassName,
+        )}
       >
         {/* Иконка */}
         {(icon || type !== 'custom') && (
@@ -173,7 +173,9 @@ const Notification: React.FC<NotificationProps> = ({
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold text-outline-purple dark:text-black">{message}</div>
           {description && (
-            <div className="text-sm text-outline-purple/80 dark:text-black/80 mt-1">{description}</div>
+            <div className="text-sm text-outline-purple/80 dark:text-black/80 mt-1">
+              {description}
+            </div>
           )}
         </div>
 

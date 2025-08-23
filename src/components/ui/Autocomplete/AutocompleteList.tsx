@@ -29,7 +29,7 @@ export default function AutocompleteList({
     return (
       <div
         className={cn(
-          'absolute top-full left-0 right-0 mt-1 bg-glass-bg backdrop-blur-xl border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
+          'absolute top-full left-0 right-0 mt-1 bg-background border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
           'max-h-80 overflow-hidden',
           className,
         )}
@@ -49,7 +49,7 @@ export default function AutocompleteList({
     return (
       <div
         className={cn(
-          'absolute top-full left-0 right-0 mt-1 bg-glass-bg backdrop-blur-xl border border-red-200 dark:border-red-800 rounded-2xl shadow-lg z-50',
+          'absolute top-full left-0 right-0 mt-1 bg-background border border-red-200 dark:border-red-800 rounded-2xl shadow-lg z-50',
           'max-h-80 overflow-hidden',
           className,
         )}
@@ -78,7 +78,7 @@ export default function AutocompleteList({
     <div
       id="autocomplete-listbox"
       className={cn(
-        'absolute top-full left-0 right-0 mt-1 bg-glass-bg backdrop-blur-xl border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
+        'absolute top-full left-0 right-0 mt-1 bg-background border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
         'max-h-120 overflow-y-auto',
         'scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent',
         className,

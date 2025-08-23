@@ -78,7 +78,7 @@ const DiveSiteMarker = React.memo<ExtendedMarkerProps>(
           ${isHovered || isActive ? 'scale-110 shadow-simple-hover border-pastel-blue' : 'hover:shadow-simple-hover'}`}
           data-testid={`dive-site-marker-${site.id}`}
         >
-          <MaskIcon size={16} scale={300}  />
+          <MaskIcon size={16} scale={300} />
         </div>
 
         {/* Tooltip с информацией и анимациями */}

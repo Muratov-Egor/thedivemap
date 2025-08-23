@@ -38,13 +38,17 @@ export function Icon({
   if (withBackground) {
     // ПАСТЕЛЬНЫЕ ФОНЫ ДЛЯ ИКОНОК - плоский дизайн
     const backgroundStyles = {
-      default: 'p-2 bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600',
-      primary: 'p-2 bg-pastel-blue/30 dark:bg-pastel-blue/20 rounded-lg border border-pastel-blue/20',
-      secondary: 'p-2 bg-pastel-turquoise/30 dark:bg-pastel-turquoise/20 rounded-lg border border-pastel-turquoise/20', 
-      success: 'p-2 bg-pastel-green/30 dark:bg-pastel-green/20 rounded-lg border border-pastel-green/20',
+      default:
+        'p-2 bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600',
+      primary:
+        'p-2 bg-pastel-blue/30 dark:bg-pastel-blue/20 rounded-lg border border-pastel-blue/20',
+      secondary:
+        'p-2 bg-pastel-turquoise/30 dark:bg-pastel-turquoise/20 rounded-lg border border-pastel-turquoise/20',
+      success:
+        'p-2 bg-pastel-green/30 dark:bg-pastel-green/20 rounded-lg border border-pastel-green/20',
       info: 'p-2 bg-pastel-yellow/30 dark:bg-pastel-yellow/20 rounded-lg border border-pastel-yellow/20',
     };
-    
+
     return <div className={backgroundStyles[backgroundVariant]}>{iconContent}</div>;
   }
 

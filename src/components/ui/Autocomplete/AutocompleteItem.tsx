@@ -70,8 +70,7 @@ export default function AutocompleteItem({
         'hover:bg-pastel-blue/10 dark:hover:bg-pastel-blue/15',
         'focus:bg-pastel-blue/15 dark:focus:bg-pastel-blue/20',
         'focus:outline-none focus:ring-2 focus:ring-pastel-blue/30 dark:focus:ring-pastel-blue/40',
-        isSelected &&
-          'bg-pastel-blue/20 dark:bg-pastel-blue/25',
+        isSelected && 'bg-pastel-blue/20 dark:bg-pastel-blue/25',
         'border-b border-slate-100 dark:border-slate-700 last:border-b-0',
         className,
       )}
@@ -99,7 +98,7 @@ export default function AutocompleteItem({
         <div className="flex items-center gap-2">
           <span
             className={cn(
-              'font-medium text-slate-800 dark:text-slate-200 truncate',
+              'font-medium text-slate-900 dark:text-white truncate',
               isSelected && 'text-outline-purple dark:text-pastel-blue',
             )}
             data-testid="autocomplete-item-name"
@@ -107,7 +106,7 @@ export default function AutocompleteItem({
             {item.name}
           </span>
           <span
-            className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full"
+            className="text-xs text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-600 px-2 py-1 rounded-full"
             data-testid="autocomplete-item-type"
           >
             {getTypeLabel(item.type)}
@@ -116,7 +115,7 @@ export default function AutocompleteItem({
 
         {/* Additional Metadata */}
         {item.metadata && Object.keys(item.metadata).length > 0 && (
-          <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          <div className="text-xs text-slate-600 dark:text-slate-300 mt-1">
             {item.type === 'site' && item.metadata.site_type && (
               <span className="inline-block bg-pastel-pink/20 text-outline-purple px-2 py-1 rounded mr-2">
                 {item.metadata.site_type}

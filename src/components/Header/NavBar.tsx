@@ -92,7 +92,7 @@ export default function NavBar() {
 
       {/* Выпадающий список */}
       {isAccordionOpen && (
-        <div className="absolute right-0 top-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg min-w-52 z-50">
+        <div className="absolute right-0 top-full mt-2 bg-background dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg min-w-52 z-50">
           <div className="p-4 space-y-4">
             {/* Кнопка входа */}
             <div>

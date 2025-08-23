@@ -155,26 +155,28 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       default: {
         track: 'bg-gray-50 dark:bg-gray-800 border border-outline-purple/20',
         filled: 'bg-outline-purple',
-        thumb: 'bg-white border-2 border-outline-purple shadow-simple',
+        thumb: 'bg-background border-2 border-outline-purple shadow-simple',
         thumbHover: 'hover:scale-110 hover:shadow-simple-hover',
       },
       depth: {
         track: 'bg-gray-50 dark:bg-gray-800 border border-slate-700/20',
         filled: 'bg-blue-400 dark:bg-blue-600',
-        thumb: 'bg-white border-2 border-slate-700 dark:border-slate-600 shadow-simple',
-        thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-slate-700 dark:hover:border-slate-600',
+        thumb: 'bg-background border-2 border-slate-700 dark:border-slate-600 shadow-simple',
+        thumbHover:
+          'hover:scale-110 hover:shadow-simple-hover hover:border-slate-700 dark:hover:border-slate-600',
       },
       visibility: {
         track: 'bg-gray-50 dark:bg-gray-800 border border-pastel-turquoise/30',
         filled: 'bg-pastel-turquoise',
-        thumb: 'bg-white border-2 border-pastel-turquoise shadow-simple',
+        thumb: 'bg-background border-2 border-pastel-turquoise shadow-simple',
         thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-pastel-turquoise',
       },
       rating: {
         track: 'bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600',
         filled: 'bg-gray-400 dark:bg-gray-500',
-        thumb: 'bg-white border-2 border-gray-400 dark:border-gray-500 shadow-simple',
-        thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-gray-400 dark:hover:border-gray-500',
+        thumb: 'bg-background border-2 border-gray-400 dark:border-gray-500 shadow-simple',
+        thumbHover:
+          'hover:scale-110 hover:shadow-simple-hover hover:border-gray-400 dark:hover:border-gray-500',
       },
     };
 
@@ -249,7 +251,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
                 {valueSuffix}
               </span>
               <span
-                className="text-sm font-semibold text-outline-purple dark:text-white bg-white dark:bg-gray-800 px-3 py-1.5 rounded-xl shadow-simple border border-outline-purple/20 dark:border-gray-600"
+                className="text-sm font-semibold text-outline-purple dark:text-white bg-background dark:bg-gray-800 px-3 py-1.5 rounded-xl shadow-simple border border-outline-purple/20 dark:border-gray-600"
                 data-testid={`${dataTestId}-value`}
                 suppressHydrationWarning
               >
