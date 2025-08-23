@@ -79,8 +79,8 @@ describe('SiteTypeFilters', () => {
     const reefChip = screen.getByTestId('site-type-filter-1');
     fireEvent.click(reefChip);
 
-    // Проверяем, что чип стал выбранным (проверяем bg-tropical-blue класс)
-    expect(reefChip).toHaveClass('bg-tropical-blue');
+    // Проверяем, что чип стал выбранным (проверяем bg-pastel-yellow класс)
+    expect(reefChip).toHaveClass('bg-pastel-yellow');
   });
 
   it('should handle multiple site type selection', async () => {
@@ -105,12 +105,12 @@ describe('SiteTypeFilters', () => {
 
     // Выбираем первый фильтр
     fireEvent.click(reefChip);
-    expect(reefChip).toHaveClass('bg-tropical-blue');
+    expect(reefChip).toHaveClass('bg-pastel-yellow');
 
     // Выбираем второй фильтр (множественный выбор)
     fireEvent.click(shipChip);
-    expect(shipChip).toHaveClass('bg-tropical-blue');
-    expect(reefChip).toHaveClass('bg-tropical-blue'); // Первый остается выбранным
+    expect(shipChip).toHaveClass('bg-pastel-yellow');
+    expect(reefChip).toHaveClass('bg-pastel-yellow'); // Первый остается выбранным
   });
 
   it('should handle fetch error', async () => {
@@ -144,10 +144,10 @@ describe('SiteTypeFilters', () => {
 
     // Первый клик - выбираем фильтр
     fireEvent.click(reefChip);
-    expect(reefChip).toHaveClass('bg-tropical-blue');
+    expect(reefChip).toHaveClass('bg-pastel-yellow');
 
     // Второй клик - снимаем фильтр
     fireEvent.click(reefChip);
-    expect(reefChip).not.toHaveClass('bg-tropical-blue');
+    expect(reefChip).not.toHaveClass('bg-pastel-yellow');
   });
 });

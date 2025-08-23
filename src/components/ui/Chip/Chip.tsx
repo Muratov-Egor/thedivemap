@@ -25,20 +25,21 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
     ref,
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer min-w-20';
+      'inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer min-w-20 active:scale-95';
 
+    // УЛУЧШЕННЫЙ КОНТРАСТНЫЙ ДИЗАЙН - более яркие чипы
     const variantStyles = {
       default: {
         selected:
-          'bg-tropical-blue text-white border border-tropical-blue shadow-sm hover:bg-deep-ocean',
+          'bg-pastel-yellow border-2 border-outline-purple text-outline-purple dark:text-black shadow-simple hover:bg-pastel-yellow/90 hover:shadow-simple-hover focus:ring-pastel-yellow/50',
         unselected:
-          'bg-glass-bg text-foreground border border-slate-300 dark:border-slate-600 hover:bg-glass-bg/90 hover:border-slate-400 dark:hover:border-slate-500',
+          'bg-white dark:bg-gray-800 border-2 border-outline-purple/40 text-outline-purple dark:text-white hover:bg-pastel-yellow/20 hover:border-outline-purple focus:ring-outline-purple/30',
       },
       subtle: {
         selected:
-          'bg-blue-100 dark:bg-blue-900/50 text-tropical-blue dark:text-blue-300 border-2 border-tropical-blue dark:border-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800/50',
+          'bg-pastel-yellow/80 border border-outline-purple text-outline-purple dark:text-black shadow-simple hover:bg-pastel-yellow hover:shadow-simple-hover focus:ring-pastel-yellow/50',
         unselected:
-          'bg-glass-bg text-foreground border-2 border-slate-300 dark:border-slate-600 hover:bg-glass-bg/90 hover:border-slate-400 dark:hover:border-slate-500',
+          'bg-white dark:bg-gray-800 border border-outline-purple/30 text-outline-purple/80 dark:text-white/90 hover:bg-pastel-yellow/15 hover:border-outline-purple/50 focus:ring-outline-purple/30',
       },
     };
 

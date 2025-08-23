@@ -69,7 +69,7 @@ export default function Filters() {
       {isMobile && !isMobilePanelOpen && (
         <div className="fixed bottom-6 right-6 z-50">
           <Button
-            variant="warning"
+            variant="info"
             shape="circle"
             size="medium"
             icon={<FiltersIcon />}

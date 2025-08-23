@@ -79,8 +79,8 @@ describe('DifficultyFilters', () => {
     const easyChip = screen.getByTestId('difficulty-filter-1');
     fireEvent.click(easyChip);
 
-    // Проверяем, что чип стал выбранным (проверяем bg-tropical-blue класс)
-    expect(easyChip).toHaveClass('bg-tropical-blue');
+    // Проверяем, что чип стал выбранным (проверяем bg-pastel-yellow класс)
+    expect(easyChip).toHaveClass('bg-pastel-yellow');
   });
 
   it('should handle multiple difficulty selection', async () => {
@@ -105,12 +105,12 @@ describe('DifficultyFilters', () => {
 
     // Выбираем первый фильтр
     fireEvent.click(easyChip);
-    expect(easyChip).toHaveClass('bg-tropical-blue');
+    expect(easyChip).toHaveClass('bg-pastel-yellow');
 
     // Выбираем второй фильтр (множественный выбор)
     fireEvent.click(mediumChip);
-    expect(mediumChip).toHaveClass('bg-tropical-blue');
-    expect(easyChip).toHaveClass('bg-tropical-blue'); // Первый остается выбранным
+    expect(mediumChip).toHaveClass('bg-pastel-yellow');
+    expect(easyChip).toHaveClass('bg-pastel-yellow'); // Первый остается выбранным
   });
 
   it('should handle fetch error', async () => {
@@ -144,10 +144,10 @@ describe('DifficultyFilters', () => {
 
     // Первый клик - выбираем фильтр
     fireEvent.click(easyChip);
-    expect(easyChip).toHaveClass('bg-tropical-blue');
+    expect(easyChip).toHaveClass('bg-pastel-yellow');
 
     // Второй клик - снимаем фильтр
     fireEvent.click(easyChip);
-    expect(easyChip).not.toHaveClass('bg-tropical-blue');
+    expect(easyChip).not.toHaveClass('bg-pastel-yellow');
   });
 });

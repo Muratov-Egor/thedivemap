@@ -516,7 +516,7 @@ describe('Filters', () => {
     renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
-    expect(openButton).toHaveClass('bg-gradient-coral', 'text-white', 'rounded-full');
+    expect(openButton).toHaveClass('bg-pastel-turquoise', 'text-outline-purple', 'rounded-full');
   });
 
   it('имеет правильные классы для кнопки закрытия', () => {
