@@ -12,7 +12,7 @@ export function Icon({
   name, 
   className = '', 
   size = 24, 
-  scale = 100, 
+  scale = 200, 
   withBackground = false 
 }: IconProps) {
   const scaleClass = `scale-${scale}`;

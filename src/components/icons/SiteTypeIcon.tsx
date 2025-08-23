@@ -1,3 +1,16 @@
+import React from 'react';
+import { 
+  ReefIcon, 
+  WreckIcon, 
+  CaveIcon, 
+  BayIcon, 
+  ArtificialReefIcon, 
+  PinnacleIcon, 
+  CoralGardenIcon, 
+  LakeIcon, 
+  MarkIcon 
+} from './index';
+
 interface IconProps {
   className?: string;
 }
@@ -11,29 +24,21 @@ export default function SiteTypeIcon({ siteTypeId, className = 'w-4 h-4' }: Site
     switch (id) {
       case 1: // Reef
         return (
-          <span className={className} data-testid="site-type-icon">
-            🪸
-          </span>
+          <ReefIcon size={16} withBackground className={className} data-testid="site-type-icon" />
         );
       case 2: // Wreck
         return (
-          <span className={className} data-testid="site-type-icon">
-            🚢
-          </span>
+          <WreckIcon size={16} withBackground className={className} data-testid="site-type-icon" />
         );
       case 3: // Cave
         return (
-          <span className={className} data-testid="site-type-icon">
-            🕳️
-          </span>
+          <CaveIcon size={16} withBackground className={className} data-testid="site-type-icon" />
         );
       case 4: // Bay
         return (
-          <span className={className} data-testid="site-type-icon">
-            🌊
-          </span>
+          <BayIcon size={16} withBackground className={className} data-testid="site-type-icon" />
         );
-      case 5: // Wall
+      case 5: // Wall - оставляем эмоджи, так как нет соответствующей иконки
         return (
           <span className={className} data-testid="site-type-icon">
             🏔️
@@ -41,34 +46,24 @@ export default function SiteTypeIcon({ siteTypeId, className = 'w-4 h-4' }: Site
         );
       case 6: // Artificial reef
         return (
-          <span className={className} data-testid="site-type-icon">
-            🏗️
-          </span>
+          <ArtificialReefIcon size={16} withBackground className={className} data-testid="site-type-icon" />
         );
       case 9: // Pinnacle
         return (
-          <span className={className} data-testid="site-type-icon">
-            🗻
-          </span>
+          <PinnacleIcon size={16} withBackground className={className} data-testid="site-type-icon" />
         );
       case 10: // Coral garden
         return (
-          <span className={className} data-testid="site-type-icon">
-            🌸
-          </span>
+          <CoralGardenIcon size={16} withBackground className={className} data-testid="site-type-icon" />
         );
       case 11: // Lake
         return (
-          <span className={className} data-testid="site-type-icon">
-            🏞️
-          </span>
+          <LakeIcon size={16} withBackground className={className} data-testid="site-type-icon" />
         );
       case 12: // Default
       default:
         return (
-          <span className={className} data-testid="site-type-icon">
-            📍
-          </span>
+          <MarkIcon size={16} withBackground className={className} data-testid="site-type-icon" />
         );
     }
   };
