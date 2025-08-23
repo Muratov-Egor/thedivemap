@@ -6,6 +6,7 @@ interface IconProps {
   size?: number;
   scale?: number;
   withBackground?: boolean;
+  'data-testid'?: string;
 }
 
 export function Icon({
@@ -14,6 +15,7 @@ export function Icon({
   size = 24,
   scale = 100,
   withBackground = false,
+  'data-testid': testId,
 }: IconProps) {
   const scaleValue = scale / 100; // Преобразуем scale в десятичное значение
 
@@ -27,6 +29,7 @@ export function Icon({
         transform: `scale(${scaleValue})`,
         transformOrigin: 'center',
       }}
+      data-testid={testId}
     />
   );
 

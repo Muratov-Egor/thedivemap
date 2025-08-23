@@ -16,7 +16,7 @@ jest.mock('next/navigation', () => ({
 }));
 
 // Мокаем компоненты
-jest.mock('../../components/Header', () => {
+jest.mock('../../components/Header/Header', () => {
   return function MockHeader() {
     return <div data-testid="header">Header</div>;
   };
