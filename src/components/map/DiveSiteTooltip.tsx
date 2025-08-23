@@ -108,7 +108,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       <div className="flex justify-center !mt-5">
         <Button
           onClick={handleShowDetails}
-          variant="info"
+          variant="outline"
           size="small"
           className="justify-center"
           aria-label={t('map.markers.more')}
@@ -121,11 +121,11 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       {/* Кнопка закрытия */}
       <Button
         onClick={onClose}
-        variant="danger"
+        variant="glass"
         shape="circle"
         size="small"
         icon={<CloseIcon className="w-3 h-3" />}
-        className="!absolute !-top-2 !-right-2 !w-7 !h-7 !p-0 shadow-md bg-background dark:bg-gray-800 hover:bg-pastel-pink/20 dark:hover:bg-pastel-pink/20"
+        className="!absolute !-top-2 !-right-2 !w-7 !h-7 !p-0 shadow-md bg-background dark:bg-gray-800"
         aria-label={t('map.markers.closeTooltip')}
         data-testid={`dive-site-tooltip-close`}
       />
