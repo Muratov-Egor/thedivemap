@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useMap } from '@/contexts/MapContext';
 import { useFilters } from '@/hooks/useFilters';
 import Chip from '@/components/ui/Chip/Chip';
+import { DifficultyIcon } from '@/components/icons';
 
 export default function DifficultyFilters() {
   const { t } = useTranslation('filters');
@@ -40,7 +41,15 @@ export default function DifficultyFilters() {
             data-testid={`difficulty-filter-${difficulty.id}`}
             aria-label={`${t('difficulties.filterBy')} ${difficulty.label}`}
           >
-            {difficulty.label}
+            <div className="flex items-center gap-2">
+              <DifficultyIcon
+                difficulty={difficulty.id as 1 | 2 | 3}
+                size={16}
+                withBackground
+                scale={200}
+              />
+              {difficulty.label}
+            </div>
           </Chip>
         ))}
       </div>

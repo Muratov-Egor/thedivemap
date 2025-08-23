@@ -33,7 +33,7 @@ jest.mock('next/link', () => {
 });
 
 // Мокаем LanguageSwitch
-jest.mock('@/components/LanguageSwitch', () => {
+jest.mock('@/components/Header/LanguageSwitch', () => {
   return function MockLanguageSwitch() {
     return <div data-testid="language-switch">Language Switch</div>;
   };
@@ -70,7 +70,7 @@ describe('Header', () => {
     expect(logo).toHaveClass('sm:w-24', 'sm:h-24', 'w-16', 'h-16');
 
     expect(title).toBeInTheDocument();
-    expect(title).toHaveClass('text-xl', 'sm:text-3xl', 'font-bold');
+    expect(title).toHaveClass('text-lg', 'sm:text-3xl', 'font-bold');
 
     expect(languageSwitch).toBeInTheDocument();
   });
@@ -86,7 +86,7 @@ describe('Header', () => {
       'sm:gap-2',
       'gap-1',
       'items-center',
-      'hover:underline',
+      'hover:no-underline',
       'pr-4',
     );
   });

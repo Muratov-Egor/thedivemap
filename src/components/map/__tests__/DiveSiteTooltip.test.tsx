@@ -61,7 +61,7 @@ describe('DiveSiteTooltip', () => {
     renderWithI18n(<DiveSiteTooltip site={mockSite} onClose={mockOnClose} />);
 
     expect(screen.getByTestId('dive-site-tooltip-coordinates')).toHaveTextContent(
-      '📍42.1234°N, 18.5678°E',
+      '42.1234°N, 18.5678°E',
     );
   });
 
@@ -74,13 +74,13 @@ describe('DiveSiteTooltip', () => {
   it('отображает глубину', () => {
     renderWithI18n(<DiveSiteTooltip site={mockSite} onClose={mockOnClose} />);
 
-    expect(screen.getByTestId('dive-site-tooltip-depth')).toHaveTextContent('⬇30 m');
+    expect(screen.getByTestId('dive-site-tooltip-depth')).toHaveTextContent('30 m');
   });
 
   it('отображает видимость', () => {
     renderWithI18n(<DiveSiteTooltip site={mockSite} onClose={mockOnClose} />);
 
-    expect(screen.getByTestId('dive-site-tooltip-visibility')).toHaveTextContent('👁️20 m');
+    expect(screen.getByTestId('dive-site-tooltip-visibility')).toHaveTextContent('20 m');
   });
 
   it('не отображает тип сайта если он отсутствует', () => {

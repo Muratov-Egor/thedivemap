@@ -1,74 +1,133 @@
+import React from 'react';
+import {
+  ReefIcon,
+  WreckIcon,
+  CaveIcon,
+  BayIcon,
+  ArtificialReefIcon,
+  PinnacleIcon,
+  CoralGardenIcon,
+  LakeIcon,
+  RiverIcon,
+  MaskIcon,
+} from './index';
+
 interface IconProps {
   className?: string;
 }
 
 interface SiteTypeIconProps extends IconProps {
   siteTypeId: number;
+  scale?: number;
 }
 
-export default function SiteTypeIcon({ siteTypeId, className = 'w-4 h-4' }: SiteTypeIconProps) {
+export default function SiteTypeIcon({
+  siteTypeId,
+  className = 'w-4 h-4',
+  scale = 200,
+}: SiteTypeIconProps) {
   const getIcon = (id: number) => {
     switch (id) {
       case 1: // Reef
         return (
-          <span className={className} data-testid="site-type-icon">
-            🪸
-          </span>
+          <ReefIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-reef"
+            scale={scale}
+          />
         );
       case 2: // Wreck
         return (
-          <span className={className} data-testid="site-type-icon">
-            🚢
-          </span>
+          <WreckIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-wreck"
+            scale={scale}
+          />
         );
       case 3: // Cave
         return (
-          <span className={className} data-testid="site-type-icon">
-            🕳️
-          </span>
+          <CaveIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-cave"
+            scale={scale}
+          />
         );
       case 4: // Bay
         return (
-          <span className={className} data-testid="site-type-icon">
-            🌊
-          </span>
+          <BayIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-bay"
+            scale={scale}
+          />
         );
-      case 5: // Wall
+      case 8: // River
         return (
-          <span className={className} data-testid="site-type-icon">
-            🏔️
-          </span>
+          <RiverIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-river"
+            scale={scale}
+          />
         );
       case 6: // Artificial reef
         return (
-          <span className={className} data-testid="site-type-icon">
-            🏗️
-          </span>
+          <ArtificialReefIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-artificial-reef"
+            scale={scale}
+          />
         );
       case 9: // Pinnacle
         return (
-          <span className={className} data-testid="site-type-icon">
-            🗻
-          </span>
+          <PinnacleIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-pinnacle"
+            scale={scale}
+          />
         );
       case 10: // Coral garden
         return (
-          <span className={className} data-testid="site-type-icon">
-            🌸
-          </span>
+          <CoralGardenIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-coral-garden"
+            scale={scale}
+          />
         );
       case 11: // Lake
         return (
-          <span className={className} data-testid="site-type-icon">
-            🏞️
-          </span>
+          <LakeIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-lake"
+            scale={scale}
+          />
         );
       case 12: // Default
       default:
         return (
-          <span className={className} data-testid="site-type-icon">
-            📍
-          </span>
+          <MaskIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-mark"
+            scale={scale}
+          />
         );
     }
   };

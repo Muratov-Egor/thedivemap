@@ -6,6 +6,7 @@ import { AutocompleteProps } from './types';
 import { useAutocomplete } from './useAutocomplete';
 import AutocompleteList from './AutocompleteList';
 import { cn } from '@/lib/utils';
+import { CloseIcon } from '@/components/icons';
 
 export default function Autocomplete({
   placeholder,
@@ -190,14 +191,7 @@ export default function Autocomplete({
             aria-label={t('clearButton')}
             data-testid="autocomplete-clear-button"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <CloseIcon />
           </button>
         )}
 

@@ -15,21 +15,21 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
   const { t } = useTranslation('common');
 
   const getIcon = () => {
-    return theme === 'dark' ? <MoonIcon size={18} /> : <SunIcon size={18} />;
+    return theme === 'dark' ? (
+      <SunIcon size={18} scale={150} />
+    ) : (
+      <MoonIcon size={18} scale={150} />
+    );
   };
 
   const getTooltipText = () => {
     return theme === 'dark' ? t('theme.light') : t('theme.dark');
   };
 
-  const getButtonColor = () => {
-    return theme === 'dark' ? 'glass' : 'coral';
-  };
-
   return (
     <Button
       onClick={toggleTheme}
-      variant={getButtonColor()}
+      variant="glass"
       size="small"
       shape="pill"
       icon={getIcon()}

@@ -22,10 +22,14 @@ jest.mock('@/components/ui/Button', () => {
   };
 });
 
-// Мокаем CloseIcon и SiteTypeIcon
+// Мокаем CloseIcon, SiteTypeIcon, MaskIcon и другие иконки
 jest.mock('@/components/icons', () => ({
   CloseIcon: () => <div data-testid="close-icon">×</div>,
   SiteTypeIcon: () => <div data-testid="site-type-icon">🏝️</div>,
+  MaskIcon: () => <div data-testid="mask-icon">🤿</div>,
+  MarkIcon: () => <div data-testid="mark-icon">📍</div>,
+  DepthIcon: () => <div data-testid="depth-icon">⬇</div>,
+  VisibilityIcon: () => <div data-testid="visibility-icon">👁️</div>,
 }));
 
 describe('DiveSiteMarker', () => {

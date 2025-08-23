@@ -97,6 +97,7 @@ describe('/api/filters', () => {
     });
 
     it('should handle site types database error', async () => {
+      // Мокаем оба запроса, которые выполняются параллельно в Promise.all
       mockSupabase.from.mockReturnValueOnce({
         select: jest.fn().mockReturnValue({
           order: jest.fn().mockResolvedValue({
@@ -106,7 +107,6 @@ describe('/api/filters', () => {
         }),
       } as any);
 
-      // Мокаем второй вызов для difficulties (хотя он не будет выполнен из-за ошибки в первом)
       mockSupabase.from.mockReturnValueOnce({
         select: jest.fn().mockReturnValue({
           order: jest.fn().mockResolvedValue({
@@ -127,6 +127,7 @@ describe('/api/filters', () => {
     it('should handle difficulties database error', async () => {
       const mockSiteTypes = [{ id: 1, label_ru: 'Риф', label_en: 'Reef' }];
 
+      // Мокаем оба запроса, которые выполняются параллельно в Promise.all
       mockSupabase.from.mockReturnValueOnce({
         select: jest.fn().mockReturnValue({
           order: jest.fn().mockResolvedValue({

@@ -296,10 +296,10 @@ describe('Autocomplete Integration Tests', () => {
     });
 
     // Проверяем, что все типы отображаются
-    expect(screen.getByText('🤿')).toBeInTheDocument(); // site
-    expect(screen.getByText('🇹🇨')).toBeInTheDocument(); // country
-    expect(screen.getByText('🗺️')).toBeInTheDocument(); // region
-    expect(screen.getByText('📍')).toBeInTheDocument(); // location
+    expect(screen.getByText('Test Site')).toBeInTheDocument(); // site
+    expect(screen.getByText('Test Country')).toBeInTheDocument(); // country
+    expect(screen.getByText('Test Region')).toBeInTheDocument(); // region
+    expect(screen.getByText('Test Location')).toBeInTheDocument(); // location
   });
 
   it('правильно обрабатывает состояние загрузки', async () => {

@@ -4,6 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { AutocompleteItem as AutocompleteItemType } from './types';
 import { cn, getCountryFlag } from '@/lib/utils';
+import { MaskIcon, TagIcon, MapIcon } from '@/components/icons';
 
 interface AutocompleteItemProps {
   item: AutocompleteItemType;
@@ -19,18 +20,20 @@ const getTypeIcon = (
   metadata?: Record<string, string | number | boolean | string[]>,
 ) => {
   switch (type) {
-    case 'site':
-      return '🤿';
     case 'country':
       // Используем флаг страны если есть ISO код
       const isoCode = metadata?.iso_code as string;
-      return isoCode ? getCountryFlag(isoCode) : '🌍';
+      return (
+        <div className="px-1 bg-tropical-blue/15 rounded-lg">
+          <span className="text-2xl">{isoCode ? getCountryFlag(isoCode) : '🌍'}</span>
+        </div>
+      );
     case 'region':
-      return '🗺️';
+      return <MapIcon size={16} scale={200} withBackground />;
     case 'location':
-      return '📍';
+      return <TagIcon size={16} scale={200} withBackground />;
     default:
-      return '🔍';
+      return <MaskIcon size={16} scale={200} withBackground />;
   }
 };
 
