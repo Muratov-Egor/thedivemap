@@ -16,9 +16,9 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
 
   const getIcon = () => {
     return theme === 'dark' ? (
-      <MoonIcon size={18} scale={200} />
+      <SunIcon size={18} scale={150} />
     ) : (
-      <SunIcon size={18} scale={200} />
+      <MoonIcon size={18} scale={150} />
     );
   };
 

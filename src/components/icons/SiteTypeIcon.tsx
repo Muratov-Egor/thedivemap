@@ -8,7 +8,8 @@ import {
   PinnacleIcon,
   CoralGardenIcon,
   LakeIcon,
-  MarkIcon,
+  RiverIcon,
+  MaskIcon,
 } from './index';
 
 interface IconProps {
@@ -33,7 +34,7 @@ export default function SiteTypeIcon({
             size={16}
             withBackground
             className={className}
-            data-testid="site-type-icon"
+            data-testid="site-type-icon-reef"
             scale={scale}
           />
         );
@@ -43,7 +44,7 @@ export default function SiteTypeIcon({
             size={16}
             withBackground
             className={className}
-            data-testid="site-type-icon"
+            data-testid="site-type-icon-wreck"
             scale={scale}
           />
         );
@@ -53,7 +54,7 @@ export default function SiteTypeIcon({
             size={16}
             withBackground
             className={className}
-            data-testid="site-type-icon"
+            data-testid="site-type-icon-cave"
             scale={scale}
           />
         );
@@ -63,15 +64,19 @@ export default function SiteTypeIcon({
             size={16}
             withBackground
             className={className}
-            data-testid="site-type-icon"
+            data-testid="site-type-icon-bay"
             scale={scale}
           />
         );
-      case 5: // Wall - оставляем эмоджи, так как нет соответствующей иконки
+      case 8: // River
         return (
-          <span className={className} data-testid="site-type-icon">
-            🏔️
-          </span>
+          <RiverIcon
+            size={16}
+            withBackground
+            className={className}
+            data-testid="site-type-icon-river"
+            scale={scale}
+          />
         );
       case 6: // Artificial reef
         return (
@@ -79,7 +84,7 @@ export default function SiteTypeIcon({
             size={16}
             withBackground
             className={className}
-            data-testid="site-type-icon"
+            data-testid="site-type-icon-artificial-reef"
             scale={scale}
           />
         );
@@ -89,7 +94,7 @@ export default function SiteTypeIcon({
             size={16}
             withBackground
             className={className}
-            data-testid="site-type-icon"
+            data-testid="site-type-icon-pinnacle"
             scale={scale}
           />
         );
@@ -99,7 +104,7 @@ export default function SiteTypeIcon({
             size={16}
             withBackground
             className={className}
-            data-testid="site-type-icon"
+            data-testid="site-type-icon-coral-garden"
             scale={scale}
           />
         );
@@ -109,18 +114,18 @@ export default function SiteTypeIcon({
             size={16}
             withBackground
             className={className}
-            data-testid="site-type-icon"
+            data-testid="site-type-icon-lake"
             scale={scale}
           />
         );
       case 12: // Default
       default:
         return (
-          <MarkIcon
+          <MaskIcon
             size={16}
             withBackground
             className={className}
-            data-testid="site-type-icon"
+            data-testid="site-type-icon-mark"
             scale={scale}
           />
         );
