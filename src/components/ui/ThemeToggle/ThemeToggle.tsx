@@ -26,10 +26,6 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
     return theme === 'dark' ? t('theme.light') : t('theme.dark');
   };
 
-  const getButtonColor = () => {
-    return theme === 'dark' ? 'glass' : 'coral';
-  };
-
   return (
     <Button
       onClick={toggleTheme}
