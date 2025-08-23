@@ -64,7 +64,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
         data-testid={`dive-site-tooltip-coordinates`}
         className="text-slate-600 dark:text-slate-400 text-xs mb-3 text-center flex items-center justify-center gap-1"
       >
-        <MarkIcon size={14} />
+        <MarkIcon size={14} scale={200} />
         {formatCoordinates(site.latitude, site.longitude)}
       </div>
 
@@ -87,17 +87,17 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
           data-testid={`dive-site-tooltip-depth`}
           className="flex items-center gap-2 text-slate-700 dark:text-slate-300 text-sm font-medium"
         >
-          <DepthIcon size={16} withBackground />
+          <DepthIcon size={16} withBackground scale={200} />
           <span className="flex items-center">
             {site.depth_max} {t('map.markers.meters')}
-          </span>
+          </span> 
         </div>
 
         <div
           data-testid={`dive-site-tooltip-visibility`}
           className="flex items-center gap-2 text-slate-700 dark:text-slate-300 text-sm font-medium"
         >
-          <VisibilityIcon size={16} withBackground />
+          <VisibilityIcon size={16} withBackground scale={200} />
           <span className="flex items-center">
             {site.visibility} {t('map.markers.meters')}
           </span>

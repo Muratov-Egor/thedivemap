@@ -17,26 +17,27 @@ interface IconProps {
 
 interface SiteTypeIconProps extends IconProps {
   siteTypeId: number;
+  scale?: number;
 }
 
-export default function SiteTypeIcon({ siteTypeId, className = 'w-4 h-4' }: SiteTypeIconProps) {
+export default function SiteTypeIcon({ siteTypeId, className = 'w-4 h-4', scale = 200 }: SiteTypeIconProps) {
   const getIcon = (id: number) => {
     switch (id) {
       case 1: // Reef
         return (
-          <ReefIcon size={16} withBackground className={className} data-testid="site-type-icon" />
+          <ReefIcon size={16} withBackground className={className} data-testid="site-type-icon" scale={scale} />
         );
       case 2: // Wreck
         return (
-          <WreckIcon size={16} withBackground className={className} data-testid="site-type-icon" />
+          <WreckIcon size={16} withBackground className={className} data-testid="site-type-icon" scale={scale} />
         );
       case 3: // Cave
         return (
-          <CaveIcon size={16} withBackground className={className} data-testid="site-type-icon" />
+          <CaveIcon size={16} withBackground className={className} data-testid="site-type-icon" scale={scale} />
         );
       case 4: // Bay
         return (
-          <BayIcon size={16} withBackground className={className} data-testid="site-type-icon" />
+          <BayIcon size={16} withBackground className={className} data-testid="site-type-icon" scale={scale} />
         );
       case 5: // Wall - оставляем эмоджи, так как нет соответствующей иконки
         return (
@@ -46,24 +47,24 @@ export default function SiteTypeIcon({ siteTypeId, className = 'w-4 h-4' }: Site
         );
       case 6: // Artificial reef
         return (
-          <ArtificialReefIcon size={16} withBackground className={className} data-testid="site-type-icon" />
+          <ArtificialReefIcon size={16} withBackground className={className} data-testid="site-type-icon" scale={scale} />
         );
       case 9: // Pinnacle
         return (
-          <PinnacleIcon size={16} withBackground className={className} data-testid="site-type-icon" />
+          <PinnacleIcon size={16} withBackground className={className} data-testid="site-type-icon" scale={scale} />
         );
       case 10: // Coral garden
         return (
-          <CoralGardenIcon size={16} withBackground className={className} data-testid="site-type-icon" />
+          <CoralGardenIcon size={16} withBackground className={className} data-testid="site-type-icon" scale={scale} />
         );
       case 11: // Lake
         return (
-          <LakeIcon size={16} withBackground className={className} data-testid="site-type-icon" />
+          <LakeIcon size={16} withBackground className={className} data-testid="site-type-icon" scale={scale} />
         );
       case 12: // Default
       default:
         return (
-          <MarkIcon size={16} withBackground className={className} data-testid="site-type-icon" />
+          <MarkIcon size={16} withBackground className={className} data-testid="site-type-icon" scale={scale} />
         );
     }
   };

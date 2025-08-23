@@ -20,3 +20,4 @@ export { CoralGardenIcon } from './CoralGardenIcon';
 export { CaveIcon } from './CaveIcon';
 export { BayIcon } from './BayIcon';
 export { ArtificialReefIcon } from './ArtificialReefIcon';
+export { DifficultyIcon } from './DifficultyIcon';

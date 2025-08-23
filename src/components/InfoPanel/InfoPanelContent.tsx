@@ -3,7 +3,7 @@ import { DiveSiteDetails } from '@/lib/types/supabase';
 import { getCountryFlag } from '@/lib/utils';
 import { formatCoordinates } from '@/lib/utils';
 import { cn } from '@/lib/utils';
-import { CloseIcon, SiteTypeIcon } from '@/components/icons';
+import { CloseIcon, SiteTypeIcon, DifficultyIcon, MarkIcon, DepthIcon, VisibilityIcon } from '@/components/icons';
 import { Button } from '@/components/ui';
 import { ImageGallery } from '@/components/ui';
 import { useTranslation } from 'react-i18next';
@@ -33,6 +33,7 @@ export default function InfoPanelContent({
       setTimeout(() => setShowCopiedMessage(false), 2000);
     }
   };
+
   return (
     <>
       {/* Заголовок с кнопкой возврата */}
@@ -73,7 +74,7 @@ export default function InfoPanelContent({
         {/* Координаты и местоположение */}
         <div className="flex items-center gap-4 mt-3 text-slate-600 dark:text-slate-400 text-sm">
           <div className="flex items-center gap-2">
-            <span className="text-tropical-blue text-lg">📍</span>
+            <MarkIcon size={14} scale={200} />
             <span className="font-medium">
               {formatCoordinates(diveSite.latitude, diveSite.longitude)}
             </span>
@@ -123,12 +124,12 @@ export default function InfoPanelContent({
             {diveSite.site_type && (
               <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-tropical-blue/15 rounded-lg">
+                  
                     <SiteTypeIcon
                       siteTypeId={diveSite.site_type.id}
                       className="w-5 h-5 text-tropical-blue"
                     />
-                  </div>
+                  
                   <span
                     className="text-sm font-medium text-slate-600 dark:text-slate-400"
                     suppressHydrationWarning
@@ -145,19 +146,15 @@ export default function InfoPanelContent({
             {diveSite.difficulty && (
               <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-tropical-blue/15 rounded-lg">
-                    <svg
-                      className="w-5 h-5 text-tropical-blue"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
+                  
+                    <DifficultyIcon 
+                      difficulty={diveSite.difficulty.id as 1 | 2 | 3} 
+                      size={20} 
+                      withBackground={true}
+                      className="text-tropical-blue"
+                      scale={150}
+                    />
+                  
                   <span
                     className="text-sm font-medium text-slate-600 dark:text-slate-400"
                     suppressHydrationWarning
@@ -173,19 +170,7 @@ export default function InfoPanelContent({
 
             <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-tropical-blue/15 rounded-lg">
-                  <svg
-                    className="w-5 h-5 text-tropical-blue"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
+                <DepthIcon size={16} withBackground scale={200} />
                 <span className="text-sm font-medium text-slate-600" suppressHydrationWarning>
                   {t('maxDepth')}
                 </span>
@@ -197,20 +182,7 @@ export default function InfoPanelContent({
 
             <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-tropical-blue/15 rounded-lg">
-                  <svg
-                    className="w-5 h-5 text-tropical-blue"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                    <path
-                      fillRule="evenodd"
-                      d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
+                <VisibilityIcon size={16} withBackground scale={200} />
                 <span className="text-sm font-medium text-slate-600" suppressHydrationWarning>
                   {t('visibility')}
                 </span>
