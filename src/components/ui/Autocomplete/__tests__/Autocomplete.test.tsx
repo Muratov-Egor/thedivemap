@@ -293,7 +293,7 @@ describe('Autocomplete Component', () => {
     render(<Autocomplete {...defaultProps} />);
 
     const input = screen.getByTestId('autocomplete-input');
-    expect(input).toHaveClass('border-tropical-blue', 'shadow-lg');
+    expect(input).toHaveClass('border-pastel-blue', 'shadow-simple');
   });
 
   it('применяет CSS классы для состояния ошибки', () => {

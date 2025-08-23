@@ -77,7 +77,7 @@ export default function FiltersContent({
       {hasActiveFilters && (
         <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
           <Button
-            variant="coral"
+            variant="success"
             size="medium"
             onClick={handleClearAll}
             data-testid="clear-all-filters-button"

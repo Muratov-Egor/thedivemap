@@ -19,7 +19,7 @@ describe('Button Component', () => {
   it('применяет правильные классы по умолчанию', () => {
     render(<Button>Кнопка</Button>);
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('bg-gradient-ocean', 'text-white', 'rounded-2xl');
+    expect(button).toHaveClass('bg-pastel-blue', 'text-outline-purple', 'rounded-2xl');
   });
 
   it('поддерживает разные размеры', () => {
@@ -39,25 +39,25 @@ describe('Button Component', () => {
   it('поддерживает разные варианты стилей', () => {
     const { rerender } = render(<Button variant="secondary">Secondary</Button>);
     expect(screen.getByRole('button')).toHaveClass(
-      'bg-gradient-to-r',
-      'from-gray-200',
-      'to-gray-300',
+      'bg-pastel-yellow',
+      'border-outline-purple/30',
+      'text-outline-purple',
     );
 
-    rerender(<Button variant="ghost">Ghost</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-transparent', 'text-slate-600');
+    rerender(<Button variant="primary">Primary</Button>);
+    expect(screen.getByRole('button')).toHaveClass('bg-pastel-blue', 'text-outline-purple');
 
-    rerender(<Button variant="coral">Coral</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-gradient-coral', 'text-white');
+    rerender(<Button variant="danger">Danger</Button>);
+    expect(screen.getByRole('button')).toHaveClass('bg-pastel-pink', 'text-outline-purple');
 
-    rerender(<Button variant="glass">Glass</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-glass-bg', 'text-foreground');
+    rerender(<Button variant="info">Info</Button>);
+    expect(screen.getByRole('button')).toHaveClass('bg-pastel-turquoise', 'text-outline-purple');
 
     rerender(<Button variant="success">Success</Button>);
     expect(screen.getByRole('button')).toHaveClass(
-      'bg-gradient-to-r',
-      'from-green-500',
-      'to-emerald-600',
+      'bg-pastel-green',
+      'text-outline-purple',
+      'border-outline-purple/30',
     );
   });
 

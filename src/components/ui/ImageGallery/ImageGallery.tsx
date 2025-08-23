@@ -55,7 +55,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
         {/* Close button */}
         <Button
           onClick={onClose}
-          variant="gallery"
+          variant="info"
           size="small"
           shape="circle"
           className="absolute top-4 right-4 text-3xl z-10"
@@ -72,7 +72,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
                 e.stopPropagation();
                 onPrevious();
               }}
-              variant="gallery"
+              variant="info"
               size="medium"
               shape="circle"
               className="absolute left-4 top-1/2 transform -translate-y-1/2 text-4xl z-10"
@@ -85,7 +85,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
                 e.stopPropagation();
                 onNext();
               }}
-              variant="gallery"
+              variant="info"
               size="medium"
               shape="circle"
               className="absolute right-4 top-1/2 transform -translate-y-1/2 text-4xl z-10"

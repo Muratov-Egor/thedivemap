@@ -37,7 +37,7 @@ export default function AutocompleteList({
       >
         <div className="flex items-center justify-center py-8">
           <div className="flex items-center gap-3 text-slate-600 dark:text-slate-400">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-tropical-blue"></div>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-pastel-blue"></div>
             <span className="text-sm font-medium">{t('loading')}</span>
           </div>
         </div>

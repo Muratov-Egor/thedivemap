@@ -153,11 +153,11 @@ export default function Autocomplete({
           className={cn(
             'w-full px-4 py-3 text-base text-foreground placeholder-slate-500 dark:placeholder-slate-400',
             'bg-glass-bg backdrop-blur-sm border-2 border-slate-200 dark:border-slate-600 rounded-2xl',
-            'focus:border-tropical-blue dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-tropical-blue/20 dark:focus:ring-blue-400/20',
+            'focus:border-pastel-blue dark:focus:border-pastel-blue focus:outline-none focus:ring-2 focus:ring-pastel-blue/30 dark:focus:ring-pastel-blue/40',
             'transition-all duration-300 ease-in-out',
             'disabled:opacity-50 disabled:cursor-not-allowed',
             'pr-12', // Space for clear button
-            state.isOpen && 'border-tropical-blue shadow-lg',
+            state.isOpen && 'border-pastel-blue shadow-simple',
             error && 'border-red-300 focus:border-red-500 focus:ring-red-500/20',
           )}
           aria-autocomplete="list"
@@ -178,7 +178,7 @@ export default function Autocomplete({
             className="absolute right-4 top-1/2 transform -translate-y-1/2"
             data-testid="autocomplete-loading"
           >
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-tropical-blue"></div>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-pastel-blue"></div>
           </div>
         )}
 

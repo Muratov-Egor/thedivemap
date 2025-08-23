@@ -62,34 +62,35 @@ const Notification: React.FC<NotificationProps> = ({
 
   if (!isVisible) return null;
 
+  // МИНИМАЛИСТИЧНАЯ ПАСТЕЛЬНАЯ СИСТЕМА - Option C: Balanced Minimal Design
   const typeStyles = {
     info: {
       container:
-        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-tropical-blue/30 dark:border-blue-400/30 shadow-glass',
-      icon: 'text-tropical-blue dark:text-blue-400',
+        'bg-pastel-turquoise dark:bg-pastel-turquoise border-l-4 border-outline-purple shadow-simple',
+      icon: 'text-outline-purple dark:text-outline-purple',
       closeButton:
-        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+        'text-outline-purple/70 dark:text-outline-purple/70 hover:text-outline-purple dark:hover:text-outline-purple hover:bg-white/10 dark:hover:bg-black/20',
     },
     warning: {
       container:
-        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-coral/30 dark:border-orange-400/30 shadow-glass',
-      icon: 'text-coral dark:text-orange-400',
+        'bg-pastel-yellow dark:bg-pastel-yellow border-l-4 border-outline-purple shadow-simple',
+      icon: 'text-outline-purple dark:text-outline-purple',
       closeButton:
-        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+        'text-outline-purple/70 dark:text-outline-purple/70 hover:text-outline-purple dark:hover:text-outline-purple hover:bg-white/10 dark:hover:bg-black/20',
     },
     error: {
       container:
-        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-error/30 dark:border-red-400/30 shadow-glass',
-      icon: 'text-error dark:text-red-400',
+        'bg-pastel-pink dark:bg-pastel-pink border-l-4 border-outline-purple shadow-simple',
+      icon: 'text-outline-purple dark:text-outline-purple',
       closeButton:
-        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+        'text-outline-purple/70 dark:text-outline-purple/70 hover:text-outline-purple dark:hover:text-outline-purple hover:bg-white/10 dark:hover:bg-black/20',
     },
     success: {
       container:
-        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-sea-green/30 dark:border-green-400/30 shadow-glass',
-      icon: 'text-sea-green dark:text-green-400',
+        'bg-pastel-green dark:bg-pastel-green border-l-4 border-outline-purple shadow-simple',
+      icon: 'text-outline-purple dark:text-outline-purple',
       closeButton:
-        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+        'text-outline-purple/70 dark:text-outline-purple/70 hover:text-outline-purple dark:hover:text-outline-purple hover:bg-white/10 dark:hover:bg-black/20',
     },
     custom: {
       container: '',
@@ -112,13 +113,13 @@ const Notification: React.FC<NotificationProps> = ({
       )}
     >
       <div
-        className={cn(
-          'rounded-2xl shadow-glass hover:shadow-glass-hover',
-          'flex items-start gap-3 p-4',
-          'transition-all duration-300 ease-in-out',
-          currentStyles.container,
-          containerClassName,
-        )}
+                  className={cn(
+            'rounded-2xl hover:shadow-simple-hover',
+            'flex items-start gap-3 p-4',
+            'transition-all duration-300 ease-in-out',
+            currentStyles.container,
+            containerClassName,
+          )}
       >
         {/* Иконка */}
         {(icon || type !== 'custom') && (
@@ -170,9 +171,9 @@ const Notification: React.FC<NotificationProps> = ({
 
         {/* Контент */}
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold text-slate-800 dark:text-slate-200">{message}</div>
+          <div className="text-sm font-semibold text-outline-purple dark:text-white">{message}</div>
           {description && (
-            <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">{description}</div>
+            <div className="text-sm text-outline-purple/80 dark:text-gray-300 mt-1">{description}</div>
           )}
         </div>
 
@@ -182,7 +183,7 @@ const Notification: React.FC<NotificationProps> = ({
           onClick={handleClose}
           className={cn(
             'flex-shrink-0 p-1.5 rounded-xl transition-all duration-200',
-            'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tropical-blue/50 dark:focus:ring-blue-400/50',
+            'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-outline-purple/50 dark:focus:ring-outline-purple/50',
             'hover:scale-105 active:scale-95',
             currentStyles.closeButton,
             closeButtonClassName,

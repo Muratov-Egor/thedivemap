@@ -73,8 +73,8 @@ describe('Slider', () => {
       expect(slider).toHaveClass('bg-gradient-to-r', 'from-slate-200', 'to-slate-300');
     });
 
-    it('применяет coral вариант', () => {
-      render(<Slider {...defaultProps} variant="coral" />);
+    it('применяет danger вариант', () => {
+      render(<Slider {...defaultProps} variant="danger" />);
 
       const slider = screen.getByRole('slider');
       expect(slider).toHaveClass('bg-gradient-to-r', 'from-red-200', 'to-orange-200');

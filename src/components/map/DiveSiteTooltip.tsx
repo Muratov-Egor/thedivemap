@@ -121,7 +121,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       {/* Кнопка закрытия */}
       <Button
         onClick={onClose}
-        variant="glass"
+        variant="info"
         shape="circle"
         size="small"
         icon={<CloseIcon className="w-3 h-3" />}
