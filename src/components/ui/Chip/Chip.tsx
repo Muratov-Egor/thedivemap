@@ -25,21 +25,25 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
     ref,
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer min-w-20 active:scale-95';
+      'inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer min-w-20 active:scale-95 transform hover:-translate-y-0.5 active:translate-y-0';
 
-    // СБАЛАНСИРОВАННЫЙ ДИЗАЙН - спокойные цвета для множественного выбора
+    // ===== ИСПРАВЛЕННЫЙ КОНТРАСТНЫЙ ДИЗАЙН =====
     const variantStyles = {
       default: {
+        // Selected - контрастное активное состояние
         selected:
-          'bg-pastel-blue border-2 border-outline-purple text-outline-purple dark:text-black shadow-simple hover:bg-pastel-blue/80 hover:shadow-simple-hover focus:ring-pastel-blue/50',
+          'bg-primary-action text-white border-2 border-primary-action shadow-primary-shadow hover:bg-blue-600 hover:shadow-lg focus:ring-2 focus:ring-primary-action/50 active:bg-blue-700 dark:hover:bg-blue-500',
+        // Unselected - четкое неактивное состояние
         unselected:
-          'bg-blue-50 border-2 border-outline-purple/40 text-slate-700 dark:text-white hover:bg-pastel-blue/20 hover:border-outline-purple focus:ring-outline-purple/30',
+          'bg-slate-100 border-2 border-slate-300 text-slate-700 shadow-simple hover:bg-slate-200 hover:border-slate-400 hover:shadow-simple-hover focus:ring-2 focus:ring-slate-300/50 active:bg-slate-300 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-600 dark:hover:border-slate-500',
       },
       subtle: {
+        // Selected - более мягкое активное состояние
         selected:
-          'bg-pastel-blue/60 border border-outline-purple text-outline-purple dark:text-black shadow-simple hover:bg-pastel-blue/80 hover:shadow-simple-hover focus:ring-pastel-blue/50',
+          'bg-primary-action/20 border border-primary-action text-primary-action shadow-simple hover:bg-primary-action/30 hover:shadow-simple-hover focus:ring-2 focus:ring-primary-action/50 active:bg-primary-action/40 dark:bg-blue-400/20 dark:border-blue-400 dark:text-blue-300',
+        // Unselected - мягкое неактивное состояние
         unselected:
-          'bg-blue-50 border border-outline-purple/30 text-slate-600 dark:text-white/90 hover:bg-pastel-blue/15 hover:border-outline-purple/50 focus:ring-outline-purple/30',
+          'bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100 hover:border-slate-300 focus:ring-2 focus:ring-slate-200/50 active:bg-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600',
       },
     };
 

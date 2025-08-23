@@ -16,17 +16,29 @@ module.exports = {
         1000: '10',
       },
       colors: {
-        // ===== НОВАЯ ПАСТЕЛЬНАЯ ПАЛИТРА =====
-        // Контурный цвет - основной accent
-        'outline-purple': '#4A3C5A',
+        // ===== ИСПРАВЛЕННАЯ КОНТРАСТНАЯ ПАЛИТРА =====
+        // Контурный цвет - значительно усилен для контрастности
+        'outline-purple': '#3730A3', // indigo-700
 
-        // Пастельные цвета - основная палитра
-        'pastel-blue': '#A8DADC',
-        'pastel-turquoise': '#80CED7',
-        'pastel-green': '#C8E6C9',
-        'pastel-pink': '#F8C8DC',
-        'pastel-cream': '#FDFD96',
-        'pastel-yellow': '#FFECB3',
+        // Пастельные цвета - усилены для лучшей читаемости
+        'pastel-blue': '#437CEB', // более контрастный синий
+        'pastel-turquoise': '#38B2AC', // teal-500
+        'pastel-green': '#34A853', // яркий зеленый
+        'pastel-pink': '#EC4899', // pink-500
+        'pastel-cream': '#FBBF24', // amber-400
+        'pastel-yellow': '#F59E0B', // amber-500
+
+        // ===== НОВАЯ СИСТЕМА АКЦЕНТОВ =====
+        // Основные действия
+        'primary-action': '#3B82F6', // blue-500
+        'secondary-action': '#6B7280', // gray-500  
+        'tertiary-action': '#9CA3AF', // gray-400
+        
+        // Семантические цвета
+        'success-accent': '#22C55E', // green-500
+        'warning-accent': '#F59E0B', // amber-500
+        'danger-accent': '#EF4444', // red-500
+        'info-accent': '#3B82F6', // blue-500
 
         // ===== СТАРЫЕ ЦВЕТА (для rollback) =====
         // 'tropical-blue': '#1B68A4',
@@ -87,9 +99,15 @@ module.exports = {
         'neumorph-hover':
           '12px 12px 24px rgba(0, 0, 0, 0.15), -12px -12px 24px rgba(255, 255, 255, 0.9)',
 
-        // ===== НОВЫЕ МИНИМАЛИСТИЧНЫЕ ТЕНИ =====
-        simple: '0 2px 8px rgba(74, 60, 90, 0.1)',
-        'simple-hover': '0 4px 12px rgba(74, 60, 90, 0.15)',
+        // ===== ИСПРАВЛЕННЫЕ МИНИМАЛИСТИЧНЫЕ ТЕНИ =====
+        simple: '0 2px 8px rgba(55, 48, 163, 0.15)', // обновлено под новый outline-purple
+        'simple-hover': '0 4px 12px rgba(55, 48, 163, 0.25)',
+        
+        // ===== НОВЫЕ СЕМАНТИЧЕСКИЕ ТЕНИ =====
+        'primary-shadow': '0 4px 14px rgba(59, 130, 246, 0.4)', // для primary кнопок
+        'success-shadow': '0 4px 14px rgba(34, 197, 94, 0.3)', // для success состояний
+        'warning-shadow': '0 4px 14px rgba(245, 158, 11, 0.3)', // для warning
+        'danger-shadow': '0 4px 14px rgba(239, 68, 68, 0.3)', // для danger
 
         // ===== СТАРЫЕ GLOW ЭФФЕКТЫ (убираем) =====
         // 'glow-blue': '0 8px 32px rgba(27, 104, 164, 0.2)',

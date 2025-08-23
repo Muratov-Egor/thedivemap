@@ -45,7 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const { t } = useTranslation('common');
 
     const baseStyles =
-      'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95';
+      'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 transform hover:-translate-y-0.5 active:translate-y-0';
 
     const sizeStyles = {
       small: {
@@ -71,36 +71,37 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const variantStyles = {
-      // Primary - основные действия (pastel-blue)
+      // ===== ИСПРАВЛЕННАЯ СИСТЕМА АКЦЕНТОВ =====
+      // Primary - основные действия (контрастный синий)
       primary:
-        'bg-pastel-blue border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-blue/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-blue/15 dark:border-pastel-blue dark:text-pastel-blue',
+        'bg-primary-action text-white border-2 border-primary-action hover:bg-blue-600 hover:border-blue-600 hover:shadow-primary-shadow focus:ring-2 focus:ring-primary-action/50 shadow-simple button-shine transition-all duration-300 active:bg-blue-700 dark:hover:bg-blue-500',
 
-      // Secondary - вторичные действия (pastel-yellow - согласно feedback)
+      // Secondary - вторичные действия (нейтральные)
       secondary:
-        'bg-pastel-yellow border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-yellow/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-yellow/15 dark:border-pastel-yellow dark:text-pastel-yellow',
+        'bg-transparent text-secondary-action border-2 border-secondary-action hover:bg-secondary-action hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-secondary-action/50 shadow-simple button-shine transition-all duration-300 active:bg-gray-600 dark:text-gray-300 dark:border-gray-400 dark:hover:bg-gray-400 dark:hover:text-gray-900',
 
-      // Success - успешные действия (pastel-green)
+      // Success - успешные действия (контрастный зеленый)
       success:
-        'bg-pastel-green border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-green/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-green/15 dark:border-pastel-green dark:text-pastel-green',
+        'bg-success-accent text-white border-2 border-success-accent hover:bg-green-600 hover:border-green-600 hover:shadow-success-shadow focus:ring-2 focus:ring-success-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-green-700 dark:hover:bg-green-400',
 
-      // Warning - предупреждения (pastel-cream - согласно feedback)
+      // Warning - предупреждения (контрастный желтый)
       warning:
-        'bg-pastel-cream border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-cream/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-cream/15 dark:border-pastel-cream dark:text-pastel-cream',
+        'bg-warning-accent text-white border-2 border-warning-accent hover:bg-amber-600 hover:border-amber-600 hover:shadow-warning-shadow focus:ring-2 focus:ring-warning-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-amber-700 dark:hover:bg-amber-400',
 
-      // Danger - опасные действия (pastel-pink)
+      // Danger - опасные действия (контрастный красный)
       danger:
-        'bg-pastel-pink border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-pink/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-pink/15 dark:border-pastel-pink dark:text-pastel-pink',
+        'bg-danger-accent text-white border-2 border-danger-accent hover:bg-red-600 hover:border-red-600 hover:shadow-danger-shadow focus:ring-2 focus:ring-danger-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-red-700 dark:hover:bg-red-400',
 
-      // Info - информационные действия (pastel-turquoise)
-      info: 'bg-pastel-turquoise border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-turquoise/50 shadow-simple button-shine transition-all duration-300 dark:bg-pastel-turquoise/15 dark:border-pastel-turquoise dark:text-pastel-turquoise',
+      // Info - информационные действия (контрастный синий)
+      info: 'bg-info-accent text-white border-2 border-info-accent hover:bg-blue-600 hover:border-blue-600 hover:shadow-primary-shadow focus:ring-2 focus:ring-info-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-blue-700 dark:hover:bg-blue-500',
 
-      // Outline - обводка (pastel-blue)
+      // Outline - обводка (контрастные границы)
       outline:
-        'bg-transparent border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-blue/50 shadow-simple button-shine transition-all duration-300 dark:border-pastel-blue dark:text-pastel-blue',
+        'bg-transparent text-outline-purple border-2 border-outline-purple hover:bg-outline-purple hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 active:bg-indigo-800 dark:text-indigo-300 dark:border-indigo-400 dark:hover:bg-indigo-400 dark:hover:text-indigo-900',
 
-      // Glass - прозрачная обводка (pastel-blue)
+      // Glass - прозрачная обводка (стеклянный эффект)
       glass:
-        'bg-transparent border-2 border-outline-purple/30 text-outline-purple hover:border-outline-purple hover:shadow-simple-hover focus:ring-pastel-blue/50 shadow-simple button-shine transition-all duration-300 dark:border-pastel-blue dark:text-pastel-blue',
+        'bg-glass-bg/50 backdrop-blur-sm text-outline-purple border-2 border-outline-purple/30 hover:border-outline-purple hover:bg-glass-bg/70 hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 dark:text-indigo-300 dark:border-indigo-400/30 dark:hover:border-indigo-400',
     };
 
     const shapeStyles = {

@@ -38,7 +38,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       className={`
         absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 
         px-4 py-3 rounded-2xl text-sm z-20
-        bg-background dark:bg-gray-800 border border-pastel-turquoise/30 dark:border-pastel-turquoise/50
+        bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600
         shadow-simple hover:shadow-simple-hover
         transition-all duration-300 ease-out
         min-w-[280px] max-w-[320px]
@@ -118,20 +118,28 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
         </Button>
       </div>
 
-      {/* Кнопка закрытия */}
-      <Button
+      {/* Кнопка закрытия - ИСПРАВЛЕНО */}
+      <button
         onClick={onClose}
-        variant="primary"
-        shape="circle"
-        size="small"
-        icon={<CloseIcon className="w-3 h-3" />}
-        className="!absolute !-top-2 !-right-2 !w-7 !h-7 !p-0 shadow-md bg-background dark:bg-gray-800"
+        className="
+          absolute -top-2 -right-2 w-7 h-7 p-0 
+          bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600
+          border-2 border-slate-300 dark:border-slate-500
+          rounded-full shadow-simple hover:shadow-simple-hover
+          transition-all duration-300 ease-out
+          flex items-center justify-center
+          text-slate-600 hover:text-slate-800 dark:text-slate-300 dark:hover:text-slate-100
+          focus:outline-none focus:ring-2 focus:ring-primary-action/50 focus:ring-offset-1
+          active:scale-95 transform hover:-translate-y-0.5
+        "
         aria-label={t('map.markers.closeTooltip')}
         data-testid={`dive-site-tooltip-close`}
-      />
+      >
+        <CloseIcon className="w-3 h-3" />
+      </button>
 
-      {/* Стрелка tooltip */}
-      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white/80 dark:border-t-slate-900/80"></div>
+      {/* Стрелка tooltip - ИСПРАВЛЕНО */}
+      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white dark:border-t-slate-800"></div>
     </div>
   );
 };
