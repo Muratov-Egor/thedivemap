@@ -80,7 +80,7 @@ export default function MobileInfoPanel({ diveSite: propDiveSite, onClose }: Mob
               onClick={handleClose}
               variant="primary"
               size="medium"
-              className="mt-6 shadow-glow hover:shadow-glow-hover"
+              className="mt-6 shadow-simple hover:shadow-simple-hover"
             >
               <span suppressHydrationWarning>{t('backToFilters')}</span>
             </Button>
