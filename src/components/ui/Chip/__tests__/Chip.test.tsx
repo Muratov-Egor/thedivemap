@@ -28,7 +28,7 @@ describe('Chip', () => {
 
   it('applies correct styles for selected state', () => {
     render(<Chip selected>Selected</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-pastel-yellow', 'border-outline-purple', 'text-outline-purple');
+    expect(screen.getByRole('button')).toHaveClass('bg-pastel-blue', 'border-outline-purple', 'text-outline-purple');
   });
 
   it('applies correct styles for unselected state', () => {
@@ -81,6 +81,6 @@ describe('Chip', () => {
         Subtle Selected
       </Chip>,
     );
-    expect(screen.getByRole('button')).toHaveClass('bg-pastel-yellow/80', 'border-outline-purple', 'text-outline-purple');
+    expect(screen.getByRole('button')).toHaveClass('bg-pastel-blue/60', 'border-outline-purple', 'text-outline-purple');
   });
 });
