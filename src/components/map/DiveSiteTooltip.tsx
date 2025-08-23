@@ -38,8 +38,8 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       className={`
         absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 
         px-4 py-3 rounded-2xl text-sm z-20
-        bg-glass-bg backdrop-blur-lg border border-tropical-blue/20 dark:border-blue-400/30
-        shadow-glass hover:shadow-glass-hover
+        bg-white dark:bg-gray-800 border border-pastel-turquoise/30 dark:border-pastel-turquoise/50
+        shadow-simple hover:shadow-simple-hover
         transition-all duration-300 ease-out
         min-w-[280px] max-w-[320px]
         pointer-events-auto
@@ -121,11 +121,11 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       {/* Кнопка закрытия */}
       <Button
         onClick={onClose}
-        variant="info"
+        variant="danger"
         shape="circle"
         size="small"
         icon={<CloseIcon className="w-3 h-3" />}
-        className="!absolute !-top-2 !-right-2 !w-7 !h-7 !p-0 shadow-md"
+        className="!absolute !-top-2 !-right-2 !w-7 !h-7 !p-0 shadow-md bg-white dark:bg-gray-800 hover:bg-pastel-pink/20 dark:hover:bg-pastel-pink/20"
         aria-label={t('map.markers.closeTooltip')}
         data-testid={`dive-site-tooltip-close`}
       />

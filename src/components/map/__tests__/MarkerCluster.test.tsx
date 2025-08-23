@@ -192,7 +192,7 @@ describe('MarkerCluster', () => {
     );
 
     let cluster = screen.getByTestId('marker-cluster');
-    expect(cluster).toHaveClass('bg-gradient-to-r', 'from-green-500', 'to-emerald-600');
+    expect(cluster).toHaveClass('bg-pastel-green', 'border-2', 'border-white');
 
     const largeCluster: Cluster = {
       ...mockCluster,
@@ -202,7 +202,7 @@ describe('MarkerCluster', () => {
     rerender(<MarkerCluster cluster={largeCluster} onClick={mockOnClick} onHover={mockOnHover} />);
 
     cluster = screen.getByTestId('marker-cluster');
-    expect(cluster).toHaveClass('bg-gradient-coral');
+    expect(cluster).toHaveClass('bg-pastel-pink', 'border-2', 'border-white');
   });
 
   it('показывает правильное склонение для единственного числа', () => {
@@ -230,7 +230,7 @@ describe('MarkerCluster', () => {
     );
 
     const container = screen.getByRole('button');
-    expect(container).toHaveClass('ring-4', 'ring-coral/30');
+    expect(container).toHaveClass('ring-4', 'ring-pastel-blue/30');
   });
 
   it('имеет правильные CSS классы для неактивного состояния', () => {
@@ -259,6 +259,6 @@ describe('MarkerCluster', () => {
 
     const pulseElement = screen.getByRole('button').querySelector('.animate-ping');
     expect(pulseElement).toBeInTheDocument();
-    expect(pulseElement).toHaveClass('bg-coral/75');
+    expect(pulseElement).toHaveClass('bg-pastel-blue/60');
   });
 });
