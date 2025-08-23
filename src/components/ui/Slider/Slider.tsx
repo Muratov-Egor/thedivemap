@@ -17,7 +17,7 @@ export interface SliderProps {
   showValue?: boolean;
   valuePrefix?: string;
   valueSuffix?: string;
-  variant?: 'default' | 'coral' | 'ocean';
+  variant?: 'default' | 'depth' | 'visibility' | 'rating';
   dataTestId?: string | 'slider';
 }
 
@@ -150,24 +150,31 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
 
     const percentage = ((value - min) / (max - min)) * 100;
 
+    // МОРСКАЯ ТЕМАТИКА - два оттенка синего + базовые варианты
     const variantStyles = {
       default: {
-        track: 'bg-gradient-to-r from-slate-200 to-slate-300',
-        filled: 'bg-gradient-to-r from-tropical-blue to-deep-ocean',
-        thumb: 'bg-gradient-to-r from-tropical-blue to-deep-ocean shadow-glow-blue',
-        thumbHover: 'hover:shadow-glow-hover',
+        track: 'bg-gray-50 dark:bg-gray-800 border border-outline-purple/20',
+        filled: 'bg-outline-purple',
+        thumb: 'bg-white border-2 border-outline-purple shadow-simple',
+        thumbHover: 'hover:scale-110 hover:shadow-simple-hover',
       },
-      coral: {
-        track: 'bg-gradient-to-r from-red-200 to-orange-200',
-        filled: 'bg-gradient-to-r from-coral to-orange-500',
-        thumb: 'bg-gradient-to-r from-coral to-orange-500 shadow-glow-coral',
-        thumbHover: 'hover:shadow-glow-coral',
+      depth: {
+        track: 'bg-gray-50 dark:bg-gray-800 border border-slate-700/20',
+        filled: 'bg-blue-400 dark:bg-blue-600',
+        thumb: 'bg-white border-2 border-slate-700 dark:border-slate-600 shadow-simple',
+        thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-slate-700 dark:hover:border-slate-600',
       },
-      ocean: {
-        track: 'bg-gradient-to-r from-blue-200 to-cyan-200',
-        filled: 'bg-gradient-to-r from-deep-ocean to-cyan-500',
-        thumb: 'bg-gradient-to-r from-deep-ocean to-cyan-500 shadow-glow-blue',
-        thumbHover: 'hover:shadow-glow-hover',
+      visibility: {
+        track: 'bg-gray-50 dark:bg-gray-800 border border-pastel-turquoise/30',
+        filled: 'bg-pastel-turquoise',
+        thumb: 'bg-white border-2 border-pastel-turquoise shadow-simple',
+        thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-pastel-turquoise',
+      },
+      rating: {
+        track: 'bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600',
+        filled: 'bg-gray-400 dark:bg-gray-500',
+        thumb: 'bg-white border-2 border-gray-400 dark:border-gray-500 shadow-simple',
+        thumbHover: 'hover:scale-110 hover:shadow-simple-hover hover:border-gray-400 dark:hover:border-gray-500',
       },
     };
 
@@ -189,7 +196,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
           <div
             ref={sliderRef}
             className={cn(
-              'relative w-full h-4 bg-gradient-to-r from-slate-200 to-slate-300 rounded-2xl cursor-pointer transition-all duration-100 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2',
+              'relative w-full h-4 rounded-full cursor-pointer transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-pastel-blue/50 focus:ring-offset-2',
               currentVariant.track,
               disabled && 'opacity-50 cursor-not-allowed',
             )}
@@ -208,7 +215,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             {/* Заполненная часть трека */}
             <div
               className={cn(
-                'absolute top-0 left-0 h-full rounded-2xl transition-all duration-100 ease-in-out',
+                'absolute top-0 left-0 h-full rounded-full transition-all duration-200 ease-out',
                 currentVariant.filled,
               )}
               style={{ width: `${percentage}%` }}
@@ -218,11 +225,11 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             <div
               ref={thumbRef}
               className={cn(
-                'absolute top-1/2 w-8 h-8 rounded-full border-2 border-white shadow-glow transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-100 ease-in-out hover:shadow-glow-hover',
+                'absolute top-1/2 w-7 h-7 rounded-full transform -translate-x-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing transition-all duration-200 ease-out focus:outline-none focus:scale-110 focus:ring-2 focus:ring-pastel-blue/50',
                 currentVariant.thumb,
                 currentVariant.thumbHover,
-                isDragging && 'scale-110 shadow-xl',
-                disabled && 'cursor-not-allowed',
+                isDragging && 'scale-125 border-4',
+                disabled && 'cursor-not-allowed opacity-50',
               )}
               style={{ left: `${percentage}%` }}
               onMouseDown={handleMouseDown}
@@ -242,7 +249,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
                 {valueSuffix}
               </span>
               <span
-                className="text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white/80 dark:bg-gray-800/80 px-3 py-1.5 rounded-2xl shadow-glass border border-slate-200 dark:border-slate-600 backdrop-blur-sm"
+                className="text-sm font-semibold text-outline-purple dark:text-white bg-white dark:bg-gray-800 px-3 py-1.5 rounded-xl shadow-simple border border-outline-purple/20 dark:border-gray-600"
                 data-testid={`${dataTestId}-value`}
                 suppressHydrationWarning
               >

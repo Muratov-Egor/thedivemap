@@ -54,7 +54,7 @@ export default function FiltersContent({
           value={depthValue}
           onChange={setDepthValue}
           valueSuffix={` ${t('units.meters')}`}
-          variant="default"
+          variant="depth"
           dataTestId="max-depth-slider"
         />
 
@@ -66,7 +66,7 @@ export default function FiltersContent({
           value={visibilityValue}
           onChange={setVisibilityValue}
           valueSuffix={` ${t('units.meters')}`}
-          variant="ocean"
+          variant="visibility"
           dataTestId="min-visibility-slider"
         />
 

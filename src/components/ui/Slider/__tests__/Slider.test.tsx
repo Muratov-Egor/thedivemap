@@ -70,21 +70,28 @@ describe('Slider', () => {
       render(<Slider {...defaultProps} />);
 
       const slider = screen.getByRole('slider');
-      expect(slider).toHaveClass('bg-gradient-to-r', 'from-slate-200', 'to-slate-300');
+      expect(slider).toHaveClass('bg-gray-50', 'border-outline-purple/20');
     });
 
-    it('применяет danger вариант', () => {
-      render(<Slider {...defaultProps} variant="danger" />);
+    it('применяет depth вариант (темно-синий)', () => {
+      render(<Slider {...defaultProps} variant="depth" />);
 
       const slider = screen.getByRole('slider');
-      expect(slider).toHaveClass('bg-gradient-to-r', 'from-red-200', 'to-orange-200');
+      expect(slider).toHaveClass('bg-gray-50', 'border-slate-700/20');
     });
 
-    it('применяет ocean вариант', () => {
-      render(<Slider {...defaultProps} variant="ocean" />);
+    it('применяет visibility вариант (светло-синий)', () => {
+      render(<Slider {...defaultProps} variant="visibility" />);
 
       const slider = screen.getByRole('slider');
-      expect(slider).toHaveClass('bg-gradient-to-r', 'from-blue-200', 'to-cyan-200');
+      expect(slider).toHaveClass('bg-gray-50', 'border-pastel-turquoise/30');
+    });
+
+    it('применяет rating вариант (серый)', () => {
+      render(<Slider {...defaultProps} variant="rating" />);
+
+      const slider = screen.getByRole('slider');
+      expect(slider).toHaveClass('bg-gray-50', 'border-gray-300');
     });
   });
 
