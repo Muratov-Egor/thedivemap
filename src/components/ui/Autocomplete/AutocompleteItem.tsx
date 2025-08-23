@@ -25,11 +25,11 @@ const getTypeIcon = (
       const isoCode = metadata?.iso_code as string;
       return isoCode ? getCountryFlag(isoCode) : '🌍';
     case 'region':
-      return <MapIcon size={16} scale={200} />;
+      return <MapIcon size={16} scale={200} withBackground />;
     case 'location':
-      return <TagIcon size={16} scale={200} />;
+      return <TagIcon size={16} scale={200} withBackground />;
     default:
-      return <MaskIcon size={16} scale={200} />;
+      return <MaskIcon size={16} scale={200} withBackground />;
   }
 };
 
