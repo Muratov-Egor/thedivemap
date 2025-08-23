@@ -10,6 +10,10 @@ import {
   MarkIcon,
   DepthIcon,
   VisibilityIcon,
+  StarIcon,
+  DiveCenterIcon,
+  InfoIcon,
+  TagIcon,
 } from '@/components/icons';
 import { Button } from '@/components/ui';
 import { ImageGallery } from '@/components/ui';
@@ -103,7 +107,7 @@ export default function InfoPanelContent({
           )}
           {diveSite.site_locations && diveSite.site_locations.length > 0 && (
             <div className="flex items-center gap-2">
-              <span className="text-lg">📍</span>
+              <TagIcon size={14} scale={200} />
               <span className="font-medium">
                 {diveSite.site_locations
                   .map((sl) => getLocalizedName(sl.location.name_en, sl.location.name_ru))
@@ -207,15 +211,7 @@ export default function InfoPanelContent({
             {diveSite.rating !== 0 && (
               <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-tropical-blue/15 rounded-lg">
-                    <svg
-                      className="w-5 h-5 text-tropical-blue"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  </div>
+                  <StarIcon size={16} withBackground scale={200} />
                   <span
                     className="text-sm font-medium text-slate-600 dark:text-slate-400"
                     suppressHydrationWarning
@@ -233,7 +229,7 @@ export default function InfoPanelContent({
                           i < diveSite.rating! ? 'text-yellow-400' : 'text-slate-300',
                         )}
                       >
-                        ★
+                        <StarIcon size={16} scale={100} />
                       </span>
                     ))}
                   </div>
@@ -278,19 +274,7 @@ export default function InfoPanelContent({
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 bg-slate-50/50 dark:bg-slate-700/50 rounded-xl border border-slate-200/50 dark:border-slate-600/50 hover:bg-slate-100/50 dark:hover:bg-slate-600/50 transition-colors duration-200"
                 >
-                  <div className="p-2 bg-tropical-blue/15 rounded-lg">
-                    <svg
-                      className="w-5 h-5 text-tropical-blue"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
+                  <DiveCenterIcon size={16} withBackground scale={200} />
                   <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     <span suppressHydrationWarning>{t('infoLink')}</span> {index + 1}
                   </span>
@@ -304,15 +288,7 @@ export default function InfoPanelContent({
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 bg-slate-50/50 dark:bg-slate-700/50 rounded-xl border border-slate-200/50 dark:border-slate-600/50 hover:bg-slate-100/50 dark:hover:bg-slate-600/50 transition-colors duration-200"
                 >
-                  <div className="p-2 bg-tropical-blue/15 rounded-lg">
-                    <svg
-                      className="w-5 h-5 text-tropical-blue"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                    </svg>
-                  </div>
+                  <InfoIcon size={16} withBackground scale={200} />
                   <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     <span suppressHydrationWarning>{t('diveCenterLink')}</span> {index + 1}
                   </span>
