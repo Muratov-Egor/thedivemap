@@ -5,6 +5,9 @@ import '@testing-library/jest-dom';
 import Filters from '../FiltersPanel/Filters';
 import { FiltersProvider } from '@/contexts/FiltersContext';
 
+// Мокаем fetch API
+global.fetch = jest.fn();
+
 // Мокаем react-i18next
 const mockUseTranslation = jest.fn();
 
@@ -104,6 +107,21 @@ describe('Filters', () => {
     jest.clearAllMocks();
     mockCenterOnSelection.mockClear();
     mockClearFilters.mockClear();
+
+    // Мокаем успешный ответ от fetch API
+    (global.fetch as jest.Mock).mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        site_types: [
+          { id: 1, labels: { ru: 'Риф', en: 'Reef' } },
+          { id: 2, labels: { ru: 'Затонувшее судно', en: 'Wreck' } },
+        ],
+        difficulties: [
+          { id: 1, labels: { ru: 'Легкий', en: 'Easy' } },
+          { id: 2, labels: { ru: 'Средний', en: 'Medium' } },
+        ],
+      }),
+    });
 
     // Мокаем window.innerWidth для десктопной версии
     Object.defineProperty(window, 'innerWidth', {

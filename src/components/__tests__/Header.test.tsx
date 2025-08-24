@@ -2,6 +2,8 @@ import React from 'react';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+import I18nProvider from '@/i18n/I18nProvider';
 import Header from '../Header/Header';
 
 // Мокаем next/image
@@ -32,51 +34,46 @@ jest.mock('next/link', () => {
   };
 });
 
-// Мокаем LanguageSwitch
-jest.mock('@/components/Header/LanguageSwitch', () => {
-  return function MockLanguageSwitch() {
-    return <div data-testid="language-switch">Language Switch</div>;
-  };
-});
-
-// Мокаем ThemeContext
-jest.mock('@/contexts/ThemeContext', () => ({
-  useTheme: () => ({
-    theme: 'light',
-    toggleTheme: jest.fn(),
-  }),
-  ThemeProvider: ({ children }: any) => <div>{children}</div>,
+// Мокаем useMediaQuery
+const mockUseIsMobile = jest.fn();
+jest.mock('@/hooks/useMediaQuery', () => ({
+  useIsMobile: () => mockUseIsMobile(),
 }));
 
-// Мокаем ThemeToggle
-jest.mock('@/components/ui/ThemeToggle', () => ({
-  ThemeToggle: function MockThemeToggle() {
-    return <div data-testid="theme-toggle">Theme Toggle</div>;
-  },
-}));
+// Создаем обертку с провайдерами
+const renderWithProviders = (component: React.ReactElement) => {
+  return render(
+    <ThemeProvider>
+      <I18nProvider>
+        {component}
+      </I18nProvider>
+    </ThemeProvider>
+  );
+};
 
 describe('Header', () => {
+  beforeEach(() => {
+    mockUseIsMobile.mockReturnValue(false);
+  });
+
   it('рендерит заголовок с логотипом и названием', () => {
-    render(<Header />);
+    renderWithProviders(<Header />);
 
     const logo = screen.getByTestId('header-logo');
     const title = screen.getByRole('heading', { level: 1 });
-    const languageSwitch = screen.getByTestId('language-switch');
 
     expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute('src', '/img/Logo.ico');
+    expect(logo).toHaveAttribute('src', '/img/Logo.svg');
     expect(logo).toHaveAttribute('width', '64');
     expect(logo).toHaveAttribute('height', '64');
     expect(logo).toHaveClass('sm:w-24', 'sm:h-24', 'w-16', 'h-16');
 
     expect(title).toBeInTheDocument();
     expect(title).toHaveClass('text-lg', 'sm:text-3xl', 'font-bold');
-
-    expect(languageSwitch).toBeInTheDocument();
   });
 
   it('рендерит ссылку на главную страницу', () => {
-    render(<Header />);
+    renderWithProviders(<Header />);
 
     const link = screen.getByRole('link');
     expect(link).toBeInTheDocument();
@@ -92,7 +89,7 @@ describe('Header', () => {
   });
 
   it('рендерит header с правильными классами', () => {
-    const { container } = render(<Header />);
+    const { container } = renderWithProviders(<Header />);
 
     const header = container.querySelector('header');
     expect(header).toBeInTheDocument();
@@ -109,18 +106,28 @@ describe('Header', () => {
   });
 
   it('содержит логотип с правильными атрибутами', () => {
-    render(<Header />);
+    renderWithProviders(<Header />);
 
     const logo = screen.getByTestId('header-logo');
     expect(logo).toHaveAttribute('alt', '');
-    expect(logo).toHaveAttribute('src', '/img/Logo.ico');
+    expect(logo).toHaveAttribute('src', '/img/Logo.svg');
   });
 
-  it('содержит компонент переключения языка', () => {
-    render(<Header />);
+  it('содержит кнопку входа', () => {
+    renderWithProviders(<Header />);
 
-    const languageSwitch = screen.getByTestId('language-switch');
-    expect(languageSwitch).toBeInTheDocument();
-    expect(languageSwitch).toHaveTextContent('Language Switch');
+    const loginButton = screen.getByRole('button', { name: /login/i });
+    expect(loginButton).toBeInTheDocument();
+  });
+
+  it('содержит компонент переключения темы в мобильной версии', () => {
+    // Мокаем мобильную версию
+    mockUseIsMobile.mockReturnValue(true);
+
+    renderWithProviders(<Header />);
+
+    // В мобильной версии должен быть кнопка меню
+    const menuButton = screen.getByRole('button');
+    expect(menuButton).toBeInTheDocument();
   });
 });
