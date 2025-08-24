@@ -21,13 +21,13 @@ export default function Logo() {
       />
       <div className="flex flex-col gap-1 min-w-0">
         <h1
-          className="text-lg sm:text-3xl font-bold text-gray-900 dark:text-white font-yomogi leading-tight"
+          className="text-lg sm:text-3xl font-bold text-gray-900 dark:text-white"
           suppressHydrationWarning
         >
           {t('appName')}
         </h1>
         <p
-          className="sm:text-lg text-xs text-gray-600 dark:text-gray-400 font-yomogi leading-tight"
+          className="sm:text-lg text-xs text-gray-600 dark:text-gray-400 "
           suppressHydrationWarning
         >
           {t('header.motto')}

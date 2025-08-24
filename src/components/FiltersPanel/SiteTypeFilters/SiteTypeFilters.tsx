@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useMap } from '@/contexts/MapContext';
 import { useFilters } from '@/hooks/useFilters';
 import Chip from '@/components/ui/Chip/Chip';
-import { SiteTypeIcon } from '@/components/icons';
+import { SiteTypeIcon } from '@/components/ui/icons';
 
 export default function SiteTypeFilters() {
   const { t } = useTranslation('filters');

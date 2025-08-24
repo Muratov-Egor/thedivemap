@@ -6,7 +6,7 @@ import { AutocompleteProps } from './types';
 import { useAutocomplete } from './useAutocomplete';
 import AutocompleteList from './AutocompleteList';
 import { cn } from '@/lib/utils';
-import { CloseIcon } from '@/components/icons';
+import { CloseIcon } from '@/components/ui/icons';
 
 export default function Autocomplete({
   placeholder,
@@ -152,13 +152,13 @@ export default function Autocomplete({
           disabled={disabled}
           className={cn(
             'w-full px-4 py-3 text-base text-foreground placeholder-slate-500 dark:placeholder-slate-400',
-            'bg-glass-bg backdrop-blur-sm border-2 border-slate-200 dark:border-slate-600 rounded-2xl',
-            'focus:border-tropical-blue dark:focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-tropical-blue/20 dark:focus:ring-blue-400/20',
+            'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-2xl',
+            'focus:border-primary-action dark:focus:border-primary-action focus:outline-none focus:ring-2 focus:ring-primary-action/30 dark:focus:ring-primary-action/40 text-slate-800 dark:text-slate-200',
             'transition-all duration-300 ease-in-out',
             'disabled:opacity-50 disabled:cursor-not-allowed',
             'pr-12', // Space for clear button
-            state.isOpen && 'border-tropical-blue shadow-lg',
-            error && 'border-red-300 focus:border-red-500 focus:ring-red-500/20',
+            state.isOpen && 'border-primary-action shadow-simple',
+            error && 'border-danger-accent focus:border-danger-accent focus:ring-danger-accent/20',
           )}
           aria-autocomplete="list"
           aria-controls="autocomplete-listbox"
@@ -178,7 +178,7 @@ export default function Autocomplete({
             className="absolute right-4 top-1/2 transform -translate-y-1/2"
             data-testid="autocomplete-loading"
           >
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-tropical-blue"></div>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-action"></div>
           </div>
         )}
 
@@ -187,7 +187,7 @@ export default function Autocomplete({
           <button
             type="button"
             onClick={handleClear}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 transition-colors"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
             aria-label={t('clearButton')}
             data-testid="autocomplete-clear-button"
           >
@@ -197,7 +197,7 @@ export default function Autocomplete({
 
         {/* Search Icon */}
         {!state.query && !state.isLoading && !loading && (
-          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400">
+          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-500 dark:text-slate-400">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
@@ -225,7 +225,7 @@ export default function Autocomplete({
       {(error || state.error) && !state.isOpen && (
         <div
           id="autocomplete-error-message"
-          className="mt-2 bg-glass-bg backdrop-blur-xl border border-red-200 dark:border-red-800 rounded-2xl shadow-lg p-4"
+          className="mt-2 bg-background border border-red-200 dark:border-red-800 rounded-2xl shadow-lg p-4"
           data-testid="autocomplete-error-message"
           role="alert"
           aria-live="assertive"

@@ -14,12 +14,12 @@ import {
   DiveCenterIcon,
   InfoIcon,
   TagIcon,
-} from '@/components/icons';
+} from '@/components/ui/icons';
 import { Button } from '@/components/ui';
 import { ImageGallery } from '@/components/ui';
 import { useTranslation } from 'react-i18next';
 import { useShareableLink } from '@/hooks/useShareableLink';
-import { CheckIcon, LinkIcon } from '@/components/icons';
+import { CheckIcon, LinkIcon } from '@/components/ui/icons';
 
 export default function InfoPanelContent({
   diveSite,
@@ -66,7 +66,7 @@ export default function InfoPanelContent({
               size="small"
               disabled={isCopying}
               aria-label="Поделиться ссылкой"
-              className="shadow-glass hover:shadow-glass-hover"
+              className="shadow-simple hover:shadow-simple-hover"
               data-testid="info-panel-share-button"
             >
               {showCopiedMessage ? (
@@ -83,7 +83,7 @@ export default function InfoPanelContent({
               size="small"
               shape="circle"
               aria-label={t('backToFilters')}
-              className="shadow-glass hover:shadow-glass-hover"
+              className="shadow-simple hover:shadow-simple-hover"
             >
               <CloseIcon />
             </Button>
@@ -122,15 +122,15 @@ export default function InfoPanelContent({
       <div className="w-full space-y-8">
         {/* Описание */}
         {diveSite.description && (
-          <div className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 dark:border-slate-600/50 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-slate-300/70 dark:border-slate-600 shadow-simple">
             <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
               {diveSite.description}
             </p>
           </div>
         )}
 
-        {/* Характеристики дайв-сайта */}
-        <div className="bg-gradient-to-br from-blue-50/80 to-cyan-50/60 dark:from-blue-900/20 dark:to-cyan-900/20 backdrop-blur-sm rounded-2xl p-4 border border-blue-200/50 dark:border-blue-600/50 shadow-sm">
+        {/* Характеристики дайв-сайта - ИСПРАВЛЕНО */}
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 border-2 border-slate-200 dark:border-slate-600 shadow-simple">
           <h4
             className="font-semibold text-slate-800 dark:text-slate-200 mb-4"
             suppressHydrationWarning
@@ -140,11 +140,11 @@ export default function InfoPanelContent({
 
           <div className="space-y-2">
             {diveSite.site_type && (
-              <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
+              <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
                 <div className="flex items-center gap-3">
                   <SiteTypeIcon
                     siteTypeId={diveSite.site_type.id}
-                    className="w-5 h-5 text-tropical-blue"
+                    className="w-5 h-5 text-primary-action"
                   />
 
                   <span
@@ -161,13 +161,13 @@ export default function InfoPanelContent({
             )}
 
             {diveSite.difficulty && (
-              <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
+              <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
                 <div className="flex items-center gap-3">
                   <DifficultyIcon
                     difficulty={diveSite.difficulty.id as 1 | 2 | 3}
                     size={20}
                     withBackground={true}
-                    className="text-tropical-blue"
+                    className="text-primary-action"
                     scale={150}
                   />
 
@@ -184,32 +184,38 @@ export default function InfoPanelContent({
               </div>
             )}
 
-            <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
+            <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3">
                 <DepthIcon size={16} withBackground scale={200} />
-                <span className="text-sm font-medium text-slate-600" suppressHydrationWarning>
+                <span
+                  className="text-sm font-medium text-slate-600 dark:text-slate-400"
+                  suppressHydrationWarning
+                >
                   {t('maxDepth')}
                 </span>
               </div>
-              <span className="text-sm font-bold text-slate-800">
+              <span className="text-sm font-bold text-slate-800 dark:text-slate-200">
                 {diveSite.depth_max} <span suppressHydrationWarning>{t('meters')}</span>
               </span>
             </div>
 
-            <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
+            <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3">
                 <VisibilityIcon size={16} withBackground scale={200} />
-                <span className="text-sm font-medium text-slate-600" suppressHydrationWarning>
+                <span
+                  className="text-sm font-medium text-slate-600 dark:text-slate-400"
+                  suppressHydrationWarning
+                >
                   {t('visibility')}
                 </span>
               </div>
-              <span className="text-sm font-bold text-slate-800">
+              <span className="text-sm font-bold text-slate-800 dark:text-slate-200">
                 {diveSite.visibility} <span suppressHydrationWarning>{t('meters')}</span>
               </span>
             </div>
 
             {diveSite.rating !== 0 && (
-              <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/60 rounded-xl border border-slate-200/50 dark:border-slate-600/50">
+              <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-gray-700 rounded-xl border border-slate-200 dark:border-slate-600">
                 <div className="flex items-center gap-3">
                   <StarIcon size={16} withBackground scale={200} />
                   <span
@@ -244,7 +250,7 @@ export default function InfoPanelContent({
 
         {/* Изображения */}
         {diveSite.images && diveSite.images.length > 0 && (
-          <div className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 dark:border-slate-600/50 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-slate-300/70 dark:border-slate-600 shadow-simple">
             <h4
               className="font-semibold text-slate-800 dark:text-slate-200 mb-4"
               suppressHydrationWarning
@@ -258,7 +264,7 @@ export default function InfoPanelContent({
         {/* Ссылки */}
         {(diveSite.info_links && diveSite.info_links.length > 0) ||
         (diveSite.dive_center_links && diveSite.dive_center_links.length > 0) ? (
-          <div className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/50 dark:border-slate-600/50 shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-slate-300/70 dark:border-slate-600 shadow-simple">
             <h4
               className="font-semibold text-slate-800 dark:text-slate-200 mb-4"
               suppressHydrationWarning
@@ -272,7 +278,7 @@ export default function InfoPanelContent({
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-slate-50/50 dark:bg-slate-700/50 rounded-xl border border-slate-200/50 dark:border-slate-600/50 hover:bg-slate-100/50 dark:hover:bg-slate-600/50 transition-colors duration-200"
+                  className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors duration-200"
                 >
                   <DiveCenterIcon size={16} withBackground scale={200} />
                   <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -286,7 +292,7 @@ export default function InfoPanelContent({
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-slate-50/50 dark:bg-slate-700/50 rounded-xl border border-slate-200/50 dark:border-slate-600/50 hover:bg-slate-100/50 dark:hover:bg-slate-600/50 transition-colors duration-200"
+                  className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors duration-200"
                 >
                   <InfoIcon size={16} withBackground scale={200} />
                   <span className="text-sm font-medium text-slate-700 dark:text-slate-300">

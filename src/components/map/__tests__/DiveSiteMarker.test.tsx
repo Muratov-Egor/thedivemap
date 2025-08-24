@@ -23,7 +23,7 @@ jest.mock('@/components/ui/Button', () => {
 });
 
 // Мокаем CloseIcon, SiteTypeIcon, MaskIcon и другие иконки
-jest.mock('@/components/icons', () => ({
+jest.mock('@/components/ui/icons', () => ({
   CloseIcon: () => <div data-testid="close-icon">×</div>,
   SiteTypeIcon: () => <div data-testid="site-type-icon">🏝️</div>,
   MaskIcon: () => <div data-testid="mask-icon">🤿</div>,
@@ -97,7 +97,7 @@ describe('DiveSiteMarker', () => {
 
     const marker = screen.getByTestId('dive-site-marker-1');
     expect(marker).toBeInTheDocument();
-    expect(marker).toHaveClass('w-8', 'h-8', 'rounded-full', 'bg-gradient-ocean');
+    expect(marker).toHaveClass('w-10', 'h-10', 'rounded-full', 'bg-pastel-turquoise');
   });
 
   it('отображает иконку дайвинга', () => {
@@ -342,7 +342,7 @@ describe('DiveSiteMarker', () => {
     );
 
     const marker = screen.getByTestId('dive-site-marker-1');
-    expect(marker).toHaveClass('shadow-glow-hover');
+    expect(marker).toHaveClass('scale-110', 'shadow-simple-hover');
   });
 
   it('имеет правильные CSS классы для неактивного состояния', () => {
@@ -356,7 +356,7 @@ describe('DiveSiteMarker', () => {
     );
 
     const marker = screen.getByTestId('dive-site-marker-1');
-    expect(marker).toHaveClass('shadow-glow-blue');
+    expect(marker).toHaveClass('shadow-simple');
   });
 
   it('не показывает tooltip при неактивном состоянии', () => {

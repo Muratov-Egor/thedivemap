@@ -1,105 +1,35 @@
-# Memory Bank: Project Brief
+# Проект: TheDiveMap
 
-## Project Overview
+## Описание проекта
 
-**Project Name**: The Dive Map  
-**Description**: Interactive map application for dive sites worldwide  
-**Technology Stack**: Next.js 15.4.2, React 19.1.0, TypeScript, Tailwind CSS, Supabase  
-**Package Manager**: pnpm  
-**Testing**: Playwright (E2E), Jest (Unit)
+TheDiveMap - это интерактивная карта дайв-сайтов, которая помогает дайверам находить интересные места для погружений. Проект разработан на Next.js с использованием TypeScript, Tailwind CSS и современных React паттернов.
 
-## Current Development Focus
+## Техническая архитектура
 
-### Primary: Modern UI/UX Implementation (Level 3)
+- **Frontend:** Next.js 14, React, TypeScript
+- **Стили:** Tailwind CSS, CSS модули, глобальные стили
+- **Карта:** MapLibre GL JS
+- **Тестирование:** Jest (unit), Playwright (e2e)
+- **Пакетный менеджер:** pnpm
+- **CI/CD:** Allure для отчетов
 
-**Status**: IMPLEMENT Mode - Phase 1: Foundation  
-**Goal**: Transform the application with modern design system and enhanced user experience
+## Текущая дизайн-система
 
-### Secondary: Autocomplete Component (Level 2)
+### Цветовая палитра (текущая - тропическая)
 
-**Status**: PLAN Mode - Planning Phase  
-**Goal**: Create a modern autocomplete component for search functionality
+- **tropical-blue:** #1B68A4
+- **deep-ocean:** #199BD7
+- **coral:** #F47B25
+- **sea-green:** #11B981
 
-## Autocomplete Component Requirements
+### Особенности дизайна
 
-### Functional Requirements
+- Glassmorphism эффекты
+- Neumorphism стили
+- Система темной/светлой темы
+- Анимации и переходы
+- Современные UI компоненты
 
-- Search across 4 data types: sites, countries, regions, locations
-- Real-time search with debouncing
-- Keyboard navigation support
-- Mobile-responsive design
-- Accessibility compliance (WCAG AA)
+## Цели обновления дизайна
 
-### Technical Requirements
-
-- Integration with `/api/places/` endpoint
-- TypeScript implementation
-- Tailwind CSS styling
-- i18n support (ru/en)
-- Performance optimization
-
-### Design Requirements
-
-- Match existing design system
-- Use tropical color palette
-- Implement glassmorphism effects
-- Smooth animations and transitions
-
-## API Integration
-
-**Endpoint**: `/api/places/`  
-**Method**: GET  
-**Parameters**:
-
-- `q` (required): Search query
-- `lang` (optional): Language ('ru' | 'en', default: 'ru')
-
-**Response Structure**:
-
-```typescript
-{
-  sites: Array<{
-    id: number,
-    name: string,
-    country: { name: string, region: { name: string } },
-    site_type: { label: string },
-    site_locations: Array<{ location: { name: string } }>
-  }>,
-  countries: Array<{ id: number, name: string, iso_code: string }>,
-  regions: Array<{ id: number, name: string }>,
-  locations: Array<{ id: number, name: string, country_id: number, region_id: number }>,
-  errors: { countries: string | null, regions: string | null, locations: string | null }
-}
-```
-
-## Success Criteria
-
-### Functional
-
-- [ ] Search works across all 4 data types
-- [ ] Real-time results with debouncing
-- [ ] Keyboard navigation (arrow keys, enter, escape)
-- [ ] Mobile touch support
-- [ ] Accessibility features (screen reader support)
-
-### Technical
-
-- [ ] TypeScript implementation
-- [ ] Performance optimized (debouncing, memoization)
-- [ ] Error handling for API failures
-- [ ] Loading states
-- [ ] Unit tests coverage
-
-### Design
-
-- [ ] Matches existing design system
-- [ ] Responsive design
-- [ ] Smooth animations
-- [ ] Consistent with tropical theme
-
-## Constraints
-
-- Must integrate with existing component architecture
-- Must maintain performance with large datasets
-- Must support both Russian and English languages
-- Must be accessible according to WCAG AA standards
+Адаптировать цветовую схему под новые иконки в минималистичном мультяшном стиле с пастельными цветами и тёмно-фиолетовыми контурами.

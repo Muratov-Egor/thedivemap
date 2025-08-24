@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { Image as ImageType } from '@/types/database';
-import Button from '@/components/ui/Button';
 import { createPortal } from 'react-dom';
 
 interface ImageGalleryProps {
@@ -46,74 +45,109 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black z-[100] flex items-center justify-center"
+      className="fixed inset-0 bg-black z-[100] flex items-center justify-center cursor-pointer"
       onClick={onClose}
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      <div className="relative w-full h-full flex items-center justify-center">
-        {/* Close button */}
-        <Button
-          onClick={onClose}
-          variant="gallery"
-          size="small"
-          shape="circle"
-          className="absolute top-4 right-4 text-3xl z-10"
+      <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
+        {/* Close button - ИСПРАВЛЕНО */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
+          className="
+            absolute top-4 right-4 z-50
+            w-10 h-10 rounded-full
+            bg-black/60 hover:bg-black/80 backdrop-blur-sm
+            text-white hover:text-white
+            border-2 border-white/20 hover:border-white/40
+            flex items-center justify-center
+            transition-all duration-300 ease-out
+            text-2xl font-bold leading-none
+            shadow-lg hover:shadow-xl
+            focus:outline-none focus:ring-2 focus:ring-white/50
+            cursor-pointer pointer-events-auto
+          "
           aria-label={t('gallery.closeModal')}
         >
           ×
-        </Button>
+        </button>
 
-        {/* Navigation buttons */}
+        {/* Navigation buttons - ИСПРАВЛЕНО ПОЗИЦИОНИРОВАНИЕ */}
         {images.length > 1 && (
           <>
-            <Button
+            {/* Кнопка "Предыдущая" - слева по центру */}
+            <button
               onClick={(e) => {
                 e.stopPropagation();
                 onPrevious();
               }}
-              variant="gallery"
-              size="medium"
-              shape="circle"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-4xl z-10"
+              className="
+                absolute left-4 top-1/2 transform -translate-y-1/2 z-40
+                w-12 h-12 rounded-full
+                bg-black/60 hover:bg-black/80 backdrop-blur-sm
+                text-white hover:text-white
+                border-2 border-white/20 hover:border-white/40
+                flex items-center justify-center
+                transition-all duration-300 ease-out
+                text-3xl font-bold leading-none
+                shadow-lg hover:shadow-xl
+                focus:outline-none focus:ring-2 focus:ring-white/50
+                hover:scale-110
+                cursor-pointer pointer-events-auto
+              "
               aria-label={t('gallery.previousImage')}
             >
               ‹
-            </Button>
-            <Button
+            </button>
+
+            {/* Кнопка "Следующая" - справа по центру, НЕ конфликтует с кнопкой закрытия */}
+            <button
               onClick={(e) => {
                 e.stopPropagation();
                 onNext();
               }}
-              variant="gallery"
-              size="medium"
-              shape="circle"
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-4xl z-10"
+              className="
+                absolute right-4 top-1/2 transform -translate-y-1/2 z-40
+                w-12 h-12 rounded-full
+                bg-black/60 hover:bg-black/80 backdrop-blur-sm
+                text-white hover:text-white
+                border-2 border-white/20 hover:border-white/40
+                flex items-center justify-center
+                transition-all duration-300 ease-out
+                text-3xl font-bold leading-none
+                shadow-lg hover:shadow-xl
+                focus:outline-none focus:ring-2 focus:ring-white/50
+                hover:scale-110
+                cursor-pointer pointer-events-auto
+              "
               aria-label={t('gallery.nextImage')}
             >
               ›
-            </Button>
+            </button>
           </>
         )}
 
         {/* Image */}
         <div
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full h-full flex items-center justify-center"
+          className="relative w-full h-full flex items-center justify-center pointer-events-auto cursor-default"
         >
           <Image
             src={currentImage.url}
             alt={`${siteName} - Image ${currentIndex + 1}`}
             width={1920}
             height={1080}
-            className="max-w-full max-h-full object-contain"
+            className="max-w-full max-h-full object-contain pointer-events-none"
             priority
           />
         </div>
 
         {/* Image counter */}
         {images.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm">
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm pointer-events-none z-30">
             {t('gallery.imageCounter', { current: currentIndex + 1, total: images.length })}
           </div>
         )}

@@ -6,7 +6,16 @@ import { cn } from '@/lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large' | 'xl';
-  variant?: 'primary' | 'secondary' | 'coral' | 'glass' | 'ghost' | 'success' | 'gallery' | 'sun';
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'warning'
+    | 'danger'
+    | 'info'
+    | 'outline'
+    | 'glass'
+    | 'coral';
   shape?: 'rounded' | 'circle' | 'pill';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
@@ -37,7 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const { t } = useTranslation('common');
 
     const baseStyles =
-      'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95';
+      'inline-flex items-center justify-center font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 transform hover:-translate-y-0.5 active:translate-y-0';
 
     const sizeStyles = {
       small: {
@@ -63,21 +72,41 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const variantStyles = {
+      // ===== ИСПРАВЛЕННАЯ СИСТЕМА АКЦЕНТОВ =====
+      // Primary - основные действия (контрастный синий)
       primary:
-        'bg-gradient-ocean dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-800 text-white hover:shadow-glow-hover dark:hover:from-blue-500 dark:hover:to-blue-700 focus:ring-tropical-blue/50 dark:focus:ring-blue-400 shadow-glow button-shine transform transition-all duration-300 border border-white/30 dark:border-blue-400/30 backdrop-blur-sm',
+        'bg-primary-action dark:bg-primary-action/80 text-white border-2 border-primary-action hover:bg-blue-600 hover:border-blue-600 hover:shadow-primary-shadow focus:ring-2 focus:ring-primary-action/50 shadow-simple button-shine transition-all duration-300 active:bg-blue-700 dark:hover:bg-blue-500',
+
+      // Secondary - вторичные действия (нейтральные)
       secondary:
-        'bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 text-slate-700 dark:text-slate-200 hover:from-slate-200 hover:to-slate-300 dark:hover:from-gray-600 dark:hover:to-gray-500 focus:ring-slate-400 dark:focus:ring-slate-500 shadow-md hover:shadow-lg button-shine transform transition-all duration-300 border border-slate-300 dark:border-slate-600',
-      coral:
-        'bg-gradient-coral dark:bg-gradient-to-r dark:from-orange-500 dark:to-red-600 text-white hover:shadow-glow-coral dark:hover:from-orange-400 dark:hover:to-red-500 focus:ring-coral/50 dark:focus:ring-orange-400 shadow-glow-coral button-shine transform transition-all duration-300 border border-white/30 dark:border-orange-400/30 backdrop-blur-sm',
-      glass:
-        'bg-glass-bg text-foreground hover:bg-glass-bg/90 focus:ring-slate-400 dark:focus:ring-slate-500 shadow-glass hover:shadow-glass-hover button-shine transform transition-all duration-300 border border-slate-200 dark:border-slate-600 backdrop-blur-xl',
-      ghost:
-        'bg-transparent text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-800 focus:ring-slate-400 dark:focus:ring-slate-500 button-shine transform transition-all duration-300 border border-slate-200 dark:border-slate-600',
+        'bg-transparent dark:bg-transparent/80 text-secondary-action border-2 border-secondary-action hover:bg-secondary-action hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-secondary-action/50 shadow-simple button-shine transition-all duration-300 active:bg-gray-600 dark:text-gray-300 dark:border-gray-400 dark:hover:bg-gray-400 dark:hover:text-gray-900',
+
+      // Success - успешные действия (контрастный зеленый)
       success:
-        'bg-gradient-to-r from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 text-white hover:from-green-600 hover:to-emerald-700 dark:hover:from-green-500 dark:hover:to-emerald-600 focus:ring-green-400 dark:focus:ring-emerald-400 shadow-lg hover:shadow-xl button-shine transform transition-all duration-300 border-0',
-      sun: 'bg-gradient-to-r from-yellow-300 to-yellow-500 dark:from-yellow-500 dark:to-amber-600 text-gray-900 dark:text-white hover:from-yellow-200 hover:to-yellow-400 dark:hover:from-yellow-400 dark:hover:to-amber-500 focus:ring-yellow-400 dark:focus:ring-amber-400 shadow-lg hover:shadow-xl hover:shadow-yellow-200/50 dark:hover:shadow-amber-200/30 button-shine transform transition-all duration-300 border border-yellow-300/50 dark:border-amber-400/30 backdrop-blur-sm',
-      gallery:
-        'bg-black bg-opacity-50 dark:bg-gray-900 dark:bg-opacity-70 text-white hover:bg-opacity-70 dark:hover:bg-opacity-80 focus:ring-white/30 dark:focus:ring-gray-400/30 border-0 shadow-none backdrop-blur-sm',
+        'bg-success-accent dark:bg-success-accent/80 text-white border-2 border-success-accent hover:bg-green-600 hover:border-green-600 hover:shadow-success-shadow focus:ring-2 focus:ring-success-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-green-700 dark:hover:bg-green-400',
+
+      // Warning - предупреждения (контрастный желтый)
+      warning:
+        'bg-warning-accent dark:bg-warning-accent/80 text-white border-2 border-warning-accent hover:bg-amber-600 hover:border-amber-600 hover:shadow-warning-shadow focus:ring-2 focus:ring-warning-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-amber-700 dark:hover:bg-amber-400',
+
+      // Danger - опасные действия (контрастный красный)
+      danger:
+        'bg-danger-accent dark:bg-danger-accent/80 text-white border-2 border-danger-accent hover:bg-red-600 hover:border-red-600 hover:shadow-danger-shadow focus:ring-2 focus:ring-danger-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-red-700 dark:hover:bg-red-400',
+
+      // Info - информационные действия (контрастный синий)
+      info: 'bg-info-accent dark:bg-info-accent/80 text-white border-2 border-info-accent hover:bg-blue-600 hover:border-blue-600 hover:shadow-primary-shadow focus:ring-2 focus:ring-info-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-blue-700 dark:hover:bg-blue-500',
+
+      // Outline - обводка (контрастные границы)
+      outline:
+        'bg-transparent dark:bg-transparent/80 text-outline-purple border-2 border-outline-purple hover:bg-outline-purple hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 active:bg-indigo-800 dark:text-indigo-300 dark:border-indigo-400 dark:hover:bg-indigo-400 dark:hover:text-indigo-900',
+
+      // Glass - прозрачная обводка (стеклянный эффект)
+      glass:
+        'bg-glass-bg/50 dark:bg-glass-bg/50 backdrop-blur-sm text-outline-purple border-2 border-outline-purple/30 hover:border-outline-purple hover:bg-glass-bg/70 hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 dark:text-indigo-300 dark:border-indigo-400/30 dark:hover:border-indigo-400',
+
+      // Coral - кормальные действия (контрастный оранжевый)
+      coral:
+        'bg-coral-action dark:bg-coral-action/80 text-white border-2 border-coral-action hover:bg-coral-action hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-coral-action/50 shadow-simple button-shine transition-all duration-300 active:bg-coral-action-700 dark:hover:bg-coral-action-400',
     };
 
     const shapeStyles = {

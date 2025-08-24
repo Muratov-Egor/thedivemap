@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Button from '@/components/ui/Button';
 import { useTranslation } from 'react-i18next';
-import { FiltersIcon } from '@/components/icons';
+import { FiltersIcon } from '@/components/ui/icons';
 import { useFilters } from '@/hooks/useFilters';
 import { useFiltersPanel } from '@/hooks/useFiltersPanel';
 import { useIsMobile } from '@/hooks/useMediaQuery';
@@ -69,7 +69,7 @@ export default function Filters() {
       {isMobile && !isMobilePanelOpen && (
         <div className="fixed bottom-6 right-6 z-50">
           <Button
-            variant="coral"
+            variant="info"
             shape="circle"
             size="medium"
             icon={<FiltersIcon />}

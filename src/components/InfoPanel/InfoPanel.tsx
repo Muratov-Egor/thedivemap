@@ -39,7 +39,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
   if (error || !diveSite) {
     return (
       <div
-        className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-glass-bg backdrop-blur-xl p-6 h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
+        className="flex flex-col justify-start items-center w-[500px] border-l border-slate-200 bg-background p-6 h-full max-h-[calc(100vh-4rem)] sm:max-h-full"
         data-testid="desktop-info-panel"
       >
         <h2
@@ -54,7 +54,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
             onClick={handleShowFilters}
             variant="primary"
             size="medium"
-            className="mt-6 shadow-glow hover:shadow-glow-hover"
+            className="mt-6 shadow-simple hover:shadow-simple-hover"
           >
             <span suppressHydrationWarning>{t('backToFilters')}</span>
           </Button>
@@ -67,7 +67,7 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
     <>
       {!isMobile && !isMobilePanelOpen && (
         <div
-          className="flex flex-col justify-start items-center w-[600px] border-l border-slate-200 bg-glass-bg backdrop-blur-xl p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full z-[60]"
+          className="flex flex-col justify-start items-center w-[600px] border-l border-slate-200 bg-background p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full z-[60]"
           data-testid="desktop-info-panel"
         >
           <InfoPanelContent diveSite={diveSite} handleShowFilters={handleShowFilters} />

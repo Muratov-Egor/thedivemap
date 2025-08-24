@@ -7,7 +7,7 @@ import { usePanel } from '@/contexts/PanelContext';
 import { useDiveSiteDetails as useDiveSiteDetailsHook } from '@/hooks/useDiveSiteDetails';
 import { useBodyOverflow } from '@/hooks/useBodyOverflow';
 import Button from '@/components/ui/Button';
-import { CloseIcon } from '@/components/icons';
+import { CloseIcon } from '@/components/ui/icons';
 import InfoPanelContent from './InfoPanelContent';
 
 interface MobileInfoPanelProps {
@@ -64,7 +64,7 @@ export default function MobileInfoPanel({ diveSite: propDiveSite, onClose }: Mob
         <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
           <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200">{t('title')}</h2>
           <Button
-            variant="ghost"
+            variant="secondary"
             shape="circle"
             size="small"
             icon={<CloseIcon />}
@@ -80,7 +80,7 @@ export default function MobileInfoPanel({ diveSite: propDiveSite, onClose }: Mob
               onClick={handleClose}
               variant="primary"
               size="medium"
-              className="mt-6 shadow-glow hover:shadow-glow-hover"
+              className="mt-6 shadow-simple hover:shadow-simple-hover"
             >
               <span suppressHydrationWarning>{t('backToFilters')}</span>
             </Button>

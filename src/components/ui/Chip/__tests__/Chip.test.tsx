@@ -28,12 +28,20 @@ describe('Chip', () => {
 
   it('applies correct styles for selected state', () => {
     render(<Chip selected>Selected</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-tropical-blue');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-primary-action/20',
+      'border-primary-action',
+      'text-primary-action',
+    );
   });
 
   it('applies correct styles for unselected state', () => {
     render(<Chip>Unselected</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-glass-bg');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-slate-50',
+      'border-slate-200',
+      'text-slate-700',
+    );
   });
 
   it('renders with icon only', () => {
@@ -67,12 +75,21 @@ describe('Chip', () => {
 
   it('renders with default variant', () => {
     render(<Chip variant="default">Default</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-glass-bg');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-slate-100',
+      'border-2',
+      'border-slate-300',
+      'text-slate-700',
+    );
   });
 
   it('renders with subtle variant', () => {
     render(<Chip variant="subtle">Subtle</Chip>);
-    expect(screen.getByRole('button')).toHaveClass('bg-glass-bg');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-slate-50',
+      'border-slate-200',
+      'text-slate-700',
+    );
   });
 
   it('applies correct styles for subtle variant when selected', () => {
@@ -81,6 +98,10 @@ describe('Chip', () => {
         Subtle Selected
       </Chip>,
     );
-    expect(screen.getByRole('button')).toHaveClass('bg-blue-100');
+    expect(screen.getByRole('button')).toHaveClass(
+      'bg-primary-action/20',
+      'border-primary-action',
+      'text-primary-action',
+    );
   });
 });

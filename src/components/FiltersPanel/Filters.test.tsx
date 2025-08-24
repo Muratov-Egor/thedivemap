@@ -90,7 +90,7 @@ jest.mock('@/components/ui/Slider', () => {
 });
 
 // Мокаем иконки
-jest.mock('@/components/icons', () => ({
+jest.mock('@/components/ui/icons', () => ({
   FiltersIcon: () => <div data-testid="filters-icon">Filters</div>,
   CloseIcon: () => <div data-testid="close-icon">Close</div>,
 }));
@@ -516,7 +516,7 @@ describe('Filters', () => {
     renderWithProviders(<Filters />);
 
     const openButton = screen.getByTestId('open-filters-panel-button');
-    expect(openButton).toHaveClass('bg-gradient-coral', 'text-white', 'rounded-full');
+    expect(openButton).toHaveClass('bg-info-accent', 'text-white', 'rounded-full');
   });
 
   it('имеет правильные классы для кнопки закрытия', () => {

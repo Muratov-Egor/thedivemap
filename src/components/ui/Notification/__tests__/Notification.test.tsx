@@ -82,16 +82,16 @@ describe('Notification', () => {
     const notificationContainer = screen
       .getByTestId('notification')
       .querySelector('.flex.items-start');
-    expect(notificationContainer).toHaveClass('bg-white/90', 'border-tropical-blue/30');
+    expect(notificationContainer).toHaveClass('bg-white', 'border-l-4', 'border-primary-action');
 
     rerender(<Notification {...defaultProps} type="warning" />);
-    expect(notificationContainer).toHaveClass('bg-white/90', 'border-coral/30');
+    expect(notificationContainer).toHaveClass('bg-white', 'border-l-4', 'border-warning-accent');
 
     rerender(<Notification {...defaultProps} type="error" />);
-    expect(notificationContainer).toHaveClass('bg-white/90', 'border-error/30');
+    expect(notificationContainer).toHaveClass('bg-white', 'border-l-4', 'border-danger-accent');
 
     rerender(<Notification {...defaultProps} type="success" />);
-    expect(notificationContainer).toHaveClass('bg-white/90', 'border-sea-green/30');
+    expect(notificationContainer).toHaveClass('bg-white', 'border-l-4', 'border-success-accent');
   });
 
   it('отображается внизу экрана с правильным позиционированием', () => {

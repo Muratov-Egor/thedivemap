@@ -62,34 +62,31 @@ const Notification: React.FC<NotificationProps> = ({
 
   if (!isVisible) return null;
 
+  // ПАСТЕЛЬНАЯ СИСТЕМА УВЕДОМЛЕНИЙ - мягкие и читаемые цвета
   const typeStyles = {
     info: {
-      container:
-        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-tropical-blue/30 dark:border-blue-400/30 shadow-glass',
-      icon: 'text-tropical-blue dark:text-blue-400',
+      container: 'bg-white dark:bg-slate-800 border-l-4 border-primary-action shadow-simple',
+      icon: 'text-primary-action',
       closeButton:
-        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+        'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     warning: {
-      container:
-        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-coral/30 dark:border-orange-400/30 shadow-glass',
-      icon: 'text-coral dark:text-orange-400',
+      container: 'bg-white dark:bg-slate-800 border-l-4 border-warning-accent shadow-simple',
+      icon: 'text-warning-accent',
       closeButton:
-        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+        'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     error: {
-      container:
-        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-error/30 dark:border-red-400/30 shadow-glass',
-      icon: 'text-error dark:text-red-400',
+      container: 'bg-white dark:bg-slate-800 border-l-4 border-danger-accent shadow-simple',
+      icon: 'text-danger-accent',
       closeButton:
-        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+        'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     success: {
-      container:
-        'bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-2 border-sea-green/30 dark:border-green-400/30 shadow-glass',
-      icon: 'text-sea-green dark:text-green-400',
+      container: 'bg-white dark:bg-slate-800 border-l-4 border-success-accent shadow-simple',
+      icon: 'text-success-accent',
       closeButton:
-        'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-700/80',
+        'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     custom: {
       container: '',
@@ -113,7 +110,7 @@ const Notification: React.FC<NotificationProps> = ({
     >
       <div
         className={cn(
-          'rounded-2xl shadow-glass hover:shadow-glass-hover',
+          'rounded-2xl hover:shadow-simple-hover',
           'flex items-start gap-3 p-4',
           'transition-all duration-300 ease-in-out',
           currentStyles.container,
@@ -182,7 +179,7 @@ const Notification: React.FC<NotificationProps> = ({
           onClick={handleClose}
           className={cn(
             'flex-shrink-0 p-1.5 rounded-xl transition-all duration-200',
-            'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tropical-blue/50 dark:focus:ring-blue-400/50',
+            'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-outline-purple/50 dark:focus:ring-outline-purple/50',
             'hover:scale-105 active:scale-95',
             currentStyles.closeButton,
             closeButtonClassName,

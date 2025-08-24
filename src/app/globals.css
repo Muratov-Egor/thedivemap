@@ -1,33 +1,72 @@
 @import url('https://fonts.googleapis.com/css2?family=Yomogi:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Основные цвета - новая тропическая палитра */
-  --tropical-blue: 27, 104, 164;
-  --deep-ocean: 25, 155, 215;
-  --coral: 244, 123, 37;
-  --sea-green: 17, 185, 129;
+  /* ===== НОВАЯ ПАСТЕЛЬНАЯ ПАЛИТРА ===== */
+  /* ===== ПАСТЕЛЬНАЯ КОНТРАСТНАЯ ПАЛИТРА ===== */
+  /* Контурный цвет - пастельный но контрастный */
+  --outline-purple: 99, 102, 241; /* #6366F1 - indigo-500 пастельный */
 
-  /* Градиенты */
-  --gradient-ocean: linear-gradient(135deg, #1b68a4, #199bd7);
-  --gradient-coral: linear-gradient(135deg, #f47b25, #ea580c);
-  --gradient-sunset: linear-gradient(135deg, #ff6b6b, #feca57);
-  --gradient-deep-sea: linear-gradient(135deg, #199bd7, #1e40af);
+  /* Пастельные цвета - мягкие но читаемые */
+  --pastel-blue: 147, 197, 253; /* #93C5FD - blue-300 пастельный */
+  --pastel-turquoise: 94, 234, 212; /* #5EEBD4 - teal-300 пастельный */
+  --pastel-green: 134, 239, 172; /* #86EFAC - green-300 пастельный */
+  --pastel-pink: 249, 168, 212; /* #F9A8D4 - pink-300 пастельный */
+  --pastel-cream: 252, 211, 77; /* #FCD34D - amber-300 пастельный */
+  --pastel-yellow: 253, 224, 71; /* #FDE047 - yellow-300 пастельный */
 
-  /* Фоны - светлая тема */
-  --background: 248, 250, 252; /* Slate 50 - светло-серый */
-  --foreground: 15, 23, 42; /* Slate 900 - темный текст */
-  --deep-water: 241, 245, 249; /* Slate 100 - более светлый серый */
+  /* ===== ПАСТЕЛЬНАЯ СИСТЕМА АКЦЕНТОВ ===== */
+  /* Основные действия - пастельные */
+  --primary-action: 96, 165, 250; /* #60A5FA - blue-400 пастельный */
+  --secondary-action: 156, 163, 175; /* #9CA3AF - gray-400 пастельный */
+  --tertiary-action: 203, 213, 225; /* #CBD5E1 - gray-300 пастельный */
+  --coral-action: 244, 123, 37; /* #FA9A55 - coral-400 пастельный */
+  --yellow-action: 250, 204, 21; /* #FECA57 - yellow-300 пастельный */
+
+  /* Семантические цвета - пастельные */
+  --success-accent: 74, 222, 128; /* #4ADE80 - green-400 пастельный */
+  --warning-accent: 251, 191, 36; /* #FBBF24 - amber-400 пастельный */
+  --danger-accent: 248, 113, 113; /* #F87171 - red-400 пастельный */
+  --info-accent: 96, 165, 250; /* #60A5FA - blue-400 пастельный */
+
+  /* ===== СТАРЫЕ ЦВЕТА (для rollback) ===== */
+  /* --tropical-blue: 27, 104, 164; */
+  /* --deep-ocean: 25, 155, 215; */
+  /* --coral: 244, 123, 37; */
+  /* --sea-green: 17, 185, 129; */
+
+  /* ===== УБИРАЕМ ГРАДИЕНТЫ (плоский дизайн) ===== */
+  /* --gradient-ocean: linear-gradient(135deg, #1b68a4, #199bd7); */
+  /* --gradient-coral: linear-gradient(135deg, #f47b25, #ea580c); */
+  /* --gradient-sunset: linear-gradient(135deg, #ff6b6b, #feca57); */
+  /* --gradient-deep-sea: linear-gradient(135deg, #199bd7, #1e40af); */
+
+  /* Фоны - светлая тема (ИСПРАВЛЕНО для контрастности) */
+  --background: 248, 250, 252; /* #F8FAFC - slate-50 нейтральный фон */
+  --foreground: 15, 23, 42; /* #0F172A - slate-900 темный текст */
+  --deep-water: 241, 245, 249; /* #F1F5F9 - slate-100 для панелей */
   --glass-bg: rgba(255, 255, 255, 0.8);
   --frosted-glass: rgba(255, 255, 255, 0.6);
 
-  /* Эффекты */
-  --glass-blur: blur(20px);
-  --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.2);
-  --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.3);
+  /* Адаптивные blue оттенки - светлая тема */
+  --blue-50: 239, 246, 255; /* Очень светлый синий */
+
+  /* ===== ИСПРАВЛЕННЫЕ ЭФФЕКТЫ ===== */
+  --glass-blur: blur(20px); /* Сохраняем для backup compatibility */
+  --shadow-simple: 0 2px 8px rgba(55, 48, 163, 0.15); /* Обновляем под новый контурный цвет */
+  --shadow-hover: 0 4px 12px rgba(55, 48, 163, 0.25); /* Более контрастные тени */
+  --shadow-primary: 0 4px 14px rgba(59, 130, 246, 0.4); /* Тени для primary действий */
+  --shadow-success: 0 4px 14px rgba(34, 197, 94, 0.3); /* Тени для success */
+  --shadow-warning: 0 4px 14px rgba(245, 158, 11, 0.3); /* Тени для warning */
+  --shadow-danger: 0 4px 14px rgba(239, 68, 68, 0.3); /* Тени для danger */
+
+  /* ===== СТАРЫЕ GLOW ЭФФЕКТЫ (убираем) ===== */
+  /* --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.2); */
+  /* --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.3); */
 
   /* Переходы */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -37,17 +76,43 @@
 
 /* Темная тема */
 [data-theme='dark'] {
-  /* Основные цвета остаются теми же */
-  --tropical-blue: 27, 104, 164;
-  --deep-ocean: 25, 155, 215;
-  --coral: 244, 123, 37;
-  --sea-green: 17, 185, 129;
+  /* ===== ПАСТЕЛЬНАЯ КОНТРАСТНАЯ ПАЛИТРА (темная тема) ===== */
+  /* Контурный цвет - пастельный для темной темы */
+  --outline-purple: 165, 180, 252; /* #A5B4FC - indigo-300 пастельный */
 
-  /* Градиенты остаются теми же */
-  --gradient-ocean: linear-gradient(135deg, #1b68a4, #199bd7);
-  --gradient-coral: linear-gradient(135deg, #f47b25, #ea580c);
-  --gradient-sunset: linear-gradient(135deg, #ff6b6b, #feca57);
-  --gradient-deep-sea: linear-gradient(135deg, #199bd7, #1e40af);
+  /* Пастельные цвета - мягкие для темной темы */
+  --pastel-blue: 191, 219, 254; /* #BFDBFE - blue-200 пастельный */
+  --pastel-turquoise: 153, 246, 228; /* #99F6E4 - teal-200 пастельный */
+  --pastel-green: 187, 247, 208; /* #BBF7D0 - green-200 пастельный */
+  --pastel-pink: 251, 207, 232; /* #FBCFE8 - pink-200 пастельный */
+  --pastel-cream: 254, 243, 199; /* #FEF3C7 - amber-200 пастельный */
+  --pastel-yellow: 254, 249, 195; /* #FEF9C3 - yellow-200 пастельный */
+
+  /* ===== ПАСТЕЛЬНАЯ СИСТЕМА АКЦЕНТОВ (темная тема) ===== */
+  /* Основные действия - пастельные для темной темы */
+  --primary-action: 147, 197, 253; /* #93C5FD - blue-300 пастельный */
+  --secondary-action: 203, 213, 225; /* #CBD5E1 - gray-300 пастельный */
+  --tertiary-action: 156, 163, 175; /* #9CA3AF - gray-400 пастельный */
+  --coral-action: 251, 146, 60; /* #FC821E - coral-300 пастельный */
+  --yellow-action: 250, 204, 21; /* ##feca57 - yellow-300 пастельный */
+
+  /* Семантические цвета - пастельные для темной темы */
+  --success-accent: 134, 239, 172; /* #86EFAC - green-300 пастельный */
+  --warning-accent: 252, 211, 77; /* #FCD34D - amber-300 пастельный */
+  --danger-accent: 252, 165, 165; /* #FCA5A5 - red-300 пастельный */
+  --info-accent: 147, 197, 253; /* #93C5FD - blue-300 пастельный */
+
+  /* ===== СТАРЫЕ ЦВЕТА (для rollback) ===== */
+  /* --tropical-blue: 27, 104, 164; */
+  /* --deep-ocean: 25, 155, 215; */
+  /* --coral: 244, 123, 37; */
+  /* --sea-green: 17, 185, 129; */
+
+  /* ===== УБИРАЕМ ГРАДИЕНТЫ (плоский дизайн) ===== */
+  /* --gradient-ocean: linear-gradient(135deg, #1b68a4, #199bd7); */
+  /* --gradient-coral: linear-gradient(135deg, #f47b25, #ea580c); */
+  /* --gradient-sunset: linear-gradient(135deg, #ff6b6b, #feca57); */
+  /* --gradient-deep-sea: linear-gradient(135deg, #199bd7, #1e40af); */
 
   /* Фоны - темная тема */
   --background: 40, 46, 61; /* Slate 900 - темно-серый */
@@ -56,10 +121,21 @@
   --glass-bg: rgba(15, 23, 42, 0.8);
   --frosted-glass: rgba(15, 23, 42, 0.6);
 
-  /* Эффекты для темной темы */
-  --glass-blur: blur(20px);
-  --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.3);
-  --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.4);
+  /* Адаптивные blue оттенки - темная тема */
+  --blue-50: 51, 65, 85; /* Приглушенный синий для темной темы */
+
+  /* ===== ИСПРАВЛЕННЫЕ ЭФФЕКТЫ (темная тема) ===== */
+  --glass-blur: blur(20px); /* Сохраняем для backup compatibility */
+  --shadow-simple: 0 4px 12px rgba(129, 140, 248, 0.2); /* Обновляем под новый контурный цвет */
+  --shadow-hover: 0 6px 16px rgba(129, 140, 248, 0.25); /* Более контрастные тени */
+  --shadow-primary: 0 4px 14px rgba(96, 165, 250, 0.4); /* Тени для primary действий */
+  --shadow-success: 0 4px 14px rgba(74, 222, 128, 0.3); /* Тени для success */
+  --shadow-warning: 0 4px 14px rgba(251, 191, 36, 0.3); /* Тени для warning */
+  --shadow-danger: 0 4px 14px rgba(248, 113, 113, 0.3); /* Тени для danger */
+
+  /* ===== СТАРЫЕ GLOW ЭФФЕКТЫ (убираем) ===== */
+  /* --shadow-glow: 0 8px 32px rgba(27, 104, 164, 0.3); */
+  /* --shadow-hover: 0 12px 40px rgba(27, 104, 164, 0.4); */
 
   /* Переходы остаются теми же */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -78,6 +154,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family:
+    'Nunito',
     'Inter',
     -apple-system,
     BlinkMacSystemFont,
@@ -262,6 +339,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  /* СОЛНЕЧНЫЙ БЛИК - белый цвет */
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   transform: translateX(-100%) skewX(-15deg);
   transition: none;
@@ -303,7 +381,8 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(27, 104, 164, 0.2), transparent);
+  /* СОЛНЕЧНЫЙ БЛИК НА ВОДЕ - белый цвет */
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transition: left 0.5s;
   pointer-events: none;
 }
@@ -330,12 +409,13 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+  /* МНОЖЕСТВЕННЫЕ СОЛНЕЧНЫЕ БЛИКИ - белый + лёгкий голубой */
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(27, 104, 164, 0.1),
+    rgba(255, 255, 255, 0.3),
     transparent,
-    rgba(27, 104, 164, 0.2),
+    rgba(255, 255, 255, 0.15),
     transparent
   );
   transform: translateX(-100%) skewX(-15deg);
@@ -372,7 +452,8 @@ body {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(27, 104, 164, 0.2);
+  /* СОЛНЕЧНЫЕ ОТРАЖЕНИЯ НА ВОДЕ - белый цвет */
+  background: rgba(255, 255, 255, 0.4);
   transform: translate(-50%, -50%);
   animation: water-ripple 0.6s ease-out;
 }
@@ -396,10 +477,11 @@ body {
 @keyframes glow-pulse {
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(27, 104, 164, 0.2);
+    /* СОЛНЕЧНОЕ СИЯНИЕ - белый цвет */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(27, 104, 164, 0.4);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
   }
 }
 
@@ -481,6 +563,16 @@ body {
 /* Шрифт Yomogi для логотипа */
 .font-yomogi {
   font-family: 'Yomogi', cursive;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
   font-weight: 900;
   line-height: 1.2;
   letter-spacing: -0.03em;

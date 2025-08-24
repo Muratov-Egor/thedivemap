@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Button from '@/components/ui/Button';
-import { CloseIcon } from '@/components/icons';
+import { CloseIcon } from '@/components/ui/icons';
 import { useTranslation } from 'react-i18next';
 import { useFilters } from '@/hooks/useFilters';
 import { useFiltersPanel } from '@/hooks/useFiltersPanel';

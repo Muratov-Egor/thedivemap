@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { AutocompleteItem as AutocompleteItemType } from './types';
 import { cn, getCountryFlag } from '@/lib/utils';
-import { MaskIcon, TagIcon, MapIcon } from '@/components/icons';
+import { MaskIcon, TagIcon, MapIcon } from '@/components/ui/icons';
 
 interface AutocompleteItemProps {
   item: AutocompleteItemType;
@@ -24,7 +24,7 @@ const getTypeIcon = (
       // Используем флаг страны если есть ISO код
       const isoCode = metadata?.iso_code as string;
       return (
-        <div className="px-1 bg-tropical-blue/15 rounded-lg">
+        <div className="px-1 bg-primary-action/20 rounded-lg">
           <span className="text-2xl">{isoCode ? getCountryFlag(isoCode) : '🌍'}</span>
         </div>
       );
@@ -67,11 +67,10 @@ export default function AutocompleteItem({
       id={`autocomplete-option-${index}`}
       className={cn(
         'relative flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ease-in-out',
-        'hover:bg-gradient-to-r hover:from-tropical-blue/5 hover:to-deep-ocean/5 dark:hover:from-blue-400/10 dark:hover:to-blue-600/10',
-        'focus:bg-gradient-to-r focus:from-tropical-blue/10 focus:to-deep-ocean/10 dark:focus:from-blue-400/20 dark:focus:to-blue-600/20',
-        'focus:outline-none focus:ring-2 focus:ring-tropical-blue/20 dark:focus:ring-blue-400/30',
-        isSelected &&
-          'bg-gradient-to-r from-tropical-blue/10 to-deep-ocean/10 dark:from-blue-400/20 dark:to-blue-600/20',
+        'hover:bg-primary-action/10 dark:hover:bg-primary-action/20',
+        'focus:bg-primary-action/10 dark:focus:bg-primary-action/20',
+        'focus:outline-none focus:ring-2 focus:ring-primary-action/30 dark:focus:ring-primary-action/40',
+        isSelected && 'bg-primary-action/15 dark:bg-primary-action/25',
         'border-b border-slate-100 dark:border-slate-700 last:border-b-0',
         className,
       )}
@@ -99,15 +98,15 @@ export default function AutocompleteItem({
         <div className="flex items-center gap-2">
           <span
             className={cn(
-              'font-medium text-slate-800 dark:text-slate-200 truncate',
-              isSelected && 'text-tropical-blue dark:text-blue-400',
+              'font-medium text-slate-900 dark:text-white truncate',
+              isSelected && 'text-primary-action dark:text-primary-action',
             )}
             data-testid="autocomplete-item-name"
           >
             {item.name}
           </span>
           <span
-            className="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full"
+            className="text-xs text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-600 px-2 py-1 rounded-full"
             data-testid="autocomplete-item-type"
           >
             {getTypeLabel(item.type)}
@@ -116,9 +115,9 @@ export default function AutocompleteItem({
 
         {/* Additional Metadata */}
         {item.metadata && Object.keys(item.metadata).length > 0 && (
-          <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          <div className="text-xs text-slate-600 dark:text-slate-300 mt-1">
             {item.type === 'site' && item.metadata.site_type && (
-              <span className="inline-block bg-coral/10 text-coral px-2 py-1 rounded mr-2">
+              <span className="inline-block bg-pastel-pink/20 text-primary-action px-2 py-1 rounded mr-2">
                 {item.metadata.site_type}
               </span>
             )}
@@ -129,7 +128,7 @@ export default function AutocompleteItem({
       {/* Selection Indicator */}
       {isSelected && (
         <div
-          className="flex-shrink-0 w-2 h-2 bg-tropical-blue rounded-full"
+          className="flex-shrink-0 w-2 h-2 bg-primary-action rounded-full"
           data-testid="autocomplete-item-selected"
         />
       )}

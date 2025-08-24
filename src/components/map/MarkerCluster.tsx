@@ -50,13 +50,13 @@ export default function MarkerCluster({
     return 'w-8 h-8 text-sm';
   };
 
-  // Определяем цвет кластера на основе количества точек
+  // Определяем цвет кластера на основе количества точек (пастельная палитра)
   const getClusterColor = () => {
-    if (cluster.count >= 100) return 'bg-gradient-coral';
-    if (cluster.count >= 50) return 'bg-gradient-ocean';
-    if (cluster.count >= 20) return 'bg-gradient-to-r from-orange-500 to-orange-600';
-    if (cluster.count >= 10) return 'bg-gradient-to-r from-blue-500 to-blue-600';
-    return 'bg-gradient-to-r from-green-500 to-emerald-600';
+    if (cluster.count >= 100) return 'bg-pastel-pink border-2 border-white';
+    if (cluster.count >= 50) return 'bg-pastel-blue border-2 border-white';
+    if (cluster.count >= 20) return 'bg-pastel-yellow border-2 border-white';
+    if (cluster.count >= 10) return 'bg-pastel-turquoise border-2 border-white';
+    return 'bg-pastel-green border-2 border-white';
   };
 
   // Форматируем количество точек для отображения
@@ -72,7 +72,7 @@ export default function MarkerCluster({
       className={`
         relative cursor-pointer
         transition-all duration-300 ease-out
-        ${isActive ? 'ring-4 ring-coral/30' : ''}
+        ${isActive ? 'ring-4 ring-pastel-blue/30' : ''}
       `}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
@@ -86,13 +86,13 @@ export default function MarkerCluster({
         className={`
           ${getClusterSize()}
           ${getClusterColor()}
-          text-white
+          text-black dark:text-black
           rounded-full
           flex items-center justify-center
           font-semibold
-          shadow-glow-blue border-2 border-white
+          shadow-simple
           transition-all duration-300
-          ${isHovered || isActive ? 'shadow-glow-hover' : 'shadow-glow-blue'}
+          ${isHovered || isActive ? 'scale-110 shadow-simple-hover' : 'hover:shadow-simple-hover'}
         `}
         data-testid={`marker-cluster`}
       >
@@ -100,7 +100,9 @@ export default function MarkerCluster({
       </div>
 
       {/* Пульсирующая анимация для активного кластера */}
-      {isActive && <div className="absolute inset-0 rounded-full bg-coral/75 animate-ping"></div>}
+      {isActive && (
+        <div className="absolute inset-0 rounded-full bg-pastel-blue/60 animate-ping"></div>
+      )}
 
       {/* Tooltip с информацией */}
       {(isHovered || isActive) && (

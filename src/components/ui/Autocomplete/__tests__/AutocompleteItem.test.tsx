@@ -204,7 +204,7 @@ describe('AutocompleteItem Component', () => {
     render(<AutocompleteItem item={item} isSelected={true} {...defaultProps} />);
 
     const element = screen.getByRole('option');
-    expect(element).toHaveClass('bg-gradient-to-r', 'from-tropical-blue/10', 'to-deep-ocean/10');
+    expect(element).toHaveClass('bg-primary-action/15');
   });
 
   it('применяет правильные CSS классы для невыбранного состояния', () => {
@@ -212,11 +212,7 @@ describe('AutocompleteItem Component', () => {
     render(<AutocompleteItem item={item} isSelected={false} {...defaultProps} />);
 
     const element = screen.getByRole('option');
-    expect(element).not.toHaveClass(
-      'bg-gradient-to-r',
-      'from-tropical-blue/10',
-      'to-deep-ocean/10',
-    );
+    expect(element).not.toHaveClass('bg-pastel-blue/20');
   });
 
   it('поддерживает кастомные CSS классы', () => {
