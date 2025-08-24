@@ -87,13 +87,21 @@ export async function GET(request: NextRequest) {
     if (sitesError) throw sitesError;
 
     // Убираем дубликаты стран (из-за inner join с sites)
-    const uniqueCountriesRaw = countriesRaw ? 
-      Array.from(new Map(countriesRaw.map(country => [country.id, {
-        id: country.id,
-        name_ru: country.name_ru,
-        name_en: country.name_en,
-        iso_code: country.iso_code
-      }])).values()).slice(0, LIMIT_COUNTRIES) : [];
+    const uniqueCountriesRaw = countriesRaw
+      ? Array.from(
+          new Map(
+            countriesRaw.map((country) => [
+              country.id,
+              {
+                id: country.id,
+                name_ru: country.name_ru,
+                name_en: country.name_en,
+                iso_code: country.iso_code,
+              },
+            ]),
+          ).values(),
+        ).slice(0, LIMIT_COUNTRIES)
+      : [];
 
     const countries = localizeList(uniqueCountriesRaw, nameField);
     const regions = localizeList(regionsRaw ?? [], nameField);

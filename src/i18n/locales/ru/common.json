@@ -51,5 +51,21 @@
     "close": "Закрыть уведомление",
     "noResults": "По выбранным фильтрам дайв-сайты не найдены",
     "noResultsDescription": "Попробуйте изменить фильтры или выбрать другую локацию"
+  },
+  "auth": {
+    "login": {
+      "title": "Вход в систему",
+      "email": "Email",
+      "password": "Пароль",
+      "submit": "Войти",
+      "noAccount": "Нет аккаунта?",
+      "register": "Зарегистрироваться",
+      "validation": {
+        "emailRequired": "Email обязателен",
+        "emailInvalid": "Введите корректный email",
+        "passwordRequired": "Пароль обязателен",
+        "passwordMinLength": "Пароль должен содержать минимум 6 символов"
+      }
+    }
   }
 }

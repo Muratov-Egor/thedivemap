@@ -1,6 +1,10 @@
 export { default as Button } from './Button';
 export type { ButtonProps } from './Button';
 
+// Input component
+export { default as Input } from './Input';
+export type { InputProps } from './Input';
+
 // Chip component
 export { default as Chip } from './Chip';
 export type { ChipProps } from './Chip';

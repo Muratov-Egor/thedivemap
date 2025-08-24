@@ -51,5 +51,21 @@
     "close": "Close notification",
     "noResults": "No dive sites found with selected filters",
     "noResultsDescription": "Try changing filters or selecting a different location"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Login",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "validation": {
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email",
+        "passwordRequired": "Password is required",
+        "passwordMinLength": "Password must be at least 6 characters long"
+      }
+    }
   }
 }

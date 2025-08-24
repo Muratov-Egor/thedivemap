@@ -311,7 +311,9 @@ describe('Places API', () => {
           { id: 2, name_ru: 'США', name_en: 'USA', iso_code: 'US', name: 'США' },
         ]);
         expect(mockSupabase.from).toHaveBeenCalledWith('countries');
-        expect(mockCountriesQuery.select).toHaveBeenCalledWith('id, name_ru, name_en, iso_code, sites!inner(id)');
+        expect(mockCountriesQuery.select).toHaveBeenCalledWith(
+          'id, name_ru, name_en, iso_code, sites!inner(id)',
+        );
         expect(mockCountriesQuery.or).toHaveBeenCalledWith(
           'name_ru.ilike.%россия%,name_en.ilike.%россия%',
         );
