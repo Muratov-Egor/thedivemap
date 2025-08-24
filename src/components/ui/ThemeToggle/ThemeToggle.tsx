@@ -3,7 +3,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/contexts/ThemeContext';
-import { SunIcon, MoonIcon } from '@/components/icons';
+import { SunIcon, MoonIcon } from '@/components/ui/icons';
 import Button from '@/components/ui/Button';
 
 interface ThemeToggleProps {

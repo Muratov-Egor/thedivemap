@@ -6,7 +6,7 @@ import { AutocompleteProps } from './types';
 import { useAutocomplete } from './useAutocomplete';
 import AutocompleteList from './AutocompleteList';
 import { cn } from '@/lib/utils';
-import { CloseIcon } from '@/components/icons';
+import { CloseIcon } from '@/components/ui/icons';
 
 export default function Autocomplete({
   placeholder,

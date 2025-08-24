@@ -6,7 +6,7 @@ interface IconProps {
   size?: number;
   scale?: number;
   withBackground?: boolean;
-  backgroundVariant?: 'default' | 'primary' | 'secondary' | 'success' | 'info';
+  backgroundVariant?: 'primary' | 'secondary' | 'success' | 'info';
   'data-testid'?: string;
 }
 
@@ -16,7 +16,7 @@ export function Icon({
   size = 24,
   scale = 100,
   withBackground = false,
-  backgroundVariant = 'default',
+  backgroundVariant = 'primary',
   'data-testid': testId,
 }: IconProps) {
   const scaleValue = scale / 100; // Преобразуем scale в десятичное значение
@@ -38,8 +38,6 @@ export function Icon({
   if (withBackground) {
     // ПАСТЕЛЬНЫЕ ФОНЫ ДЛЯ ИКОНОК - плоский дизайн
     const backgroundStyles = {
-      default:
-        'p-2 bg-gray-100 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600',
       primary:
         'p-2 bg-pastel-blue/30 dark:bg-pastel-blue/20 rounded-lg border border-pastel-blue/20',
       secondary:

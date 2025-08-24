@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { AutocompleteItem as AutocompleteItemType } from './types';
 import { cn, getCountryFlag } from '@/lib/utils';
-import { MaskIcon, TagIcon, MapIcon } from '@/components/icons';
+import { MaskIcon, TagIcon, MapIcon } from '@/components/ui/icons';
 
 interface AutocompleteItemProps {
   item: AutocompleteItemType;

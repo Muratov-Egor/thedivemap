@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Button from '@/components/ui/Button';
 import { useTranslation } from 'react-i18next';
-import { FiltersIcon } from '@/components/icons';
+import { FiltersIcon } from '@/components/ui/icons';
 import { useFilters } from '@/hooks/useFilters';
 import { useFiltersPanel } from '@/hooks/useFiltersPanel';
 import { useIsMobile } from '@/hooks/useMediaQuery';

@@ -14,12 +14,12 @@ import {
   DiveCenterIcon,
   InfoIcon,
   TagIcon,
-} from '@/components/icons';
+} from '@/components/ui/icons';
 import { Button } from '@/components/ui';
 import { ImageGallery } from '@/components/ui';
 import { useTranslation } from 'react-i18next';
 import { useShareableLink } from '@/hooks/useShareableLink';
-import { CheckIcon, LinkIcon } from '@/components/icons';
+import { CheckIcon, LinkIcon } from '@/components/ui/icons';
 
 export default function InfoPanelContent({
   diveSite,

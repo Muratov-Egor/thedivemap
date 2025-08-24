@@ -7,7 +7,7 @@ import { usePanel } from '@/contexts/PanelContext';
 import { useDiveSiteDetails as useDiveSiteDetailsHook } from '@/hooks/useDiveSiteDetails';
 import { useBodyOverflow } from '@/hooks/useBodyOverflow';
 import Button from '@/components/ui/Button';
-import { CloseIcon } from '@/components/icons';
+import { CloseIcon } from '@/components/ui/icons';
 import InfoPanelContent from './InfoPanelContent';
 
 interface MobileInfoPanelProps {

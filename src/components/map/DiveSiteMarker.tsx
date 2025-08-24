@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MarkerProps } from '../../types/clustering';
 import DiveSiteTooltip from './DiveSiteTooltip';
-import { MaskIcon } from '../icons';
+import { MaskIcon } from '../ui/icons';
 
 interface ExtendedMarkerProps extends MarkerProps {
   onShowDetails?: (siteId: string) => void;

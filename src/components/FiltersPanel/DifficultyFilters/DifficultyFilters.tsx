@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useMap } from '@/contexts/MapContext';
 import { useFilters } from '@/hooks/useFilters';
 import Chip from '@/components/ui/Chip/Chip';
-import { DifficultyIcon } from '@/components/icons';
+import { DifficultyIcon } from '@/components/ui/icons';
 
 export default function DifficultyFilters() {
   const { t } = useTranslation('filters');
