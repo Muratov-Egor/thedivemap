@@ -62,12 +62,12 @@ export async function GET(request: NextRequest) {
         .ilike('name', searchPattern)
         .limit(LIMIT_SITES),
 
-      // 2. Countries
+      // 2. Countries (только те, где есть дайв-сайты)
       supabase
         .from('countries')
-        .select('id, name_ru, name_en, iso_code')
+        .select('id, name_ru, name_en, iso_code, sites!inner(id)')
         .or(ilikeBothLangs('name', q))
-        .limit(LIMIT_COUNTRIES),
+        .limit(LIMIT_COUNTRIES * 10), // увеличиваем лимит для дедупликации
 
       // 3. Regions
       supabase
@@ -86,7 +86,16 @@ export async function GET(request: NextRequest) {
 
     if (sitesError) throw sitesError;
 
-    const countries = localizeList(countriesRaw ?? [], nameField);
+    // Убираем дубликаты стран (из-за inner join с sites)
+    const uniqueCountriesRaw = countriesRaw ? 
+      Array.from(new Map(countriesRaw.map(country => [country.id, {
+        id: country.id,
+        name_ru: country.name_ru,
+        name_en: country.name_en,
+        iso_code: country.iso_code
+      }])).values()).slice(0, LIMIT_COUNTRIES) : [];
+
+    const countries = localizeList(uniqueCountriesRaw, nameField);
     const regions = localizeList(regionsRaw ?? [], nameField);
     const locations = (locationsRaw ?? []).map(
       (loc: {
