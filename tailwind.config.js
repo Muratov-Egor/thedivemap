@@ -16,29 +16,29 @@ module.exports = {
         1000: '10',
       },
       colors: {
-        // ===== ИСПРАВЛЕННАЯ КОНТРАСТНАЯ ПАЛИТРА =====
-        // Контурный цвет - значительно усилен для контрастности
-        'outline-purple': '#3730A3', // indigo-700
+        // ===== ПАСТЕЛЬНАЯ КОНТРАСТНАЯ ПАЛИТРА =====
+        // Контурный цвет - пастельный но контрастный
+        'outline-purple': '#6366F1', // indigo-500 пастельный
 
-        // Пастельные цвета - усилены для лучшей читаемости
-        'pastel-blue': '#437CEB', // более контрастный синий
-        'pastel-turquoise': '#38B2AC', // teal-500
-        'pastel-green': '#34A853', // яркий зеленый
-        'pastel-pink': '#EC4899', // pink-500
-        'pastel-cream': '#FBBF24', // amber-400
-        'pastel-yellow': '#F59E0B', // amber-500
+        // Пастельные цвета - мягкие но читаемые
+        'pastel-blue': '#93C5FD', // blue-300 пастельный
+        'pastel-turquoise': '#5EEBD4', // teal-300 пастельный
+        'pastel-green': '#86EFAC', // green-300 пастельный
+        'pastel-pink': '#F9A8D4', // pink-300 пастельный
+        'pastel-cream': '#FCD34D', // amber-300 пастельный
+        'pastel-yellow': '#FDE047', // yellow-300 пастельный
 
-        // ===== НОВАЯ СИСТЕМА АКЦЕНТОВ =====
-        // Основные действия
-        'primary-action': '#3B82F6', // blue-500
-        'secondary-action': '#6B7280', // gray-500  
-        'tertiary-action': '#9CA3AF', // gray-400
+        // ===== ПАСТЕЛЬНАЯ СИСТЕМА АКЦЕНТОВ =====
+        // Основные действия - пастельные
+        'primary-action': '#60A5FA', // blue-400 пастельный
+        'secondary-action': '#9CA3AF', // gray-400 пастельный
+        'tertiary-action': '#CBD5E1', // gray-300 пастельный
         
-        // Семантические цвета
-        'success-accent': '#22C55E', // green-500
-        'warning-accent': '#F59E0B', // amber-500
-        'danger-accent': '#EF4444', // red-500
-        'info-accent': '#3B82F6', // blue-500
+        // Семантические цвета - пастельные
+        'success-accent': '#4ADE80', // green-400 пастельный
+        'warning-accent': '#FBBF24', // amber-400 пастельный
+        'danger-accent': '#F87171', // red-400 пастельный
+        'info-accent': '#60A5FA', // blue-400 пастельный
 
         // ===== СТАРЫЕ ЦВЕТА (для rollback) =====
         // 'tropical-blue': '#1B68A4',

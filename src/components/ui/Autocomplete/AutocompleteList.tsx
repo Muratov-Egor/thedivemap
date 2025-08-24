@@ -29,7 +29,7 @@ export default function AutocompleteList({
     return (
       <div
         className={cn(
-          'absolute top-full left-0 right-0 mt-1 bg-blue-50 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
+          'absolute top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
           'max-h-80 overflow-hidden',
           className,
         )}
@@ -37,7 +37,7 @@ export default function AutocompleteList({
       >
         <div className="flex items-center justify-center py-8">
           <div className="flex items-center gap-3 text-slate-600 dark:text-slate-400">
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-pastel-blue"></div>
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-action"></div>
             <span className="text-sm font-medium">{t('loading')}</span>
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function AutocompleteList({
     return (
       <div
         className={cn(
-          'absolute top-full left-0 right-0 mt-1 bg-blue-50 border border-red-200 dark:border-red-800 rounded-2xl shadow-lg z-50',
+          'absolute top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 border border-danger-accent/30 dark:border-danger-accent/50 rounded-2xl shadow-lg z-50',
           'max-h-80 overflow-hidden',
           className,
         )}
@@ -77,12 +77,12 @@ export default function AutocompleteList({
   return (
     <div
       id="autocomplete-listbox"
-      className={cn(
-        'absolute top-full left-0 right-0 mt-1 bg-blue-50 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
-        'max-h-120 overflow-y-auto',
-        'scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent',
-        className,
-      )}
+              className={cn(
+          'absolute top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
+          'max-h-120 overflow-y-auto',
+          'scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent',
+          className,
+        )}
       role="listbox"
       aria-label={t('resultsLabel')}
       data-testid="autocomplete-list"

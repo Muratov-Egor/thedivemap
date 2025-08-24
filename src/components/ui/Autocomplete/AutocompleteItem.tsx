@@ -24,7 +24,7 @@ const getTypeIcon = (
       // Используем флаг страны если есть ISO код
       const isoCode = metadata?.iso_code as string;
       return (
-        <div className="px-1 bg-pastel-blue/20 rounded-lg">
+        <div className="px-1 bg-primary-action/20 rounded-lg">
           <span className="text-2xl">{isoCode ? getCountryFlag(isoCode) : '🌍'}</span>
         </div>
       );
@@ -67,10 +67,10 @@ export default function AutocompleteItem({
       id={`autocomplete-option-${index}`}
       className={cn(
         'relative flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 ease-in-out',
-        'hover:bg-pastel-blue/50 dark:hover:bg-pastel-blue/15',
-        'focus:bg-pastel-blue/50 dark:focus:bg-pastel-blue/20',
-        'focus:outline-none focus:ring-2 focus:ring-pastel-blue/30 dark:focus:ring-pastel-blue/40',
-        isSelected && 'bg-pastel-blue/20 dark:bg-pastel-blue/25',
+        'hover:bg-primary-action/10 dark:hover:bg-primary-action/20',
+        'focus:bg-primary-action/10 dark:focus:bg-primary-action/20',
+        'focus:outline-none focus:ring-2 focus:ring-primary-action/30 dark:focus:ring-primary-action/40',
+        isSelected && 'bg-primary-action/15 dark:bg-primary-action/25',
         'border-b border-slate-100 dark:border-slate-700 last:border-b-0',
         className,
       )}
@@ -99,7 +99,7 @@ export default function AutocompleteItem({
           <span
             className={cn(
               'font-medium text-slate-900 dark:text-white truncate',
-              isSelected && 'text-outline-purple dark:text-pastel-blue',
+              isSelected && 'text-primary-action dark:text-primary-action',
             )}
             data-testid="autocomplete-item-name"
           >
@@ -117,7 +117,7 @@ export default function AutocompleteItem({
         {item.metadata && Object.keys(item.metadata).length > 0 && (
           <div className="text-xs text-slate-600 dark:text-slate-300 mt-1">
             {item.type === 'site' && item.metadata.site_type && (
-              <span className="inline-block bg-pastel-pink/20 text-outline-purple px-2 py-1 rounded mr-2">
+              <span className="inline-block bg-pastel-pink/20 text-primary-action px-2 py-1 rounded mr-2">
                 {item.metadata.site_type}
               </span>
             )}
@@ -128,7 +128,7 @@ export default function AutocompleteItem({
       {/* Selection Indicator */}
       {isSelected && (
         <div
-          className="flex-shrink-0 w-2 h-2 bg-outline-purple rounded-full"
+          className="flex-shrink-0 w-2 h-2 bg-primary-action rounded-full"
           data-testid="autocomplete-item-selected"
         />
       )}
