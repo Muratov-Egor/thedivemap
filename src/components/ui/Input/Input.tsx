@@ -50,6 +50,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       description,
       descriptionClassName,
       disabled,
+      id,
       ...props
     },
     ref,
@@ -94,11 +95,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
     );
 
+    const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+
     return (
       <div className={cn('w-full', containerClassName)}>
         {/* Лейбл */}
         {label && (
           <label
+            htmlFor={inputId}
             className={cn(
               'block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2',
               labelClassName,
@@ -120,6 +124,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {/* Input поле */}
           <input
             ref={ref}
+            id={inputId}
             className={inputStyles}
             disabled={disabled || loading}
             aria-invalid={hasError}

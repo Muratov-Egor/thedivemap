@@ -59,13 +59,27 @@
       "password": "Пароль",
       "submit": "Войти",
       "noAccount": "Нет аккаунта?",
-      "register": "Зарегистрироваться",
-      "validation": {
-        "emailRequired": "Email обязателен",
-        "emailInvalid": "Введите корректный email",
-        "passwordRequired": "Пароль обязателен",
-        "passwordMinLength": "Пароль должен содержать минимум 6 символов"
-      }
+      "register": "Зарегистрироваться"
+    },
+    "register": {
+      "title": "Регистрация",
+      "name": "Имя",
+      "namePlaceholder": "Введите ваше имя",
+      "email": "Email",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердите пароль",
+      "submit": "Зарегистрироваться",
+      "haveAccount": "Уже есть аккаунт?",
+      "login": "Войти"
+    },
+    "validation": {
+      "emailRequired": "Email обязателен",
+      "emailInvalid": "Введите корректный email",
+      "passwordRequired": "Пароль обязателен",
+      "passwordMinLength": "Пароль должен содержать минимум 6 символов",
+      "confirmPasswordRequired": "Подтверждение пароля обязательно",
+      "passwordsDoNotMatch": "Пароли не совпадают",
+      "fieldRequired": "Поле {{field}} обязательно для заполнения"
     }
   }
 }

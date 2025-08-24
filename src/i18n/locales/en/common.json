@@ -59,13 +59,27 @@
       "password": "Password",
       "submit": "Login",
       "noAccount": "Don't have an account?",
-      "register": "Register",
-      "validation": {
-        "emailRequired": "Email is required",
-        "emailInvalid": "Please enter a valid email",
-        "passwordRequired": "Password is required",
-        "passwordMinLength": "Password must be at least 6 characters long"
-      }
+      "register": "Register"
+    },
+    "register": {
+      "title": "Register",
+      "name": "Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Register",
+      "haveAccount": "Already have an account?",
+      "login": "Login"
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 6 characters long",
+      "confirmPasswordRequired": "Password confirmation is required",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "fieldRequired": "{{field}} is required"
     }
   }
 }
