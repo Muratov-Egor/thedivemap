@@ -4,29 +4,7 @@ import { useTranslation } from 'react-i18next';
 import LanguageSwitch from './LanguageSwitch';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { useIsMobile } from '@/hooks/useMediaQuery';
-
-// Простая иконка меню
-function MenuIcon({ className = 'w-5 h-5' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M4 6h16M4 12h16M4 18h16"
-      />
-    </svg>
-  );
-}
-
-// Иконка закрытия
-function ChevronUpIcon({ className = 'w-5 h-5' }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-    </svg>
-  );
-}
+import { MenuIcon, ChevronUpIcon } from '../ui/icons';
 
 export default function NavBar() {
   const { t } = useTranslation('common');
@@ -79,7 +57,7 @@ export default function NavBar() {
     <div className="relative mr-4" ref={accordionRef}>
       {/* Кнопка меню */}
       <Button
-        variant="outline"
+        variant="glass"
         shape="pill"
         size="medium"
         onClick={toggleAccordion}
@@ -97,7 +75,7 @@ export default function NavBar() {
             {/* Кнопка входа */}
             <div>
               <Button
-                variant="primary"
+                variant="info"
                 shape="pill"
                 size="small"
                 className="w-full"

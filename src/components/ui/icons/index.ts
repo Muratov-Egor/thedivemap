@@ -29,3 +29,5 @@ export { StarIcon } from './StarIcon';
 export { TagIcon } from './TagIcon';
 export { DiverIcon } from './DiverIcon';
 export { MapIcon } from './MapIcon';
+export { MenuIcon } from './MenuIcon';
+export { ChevronUpIcon } from './ChevronUpIcon';

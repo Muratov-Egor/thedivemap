@@ -102,7 +102,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
       // Glass - прозрачная обводка (стеклянный эффект)
       glass:
-        'bg-glass-bg/50 dark:bg-glass-bg/50 backdrop-blur-sm text-outline-purple border-2 border-outline-purple/30 hover:border-outline-purple hover:bg-glass-bg/70 hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 dark:text-indigo-300 dark:border-indigo-400/30 dark:hover:border-indigo-400',
+        'bg-glass-bg/50 dark:bg-glass-bg/50 backdrop-blur-sm text-outline-purple border-2 border-gray-200 hover:border-gray-300 hover:bg-glass-bg/70 hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 dark:text-indigo-300 dark:border-gray-400 dark:hover:border-gray-300',
 
       // Coral - кормальные действия (контрастный оранжевый)
       coral:
