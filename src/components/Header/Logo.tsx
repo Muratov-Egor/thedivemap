@@ -12,7 +12,7 @@ export default function Logo() {
       suppressHydrationWarning
     >
       <Image
-        src="/img/Logo.ico"
+        src="/img/Logo.svg"
         alt=""
         width={64}
         height={64}
