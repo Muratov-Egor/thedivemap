@@ -21,7 +21,7 @@ export default function LanguageSwitch() {
     <Button
       onClick={onToggle}
       shape="pill"
-      variant="info"
+      variant="glass"
       size="small"
       data-testid="language-switch"
       suppressHydrationWarning

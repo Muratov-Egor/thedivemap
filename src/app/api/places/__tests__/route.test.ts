@@ -311,11 +311,65 @@ describe('Places API', () => {
           { id: 2, name_ru: 'США', name_en: 'USA', iso_code: 'US', name: 'США' },
         ]);
         expect(mockSupabase.from).toHaveBeenCalledWith('countries');
-        expect(mockCountriesQuery.select).toHaveBeenCalledWith('id, name_ru, name_en, iso_code');
+        expect(mockCountriesQuery.select).toHaveBeenCalledWith('id, name_ru, name_en, iso_code, sites!inner(id)');
         expect(mockCountriesQuery.or).toHaveBeenCalledWith(
           'name_ru.ilike.%россия%,name_en.ilike.%россия%',
         );
-        expect(mockCountriesQuery.limit).toHaveBeenCalledWith(3);
+        expect(mockCountriesQuery.limit).toHaveBeenCalledWith(30); // 3 * 10 для дедупликации
+      });
+
+      it('должен возвращать только страны с дайв-сайтами и убирать дубликаты', async () => {
+        const mockSites: any[] = [];
+        // Имитируем дубликаты стран из-за inner join с sites
+        const mockCountriesWithDuplicates = [
+          { id: 1, name_ru: 'Россия', name_en: 'Russia', iso_code: 'RU', sites: [{ id: 'site1' }] },
+          { id: 1, name_ru: 'Россия', name_en: 'Russia', iso_code: 'RU', sites: [{ id: 'site2' }] }, // дубликат
+          { id: 2, name_ru: 'США', name_en: 'USA', iso_code: 'US', sites: [{ id: 'site3' }] },
+        ];
+        const mockRegions: any[] = [];
+        const mockLocations: any[] = [];
+
+        const mockSitesQuery = {
+          select: jest.fn().mockReturnThis(),
+          ilike: jest.fn().mockReturnThis(),
+          limit: jest.fn().mockResolvedValue({ data: mockSites, error: null }),
+        };
+
+        const mockCountriesQuery = {
+          select: jest.fn().mockReturnThis(),
+          or: jest.fn().mockReturnThis(),
+          limit: jest.fn().mockResolvedValue({ data: mockCountriesWithDuplicates, error: null }),
+        };
+
+        const mockRegionsQuery = {
+          select: jest.fn().mockReturnThis(),
+          or: jest.fn().mockReturnThis(),
+          limit: jest.fn().mockResolvedValue({ data: mockRegions, error: null }),
+        };
+
+        const mockLocationsQuery = {
+          select: jest.fn().mockReturnThis(),
+          or: jest.fn().mockReturnThis(),
+          limit: jest.fn().mockResolvedValue({ data: mockLocations, error: null }),
+        };
+
+        mockSupabase.from
+          .mockReturnValueOnce(mockSitesQuery as any)
+          .mockReturnValueOnce(mockCountriesQuery as any)
+          .mockReturnValueOnce(mockRegionsQuery as any)
+          .mockReturnValueOnce(mockLocationsQuery as any);
+
+        const request = createRequest('http://localhost:3000/api/places?q=test');
+        const response = await GET(request);
+        const data = await response.json();
+
+        expect(response.status).toBe(200);
+        // Проверяем, что дубликаты удалены и остались только уникальные страны
+        expect(data.countries).toEqual([
+          { id: 1, name_ru: 'Россия', name_en: 'Russia', iso_code: 'RU', name: 'Россия' },
+          { id: 2, name_ru: 'США', name_en: 'USA', iso_code: 'US', name: 'США' },
+        ]);
+        expect(data.countries).toHaveLength(2); // должно быть 2, а не 3 (дубликат удален)
       });
 
       it('должен обрабатывать ошибку при поиске стран', async () => {

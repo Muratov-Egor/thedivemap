@@ -46,8 +46,6 @@ export default function NavBar() {
         >
           {t('header.login')}
         </Button>
-        <LanguageSwitch />
-        <ThemeToggle />
       </div>
     );
   }
