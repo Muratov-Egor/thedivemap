@@ -103,7 +103,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
             >
               ‹
             </button>
-            
+
             {/* Кнопка "Следующая" - справа по центру, НЕ конфликтует с кнопкой закрытия */}
             <button
               onClick={(e) => {

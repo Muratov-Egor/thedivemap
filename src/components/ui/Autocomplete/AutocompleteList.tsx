@@ -77,12 +77,12 @@ export default function AutocompleteList({
   return (
     <div
       id="autocomplete-listbox"
-              className={cn(
-          'absolute top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
-          'max-h-120 overflow-y-auto',
-          'scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent',
-          className,
-        )}
+      className={cn(
+        'absolute top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-2xl shadow-lg z-50',
+        'max-h-120 overflow-y-auto',
+        'scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-transparent',
+        className,
+      )}
       role="listbox"
       aria-label={t('resultsLabel')}
       data-testid="autocomplete-list"

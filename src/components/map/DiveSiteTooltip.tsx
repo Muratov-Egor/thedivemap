@@ -4,7 +4,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarkerProps } from '@/types/clustering';
 import Button from '@/components/ui/Button';
-import { CloseIcon, SiteTypeIcon, VisibilityIcon, DepthIcon, MarkIcon } from '@/components/ui/icons';
+import {
+  CloseIcon,
+  SiteTypeIcon,
+  VisibilityIcon,
+  DepthIcon,
+  MarkIcon,
+} from '@/components/ui/icons';
 import { formatCoordinates } from '@/lib/utils';
 
 interface DiveSiteTooltipProps {

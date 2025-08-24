@@ -33,7 +33,7 @@ module.exports = {
         'primary-action': '#60A5FA', // blue-400 пастельный
         'secondary-action': '#9CA3AF', // gray-400 пастельный
         'tertiary-action': '#CBD5E1', // gray-300 пастельный
-        
+
         // Семантические цвета - пастельные
         'success-accent': '#4ADE80', // green-400 пастельный
         'warning-accent': '#FBBF24', // amber-400 пастельный
@@ -102,7 +102,7 @@ module.exports = {
         // ===== ИСПРАВЛЕННЫЕ МИНИМАЛИСТИЧНЫЕ ТЕНИ =====
         simple: '0 2px 8px rgba(55, 48, 163, 0.15)', // обновлено под новый outline-purple
         'simple-hover': '0 4px 12px rgba(55, 48, 163, 0.25)',
-        
+
         // ===== НОВЫЕ СЕМАНТИЧЕСКИЕ ТЕНИ =====
         'primary-shadow': '0 4px 14px rgba(59, 130, 246, 0.4)', // для primary кнопок
         'success-shadow': '0 4px 14px rgba(34, 197, 94, 0.3)', // для success состояний

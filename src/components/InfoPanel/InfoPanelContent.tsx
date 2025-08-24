@@ -187,7 +187,10 @@ export default function InfoPanelContent({
             <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3">
                 <DepthIcon size={16} withBackground scale={200} />
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400" suppressHydrationWarning>
+                <span
+                  className="text-sm font-medium text-slate-600 dark:text-slate-400"
+                  suppressHydrationWarning
+                >
                   {t('maxDepth')}
                 </span>
               </div>
@@ -199,7 +202,10 @@ export default function InfoPanelContent({
             <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3">
                 <VisibilityIcon size={16} withBackground scale={200} />
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400" suppressHydrationWarning>
+                <span
+                  className="text-sm font-medium text-slate-600 dark:text-slate-400"
+                  suppressHydrationWarning
+                >
                   {t('visibility')}
                 </span>
               </div>
