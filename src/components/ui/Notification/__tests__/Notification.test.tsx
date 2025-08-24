@@ -83,30 +83,30 @@ describe('Notification', () => {
       .getByTestId('notification')
       .querySelector('.flex.items-start');
     expect(notificationContainer).toHaveClass(
-      'bg-pastel-turquoise',
+      'bg-white',
       'border-l-4',
-      'border-outline-purple',
+      'border-primary-action',
     );
 
     rerender(<Notification {...defaultProps} type="warning" />);
     expect(notificationContainer).toHaveClass(
-      'bg-pastel-yellow',
+      'bg-white',
       'border-l-4',
-      'border-outline-purple',
+      'border-warning-accent',
     );
 
     rerender(<Notification {...defaultProps} type="error" />);
     expect(notificationContainer).toHaveClass(
-      'bg-pastel-pink',
+      'bg-white',
       'border-l-4',
-      'border-outline-purple',
+      'border-danger-accent',
     );
 
     rerender(<Notification {...defaultProps} type="success" />);
     expect(notificationContainer).toHaveClass(
-      'bg-pastel-green',
+      'bg-white',
       'border-l-4',
-      'border-outline-purple',
+      'border-success-accent',
     );
   });
 

@@ -62,35 +62,35 @@ const Notification: React.FC<NotificationProps> = ({
 
   if (!isVisible) return null;
 
-  // МИНИМАЛИСТИЧНАЯ ПАСТЕЛЬНАЯ СИСТЕМА - Option C: Balanced Minimal Design
+  // ПАСТЕЛЬНАЯ СИСТЕМА УВЕДОМЛЕНИЙ - мягкие и читаемые цвета
   const typeStyles = {
     info: {
       container:
-        'bg-pastel-turquoise dark:bg-pastel-turquoise border-l-4 border-outline-purple shadow-simple',
-      icon: 'text-outline-purple dark:text-black',
+        'bg-white dark:bg-slate-800 border-l-4 border-primary-action shadow-simple',
+      icon: 'text-primary-action',
       closeButton:
-        'text-outline-purple/70 dark:text-black/70 hover:text-outline-purple dark:hover:text-black hover:bg-white/10 dark:hover:bg-white/20',
+        'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     warning: {
       container:
-        'bg-pastel-yellow dark:bg-pastel-yellow border-l-4 border-outline-purple shadow-simple',
-      icon: 'text-outline-purple dark:text-black',
+        'bg-white dark:bg-slate-800 border-l-4 border-warning-accent shadow-simple',
+      icon: 'text-warning-accent',
       closeButton:
-        'text-outline-purple/70 dark:text-black/70 hover:text-outline-purple dark:hover:text-black hover:bg-white/10 dark:hover:bg-white/20',
+        'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     error: {
       container:
-        'bg-pastel-pink dark:bg-pastel-pink border-l-4 border-outline-purple shadow-simple',
-      icon: 'text-outline-purple dark:text-black',
+        'bg-white dark:bg-slate-800 border-l-4 border-danger-accent shadow-simple',
+      icon: 'text-danger-accent',
       closeButton:
-        'text-outline-purple/70 dark:text-black/70 hover:text-outline-purple dark:hover:text-black hover:bg-white/10 dark:hover:bg-white/20',
+        'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     success: {
       container:
-        'bg-pastel-green dark:bg-pastel-green border-l-4 border-outline-purple shadow-simple',
-      icon: 'text-outline-purple dark:text-black',
+        'bg-white dark:bg-slate-800 border-l-4 border-success-accent shadow-simple',
+      icon: 'text-success-accent',
       closeButton:
-        'text-outline-purple/70 dark:text-black/70 hover:text-outline-purple dark:hover:text-black hover:bg-white/10 dark:hover:bg-white/20',
+        'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     custom: {
       container: '',
@@ -171,9 +171,9 @@ const Notification: React.FC<NotificationProps> = ({
 
         {/* Контент */}
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold text-outline-purple dark:text-black">{message}</div>
+          <div className="text-sm font-semibold text-slate-800 dark:text-slate-200">{message}</div>
           {description && (
-            <div className="text-sm text-outline-purple/80 dark:text-black/80 mt-1">
+            <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">
               {description}
             </div>
           )}
