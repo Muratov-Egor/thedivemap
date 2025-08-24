@@ -47,7 +47,6 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
         bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600
         shadow-simple hover:shadow-simple-hover
         transition-all duration-300 ease-out
-        min-w-[280px] max-w-[320px]
         pointer-events-auto
       `}
       style={{
@@ -60,7 +59,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       {/* Заголовок */}
       <div
         data-testid={`dive-site-tooltip-name`}
-        className="font-semibold text-foreground mb-3 text-center text-xl"
+        className="font-semibold text-foreground mb-3 text-center text-xl whitespace-nowrap"
       >
         {site.name}
       </div>
@@ -68,14 +67,14 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
       {/* Координаты */}
       <div
         data-testid={`dive-site-tooltip-coordinates`}
-        className="text-slate-600 dark:text-slate-400 text-xs mb-3 text-center flex items-center justify-center gap-1"
+        className="text-slate-600 dark:text-slate-400 text-xs mb-3 text-center flex items-center justify-center gap-1 whitespace-nowrap"
       >
         <MarkIcon size={14} scale={200} />
         {formatCoordinates(site.latitude, site.longitude)}
       </div>
 
       {/* Тип, глубина и видимость */}
-      <div className="flex items-center justify-between gap-3 mb-3">
+      <div className="flex items-center justify-between gap-3 mb-3 mt-3">
         {getSiteTypeLabel() && (
           <div
             data-testid={`dive-site-tooltip-type`}
@@ -91,7 +90,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
 
         <div
           data-testid={`dive-site-tooltip-depth`}
-          className="flex items-center gap-2 text-slate-700 dark:text-slate-300 text-sm font-medium"
+          className="flex items-center gap-2 text-slate-700 dark:text-slate-300 text-sm font-medium whitespace-nowrap"
         >
           <DepthIcon size={16} withBackground scale={200} />
           <span className="flex items-center">
@@ -101,7 +100,7 @@ const DiveSiteTooltip: React.FC<DiveSiteTooltipProps> = ({ site, onClose, onShow
 
         <div
           data-testid={`dive-site-tooltip-visibility`}
-          className="flex items-center gap-2 text-slate-700 dark:text-slate-300 text-sm font-medium"
+          className="flex items-center gap-2 text-slate-700 dark:text-slate-300 text-sm font-medium whitespace-nowrap"
         >
           <VisibilityIcon size={16} withBackground scale={200} />
           <span className="flex items-center">

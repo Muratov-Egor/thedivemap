@@ -65,29 +65,25 @@ const Notification: React.FC<NotificationProps> = ({
   // ПАСТЕЛЬНАЯ СИСТЕМА УВЕДОМЛЕНИЙ - мягкие и читаемые цвета
   const typeStyles = {
     info: {
-      container:
-        'bg-white dark:bg-slate-800 border-l-4 border-primary-action shadow-simple',
+      container: 'bg-white dark:bg-slate-800 border-l-4 border-primary-action shadow-simple',
       icon: 'text-primary-action',
       closeButton:
         'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     warning: {
-      container:
-        'bg-white dark:bg-slate-800 border-l-4 border-warning-accent shadow-simple',
+      container: 'bg-white dark:bg-slate-800 border-l-4 border-warning-accent shadow-simple',
       icon: 'text-warning-accent',
       closeButton:
         'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     error: {
-      container:
-        'bg-white dark:bg-slate-800 border-l-4 border-danger-accent shadow-simple',
+      container: 'bg-white dark:bg-slate-800 border-l-4 border-danger-accent shadow-simple',
       icon: 'text-danger-accent',
       closeButton:
         'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
     },
     success: {
-      container:
-        'bg-white dark:bg-slate-800 border-l-4 border-success-accent shadow-simple',
+      container: 'bg-white dark:bg-slate-800 border-l-4 border-success-accent shadow-simple',
       icon: 'text-success-accent',
       closeButton:
         'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700',
@@ -173,9 +169,7 @@ const Notification: React.FC<NotificationProps> = ({
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold text-slate-800 dark:text-slate-200">{message}</div>
           {description && (
-            <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              {description}
-            </div>
+            <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">{description}</div>
           )}
         </div>
 

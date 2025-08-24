@@ -107,7 +107,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // Coral - кормальные действия (контрастный оранжевый)
       coral:
         'bg-coral-action dark:bg-coral-action/80 text-white border-2 border-coral-action hover:bg-coral-action hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-coral-action/50 shadow-simple button-shine transition-all duration-300 active:bg-coral-action-700 dark:hover:bg-coral-action-400',
-
     };
 
     const shapeStyles = {
