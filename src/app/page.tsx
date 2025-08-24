@@ -6,7 +6,7 @@ import MapContainer from '@/components/map/MapContainer';
 import { MapProvider } from '@/contexts/MapContext';
 import { PanelProvider } from '@/contexts/PanelContext';
 import PanelSwitcher from '@/components/PanelSwitcher';
-
+import Footer from '@/components/Footer';
 function MapContent() {
   return (
     <MapProvider>
@@ -29,6 +29,7 @@ export default function HomePage() {
       >
         <MapContent />
       </Suspense>
+      <Footer />
     </main>
   );
 }

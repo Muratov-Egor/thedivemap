@@ -29,7 +29,7 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
   return (
     <Button
       onClick={toggleTheme}
-      variant="info"
+      variant="glass"
       size="small"
       shape="pill"
       icon={getIcon()}

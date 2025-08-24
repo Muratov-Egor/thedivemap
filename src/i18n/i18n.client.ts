@@ -12,6 +12,8 @@ import enAutocomplete from '@/i18n/locales/en/autocomplete.json';
 import ruAutocomplete from '@/i18n/locales/ru/autocomplete.json';
 import enInfoPanel from '@/i18n/locales/en/infoPanel.json';
 import ruInfoPanel from '@/i18n/locales/ru/infoPanel.json';
+import enFooter from '@/i18n/locales/en/footer.json';
+import ruFooter from '@/i18n/locales/ru/footer.json';
 
 let i18nSingleton: I18nInstance | null = null;
 
@@ -30,18 +32,20 @@ export function getI18n(): I18nInstance {
           filters: enFilters,
           autocomplete: enAutocomplete,
           infoPanel: enInfoPanel,
+          footer: enFooter,
         },
         ru: {
           common: ruCommon,
           filters: ruFilters,
           autocomplete: ruAutocomplete,
           infoPanel: ruInfoPanel,
+          footer: ruFooter,
         },
       },
       fallbackLng: 'ru',
       supportedLngs: ['en', 'ru'],
       defaultNS: 'common',
-      ns: ['common', 'filters', 'autocomplete', 'infoPanel'],
+      ns: ['common', 'filters', 'autocomplete', 'infoPanel', 'footer'],
       interpolation: { escapeValue: false },
       detection: {
         // localStorage to persist user choice; also checks navigator.language
