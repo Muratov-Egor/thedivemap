@@ -70,28 +70,28 @@ describe('Slider', () => {
       render(<Slider {...defaultProps} />);
 
       const slider = screen.getByRole('slider');
-      expect(slider).toHaveClass('bg-gray-50', 'border-outline-purple/20');
+      expect(slider).toHaveClass('bg-slate-100', 'border-slate-300');
     });
 
     it('применяет depth вариант (темно-синий)', () => {
       render(<Slider {...defaultProps} variant="depth" />);
 
       const slider = screen.getByRole('slider');
-      expect(slider).toHaveClass('bg-gray-50', 'border-slate-700/20');
+      expect(slider).toHaveClass('bg-slate-100', 'border-slate-300');
     });
 
     it('применяет visibility вариант (светло-синий)', () => {
       render(<Slider {...defaultProps} variant="visibility" />);
 
       const slider = screen.getByRole('slider');
-      expect(slider).toHaveClass('bg-gray-50', 'border-pastel-turquoise/30');
+      expect(slider).toHaveClass('bg-slate-100', 'border-slate-300');
     });
 
     it('применяет rating вариант (серый)', () => {
       render(<Slider {...defaultProps} variant="rating" />);
 
       const slider = screen.getByRole('slider');
-      expect(slider).toHaveClass('bg-gray-50', 'border-gray-300');
+      expect(slider).toHaveClass('bg-slate-100', 'border-slate-300');
     });
   });
 

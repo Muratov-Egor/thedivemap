@@ -80,7 +80,7 @@ describe('DifficultyFilters', () => {
     fireEvent.click(easyChip);
 
     // Проверяем, что чип стал выбранным (проверяем bg-pastel-blue класс)
-    expect(easyChip).toHaveClass('bg-pastel-blue');
+    expect(easyChip).toHaveClass('bg-primary-action/20');
   });
 
   it('should handle multiple difficulty selection', async () => {
@@ -105,12 +105,12 @@ describe('DifficultyFilters', () => {
 
     // Выбираем первый фильтр
     fireEvent.click(easyChip);
-    expect(easyChip).toHaveClass('bg-pastel-blue');
+    expect(easyChip).toHaveClass('bg-primary-action/20');
 
     // Выбираем второй фильтр (множественный выбор)
     fireEvent.click(mediumChip);
-    expect(mediumChip).toHaveClass('bg-pastel-blue');
-    expect(easyChip).toHaveClass('bg-pastel-blue'); // Первый остается выбранным
+    expect(mediumChip).toHaveClass('bg-primary-action/20');
+    expect(easyChip).toHaveClass('bg-primary-action/20'); // Первый остается выбранным
   });
 
   it('should handle fetch error', async () => {
@@ -144,7 +144,7 @@ describe('DifficultyFilters', () => {
 
     // Первый клик - выбираем фильтр
     fireEvent.click(easyChip);
-    expect(easyChip).toHaveClass('bg-pastel-blue');
+    expect(easyChip).toHaveClass('bg-primary-action/20');
 
     // Второй клик - снимаем фильтр
     fireEvent.click(easyChip);

@@ -86,7 +86,7 @@ export default function MarkerCluster({
         className={`
           ${getClusterSize()}
           ${getClusterColor()}
-          text-outline-purple dark:text-black
+          text-black dark:text-black
           rounded-full
           flex items-center justify-center
           font-semibold

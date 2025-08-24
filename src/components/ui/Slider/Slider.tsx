@@ -254,7 +254,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
                 {valueSuffix}
               </span>
               <span
-                className="text-sm font-semibold text-outline-purple dark:text-white bg-background dark:bg-gray-800 px-3 py-1.5 rounded-xl shadow-simple border border-outline-purple/20 dark:border-gray-600"
+                className="text-sm font-semibold text-black dark:text-white bg-background dark:bg-gray-800 px-3 py-1.5 rounded-xl shadow-simple border border-outline-purple/20 dark:border-gray-600"
                 data-testid={`${dataTestId}-value`}
                 suppressHydrationWarning
               >

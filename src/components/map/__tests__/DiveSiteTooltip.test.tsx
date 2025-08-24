@@ -117,16 +117,16 @@ describe('DiveSiteTooltip', () => {
       'rounded-2xl',
       'text-sm',
       'z-20',
-      'bg-background',
-      'border',
-      'border-pastel-turquoise/30',
+      'bg-white',
+      'dark:bg-slate-800',
+      'border-2',
+      'border-slate-200',
+      'dark:border-slate-600',
       'shadow-simple',
       'hover:shadow-simple-hover',
       'transition-all',
       'duration-300',
       'ease-out',
-      'min-w-[280px]',
-      'max-w-[320px]',
     );
   });
 
@@ -148,7 +148,8 @@ describe('DiveSiteTooltip', () => {
       'border-r-8',
       'border-t-8',
       'border-transparent',
-      'border-t-white/80',
+      'border-t-white',
+      'dark:border-t-slate-800',
     );
   });
 });

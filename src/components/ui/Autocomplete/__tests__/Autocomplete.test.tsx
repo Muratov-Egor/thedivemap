@@ -293,14 +293,14 @@ describe('Autocomplete Component', () => {
     render(<Autocomplete {...defaultProps} />);
 
     const input = screen.getByTestId('autocomplete-input');
-    expect(input).toHaveClass('border-pastel-blue', 'shadow-simple');
+    expect(input).toHaveClass('border-primary-action', 'shadow-simple');
   });
 
   it('применяет CSS классы для состояния ошибки', () => {
     render(<Autocomplete {...defaultProps} error="Test error" />);
 
     const input = screen.getByTestId('autocomplete-input');
-    expect(input).toHaveClass('border-red-300');
+    expect(input).toHaveClass('border-danger-accent');
   });
 
   it('показывает сообщение об ошибке из хука', () => {

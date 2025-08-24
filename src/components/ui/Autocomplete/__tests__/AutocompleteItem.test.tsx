@@ -204,7 +204,7 @@ describe('AutocompleteItem Component', () => {
     render(<AutocompleteItem item={item} isSelected={true} {...defaultProps} />);
 
     const element = screen.getByRole('option');
-    expect(element).toHaveClass('bg-pastel-blue/20');
+    expect(element).toHaveClass('bg-primary-action/15');
   });
 
   it('применяет правильные CSS классы для невыбранного состояния', () => {

@@ -29,19 +29,18 @@ describe('Chip', () => {
   it('applies correct styles for selected state', () => {
     render(<Chip selected>Selected</Chip>);
     expect(screen.getByRole('button')).toHaveClass(
-      'bg-pastel-blue',
-      'border-outline-purple',
-      'text-outline-purple',
+      'bg-primary-action/20',
+      'border-primary-action',
+      'text-primary-action',
     );
   });
 
   it('applies correct styles for unselected state', () => {
     render(<Chip>Unselected</Chip>);
     expect(screen.getByRole('button')).toHaveClass(
-      'bg-background',
-      'border-outline-purple/40',
+      'bg-slate-50',
+      'border-slate-200',
       'text-slate-700',
-      'dark:text-white',
     );
   });
 
@@ -77,20 +76,19 @@ describe('Chip', () => {
   it('renders with default variant', () => {
     render(<Chip variant="default">Default</Chip>);
     expect(screen.getByRole('button')).toHaveClass(
-      'bg-background',
-      'border-outline-purple/40',
+      'bg-slate-100',
+      'border-2',
+      'border-slate-300',
       'text-slate-700',
-      'dark:text-white',
     );
   });
 
   it('renders with subtle variant', () => {
     render(<Chip variant="subtle">Subtle</Chip>);
     expect(screen.getByRole('button')).toHaveClass(
-      'bg-background',
-      'border-outline-purple/30',
-      'text-slate-600',
-      'dark:text-white/90',
+      'bg-slate-50',
+      'border-slate-200',
+      'text-slate-700',
     );
   });
 
@@ -101,9 +99,9 @@ describe('Chip', () => {
       </Chip>,
     );
     expect(screen.getByRole('button')).toHaveClass(
-      'bg-pastel-blue/60',
-      'border-outline-purple',
-      'text-outline-purple',
+      'bg-primary-action/20',
+      'border-primary-action',
+      'text-primary-action',
     );
   });
 });
