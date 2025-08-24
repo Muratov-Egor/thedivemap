@@ -19,7 +19,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       children,
       icon,
       iconPosition = 'left',
-      variant = 'default',
+      variant = 'subtle',
       ...props
     },
     ref,
@@ -40,10 +40,10 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       subtle: {
         // Selected - более мягкое активное состояние
         selected:
-          'bg-primary-action/20 border border-primary-action text-primary-action shadow-simple hover:bg-primary-action/30 hover:shadow-simple-hover focus:ring-2 focus:ring-primary-action/50 active:bg-primary-action/40 dark:bg-blue-400/20 dark:border-blue-400 dark:text-blue-300',
+          'bg-primary-action/20 border border-primary-action text-primary-action shadow-simple hover:bg-primary-action/30 hover:shadow-simple-hover focus:ring-2 focus:ring-primary-action/50 active:bg-primary-action/40 dark:bg-blue-400/20 dark:border-blue-400 dark:text-gray-300',
         // Unselected - мягкое неактивное состояние
         unselected:
-          'bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100 hover:border-slate-300 focus:ring-2 focus:ring-slate-200/50 active:bg-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:border-slate-600',
+          'bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-slate-300 focus:ring-2 focus:ring-slate-200/50 active:bg-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300 dark:hover:bg-slate-700 dark:hover:border-slate-600',
       },
     };
 

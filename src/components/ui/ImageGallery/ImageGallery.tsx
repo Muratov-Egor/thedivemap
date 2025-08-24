@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { Image as ImageType } from '@/types/database';
-import Button from '@/components/ui/Button';
 import { createPortal } from 'react-dom';
 
 interface ImageGalleryProps {

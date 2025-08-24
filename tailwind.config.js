@@ -30,10 +30,12 @@ module.exports = {
 
         // ===== ПАСТЕЛЬНАЯ СИСТЕМА АКЦЕНТОВ =====
         // Основные действия - пастельные
-        'primary-action': '#60A5FA', // blue-400 пастельный
+                'primary-action': '#60A5FA', // blue-400 пастельный
         'secondary-action': '#9CA3AF', // gray-400 пастельный
         'tertiary-action': '#CBD5E1', // gray-300 пастельный
-
+        'coral-action': '#FA9A55', // coral-400 пастельный (светлая тема)
+        'yellow-action': '#FECA57', // yellow-300 пастельный (светлая тема)
+        
         // Семантические цвета - пастельные
         'success-accent': '#4ADE80', // green-400 пастельный
         'warning-accent': '#FBBF24', // amber-400 пастельный

@@ -14,7 +14,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     | 'danger'
     | 'info'
     | 'outline'
-    | 'glass';
+    | 'glass'
+    | 'coral';
   shape?: 'rounded' | 'circle' | 'pill';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
@@ -74,34 +75,39 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // ===== ИСПРАВЛЕННАЯ СИСТЕМА АКЦЕНТОВ =====
       // Primary - основные действия (контрастный синий)
       primary:
-        'bg-primary-action text-white border-2 border-primary-action hover:bg-blue-600 hover:border-blue-600 hover:shadow-primary-shadow focus:ring-2 focus:ring-primary-action/50 shadow-simple button-shine transition-all duration-300 active:bg-blue-700 dark:hover:bg-blue-500',
+        'bg-primary-action dark:bg-primary-action/80 text-white border-2 border-primary-action hover:bg-blue-600 hover:border-blue-600 hover:shadow-primary-shadow focus:ring-2 focus:ring-primary-action/50 shadow-simple button-shine transition-all duration-300 active:bg-blue-700 dark:hover:bg-blue-500',
 
       // Secondary - вторичные действия (нейтральные)
       secondary:
-        'bg-transparent text-secondary-action border-2 border-secondary-action hover:bg-secondary-action hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-secondary-action/50 shadow-simple button-shine transition-all duration-300 active:bg-gray-600 dark:text-gray-300 dark:border-gray-400 dark:hover:bg-gray-400 dark:hover:text-gray-900',
+        'bg-transparent dark:bg-transparent/80 text-secondary-action border-2 border-secondary-action hover:bg-secondary-action hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-secondary-action/50 shadow-simple button-shine transition-all duration-300 active:bg-gray-600 dark:text-gray-300 dark:border-gray-400 dark:hover:bg-gray-400 dark:hover:text-gray-900',
 
       // Success - успешные действия (контрастный зеленый)
       success:
-        'bg-success-accent text-white border-2 border-success-accent hover:bg-green-600 hover:border-green-600 hover:shadow-success-shadow focus:ring-2 focus:ring-success-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-green-700 dark:hover:bg-green-400',
+        'bg-success-accent dark:bg-success-accent/80 text-white border-2 border-success-accent hover:bg-green-600 hover:border-green-600 hover:shadow-success-shadow focus:ring-2 focus:ring-success-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-green-700 dark:hover:bg-green-400',
 
       // Warning - предупреждения (контрастный желтый)
       warning:
-        'bg-warning-accent text-white border-2 border-warning-accent hover:bg-amber-600 hover:border-amber-600 hover:shadow-warning-shadow focus:ring-2 focus:ring-warning-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-amber-700 dark:hover:bg-amber-400',
+        'bg-warning-accent dark:bg-warning-accent/80 text-white border-2 border-warning-accent hover:bg-amber-600 hover:border-amber-600 hover:shadow-warning-shadow focus:ring-2 focus:ring-warning-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-amber-700 dark:hover:bg-amber-400',
 
       // Danger - опасные действия (контрастный красный)
       danger:
-        'bg-danger-accent text-white border-2 border-danger-accent hover:bg-red-600 hover:border-red-600 hover:shadow-danger-shadow focus:ring-2 focus:ring-danger-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-red-700 dark:hover:bg-red-400',
+        'bg-danger-accent dark:bg-danger-accent/80 text-white border-2 border-danger-accent hover:bg-red-600 hover:border-red-600 hover:shadow-danger-shadow focus:ring-2 focus:ring-danger-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-red-700 dark:hover:bg-red-400',
 
       // Info - информационные действия (контрастный синий)
-      info: 'bg-info-accent text-white border-2 border-info-accent hover:bg-blue-600 hover:border-blue-600 hover:shadow-primary-shadow focus:ring-2 focus:ring-info-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-blue-700 dark:hover:bg-blue-500',
+      info: 'bg-info-accent dark:bg-info-accent/80 text-white border-2 border-info-accent hover:bg-blue-600 hover:border-blue-600 hover:shadow-primary-shadow focus:ring-2 focus:ring-info-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-blue-700 dark:hover:bg-blue-500',
 
       // Outline - обводка (контрастные границы)
       outline:
-        'bg-transparent text-outline-purple border-2 border-outline-purple hover:bg-outline-purple hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 active:bg-indigo-800 dark:text-indigo-300 dark:border-indigo-400 dark:hover:bg-indigo-400 dark:hover:text-indigo-900',
+        'bg-transparent dark:bg-transparent/80 text-outline-purple border-2 border-outline-purple hover:bg-outline-purple hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 active:bg-indigo-800 dark:text-indigo-300 dark:border-indigo-400 dark:hover:bg-indigo-400 dark:hover:text-indigo-900',
 
       // Glass - прозрачная обводка (стеклянный эффект)
       glass:
-        'bg-glass-bg/50 backdrop-blur-sm text-outline-purple border-2 border-outline-purple/30 hover:border-outline-purple hover:bg-glass-bg/70 hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 dark:text-indigo-300 dark:border-indigo-400/30 dark:hover:border-indigo-400',
+        'bg-glass-bg/50 dark:bg-glass-bg/50 backdrop-blur-sm text-outline-purple border-2 border-outline-purple/30 hover:border-outline-purple hover:bg-glass-bg/70 hover:shadow-simple-hover focus:ring-2 focus:ring-outline-purple/50 shadow-simple button-shine transition-all duration-300 dark:text-indigo-300 dark:border-indigo-400/30 dark:hover:border-indigo-400',
+
+      // Coral - кормальные действия (контрастный оранжевый)
+      coral:
+        'bg-coral-action dark:bg-coral-action/80 text-white border-2 border-coral-action hover:bg-coral-action hover:text-white hover:shadow-simple-hover focus:ring-2 focus:ring-coral-action/50 shadow-simple button-shine transition-all duration-300 active:bg-coral-action-700 dark:hover:bg-coral-action-400',
+
     };
 
     const shapeStyles = {

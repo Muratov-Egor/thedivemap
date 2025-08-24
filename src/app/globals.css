@@ -23,6 +23,8 @@
   --primary-action: 96, 165, 250; /* #60A5FA - blue-400 пастельный */
   --secondary-action: 156, 163, 175; /* #9CA3AF - gray-400 пастельный */
   --tertiary-action: 203, 213, 225; /* #CBD5E1 - gray-300 пастельный */
+  --coral-action: 244, 123, 37; /* #FA9A55 - coral-400 пастельный */
+  --yellow-action: 250, 204, 21; /* #FECA57 - yellow-300 пастельный */
 
   /* Семантические цвета - пастельные */
   --success-accent: 74, 222, 128; /* #4ADE80 - green-400 пастельный */
@@ -90,6 +92,8 @@
   --primary-action: 147, 197, 253; /* #93C5FD - blue-300 пастельный */
   --secondary-action: 203, 213, 225; /* #CBD5E1 - gray-300 пастельный */
   --tertiary-action: 156, 163, 175; /* #9CA3AF - gray-400 пастельный */
+  --coral-action: 251, 146, 60; /* #FC821E - coral-300 пастельный */
+  --yellow-action: 250, 204, 21; /* ##feca57 - yellow-300 пастельный */
 
   /* Семантические цвета - пастельные для темной темы */
   --success-accent: 134, 239, 172; /* #86EFAC - green-300 пастельный */

@@ -162,15 +162,15 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         track: 'bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600',
         filled: 'bg-primary-action dark:bg-blue-400',
         thumb:
-          'bg-white dark:bg-slate-800 border-2 border-primary-action dark:border-blue-400 shadow-simple',
+          'bg-white dark:bg-primary-action border-2 border-primary-action dark:border-white shadow-simple',
         thumbHover:
           'hover:scale-110 hover:shadow-simple-hover hover:border-blue-600 dark:hover:border-blue-300',
       },
       visibility: {
         track: 'bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600',
-        filled: 'bg-info-accent dark:bg-blue-400',
+        filled: 'bg-blue-200 dark:bg-blue-200',
         thumb:
-          'bg-white dark:bg-slate-800 border-2 border-info-accent dark:border-blue-400 shadow-simple',
+          'bg-white dark:bg-blue-200 border-2 border-blue-200 dark:border-white shadow-simple',
         thumbHover:
           'hover:scale-110 hover:shadow-simple-hover hover:border-blue-600 dark:hover:border-blue-300',
       },
