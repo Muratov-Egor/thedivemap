@@ -26,6 +26,8 @@ export async function signUp(data: SignUpData, t?: (key: string) => string): Pro
       options: {
         data: {
           name: data.name,
+          full_name: data.name,
+          display_name: data.name,
         },
       },
     });
@@ -60,7 +62,7 @@ export async function signUp(data: SignUpData, t?: (key: string) => string): Pro
       user: {
         id: authData.user.id,
         email: authData.user.email || '',
-        name: authData.user.user_metadata?.name || undefined,
+        name: authData.user.user_metadata?.display_name || authData.user.user_metadata?.full_name || authData.user.user_metadata?.name || undefined,
         created_at: authData.user.created_at,
         updated_at: authData.user.updated_at || authData.user.created_at,
       },
@@ -119,7 +121,7 @@ export async function signIn(data: SignInData, t?: (key: string) => string): Pro
       user: {
         id: authData.user.id,
         email: authData.user.email || '',
-        name: authData.user.user_metadata?.name || undefined,
+        name: authData.user.user_metadata?.display_name || authData.user.user_metadata?.full_name || authData.user.user_metadata?.name || undefined,
         created_at: authData.user.created_at,
         updated_at: authData.user.updated_at || authData.user.created_at,
       },

@@ -50,7 +50,7 @@ export async function getCurrentSession(): Promise<AuthResponse<UserSession | nu
       user: {
         id: session.user.id,
         email: session.user.email || '',
-        name: session.user.user_metadata?.name || undefined,
+        name: session.user.user_metadata?.display_name || session.user.user_metadata?.full_name || session.user.user_metadata?.name || undefined,
         created_at: session.user.created_at,
         updated_at: session.user.updated_at || session.user.created_at,
       },
@@ -96,7 +96,7 @@ export async function getCurrentUser(): Promise<AuthResponse<User | null>> {
     const userData: User = {
       id: user.id,
       email: user.email || '',
-      name: user.user_metadata?.name || undefined,
+      name: user.user_metadata?.display_name || user.user_metadata?.full_name || user.user_metadata?.name || undefined,
       created_at: user.created_at,
       updated_at: user.updated_at || user.created_at,
     };
@@ -132,6 +132,7 @@ export async function refreshSession(): Promise<AuthResponse<UserSession | null>
       user: {
         id: session.user.id,
         email: session.user.email || '',
+        name: session.user.user_metadata?.display_name || session.user.user_metadata?.full_name || session.user.user_metadata?.name || undefined,
         created_at: session.user.created_at,
         updated_at: session.user.updated_at || session.user.created_at,
       },
@@ -162,6 +163,7 @@ export function onAuthStateChange(
         user: {
           id: session.user.id,
           email: session.user.email || '',
+          name: session.user.user_metadata?.display_name || session.user.user_metadata?.full_name || session.user.user_metadata?.name || undefined,
           created_at: session.user.created_at,
           updated_at: session.user.updated_at || session.user.created_at,
         },
