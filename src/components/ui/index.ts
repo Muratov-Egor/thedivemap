@@ -22,3 +22,7 @@ export { ImageGallery } from './ImageGallery';
 
 // ThemeToggle component
 export { ThemeToggle } from './ThemeToggle';
+
+// DropdownMenu component
+export { DropdownMenu } from './DropdownMenu';
+export type { DropdownMenuProps, DropdownMenuItem } from './DropdownMenu';

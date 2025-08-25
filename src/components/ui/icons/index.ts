@@ -31,3 +31,4 @@ export { DiverIcon } from './DiverIcon';
 export { MapIcon } from './MapIcon';
 export { MenuIcon } from './MenuIcon';
 export { ChevronUpIcon } from './ChevronUpIcon';
+export { ChevronDownIcon } from './ChevronDownIcon';
