@@ -1,9 +1,9 @@
 'use client';
 
-import NavBar from './NavBar';
 import Logo from './Logo';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
+import { Button } from '../ui';
 
 export default function Header() {
   const { user, signOut } = useAuth();
@@ -28,7 +28,17 @@ export default function Header() {
       suppressHydrationWarning
     >
       <Logo />
-      <NavBar user={user} onLogin={handleLogin} onLogout={handleLogout} />
+      <div className="flex items-center gap-2">
+        {user ? (
+          <Button variant="glass" shape="pill" size="small" onClick={handleLogout}>
+            Logout
+          </Button>
+        ) : (
+          <Button variant="glass" shape="pill" size="small" onClick={handleLogin}>
+            Login
+          </Button>
+        )}
+      </div>
     </header>
   );
 }
