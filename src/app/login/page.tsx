@@ -23,10 +23,10 @@ export default function LoginPage() {
     try {
       await signIn(formData.email, formData.password);
       
-      // После успешного входа редирект на главную
-      router.push('/');
+      // Проверяем, что нет ошибок после попытки входа
+      // Если ошибок нет и пользователь авторизован, редирект произойдет автоматически
+      // через useEffect выше
     } catch (error) {
-      // Ошибки обрабатываются в AuthContext
       console.error('Ошибка при входе:', error);
     }
   };

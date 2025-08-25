@@ -1,5 +1,5 @@
 import { supabase } from '../supabase';
-import { AuthResponse, createAuthSuccess, createAuthErrorResponse, AUTH_ERROR_CODES, AuthErrorCode } from './errors';
+import { AuthResponse, createAuthSuccess, createAuthErrorResponse, AUTH_ERROR_CODES, AuthErrorCode, translateAuthError } from './errors';
 import { UserSession } from './session';
 
 export interface SignUpData {
@@ -18,7 +18,7 @@ export interface ResetPasswordData {
 }
 
 // Регистрация пользователя
-export async function signUp(data: SignUpData): Promise<AuthResponse<UserSession>> {
+export async function signUp(data: SignUpData, t?: (key: string) => string): Promise<AuthResponse<UserSession>> {
   try {
     const { data: authData, error } = await supabase.auth.signUp({
       email: data.email,
@@ -42,7 +42,7 @@ export async function signUp(data: SignUpData): Promise<AuthResponse<UserSession
       }
 
       return createAuthErrorResponse(
-        error.message,
+        translateAuthError(error.message, t),
         errorCode as AuthErrorCode,
         error.status || 400
       );
@@ -82,7 +82,7 @@ export async function signUp(data: SignUpData): Promise<AuthResponse<UserSession
 }
 
 // Вход в систему
-export async function signIn(data: SignInData): Promise<AuthResponse<UserSession>> {
+export async function signIn(data: SignInData, t?: (key: string) => string): Promise<AuthResponse<UserSession>> {
   try {
     const { data: authData, error } = await supabase.auth.signInWithPassword({
       email: data.email,
@@ -101,7 +101,7 @@ export async function signIn(data: SignInData): Promise<AuthResponse<UserSession
       }
 
       return createAuthErrorResponse(
-        error.message,
+        translateAuthError(error.message, t),
         errorCode as AuthErrorCode,
         error.status || 400
       );

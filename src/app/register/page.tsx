@@ -23,10 +23,10 @@ export default function RegisterPage() {
     try {
       await signUp(formData.email, formData.password, formData.name);
       
-      // После успешной регистрации редирект на главную
-      router.push('/');
+      // Проверяем, что нет ошибок после попытки регистрации
+      // Если ошибок нет и пользователь авторизован, редирект произойдет автоматически
+      // через useEffect выше
     } catch (error) {
-      // Ошибки обрабатываются в AuthContext
       console.error('Ошибка при регистрации:', error);
     }
   };

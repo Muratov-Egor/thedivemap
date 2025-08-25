@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { UserSession, User } from '@/lib/auth/session';
 import { AuthError } from '@/lib/auth/errors';
 import { getCurrentSession, getCurrentUser, onAuthStateChange } from '@/lib/auth/session';
@@ -28,6 +29,7 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  const { t } = useTranslation('common');
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<UserSession | null>(null);
   const [loading, setLoading] = useState(true);
@@ -101,13 +103,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setLoading(true);
       setError(null);
 
-      const response = await signIn({ email, password });
+      const response = await signIn({ email, password }, t);
       
       if (response.error) {
         // Специальная обработка для неподтвержденного email
         if (response.error.code === 'email_not_confirmed') {
           setError({
-            message: 'Пожалуйста, подтвердите ваш email перед входом в систему. Проверьте вашу почту.',
+            message: t('auth.errors.emailNotConfirmed'),
             code: 'email_not_confirmed',
             status: 400,
           });
@@ -123,7 +125,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     } catch {
       setError({
-        message: 'Неожиданная ошибка при входе в систему',
+        message: t('auth.errors.generalError'),
         code: 'unknown_error',
         status: 500,
       });
@@ -138,7 +140,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setLoading(true);
       setError(null);
 
-      const response = await signUp({ email, password, name });
+      const response = await signUp({ email, password, name }, t);
       
       if (response.error) {
         setError(response.error);
@@ -151,7 +153,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     } catch {
       setError({
-        message: 'Неожиданная ошибка при регистрации',
+        message: t('auth.errors.generalError'),
         code: 'unknown_error',
         status: 500,
       });
@@ -177,7 +179,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setUser(null);
     } catch {
       setError({
-        message: 'Неожиданная ошибка при выходе из системы',
+        message: t('auth.unexpected_error_message'),
         code: 'unknown_error',
         status: 500,
       });
@@ -200,7 +202,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     } catch {
       setError({
-        message: 'Неожиданная ошибка при сбросе пароля',
+        message: t('auth.unexpected_error_message'),
         code: 'unknown_error',
         status: 500,
       });

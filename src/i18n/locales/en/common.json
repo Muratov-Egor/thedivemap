@@ -80,7 +80,21 @@
       "passwordMinLength": "Password must be at least 6 characters long",
       "confirmPasswordRequired": "Password confirmation is required",
       "passwordsDoNotMatch": "Passwords do not match",
-      "fieldRequired": "{{field}} is required"
+      "fieldRequired": "{{field}} field is required"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password. Please check your credentials.",
+      "emailNotConfirmed": "Email not confirmed. Check your email and click the confirmation link.",
+      "userNotFound": "User with this email not found. Check your email or register.",
+      "emailAlreadyExists": "User with this email already exists. Sign in or use a different email.",
+      "invalidEmail": "Invalid email. Please check the spelling.",
+      "weakPassword": "Password is too weak. Use at least 6 characters.",
+      "passwordRequired": "Password is required.",
+      "networkError": "Connection error. Check your internet connection and try again.",
+      "timeout": "Request timeout. Please try again.",
+      "tooManyRequests": "Too many attempts. Wait a moment and try again.",
+      "generalError": "An error occurred while signing in. Please try again.",
+      "unexpectedError": "An unexpected error occurred. Please try again."
     }
   }
 }
