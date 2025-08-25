@@ -1,5 +1,12 @@
 import { supabase } from '../supabase';
-import { AuthResponse, createAuthSuccess, createAuthErrorResponse, AUTH_ERROR_CODES, AuthErrorCode, translateAuthError } from './errors';
+import {
+  AuthResponse,
+  createAuthSuccess,
+  createAuthErrorResponse,
+  AUTH_ERROR_CODES,
+  AuthErrorCode,
+  translateAuthError,
+} from './errors';
 import { UserSession } from './session';
 
 export interface SignUpData {
@@ -18,7 +25,10 @@ export interface ResetPasswordData {
 }
 
 // Регистрация пользователя
-export async function signUp(data: SignUpData, t?: (key: string) => string): Promise<AuthResponse<UserSession>> {
+export async function signUp(
+  data: SignUpData,
+  t?: (key: string) => string,
+): Promise<AuthResponse<UserSession>> {
   try {
     const { data: authData, error } = await supabase.auth.signUp({
       email: data.email,
@@ -34,7 +44,7 @@ export async function signUp(data: SignUpData, t?: (key: string) => string): Pro
 
     if (error) {
       let errorCode = 'unknown_error';
-      
+
       if (error.message.includes('Invalid email')) {
         errorCode = AUTH_ERROR_CODES.INVALID_EMAIL;
       } else if (error.message.includes('Password')) {
@@ -46,23 +56,23 @@ export async function signUp(data: SignUpData, t?: (key: string) => string): Pro
       return createAuthErrorResponse(
         translateAuthError(error.message, t),
         errorCode as AuthErrorCode,
-        error.status || 400
+        error.status || 400,
       );
     }
 
     if (!authData.session || !authData.user) {
-      return createAuthErrorResponse(
-        'Ошибка при создании аккаунта',
-        'unknown_error',
-        500
-      );
+      return createAuthErrorResponse('Ошибка при создании аккаунта', 'unknown_error', 500);
     }
 
     const userSession: UserSession = {
       user: {
         id: authData.user.id,
         email: authData.user.email || '',
-        name: authData.user.user_metadata?.display_name || authData.user.user_metadata?.full_name || authData.user.user_metadata?.name || undefined,
+        name:
+          authData.user.user_metadata?.display_name ||
+          authData.user.user_metadata?.full_name ||
+          authData.user.user_metadata?.name ||
+          undefined,
         created_at: authData.user.created_at,
         updated_at: authData.user.updated_at || authData.user.created_at,
       },
@@ -75,16 +85,15 @@ export async function signUp(data: SignUpData, t?: (key: string) => string): Pro
 
     return createAuthSuccess(userSession);
   } catch {
-    return createAuthErrorResponse(
-      'Ошибка при регистрации',
-      'unknown_error',
-      500
-    );
+    return createAuthErrorResponse('Ошибка при регистрации', 'unknown_error', 500);
   }
 }
 
 // Вход в систему
-export async function signIn(data: SignInData, t?: (key: string) => string): Promise<AuthResponse<UserSession>> {
+export async function signIn(
+  data: SignInData,
+  t?: (key: string) => string,
+): Promise<AuthResponse<UserSession>> {
   try {
     const { data: authData, error } = await supabase.auth.signInWithPassword({
       email: data.email,
@@ -93,7 +102,7 @@ export async function signIn(data: SignInData, t?: (key: string) => string): Pro
 
     if (error) {
       let errorCode = 'unknown_error';
-      
+
       if (error.message.includes('Invalid login credentials')) {
         errorCode = AUTH_ERROR_CODES.INVALID_CREDENTIALS;
       } else if (error.message.includes('Email not confirmed')) {
@@ -105,23 +114,23 @@ export async function signIn(data: SignInData, t?: (key: string) => string): Pro
       return createAuthErrorResponse(
         translateAuthError(error.message, t),
         errorCode as AuthErrorCode,
-        error.status || 400
+        error.status || 400,
       );
     }
 
     if (!authData.session || !authData.user) {
-      return createAuthErrorResponse(
-        'Ошибка при входе в систему',
-        'unknown_error',
-        500
-      );
+      return createAuthErrorResponse('Ошибка при входе в систему', 'unknown_error', 500);
     }
 
     const userSession: UserSession = {
       user: {
         id: authData.user.id,
         email: authData.user.email || '',
-        name: authData.user.user_metadata?.display_name || authData.user.user_metadata?.full_name || authData.user.user_metadata?.name || undefined,
+        name:
+          authData.user.user_metadata?.display_name ||
+          authData.user.user_metadata?.full_name ||
+          authData.user.user_metadata?.name ||
+          undefined,
         created_at: authData.user.created_at,
         updated_at: authData.user.updated_at || authData.user.created_at,
       },
@@ -134,11 +143,7 @@ export async function signIn(data: SignInData, t?: (key: string) => string): Pro
 
     return createAuthSuccess(userSession);
   } catch {
-    return createAuthErrorResponse(
-      'Ошибка при входе в систему',
-      'unknown_error',
-      500
-    );
+    return createAuthErrorResponse('Ошибка при входе в систему', 'unknown_error', 500);
   }
 }
 
@@ -148,20 +153,12 @@ export async function signOut(): Promise<AuthResponse<void>> {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-      return createAuthErrorResponse(
-        error.message,
-        'unknown_error',
-        error.status || 500
-      );
+      return createAuthErrorResponse(error.message, 'unknown_error', error.status || 500);
     }
 
     return createAuthSuccess(undefined);
   } catch {
-    return createAuthErrorResponse(
-      'Ошибка при выходе из системы',
-      'unknown_error',
-      500
-    );
+    return createAuthErrorResponse('Ошибка при выходе из системы', 'unknown_error', 500);
   }
 }
 
@@ -174,7 +171,7 @@ export async function resetPassword(data: ResetPasswordData): Promise<AuthRespon
 
     if (error) {
       let errorCode = 'unknown_error';
-      
+
       if (error.message.includes('Invalid email')) {
         errorCode = AUTH_ERROR_CODES.INVALID_EMAIL;
       } else if (error.message.includes('User not found')) {
@@ -184,17 +181,13 @@ export async function resetPassword(data: ResetPasswordData): Promise<AuthRespon
       return createAuthErrorResponse(
         error.message,
         errorCode as AuthErrorCode,
-        error.status || 400
+        error.status || 400,
       );
     }
 
     return createAuthSuccess(undefined);
   } catch {
-    return createAuthErrorResponse(
-      'Ошибка при сбросе пароля',
-      'unknown_error',
-      500
-    );
+    return createAuthErrorResponse('Ошибка при сбросе пароля', 'unknown_error', 500);
   }
 }
 
@@ -207,7 +200,7 @@ export async function updatePassword(newPassword: string): Promise<AuthResponse<
 
     if (error) {
       let errorCode = 'unknown_error';
-      
+
       if (error.message.includes('Password')) {
         errorCode = AUTH_ERROR_CODES.WEAK_PASSWORD;
       }
@@ -215,16 +208,12 @@ export async function updatePassword(newPassword: string): Promise<AuthResponse<
       return createAuthErrorResponse(
         error.message,
         errorCode as AuthErrorCode,
-        error.status || 400
+        error.status || 400,
       );
     }
 
     if (!authData.user) {
-      return createAuthErrorResponse(
-        'Ошибка при обновлении пароля',
-        'unknown_error',
-        500
-      );
+      return createAuthErrorResponse('Ошибка при обновлении пароля', 'unknown_error', 500);
     }
 
     // Для updatePassword Supabase не возвращает session, поэтому создаем базовую структуру
@@ -244,10 +233,6 @@ export async function updatePassword(newPassword: string): Promise<AuthResponse<
 
     return createAuthSuccess(userSession);
   } catch {
-    return createAuthErrorResponse(
-      'Ошибка при обновлении пароля',
-      'unknown_error',
-      500
-    );
+    return createAuthErrorResponse('Ошибка при обновлении пароля', 'unknown_error', 500);
   }
 }

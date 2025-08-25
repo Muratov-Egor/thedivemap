@@ -27,19 +27,18 @@ export interface User {
 // Получение текущей сессии
 export async function getCurrentSession(): Promise<AuthResponse<UserSession | null>> {
   try {
-    const { data: { session }, error } = await supabase.auth.getSession();
-    
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.getSession();
+
     if (error) {
       // Если ошибка связана с отсутствием сессии, это нормально
       if (error.message.includes('Auth session missing')) {
         return createAuthSuccess(null);
       }
-      
-      return createAuthErrorResponse(
-        error.message,
-        'unknown_error',
-        error.status || 500
-      );
+
+      return createAuthErrorResponse(error.message, 'unknown_error', error.status || 500);
     }
 
     if (!session) {
@@ -50,7 +49,11 @@ export async function getCurrentSession(): Promise<AuthResponse<UserSession | nu
       user: {
         id: session.user.id,
         email: session.user.email || '',
-        name: session.user.user_metadata?.display_name || session.user.user_metadata?.full_name || session.user.user_metadata?.name || undefined,
+        name:
+          session.user.user_metadata?.display_name ||
+          session.user.user_metadata?.full_name ||
+          session.user.user_metadata?.name ||
+          undefined,
         created_at: session.user.created_at,
         updated_at: session.user.updated_at || session.user.created_at,
       },
@@ -63,30 +66,25 @@ export async function getCurrentSession(): Promise<AuthResponse<UserSession | nu
 
     return createAuthSuccess(userSession);
   } catch {
-    return createAuthErrorResponse(
-      'Ошибка при получении сессии',
-      'unknown_error',
-      500
-    );
+    return createAuthErrorResponse('Ошибка при получении сессии', 'unknown_error', 500);
   }
 }
 
 // Получение текущего пользователя
 export async function getCurrentUser(): Promise<AuthResponse<User | null>> {
   try {
-    const { data: { user }, error } = await supabase.auth.getUser();
-    
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+
     if (error) {
       // Если ошибка связана с отсутствием пользователя, это нормально
       if (error.message.includes('Auth session missing')) {
         return createAuthSuccess(null);
       }
-      
-      return createAuthErrorResponse(
-        error.message,
-        'unknown_error',
-        error.status || 500
-      );
+
+      return createAuthErrorResponse(error.message, 'unknown_error', error.status || 500);
     }
 
     if (!user) {
@@ -96,32 +94,31 @@ export async function getCurrentUser(): Promise<AuthResponse<User | null>> {
     const userData: User = {
       id: user.id,
       email: user.email || '',
-      name: user.user_metadata?.display_name || user.user_metadata?.full_name || user.user_metadata?.name || undefined,
+      name:
+        user.user_metadata?.display_name ||
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        undefined,
       created_at: user.created_at,
       updated_at: user.updated_at || user.created_at,
     };
 
     return createAuthSuccess(userData);
   } catch {
-    return createAuthErrorResponse(
-      'Ошибка при получении пользователя',
-      'unknown_error',
-      500
-    );
+    return createAuthErrorResponse('Ошибка при получении пользователя', 'unknown_error', 500);
   }
 }
 
 // Обновление сессии
 export async function refreshSession(): Promise<AuthResponse<UserSession | null>> {
   try {
-    const { data: { session }, error } = await supabase.auth.refreshSession();
-    
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.refreshSession();
+
     if (error) {
-      return createAuthErrorResponse(
-        error.message,
-        'unknown_error',
-        error.status || 500
-      );
+      return createAuthErrorResponse(error.message, 'unknown_error', error.status || 500);
     }
 
     if (!session) {
@@ -132,7 +129,11 @@ export async function refreshSession(): Promise<AuthResponse<UserSession | null>
       user: {
         id: session.user.id,
         email: session.user.email || '',
-        name: session.user.user_metadata?.display_name || session.user.user_metadata?.full_name || session.user.user_metadata?.name || undefined,
+        name:
+          session.user.user_metadata?.display_name ||
+          session.user.user_metadata?.full_name ||
+          session.user.user_metadata?.name ||
+          undefined,
         created_at: session.user.created_at,
         updated_at: session.user.updated_at || session.user.created_at,
       },
@@ -145,17 +146,16 @@ export async function refreshSession(): Promise<AuthResponse<UserSession | null>
 
     return createAuthSuccess(userSession);
   } catch {
-    return createAuthErrorResponse(
-      'Ошибка при обновлении сессии',
-      'unknown_error',
-      500
-    );
+    return createAuthErrorResponse('Ошибка при обновлении сессии', 'unknown_error', 500);
   }
 }
 
 // Подписка на изменения аутентификации
 export function onAuthStateChange(
-  callback: (event: 'SIGNED_IN' | 'SIGNED_OUT' | 'TOKEN_REFRESHED', session: UserSession | null) => void
+  callback: (
+    event: 'SIGNED_IN' | 'SIGNED_OUT' | 'TOKEN_REFRESHED',
+    session: UserSession | null,
+  ) => void,
 ) {
   return supabase.auth.onAuthStateChange(async (event, session) => {
     if (session) {
@@ -163,7 +163,11 @@ export function onAuthStateChange(
         user: {
           id: session.user.id,
           email: session.user.email || '',
-          name: session.user.user_metadata?.display_name || session.user.user_metadata?.full_name || session.user.user_metadata?.name || undefined,
+          name:
+            session.user.user_metadata?.display_name ||
+            session.user.user_metadata?.full_name ||
+            session.user.user_metadata?.name ||
+            undefined,
           created_at: session.user.created_at,
           updated_at: session.user.updated_at || session.user.created_at,
         },

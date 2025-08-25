@@ -40,7 +40,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const initializeAuth = async () => {
       try {
         setLoading(true);
-        
+
         // Получаем текущую сессию
         const sessionResponse = await getCurrentSession();
         if (sessionResponse.error) {
@@ -77,9 +77,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     initializeAuth();
 
     // Подписываемся на изменения состояния аутентификации
-    const { data: { subscription } } = onAuthStateChange((event, session) => {
+    const {
+      data: { subscription },
+    } = onAuthStateChange((event, session) => {
       console.log('Auth state changed:', event, session);
-      
+
       if (session) {
         setSession(session);
         setUser(session.user);
@@ -88,7 +90,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setSession(null);
         setUser(null);
       }
-      
+
       setLoading(false);
     });
 
@@ -104,7 +106,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setError(null);
 
       const response = await signIn({ email, password }, t);
-      
+
       if (response.error) {
         // Специальная обработка для неподтвержденного email
         if (response.error.code === 'email_not_confirmed') {
@@ -141,7 +143,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setError(null);
 
       const response = await signUp({ email, password, name }, t);
-      
+
       if (response.error) {
         setError(response.error);
         return;
@@ -169,7 +171,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setError(null);
 
       const response = await signOut();
-      
+
       if (response.error) {
         setError(response.error);
         return;
@@ -195,7 +197,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setError(null);
 
       const response = await resetPassword({ email });
-      
+
       if (response.error) {
         setError(response.error);
         return;
@@ -228,20 +230,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     clearError,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 // Хук для использования контекста аутентификации
 export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);
-  
+
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
-  
+
   return context;
 }

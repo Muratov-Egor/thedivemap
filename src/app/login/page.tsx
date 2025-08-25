@@ -22,7 +22,7 @@ export default function LoginPage() {
   const handleLogin = async (formData: Record<string, string>) => {
     try {
       await signIn(formData.email, formData.password);
-      
+
       // Проверяем, что нет ошибок после попытки входа
       // Если ошибок нет и пользователь авторизован, редирект произойдет автоматически
       // через useEffect выше

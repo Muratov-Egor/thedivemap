@@ -29,9 +29,7 @@ export default function AuthForm({ config, submitButtonText, bottomText }: AuthF
       {/* Отображение глобальных ошибок аутентификации */}
       {authError && (
         <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-          <p className="text-sm text-red-700 dark:text-red-300">
-            {authError.message}
-          </p>
+          <p className="text-sm text-red-700 dark:text-red-300">{authError.message}</p>
         </div>
       )}
 

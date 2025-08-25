@@ -34,26 +34,45 @@ jest.mock('next/link', () => {
   };
 });
 
+// Мокаем next/navigation
+const mockPush = jest.fn();
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: mockPush,
+  }),
+}));
+
 // Мокаем useMediaQuery
 const mockUseIsMobile = jest.fn();
 jest.mock('@/hooks/useMediaQuery', () => ({
   useIsMobile: () => mockUseIsMobile(),
 }));
 
+// Мокаем useAuth
+const mockSignOut = jest.fn();
+const mockUseAuth = jest.fn();
+jest.mock('@/hooks/useAuth', () => ({
+  useAuth: () => mockUseAuth(),
+}));
+
 // Создаем обертку с провайдерами
 const renderWithProviders = (component: React.ReactElement) => {
   return render(
     <ThemeProvider>
-      <I18nProvider>
-        {component}
-      </I18nProvider>
-    </ThemeProvider>
+      <I18nProvider>{component}</I18nProvider>
+    </ThemeProvider>,
   );
 };
 
 describe('Header', () => {
   beforeEach(() => {
     mockUseIsMobile.mockReturnValue(false);
+    mockUseAuth.mockReturnValue({
+      user: null,
+      signOut: mockSignOut,
+    });
+    mockPush.mockClear();
+    mockSignOut.mockClear();
   });
 
   it('рендерит заголовок с логотипом и названием', () => {
@@ -113,11 +132,26 @@ describe('Header', () => {
     expect(logo).toHaveAttribute('src', '/img/Logo.svg');
   });
 
-  it('содержит кнопку входа', () => {
+  it('содержит кнопку входа для неавторизованного пользователя', () => {
     renderWithProviders(<Header />);
 
     const loginButton = screen.getByRole('button', { name: /login/i });
     expect(loginButton).toBeInTheDocument();
+  });
+
+  it('содержит информацию о пользователе и кнопку выхода для авторизованного пользователя', () => {
+    mockUseAuth.mockReturnValue({
+      user: { name: 'Test User', email: 'test@example.com' },
+      signOut: mockSignOut,
+    });
+
+    renderWithProviders(<Header />);
+
+    const userInfo = screen.getByText('Test User');
+    const logoutButton = screen.getByRole('button', { name: /logout/i });
+
+    expect(userInfo).toBeInTheDocument();
+    expect(logoutButton).toBeInTheDocument();
   });
 
   it('содержит компонент переключения темы в мобильной версии', () => {

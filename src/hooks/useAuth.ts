@@ -6,7 +6,7 @@ export const useAuth = useAuthContext;
 // Дополнительные утилитарные хуки для аутентификации
 export function useAuthState() {
   const { user, session, loading, error } = useAuth();
-  
+
   return {
     user,
     session,
@@ -19,7 +19,7 @@ export function useAuthState() {
 
 export function useAuthActions() {
   const { signIn, signUp, signOut, resetPassword, clearError } = useAuth();
-  
+
   return {
     signIn,
     signUp,

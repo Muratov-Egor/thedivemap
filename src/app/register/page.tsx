@@ -22,7 +22,7 @@ export default function RegisterPage() {
   const handleRegister = async (formData: Record<string, string>) => {
     try {
       await signUp(formData.email, formData.password, formData.name);
-      
+
       // Проверяем, что нет ошибок после попытки регистрации
       // Если ошибок нет и пользователь авторизован, редирект произойдет автоматически
       // через useEffect выше
