@@ -4,6 +4,7 @@
     "logoAlt": "The Dive Map",
     "motto": "Dive where it's interesting!",
     "login": "Login",
+    "logout": "Logout",
     "menu": {
       "open": "Open menu",
       "close": "Close menu",

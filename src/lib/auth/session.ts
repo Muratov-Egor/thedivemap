@@ -5,6 +5,7 @@ export interface UserSession {
   user: {
     id: string;
     email: string;
+    name?: string;
     created_at: string;
     updated_at: string;
   };
@@ -18,6 +19,7 @@ export interface UserSession {
 export interface User {
   id: string;
   email: string;
+  name?: string;
   created_at: string;
   updated_at: string;
 }
@@ -28,6 +30,11 @@ export async function getCurrentSession(): Promise<AuthResponse<UserSession | nu
     const { data: { session }, error } = await supabase.auth.getSession();
     
     if (error) {
+      // Если ошибка связана с отсутствием сессии, это нормально
+      if (error.message.includes('Auth session missing')) {
+        return createAuthSuccess(null);
+      }
+      
       return createAuthErrorResponse(
         error.message,
         'unknown_error',
@@ -43,6 +50,7 @@ export async function getCurrentSession(): Promise<AuthResponse<UserSession | nu
       user: {
         id: session.user.id,
         email: session.user.email || '',
+        name: session.user.user_metadata?.name || undefined,
         created_at: session.user.created_at,
         updated_at: session.user.updated_at || session.user.created_at,
       },
@@ -69,6 +77,11 @@ export async function getCurrentUser(): Promise<AuthResponse<User | null>> {
     const { data: { user }, error } = await supabase.auth.getUser();
     
     if (error) {
+      // Если ошибка связана с отсутствием пользователя, это нормально
+      if (error.message.includes('Auth session missing')) {
+        return createAuthSuccess(null);
+      }
+      
       return createAuthErrorResponse(
         error.message,
         'unknown_error',
@@ -83,6 +96,7 @@ export async function getCurrentUser(): Promise<AuthResponse<User | null>> {
     const userData: User = {
       id: user.id,
       email: user.email || '',
+      name: user.user_metadata?.name || undefined,
       created_at: user.created_at,
       updated_at: user.updated_at || user.created_at,
     };

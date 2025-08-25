@@ -42,7 +42,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         // Получаем текущую сессию
         const sessionResponse = await getCurrentSession();
         if (sessionResponse.error) {
-          console.error('Ошибка при получении сессии:', sessionResponse.error);
+          // Не выводим ошибку если сессия просто отсутствует (это нормально)
+          if (sessionResponse.error.message !== 'Auth session missing!') {
+            console.error('Ошибка при получении сессии:', sessionResponse.error);
+          }
           setLoading(false);
           return;
         }
@@ -54,7 +57,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
           // Если сессии нет, проверяем пользователя
           const userResponse = await getCurrentUser();
           if (userResponse.error) {
-            console.error('Ошибка при получении пользователя:', userResponse.error);
+            // Не выводим ошибку если пользователь просто не авторизован
+            if (userResponse.error.message !== 'Auth session missing!') {
+              console.error('Ошибка при получении пользователя:', userResponse.error);
+            }
           } else if (userResponse.data) {
             setUser(userResponse.data);
           }
@@ -98,7 +104,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const response = await signIn({ email, password });
       
       if (response.error) {
-        setError(response.error);
+        // Специальная обработка для неподтвержденного email
+        if (response.error.code === 'email_not_confirmed') {
+          setError({
+            message: 'Пожалуйста, подтвердите ваш email перед входом в систему. Проверьте вашу почту.',
+            code: 'email_not_confirmed',
+            status: 400,
+          });
+        } else {
+          setError(response.error);
+        }
         return;
       }
 

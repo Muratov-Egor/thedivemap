@@ -60,6 +60,7 @@ export async function signUp(data: SignUpData): Promise<AuthResponse<UserSession
       user: {
         id: authData.user.id,
         email: authData.user.email || '',
+        name: authData.user.user_metadata?.name || undefined,
         created_at: authData.user.created_at,
         updated_at: authData.user.updated_at || authData.user.created_at,
       },
@@ -118,6 +119,7 @@ export async function signIn(data: SignInData): Promise<AuthResponse<UserSession
       user: {
         id: authData.user.id,
         email: authData.user.email || '',
+        name: authData.user.user_metadata?.name || undefined,
         created_at: authData.user.created_at,
         updated_at: authData.user.updated_at || authData.user.created_at,
       },
