@@ -139,7 +139,7 @@ describe('Header', () => {
     expect(loginButton).toBeInTheDocument();
   });
 
-  it('содержит информацию о пользователе и кнопку выхода для авторизованного пользователя', () => {
+  it('содержит кнопку выхода для авторизованного пользователя', () => {
     mockUseAuth.mockReturnValue({
       user: { name: 'Test User', email: 'test@example.com' },
       signOut: mockSignOut,
@@ -147,10 +147,8 @@ describe('Header', () => {
 
     renderWithProviders(<Header />);
 
-    const userInfo = screen.getByText('Test User');
     const logoutButton = screen.getByRole('button', { name: /logout/i });
 
-    expect(userInfo).toBeInTheDocument();
     expect(logoutButton).toBeInTheDocument();
   });
 

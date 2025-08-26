@@ -10,8 +10,7 @@
     "result": "Результат"
   },
   "errors": {
-    "searchFailed": "Ошибка поиска",
-    "noResults": "Ничего не найдено"
+    "searchFailed": "Ошибка поиска"
   },
   "loading": "Поиск...",
   "resultsLabel": "Результаты поиска",

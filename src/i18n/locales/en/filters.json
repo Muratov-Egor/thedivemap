@@ -1,15 +1,12 @@
 {
   "title": "Filters",
-  "stub": "Here will be filters",
   "clearAll": "Clear filters",
   "siteTypes": {
     "title": "Dive Site Type",
-    "clearAll": "Clear",
     "filterBy": "Filter by"
   },
   "difficulties": {
     "title": "Difficulty Level",
-    "clearAll": "Clear",
     "filterBy": "Filter by"
   },
   "accessibility": {

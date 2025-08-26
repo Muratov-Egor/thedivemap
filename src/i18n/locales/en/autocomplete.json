@@ -10,8 +10,7 @@
     "result": "Result"
   },
   "errors": {
-    "searchFailed": "Search failed",
-    "noResults": "No results found"
+    "searchFailed": "Search failed"
   },
   "loading": "Searching...",
   "resultsLabel": "Search results",

@@ -1,19 +1,7 @@
 {
   "appName": "The Dive Map",
   "header": {
-    "logoAlt": "The Dive Map",
-    "motto": "Dive where it's interesting!",
-    "login": "Войти",
-    "logout": "Выйти",
-    "profile": "Профиль",
-    "logbook": "Мой лог-бук",
-    "menu": {
-      "open": "Открыть меню",
-      "close": "Закрыть меню",
-      "settings": "Настройки",
-      "theme": "Тема",
-      "language": "Язык"
-    }
+    "motto": "Dive where it's interesting!"
   },
   "search": {
     "placeholder": "Поиск дайв-сайтов, стран, регионов..."
@@ -38,9 +26,7 @@
       "closeTooltip": "Закрыть",
       "more": "Подробнее",
       "meters": "м"
-    },
-    "noResults": "По выбранным фильтрам дайв-сайты не найдены",
-    "tryChangeFilters": "Попробуйте изменить фильтры"
+    }
   },
   "button": {
     "accessibility": {
