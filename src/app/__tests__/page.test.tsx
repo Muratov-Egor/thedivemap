@@ -64,10 +64,8 @@ jest.mock('../../contexts/PanelContext', () => ({
 const renderWithProviders = (component: React.ReactElement) => {
   return render(
     <ThemeProvider>
-      <I18nProvider>
-        {component}
-      </I18nProvider>
-    </ThemeProvider>
+      <I18nProvider>{component}</I18nProvider>
+    </ThemeProvider>,
   );
 };
 

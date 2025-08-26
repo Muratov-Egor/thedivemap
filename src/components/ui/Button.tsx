@@ -91,7 +91,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
       // Danger - опасные действия (контрастный красный)
       danger:
-        'bg-danger-accent dark:bg-danger-accent/80 text-white border-2 border-danger-accent hover:bg-red-600 hover:border-red-600 hover:shadow-danger-shadow focus:ring-2 focus:ring-danger-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-red-700 dark:hover:bg-red-400',
+        'bg-danger-accent/70 dark:bg-danger-accent/80 text-white border-2 border-danger-accent/20 hover:bg-red-600 hover:border-red-600 hover:shadow-danger-shadow focus:ring-2 focus:ring-danger-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-red-700 dark:hover:bg-red-400',
 
       // Info - информационные действия (контрастный синий)
       info: 'bg-info-accent dark:bg-info-accent/80 text-white border-2 border-info-accent hover:bg-blue-600 hover:border-blue-600 hover:shadow-primary-shadow focus:ring-2 focus:ring-info-accent/50 shadow-simple button-shine transition-all duration-300 active:bg-blue-700 dark:hover:bg-blue-500',

@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { ThemeToggle } from './ui';
-import LanguageSwitch from './Header/LanguageSwitch';
-import { useIsMobile } from '@/hooks/useMediaQuery';
+import { ThemeToggle } from './ThemeToggle';
+import LanguageSwitch from './LanguageSwitch';
 
 export default function Footer() {
   const { t } = useTranslation('footer');
-  const isMobile = useIsMobile();
+
   return (
     <footer className="bg-background dark:bg-gray-800">
       <div className="container mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -20,12 +19,11 @@ export default function Footer() {
             {t('blog')}
           </Link>
         </div>
-        {!isMobile && (
-          <div className="flex flex-row items-center justify-end gap-4">
-            <ThemeToggle />
-            <LanguageSwitch />
-          </div>
-        )}
+
+        <div className="flex flex-row items-center justify-end gap-4">
+          <ThemeToggle />
+          <LanguageSwitch />
+        </div>
       </div>
     </footer>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import { useAuthForm, AuthFormConfig } from '@/hooks/useAuthForm';
+import { useAuth } from '@/hooks/useAuth';
 
 interface AuthFormProps {
   config: AuthFormConfig;
@@ -11,9 +12,27 @@ interface AuthFormProps {
 
 export default function AuthForm({ config, submitButtonText, bottomText }: AuthFormProps) {
   const { formData, errors, isSubmitting, handleInputChange, handleSubmit } = useAuthForm(config);
+  const { error: authError, clearError } = useAuth();
+
+  // Auto-clear error after 10 seconds
+  React.useEffect(() => {
+    if (authError) {
+      const timer = setTimeout(() => {
+        clearError();
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [authError, clearError]);
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
+      {/* Отображение глобальных ошибок аутентификации */}
+      {authError && (
+        <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+          <p className="text-sm text-red-700 dark:text-red-300">{authError.message}</p>
+        </div>
+      )}
+
       <div className="space-y-4">
         {config.fields.map((field) => (
           <Input
