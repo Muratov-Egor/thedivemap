@@ -44,6 +44,7 @@ next-env.d.ts
 allure-report
 allure-results
 test-results
+.playwright-mcp
 
 # vscode
 .vscode
