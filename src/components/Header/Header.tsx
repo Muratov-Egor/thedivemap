@@ -4,22 +4,14 @@ import Logo from './Logo';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { Button } from '../ui';
+import DropDownMenu from './DropDownMenu';
 
 export default function Header() {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
 
   const handleLogin = () => {
     router.push('/login');
-  };
-
-  const handleLogout = async () => {
-    try {
-      await signOut();
-      router.push('/');
-    } catch (error) {
-      console.error('Ошибка при выходе:', error);
-    }
   };
 
   return (
@@ -30,9 +22,7 @@ export default function Header() {
       <Logo />
       <div className="flex items-center gap-2">
         {user ? (
-          <Button variant="glass" shape="pill" size="small" onClick={handleLogout}>
-            Logout
-          </Button>
+          <DropDownMenu />
         ) : (
           <Button variant="glass" shape="pill" size="small" onClick={handleLogin}>
             Login
