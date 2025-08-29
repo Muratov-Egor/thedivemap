@@ -97,4 +97,43 @@ export class BaseApiSteps {
       expect(property).toEqual(expectedValue);
     });
   }
+
+  async expectPropertyType(obj: any, propertyName: string, expectedType: string) {
+    await test.step(`Check ${propertyName} is ${expectedType}`, async () => {
+      const value = obj[propertyName];
+      expect(typeof value).toBe(expectedType);
+    });
+  }
+
+  async expectPropertyIsArray(obj: any, propertyName: string) {
+    await test.step(`Check ${propertyName} is array`, async () => {
+      const value = obj[propertyName];
+      expect(Array.isArray(value)).toBe(true);
+    });
+  }
+
+  async expectPropertyIsNullable(obj: any, propertyName: string, expectedType: string) {
+    await test.step(`Check ${propertyName} is ${expectedType} or null`, async () => {
+      const value = obj[propertyName];
+      const actualType = Array.isArray(value) ? 'array' : typeof value;
+      expect([expectedType, 'object']).toContain(actualType); // object для null
+    });
+  }
+
+  // Обратная совместимость - можно удалить позже
+  async expectPropertyIsByType(obj: any, propertyName: string, expectedType: string | string[]) {
+    if (expectedType === 'array') {
+      await this.expectPropertyIsArray(obj, propertyName);
+    } else if (Array.isArray(expectedType)) {
+      await this.expectPropertyIsNullable(obj, propertyName, expectedType[0]);
+    } else {
+      await this.expectPropertyType(obj, propertyName, expectedType);
+    }
+  }
+
+  async expectArrayContains(array: any[], expectedValue: string | number) {
+    await test.step(`Check array contains ${expectedValue}`, async () => {
+      expect(array).toContain(expectedValue);
+    });
+  }
 }

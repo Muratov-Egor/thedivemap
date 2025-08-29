@@ -1,5 +1,10 @@
 import { APIRequestContext, APIResponse, expect, test } from '@playwright/test';
 import { BaseApiSteps } from './baseApiSteps';
+import {
+  EXPECTED_DIVE_SITE_FIELDS,
+  DIVE_SITE_FIELD_TYPES,
+  DIVE_SITE_STATUSES,
+} from './api-schemas';
 
 export class DiveSitesApi extends BaseApiSteps {
   constructor(request: APIRequestContext) {
@@ -90,18 +95,63 @@ export class DiveSitesApi extends BaseApiSteps {
 
       if (data.length > 0) {
         const site = data[0];
-        expect(site).toHaveProperty('id');
-        expect(site).toHaveProperty('name');
-        expect(site).toHaveProperty('latitude');
-        expect(site).toHaveProperty('longitude');
-        expect(site).toHaveProperty('country_id');
-        expect(site).toHaveProperty('depth_max');
-        expect(site).toHaveProperty('visibility');
-        expect(site).toHaveProperty('rating');
-        expect(site).toHaveProperty('site_type_id');
-        expect(site).toHaveProperty('difficulty_id');
-        expect(site).toHaveProperty('status');
+        await this.expectValidDiveSiteStructure(site);
       }
+    });
+  }
+
+  /**
+   * Проверяет, что объект содержит только ожидаемые поля
+   * @param obj - объект для проверки
+   * @param expectedFields - массив ожидаемых полей (по умолчанию использует EXPECTED_DIVE_SITE_FIELDS)
+   */
+  private expectNoExtraFields(
+    obj: any,
+    expectedFields: readonly string[] = EXPECTED_DIVE_SITE_FIELDS,
+  ): void {
+    const actualFields = Object.keys(obj);
+    const unexpectedFields = actualFields.filter((field) => !expectedFields.includes(field));
+
+    if (unexpectedFields.length > 0) {
+      throw new Error(`Объект содержит неожиданные поля: ${unexpectedFields.join(', ')}`);
+    }
+
+    // Дополнительная проверка точного количества полей
+    expect(actualFields).toHaveLength(expectedFields.length);
+  }
+
+  /**
+   * Проверяет структуру dive site объекта на соответствие ожидаемой схеме
+   * @param site - объект dive site для проверки
+   */
+  async expectValidDiveSiteStructure(site: any): Promise<void> {
+    await test.step('Validate dive site structure', async () => {
+      // Проверяем наличие всех обязательных полей
+      EXPECTED_DIVE_SITE_FIELDS.forEach((field) => {
+        expect(site).toHaveProperty(field);
+      });
+
+      // Проверяем отсутствие лишних полей
+      this.expectNoExtraFields(site);
+
+      // Проверяем типы данных
+      await this.expectPropertyType(site, 'name', 'string');
+      await this.expectPropertyType(site, 'latitude', 'number');
+      await this.expectPropertyType(site, 'longitude', 'number');
+      await this.expectPropertyType(site, 'country_id', 'number');
+      await this.expectPropertyType(site, 'depth_max', 'number');
+      await this.expectPropertyType(site, 'visibility', 'number');
+      await this.expectPropertyType(site, 'rating', 'number');
+      await this.expectPropertyType(site, 'site_type_id', 'number');
+      await this.expectPropertyType(site, 'difficulty_id', 'number');
+      await this.expectArrayContains([...DIVE_SITE_STATUSES], site.status);
+      await this.expectPropertyIsNullable(site, 'description', 'string');
+      await this.expectPropertyIsNullable(site, 'info_links', 'array');
+      await this.expectPropertyIsNullable(site, 'dive_center_links', 'array');
+      await this.expectPropertyType(site, 'created_at', 'string');
+      await this.expectPropertyType(site, 'country', 'object');
+      await this.expectPropertyType(site, 'site_type', 'object');
+      await this.expectPropertyType(site, 'difficulty', 'object');
     });
   }
 
@@ -120,13 +170,8 @@ export class DiveSitesApi extends BaseApiSteps {
       const site = data.find((s: any) => s.id === siteId);
       expect(site).toBeDefined();
       expect(site.id).toBe(siteId);
-      expect(typeof site.name).toBe('string');
-      expect(typeof site.latitude).toBe('number');
-      expect(typeof site.longitude).toBe('number');
-      expect(typeof site.depth_max).toBe('number');
-      expect(typeof site.visibility).toBe('number');
-      expect(typeof site.rating).toBe('number');
-      expect(['draft', 'published', 'rejected']).toContain(site.status);
+
+      await this.expectValidDiveSiteStructure(site);
     });
   }
 
