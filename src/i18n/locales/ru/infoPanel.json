@@ -18,6 +18,13 @@
   "links": "Ссылки",
   "infoLink": "Информационная ссылка",
   "diveCenterLink": "Ссылка на дайв-центр",
+  "visits": {
+    "markAsVisited": "Отметить как посещенный",
+    "removeVisit": "Удалить отметку",
+    "visitedOn": "Посещен {{date}}",
+    "notVisited": "Не посещен",
+    "loginRequired": "Войдите, чтобы отмечать посещения"
+  },
   "gallery": {
     "closeModal": "Закрыть",
     "previousImage": "Предыдущее изображение",

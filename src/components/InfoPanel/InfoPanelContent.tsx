@@ -19,17 +19,23 @@ import { Button } from '@/components/ui';
 import { ImageGallery } from '@/components/ui';
 import { useTranslation } from 'react-i18next';
 import { useShareableLink } from '@/hooks/useShareableLink';
+import { useSiteVisits } from '@/hooks/useSiteVisits';
+import { useAuth } from '@/hooks/useAuth';
 import { CheckIcon, LinkIcon } from '@/components/ui/icons';
 
 export default function InfoPanelContent({
   diveSite,
   handleShowFilters,
+  onDiveSiteUpdate,
 }: {
   diveSite: DiveSiteDetails;
   handleShowFilters: (e: React.MouseEvent) => void;
+  onDiveSiteUpdate?: () => void;
 }) {
   const { t } = useTranslation('infoPanel');
   const { copyShareableLink, isCopying } = useShareableLink();
+  const { markAsVisited, removeVisit, loading: visitsLoading } = useSiteVisits();
+  const { user } = useAuth();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   // Получение локализованного названия
@@ -44,6 +50,25 @@ export default function InfoPanelContent({
       setShowCopiedMessage(true);
       setTimeout(() => setShowCopiedMessage(false), 2000);
     }
+  };
+
+  const handleVisitToggle = async () => {
+    if (diveSite.user_visit) {
+      // Удаляем отметку о посещении
+      await removeVisit(diveSite.id, onDiveSiteUpdate);
+    } else {
+      // Отмечаем как посещенный
+      await markAsVisited(diveSite.id, onDiveSiteUpdate);
+    }
+  };
+
+  const formatVisitDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ru-RU', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   };
 
   return (
@@ -120,6 +145,40 @@ export default function InfoPanelContent({
 
       {/* Основная информация */}
       <div className="w-full space-y-8">
+        {/* Секция посещений */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-slate-300/70 dark:border-slate-600 shadow-simple">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <CheckIcon size={20} className="text-primary-action" />
+              <span className="font-semibold text-slate-800 dark:text-slate-200">
+                {diveSite.user_visit
+                  ? t('visits.visitedOn', {
+                      date: formatVisitDate(diveSite.user_visit.visited_at),
+                    })
+                  : t('visits.notVisited')}
+              </span>
+            </div>
+
+            {user ? (
+              <Button
+                onClick={handleVisitToggle}
+                variant={diveSite.user_visit ? 'secondary' : 'primary'}
+                size="medium"
+                loading={visitsLoading}
+                disabled={visitsLoading}
+                className="shadow-simple hover:shadow-simple-hover"
+                data-testid={diveSite.user_visit ? 'remove-visit-button' : 'mark-visited-button'}
+              >
+                {diveSite.user_visit ? t('visits.removeVisit') : t('visits.markAsVisited')}
+              </Button>
+            ) : (
+              <span className="text-sm text-slate-500 dark:text-slate-400">
+                {t('visits.loginRequired')}
+              </span>
+            )}
+          </div>
+        </div>
+
         {/* Описание */}
         {diveSite.description && (
           <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 border border-slate-300/70 dark:border-slate-600 shadow-simple">

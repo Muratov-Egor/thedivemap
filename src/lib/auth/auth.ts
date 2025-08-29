@@ -64,6 +64,24 @@ export async function signUp(
       return createAuthErrorResponse('Ошибка при создании аккаунта', 'unknown_error', 500);
     }
 
+    // Создаем запись в таблице users
+    try {
+      const { error: insertError } = await supabase.from('users').insert({
+        id: authData.user.id,
+        email: authData.user.email,
+        name: data.name || authData.user.email?.split('@')[0] || 'User',
+      });
+
+      if (insertError) {
+        console.error('Error creating user record:', insertError);
+        // Не возвращаем ошибку, так как пользователь уже создан в auth.users
+        // Запись в users может быть создана позже
+      }
+    } catch (error) {
+      console.error('Error creating user record:', error);
+      // Не возвращаем ошибку, так как пользователь уже создан в auth.users
+    }
+
     const userSession: UserSession = {
       user: {
         id: authData.user.id,
@@ -120,6 +138,32 @@ export async function signIn(
 
     if (!authData.session || !authData.user) {
       return createAuthErrorResponse('Ошибка при входе в систему', 'unknown_error', 500);
+    }
+
+    // Проверяем и создаем запись в таблице users если её нет
+    try {
+      const { data: existingUser, error: checkError } = await supabase
+        .from('users')
+        .select('id')
+        .eq('id', authData.user.id)
+        .single();
+
+      if (checkError && checkError.code === 'PGRST116') {
+        // Пользователя нет в таблице users, создаем
+        const { error: insertError } = await supabase.from('users').insert({
+          id: authData.user.id,
+          email: authData.user.email,
+          name: authData.user.user_metadata?.name || authData.user.email?.split('@')[0] || 'User',
+        });
+
+        if (insertError) {
+          console.error('Error creating user record on login:', insertError);
+          // Не возвращаем ошибку, так как пользователь может войти
+        }
+      }
+    } catch (error) {
+      console.error('Error checking/creating user record on login:', error);
+      // Не возвращаем ошибку, так как пользователь может войти
     }
 
     const userSession: UserSession = {

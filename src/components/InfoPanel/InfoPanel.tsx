@@ -17,12 +17,19 @@ interface InfoPanelProps {
 export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
   const { t } = useTranslation('infoPanel');
   const { showFilters } = usePanel();
-  const { diveSite: hookDiveSite, error } = useDiveSiteDetailsHook();
+  const { diveSite: hookDiveSite, error, fetchDiveSiteDetails } = useDiveSiteDetailsHook();
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
   const isMobile = useIsMobile();
 
   // Используем данные из пропсов или из хука
   const diveSite = propDiveSite || hookDiveSite;
+
+  // Функция для обновления данных дайв-сайта
+  const handleDiveSiteUpdate = () => {
+    if (diveSite?.id) {
+      fetchDiveSiteDetails(diveSite.id);
+    }
+  };
 
   const handleShowFilters = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -70,11 +77,19 @@ export default function InfoPanel({ diveSite: propDiveSite }: InfoPanelProps) {
           className="flex flex-col justify-start items-center w-[600px] border-l border-slate-200 bg-background p-6 overflow-y-auto h-full max-h-[calc(100vh-4rem)] sm:max-h-full z-[60]"
           data-testid="desktop-info-panel"
         >
-          <InfoPanelContent diveSite={diveSite} handleShowFilters={handleShowFilters} />
+          <InfoPanelContent
+            diveSite={diveSite}
+            handleShowFilters={handleShowFilters}
+            onDiveSiteUpdate={handleDiveSiteUpdate}
+          />
         </div>
       )}
       {isMobile && isMobilePanelOpen && (
-        <MobileInfoPanel diveSite={diveSite} onClose={() => setIsMobilePanelOpen(false)} />
+        <MobileInfoPanel
+          diveSite={diveSite}
+          onClose={() => setIsMobilePanelOpen(false)}
+          onDiveSiteUpdate={handleDiveSiteUpdate}
+        />
       )}
     </>
   );

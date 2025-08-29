@@ -45,6 +45,11 @@ export interface SiteLocation {
   location: Location;
 }
 
+export interface UserVisit {
+  id: string;
+  visited_at: string;
+}
+
 export interface Site {
   id: string;
   name: string;
@@ -79,4 +84,5 @@ export interface DiveSiteDetails extends Site {
   difficulty: Difficulty;
   site_locations: SiteLocation[];
   images: Image[];
+  user_visit?: UserVisit | null;
 }

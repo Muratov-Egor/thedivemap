@@ -18,6 +18,13 @@
   "links": "Links",
   "infoLink": "Info Link",
   "diveCenterLink": "Dive Center Link",
+  "visits": {
+    "markAsVisited": "Mark as Visited",
+    "removeVisit": "Remove Mark",
+    "visitedOn": "Visited on {{date}}",
+    "notVisited": "Not visited",
+    "loginRequired": "Login to mark visits"
+  },
   "gallery": {
     "closeModal": "Close",
     "previousImage": "Previous image",

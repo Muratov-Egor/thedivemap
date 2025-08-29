@@ -13,9 +13,14 @@ import InfoPanelContent from './InfoPanelContent';
 interface MobileInfoPanelProps {
   diveSite?: DiveSiteDetails;
   onClose?: () => void;
+  onDiveSiteUpdate?: () => void;
 }
 
-export default function MobileInfoPanel({ diveSite: propDiveSite, onClose }: MobileInfoPanelProps) {
+export default function MobileInfoPanel({
+  diveSite: propDiveSite,
+  onClose,
+  onDiveSiteUpdate,
+}: MobileInfoPanelProps) {
   const { t } = useTranslation('infoPanel');
   const { showFilters } = usePanel();
   const { diveSite: hookDiveSite, error } = useDiveSiteDetailsHook();
@@ -98,7 +103,11 @@ export default function MobileInfoPanel({ diveSite: propDiveSite, onClose }: Mob
     >
       <div className="flex-1 overflow-y-auto">
         <div className="p-4">
-          <InfoPanelContent diveSite={diveSite} handleShowFilters={handleShowFilters} />
+          <InfoPanelContent
+            diveSite={diveSite}
+            handleShowFilters={handleShowFilters}
+            onDiveSiteUpdate={onDiveSiteUpdate}
+          />
         </div>
       </div>
     </div>
